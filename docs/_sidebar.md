@@ -13,6 +13,7 @@
   * [✨ Into the Workspace](3-ready-to-scale-101/2-into-the-workspace.md)
   * [🎒 Intro to Backend](3-ready-to-scale-101/3-intro-to-backend.md)
   * [🐙 GitOps](3-ready-to-scale-101/4-gitops.md)
+  * [🌳 Deploy Canopy](3-ready-to-scale-101/5-deploy-canopy.md)
 * [Ready to Scale 201](4-ready-to-scale-201/README.md)
   * [📝 Prompt Versioning](4-ready-to-scale-201/1-prompt-versioning.md)
   * [💫 Continuous Model Evaluation](4-ready-to-scale-201/2-continuous-model-evaluation.md)

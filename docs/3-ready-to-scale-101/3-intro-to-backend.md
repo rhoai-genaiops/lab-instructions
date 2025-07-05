@@ -41,7 +41,7 @@
    
    - tag: `0.2`
   
-  ..and hit `Create`!
+  ..and hit `Upgrade`!
 
     ![update-canopy-ui-3.png](./images/update-canopy-ui-3.png)
 

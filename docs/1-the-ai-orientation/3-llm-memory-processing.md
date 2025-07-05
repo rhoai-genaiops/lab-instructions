@@ -158,12 +158,6 @@ Which approach is the <em>most practical</em>?</p>
 ### 🔍 Hands-on Exercises - Context Windows
 
 1. Let's see why context window is so important. Send a simple `I need a Spanish tortilla recipe.` message to the model and observe the response.
-  
-2. But maybe you want to be more sophisticated and ask the model with a bit more details, so send this next and see what happens:
-
-```
-I'm interested in learning how to make an authentic Spanish tortilla de patatas, also known as a Spanish omelette. Could you please provide a step-by-step recipe, including ingredients, preparation tips, and cooking techniques that reflect the traditional way it's made in Spain?
-```
 
 <div class="iframe-scroll-container">
   <iframe 
@@ -175,8 +169,14 @@ I'm interested in learning how to make an authentic Spanish tortilla de patatas,
   </iframe>
 </div>
 
+2. And maybe you want to be more sophisticated and ask the model with a bit more details, so send this next and see what happens:
 
-The model is not happy with this, is it? 🥲🥲  
+  ```
+  I'm interested in learning how to make an authentic Spanish tortilla de patatas, also known as a Spanish omelette. 
+  Could you please provide a step-by-step recipe, including ingredients, preparation tips, and cooking techniques that reflect the traditional way it's made in Spain?
+  ```
+
+  The model is not happy with this, is it? 🥲🥲  
 
 Can you guess what the context length of this model is?
 
