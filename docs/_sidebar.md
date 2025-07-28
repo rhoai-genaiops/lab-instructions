@@ -24,3 +24,7 @@
   * [🫶 Evaluate & Update Canopy](5-on-prem-practicum/2-update-canopy.md)
 * [Knowledge Systems](6-rag/README.md)
   * [RAG](6-rag/1-rag.md)
+* [The Honor Code](7-honor-code/README.md)
+  * [🎓 Guardrais](7-honor-code/1-guardrails.md)
+  * [💂‍♂️ LlamaGuard](7-honor-code/2-llamaguard.md)
+  * [🛡️ PromptGuard](7-honor-code/3-promptguard.md)
