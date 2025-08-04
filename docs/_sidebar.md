@@ -16,7 +16,7 @@
   * [🐙 GitOps](3-ready-to-scale-101/4-gitops.md)
   * [🌳 Deploy Canopy](3-ready-to-scale-101/5-deploy-canopy.md)
 * [Ready to Scale 201](4-ready-to-scale-201/README.md)
-  * [📝 Prompt Versioning](4-ready-to-scale-201/1-prompt-versioning.md)
+  <!-- * [📝 Prompt Versioning](4-ready-to-scale-201/1-prompt-versioning.md) -->
   * [💫 Continuous Model Evaluation](4-ready-to-scale-201/2-continuous-model-evaluation.md)
   * [🏃 Automate It!](4-ready-to-scale-201/3-automate.md)
 * [On-Prem Practicum](5-on-prem-practicum/README.md)
