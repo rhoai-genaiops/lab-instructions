@@ -60,3 +60,7 @@ out/
 
 # Project specific
 *.gradio
+
+# Claude
+CLAUDE.md
+.claude/
