@@ -17,3 +17,10 @@
 * **S13:** Election Interference
 
 > 🧪 **How it works:** LlamaGuard can evaluate both **user inputs** and **LLM outputs** before they reach the other side — allowing you to catch safety issues on both ends of a conversation.
+
+
+Let's first update the Llama Stack config in experimentation area to understand what is provided.
+
+Then play with it on Llama Stack Playground
+
+Then let's jump into the workbench and understand how we can bring it to Canopy programmatically. 
