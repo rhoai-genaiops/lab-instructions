@@ -1,23 +1,27 @@
 # Canopy Backend
 
-1. We'll deploy the backend to our development environment the same way we deployed the other components. Go back to OpenShift Console, click `+Add` and select `Helm Charts`. Under `Canopy Helm Charts`. Select `Canopy Backend` > `Create`.
+1. We'll deploy the backend to our development environment the same way we deployed the other components. Go back to OpenShift Console > `Helm` > `Releases` in `<USER_NAME>-canopy project`.
+   
+   ![canopy-be-helm-releases.png](./images/canopy-be-helm-releases.png)
+
+2.  Under `Chart Repositories` select  `Canopy Helm Charts` and cclick `Canopy Backend` > `Create`.
 
     ![canopy-be-helm.png](./images/canopy-be-helm.png)
 
-1. Open up the `YAML view` to update the variables.
+3. Open up the `YAML view` to update the variables.
 
     As we discussed, backend will be the one talking to Llama Stack, therefore we need to make sure we provide the correct Llama Stack connection details:
 
     - LLAMA_STACK_URL: `http://llama-stack-service:8321`
 
-2. We also need to provide your chosen System Prompt. Because as we did on the Notebooks, we need to include the prompt while calling Llama Stack endpoint.
+4. We also need to provide your chosen System Prompt. Because as we did on the Notebooks, we need to include the prompt while calling Llama Stack endpoint.
     Add your system prompt here, and mind the indentation please 🙏
 
     ![canopy-be-values.png](./images/canopy-be-values.png)
  
     ..leave the rest default and hit `Create`.
 
-3. Verify that it is running on the OpenShift Console.
+5. Verify that it is running on the OpenShift Console.
    
    ![canopy-be-ocp.png](./images/canopy-be-ocp.png)
 

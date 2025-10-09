@@ -2,13 +2,13 @@
 
 Now that we’ve deployed the Llama Stack and verified it’s up and running, it’s time to get hands-on.
 
-In this section, we’ll launch a Workbench on Red Hat OpenShift AI to spin up a Code Server environment. This gives us a powerful, browser-based IDE where we can run Python notebooks and start interacting with the Llama Stack programmatically.
+In this section, we’ll launch a Workbench on Red Hat OpenShift AI to spin up a Code Server environment. This gives us a browser-based IDE where we can run Python notebooks and start interacting with the Llama Stack programmatically.
 
 You’ll use this environment to:
 
 - Explore Llama Stack’s API
 - Send test prompts directly from code
-- Build a backend to handle requests from our frontend
+- Build a backend that connects Llama Stack and handle requests from our frontend
 
 By the end of this section, you'll have a better grasp of how to integrate Llama Stack into your own workflows and applications — and set the stage for more advanced use cases.
 
@@ -18,7 +18,7 @@ By the end of this section, you'll have a better grasp of how to integrate Llama
 
 2. Let's create a workbench!   
 
-   A workbench is your web-based development environment hosted inside OpenShift AI. Click on the `<USER_NAME>-canopy` project, then click `Create a Workbench`. OpenShift AI Dashboard is pretty intuitive, isn't it? :)
+   Click on the `<USER_NAME>-canopy` project, then click `Create a Workbench`. OpenShift AI Dashboard is pretty intuitive, isn't it? :)
    
    ![create-workbench.png](./images/create-workbench.png)
 
@@ -26,8 +26,7 @@ By the end of this section, you'll have a better grasp of how to integrate Llama
 
     **Notebook Image:** 
 
-    - Image selection: `code-server`
-    - Version selection: `2025.1`
+    - Image selection: `Code Server | Data Science | CPU | Python 3.12`
   
     **Deployment size**
     - Container size: `Small`

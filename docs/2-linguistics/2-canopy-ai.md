@@ -59,9 +59,8 @@ In OpenShift, you have an experimentation environment which is called `<USER_NAM
 
     ✅ This will create:
 
-    - A UBI9-based Streamlit app
-    - A service exposing port 8501
-    - A secure OpenShift route (TLS termination: edge)
+    - A UBI9-based Streamlit application that sends your chat requests to the LLM
+    - A secure OpenShift route for us to access the app outside of the cluster
 
 5. Once the application is successfully running, click on the arrow on the side of the circle to access the Canopy UI 🌳🌳🌳
 
@@ -86,7 +85,7 @@ In OpenShift, you have an experimentation environment which is called `<USER_NAM
 
 - Deployed the Canopy frontend on OpenShift
 
-- Connected it to your own LLM endpoint
+- Connected it to the provided LLM endpoint
 
 - Used the system prompt to shape the assistant's behavior
 

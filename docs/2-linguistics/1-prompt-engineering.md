@@ -57,7 +57,7 @@ Use the Prompt Playground to:
 
 📌 **Tip**: Try changing the tone, specificity, or format of your system prompt to see how much it shapes the output. Don’t be afraid to get creative!
 
-Enter the following info:
+The following info already entered to the playground:
 
 - Model Name: 
 ```
@@ -68,7 +68,7 @@ llama32
 https://llama32-ai501.<CLUSTER_DOMAIN>/v1/chat/completions
 ```
 
-..and for the rest, it is up to what you feel like trying 🧪  
+..now, it is up to what you feel like trying 🧪  
 
 #### What is the best system prompt and settings you can find to summarize the above text?
 

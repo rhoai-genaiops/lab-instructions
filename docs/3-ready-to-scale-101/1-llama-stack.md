@@ -24,12 +24,12 @@ In short: Llama Stack helps us move from *experimentation* to *production readin
 
     ![llama-stack-helmchart.png](./images/llama-stack-helmchart.png)
 
-2. Now we need to provide our LLM endpoint to Llama Stack, the same way we did to Canopy frontend.
+2. We need to provide our LLM endpoint to Llama Stack, the same way we did to Canopy frontend. The helm chart already comes with good default values. Check if the below values are like below:
 
     - Model Name: `llama32`
-    - Model URL: `https://llama32-ai501.<CLUSTER_DOMAIN>`
+    - Model URL: `http://llama-32-predictor.ai501.svc.cluster.local:8080/v1`
 
-    ..keep the rest the same.
+..and click `Create`.
 
 3. Observe that the Llama Stack is running in your environment:
 
@@ -43,15 +43,15 @@ Think of it as your control room for:
 
 - 🔧 Trying out different models behind the same interface
 
-- 🧵 Testing prompt templates stored in Git or locally
+- 🧵 Testing system and user prompts
 
 - 🌐 Experimenting with RAG systems and different tools
 
-- 📊 Previewing evaluation hooks, even before automating them in pipelines
+- 📊 Previewing evaluation hooks or guardrails
+
+In another word, all the cool stuff we will get to later on!
 
 It’s built to help you prototype quickly and standardize early, so you quicker can implement new LLM functionality.
-
-Use it to validate your prompts, compare responses, and debug model behavior—before anything hits production.
 
 Let’s deploy the Playground to verify the integration between Llama Stack and your LLM before we deep dive into what’s going on under the hood and how we’ll update the frontend.
 
@@ -67,9 +67,9 @@ Let’s deploy the Playground to verify the integration between Llama Stack and 
 
     ![llama-stack-playground.png](./images/llama-stack-playground.png)
 
-3. If you scroll on the left menu, there is a `System Prompt` area. We can continue experimenting and iterating on our prompts here.
+3. If you scroll on the left menu, there is a `System Prompt` area. We can continue experimenting and iterating on our prompts here. So feel free to bring your latest System prompt to the playground.
 
-    Remember your user prompt from before:
+    And remember your user prompt from before:
     ```
     Tea preparation involves the controlled extraction of bioactive compounds from processed Camellia sinensis leaves. Begin by heating water to near 100°C to optimize solubility. Introduce a tea bag to a ceramic vessel, then infuse with hot water to initiate steeping—typically 3–5 minutes to allow for the diffusion of polyphenols and caffeine. Upon removal of the bag, optional additives like sucrose or lipid-based emulsions may be introduced to alter flavor profiles. The infusion is then ready for consumption.
     ```
@@ -78,10 +78,7 @@ Let’s deploy the Playground to verify the integration between Llama Stack and 
 
 You have a few more options than in previous exercises. Alongside `Temperature`, you’ll also see `Top P` and `Repetition Penalty`. Try them out on the summarize task and observe how they change the output. 
 
-What values work well and what do they do?
-
-#TODO: update playground and use top_k instead
-
+What values work well and what do they do? 🧠 🤓
 
 ---
 
