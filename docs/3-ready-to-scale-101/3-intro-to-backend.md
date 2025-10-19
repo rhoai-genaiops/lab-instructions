@@ -38,7 +38,7 @@ We'll separate out the LLM business logic from the frontend into its own backend
 
 ## Update Canopy Frontend
 
-1. Now it is time to make Canopy UI to talk with backend, instead of directly sending requests to LLM. In order to do that, we need to update some values in our helm chart. In the `Workloads` >  `Topology` view, find `canopy-ui` and click the three dots underneath > `Upgrade`
+1. Now it is time to make Canopy UI to talk with the backend, instead of directly sending requests to LLM. In order to do that, we need to update some values in our helm chart. In the `Workloads` >  `Topology` view, find `canopy-ui` and click the three dots underneath > `Upgrade`
 
     ![update-canopy-ui.png](./images/update-canopy-ui.png)
 
