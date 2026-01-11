@@ -60,7 +60,7 @@ When it is in running state, open it by clicking its name and use your credentia
 
    ![choose-python-env.png](./images/choose-python-env.png)
 
-   Then it will ask you to choose which Python environment to use. Go with the `Recommended` one.
+   Then it will ask you to choose which Python environment to use. Go with the `Virtual Env` one.
 
    ![choose-python-env2.png](./images/choose-python-env2.png)
 

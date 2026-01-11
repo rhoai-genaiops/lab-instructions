@@ -2,7 +2,7 @@
 
 We'll separate out the LLM business logic from the frontend into its own backend so that we can iterate on them independently.
 
-1. We'll deploy the backend to our development environment the same way we deployed the other components. Go back to OpenShift Console > `Helm` > `Releases` in `<USER_NAME>-canopy project`.
+1. We'll deploy the backend to our development environment the same way we deployed the other components. Go back to OpenShift Console > `Helm` > `Releases` in `<USER_NAME>-canopy` project.
    
    ![canopy-be-helm-releases.png](./images/canopy-be-helm-releases.png)
 
@@ -12,7 +12,7 @@ We'll separate out the LLM business logic from the frontend into its own backend
 
 3. Open up the `YAML view` to update the variables.
 
-    As we discussed, backend will be the one talking to Llama Stack, therefore we need to make sure we provide the correct Llama Stack connection details:
+    As we discussed, backend will be the one talking to Llama Stack, therefore we need to make sure we provide the correct Llama Stack connection details.
 
     We also need to provide your chosen System Prompt. Because as we did on the Notebooks, we need to include the prompt while calling Llama Stack endpoint.
 
@@ -42,17 +42,17 @@ We'll separate out the LLM business logic from the frontend into its own backend
 
     ![update-canopy-ui.png](./images/update-canopy-ui.png)
 
-2. In the values, add the below backend endpoint value for `BACKEND_ENDPOINT`.
+2. In the values, open up the `Form view`, find the `BACKEND_ENDPOINT` key and add the below value.
    
     ```bash
     http://canopy-backend:8000
     ```
 
-3. For the image, point to a newer version:
+3. Then, go a little bit down, expand the `image` value and update the tag to point to a newer version:
    
    - tag: `0.4`
   
-  ..and hit `Upgrade`!
+  ..and now hit `Upgrade`!
 
     ![update-canopy-ui-3.png](./images/update-canopy-ui-3.png)
 
