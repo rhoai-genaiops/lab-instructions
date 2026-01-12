@@ -53,8 +53,6 @@ tests/test_tools.py::test_mcp_calendar_list_events PASSED                [100%]
 **Pro tip:** Want to see what the tools are returning? Run with the `-s` flag:
 
 ```bash
-pytest tests/test_tools.py::test_search_knowledge_base -v -s
+pytest tests/test_tools.py -v -s
 ```
-
-This shows the actual search results and helps you understand what data your tools are working with.
 
