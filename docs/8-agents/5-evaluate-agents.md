@@ -58,13 +58,42 @@ pytest tests/test_tools.py -v -s
 
 This shows the actual search results and helps you understand what data your tools are working with.
 
-## 2. End-to-End Agent Evaluation
+## 2. Add Unit Tests to CI/CD Pipeline
 
-Unit tests are great, but they only test individual pieces. Now let's test the **whole agent** - does it choose the right tools AND provide good answers?
+Now that we've verified the unit tests work locally, let's automate them in our CI/CD pipeline! This ensures every code change is tested before being promoted to production.
 
-We'll add E2E tests to our eval pipeline, just like we did for RAG. These tests will validate:
-- **Answer quality** - Is the response helpful and accurate? (LLM-as-judge)
-- **Tool selection** - Did the agent call the right tools?
+### Enable Unit Tests in the Tekton Pipeline
+
+The evaluation pipeline can run unit tests alongside the other evaluations. Let's enable this step:
+
+1. Go to `genaiops-gitops/toolings/evaluation-pipeline/config.yaml` in your workbench and update the config file to enable a unit test step:
+
+    ```yaml
+    chart_path: charts/canopy-evals-pipeline
+    USER_NAME: <USER_NAME>
+    CLUSTER_DOMAIN: <CLUSTER_DOMAIN>
+    kfp:
+      llsUrl: http://llama-stack-service.<USER_NAME>-test.svc.cluster.local:8321
+      backendUrl: http://canopy-backend.<USER_NAME>-test.svc.cluster.local:8000
+    testing:                    # 👈 Add this
+      enableUnitTests: true     # 👈 Add this
+    ```
+
+2. Push it to git:
+
+    ```bash
+    cd /opt/app-root/src/genaiops-gitops
+    git pull
+    git add .
+    git commit -m "1️⃣ Enabled unit tests 1️⃣"
+    git push
+    ```
+
+3. To make sure it was added, go to OpenShift Console -> Pipelines -> canopy-evals-pipeline and see that `tool-unit-tests` is in there.  
+
+    ![unit-test-step.png](images/unit-test-step.png)
+
+We will see it action soon, but first, let's make sure that our end-to-end tests works for our agent as well.
 
 ### Adding Agent E2E Tests
 
