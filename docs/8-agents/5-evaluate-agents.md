@@ -56,3 +56,67 @@ tests/test_tools.py::test_mcp_calendar_list_events PASSED                [100%]
 pytest tests/test_tools.py -v -s
 ```
 
+This shows the actual search results and helps you understand what data your tools are working with.
+
+## 2. End-to-End Agent Evaluation
+
+Unit tests are great, but they only test individual pieces. Now let's test the **whole agent** - does it choose the right tools AND provide good answers?
+
+We'll add E2E tests to our eval pipeline, just like we did for RAG. These tests will validate:
+- **Answer quality** - Is the response helpful and accurate? (LLM-as-judge)
+- **Tool selection** - Did the agent call the right tools?
+
+### Adding Agent E2E Tests
+
+1. Go to your workbench and navigate to the `evals` repository:
+
+    ```bash
+    cd /opt/app-root/src/evals
+    ```
+
+2. Create a new folder for the student assistant tests:
+
+    ```bash
+    mkdir student-assistant
+    ```
+
+3. Create the test configuration file. Open a new file `student-assistant/student_assistant_tests.yaml` and paste this:
+
+```yaml
+name: student_assistant_tests
+description: End-to-end tests for the student assistant agent with tool choice validation
+model: llama32
+endpoint: /student-assistant
+scoring_params:
+    "llm-as-judge::base":
+        "judge_model": llama32
+        "prompt_template": e2e_judge_prompt.txt
+        "type": "llm_as_judge"
+        "judge_score_regexes": ["Answer: (A|B|C|D|E)"]
+    "basic::tool_choice": null
+tests:
+  - prompt: "What is a forest canopy?"
+    expected_result: "A forest canopy is the upper layer of a forest, formed by the crowns of trees. It's an important ecosystem component that provides habitat for many species and plays a crucial role in photosynthesis and the forest's overall health."
+    expected_tools: ["search_knowledge_base"]
+  - prompt: "Who can help me with machine learning?"
+    expected_result: "Dr. Sarah Chen from the Computer Science department can help you with machine learning. She specializes in Machine Learning, Neural Networks, AI Ethics, and Agentic Workflows. You can reach her at s.chen@university.edu."
+    expected_tools: ["find_professors_by_expertise"]
+```
+
+4. Notice the `expected_tools` field in the tests - this tells the evaluator which tools the agent should call. The eval pipeline will check:
+- Did the agent call `search_knowledge_base` for the canopy question?
+- Did it call `find_professors_by_expertise` for the professor question?
+
+6. Commit and push your changes:
+
+    ```bash
+    cd /opt/app-root/src/evals/student-assistant
+    git add .
+    git commit -m "🤖 Agent E2E tests added 🤖"
+    git push
+    ```
+
+7. The eval pipeline should trigger automatically. Go to **OpenShift Pipelines** to watch it run!
+
+
+
