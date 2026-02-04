@@ -24,6 +24,7 @@ The canopy backend already has unit tests set up for the student assistant tools
 
     ```bash
     cd /opt/app-root/src/backend
+    pip install -r app/requirements.txt
     pip install -r tests/requirements-test.txt
     ```
 
@@ -148,4 +149,4 @@ tests:
 7. The eval pipeline should trigger automatically. Go to **OpenShift Pipelines** to watch it run!
 
 
-
+After it has compeleted you can see the evaluation results in minio or through the prompt tracker 🎉
