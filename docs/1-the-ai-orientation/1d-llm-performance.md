@@ -5,7 +5,8 @@
   - [📚 Contents](#-contents)
   - [📊 Key Performance Metrics](#-key-performance-metrics)
   - [📦 Model Sizes and Requirements](#-model-sizes-and-requirements)
-  - [👀 How to Understand Model Resource Requirements from Modelcards](#-how-to-understand-model-resource-requirements-from-modelcards)
+  - [� How to Understand Model Resource Requirements from Model Cards](#-how-to-understand-model-resource-requirements-from-model-cards)
+  - [👀 Let's see this in practice](#-lets-see-this-in-practice)
   - [✅ Summary](#-summary)
 
 ## 📊 Key Performance Metrics
@@ -200,11 +201,11 @@ The FP8 version uses **half the memory**. But can you tell the difference in qua
 3. `What are Ireland's chances in the upcoming Six Nations?`
 
 <iframe
-    src="https://gradio-app-ai501.<CLUSTER_DOMAIN>/optimization"
+    src="https://ai-orientation-app-ai501.<CLUSTER_DOMAIN>/compare?embed"
     frameborder="0"
     width="850"
-    height="1200"
-    style="border: 1px solid #e0e0e0; border-radius: 8px;"
+    height="1000"
+    style="border: 1px solid #ccc; border-radius: 8px;"
     loading="lazy">
 </iframe>
 

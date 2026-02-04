@@ -307,13 +307,13 @@ What did I say in the last message?
 What did the model respond with?
 
 <iframe
-	src="https://gradio-app-ai501.<CLUSTER_DOMAIN>/chat-interface"
+	src="https://ai-orientation-app-ai501.<CLUSTER_DOMAIN>/chat?embed"
 	frameborder="0"
-	width="600"
-	height="800"
-	style="border: 1px solid transparent; border-radius: 1px;"
+	width="500"
+	height="600"
+	style="border: 1px solid #ccc; border-radius: 8px;"
 	loading="lazy">
-></iframe>
+</iframe>
 
 
 <!-- TODO: Uncomment this below line when we have it in Canopy -->
@@ -333,13 +333,13 @@ Take note of the response. Then ask the **exact same question again**.
 Did you get the same answer, or something different?
 
 <iframe
-	src="https://gradio-app-ai501.<CLUSTER_DOMAIN>/chat-interface"
+	src="https://ai-orientation-app-ai501.<CLUSTER_DOMAIN>/chat?embed"
 	frameborder="0"
-	width="600"
-	height="800"
-	style="border: 1px solid transparent; border-radius: 1px;"
+	width="500"
+	height="600"
+	style="border: 1px solid #ccc; border-radius: 8px;"
 	loading="lazy">
-></iframe>
+</iframe>
 
 
 LLMs often use a bit of randomness when generating answers. This randomness is controlled by something called **temperature**:
