@@ -280,13 +280,13 @@ Imagine a prompt sent to an LLM reads exactly like this:
   Ask the model `I need a Spanish tortilla recipe.` and change the `max_token` until you get a delicious recipe 🇪🇸
 
 <iframe
-	src="https://gradio-app-ai501.<CLUSTER_DOMAIN>/context-demo"
+	src="https://ai-orientation-app-ai501.<CLUSTER_DOMAIN>/context?embed"
 	frameborder="0"
-	width="600"
-	height="700"
-	style="border: 1px solid transparent; border-radius: 8px;"
+	width="400"
+	height="600"
+	style="border: 1px solid #ccc; border-radius: 8px;"
 	loading="lazy">
-></iframe>
+</iframe>
 
 
   What is the number you are happy with?
@@ -306,13 +306,13 @@ Imagine a prompt sent to an LLM reads exactly like this:
   ```
 
 <iframe
-	src="https://gradio-app-ai501.<CLUSTER_DOMAIN>/max-length-demo"
+	src="https://ai-orientation-app-ai501.<CLUSTER_DOMAIN>/max-length?embed"
 	frameborder="0"
-	width="600"
-	height="700"
-	style="border: 1px solid transparent; border-radius: 8px;"
+	width="500"
+	height="600"
+	style="border: 1px solid #ccc; border-radius: 8px;"
 	loading="lazy">
-></iframe>
+</iframe>
 
  Uh-oh. You probably got an error message. Why?
 
