@@ -44,6 +44,7 @@
   * [🦙 Agentic Llamas](8-agents/3-agentic-llamas.md)
   * [✅ Take Agents to Prod](8-agents/4-take-agents-to-prod.md)
   * [🔬 Evaluate Agents](8-agents/5-evaluate-agents.md)
+  * [🔐 Securing MCP Servers](8-agents/6-securing-mcp-servers.md)
 * [On-Prem Practicum](9-on-prem-practicum/README.md)
   * [🏠 Deploy LLMs](9-on-prem-practicum/1-deploy-llms.md)
   * [🔄 Update Canopy](9-on-prem-practicum/2-update-canopy.md)
