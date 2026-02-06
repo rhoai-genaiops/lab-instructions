@@ -1,8 +1,8 @@
-## Automate Jailbreak Scenarios
+# Automate Jailbreak Scenarios
 
 So far we created good regex rules and added some guardrails to prevent misuse of our application and to make sure it stays in its intended scope of the application. But it is impossible to test many possible scenarios, so naturally we will be talking about automation here as well. For that, we are going to introduce an open source tool called `Spikee` 🦔🦔
 
-## Test Canopy for Prompt Injection with Spikee
+## Test Your System for Prompt Injection with Spikee
 
 Spikee, as their [website](https://spikee.ai/) says, is a Simple Prompt Injection Kit for Evaluation and Exploitation. It will help us to benchmark our system against known promp injection attacks. 
 
