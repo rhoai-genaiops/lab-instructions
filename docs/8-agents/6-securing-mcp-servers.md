@@ -27,7 +27,7 @@ Here's how token-based security works for MCP leveraging OAuth:
 3. Keycloak returns an **access token** with granted scopes
 4. Client retries with `Authorization: Bearer <token>`
 5. MCP Server validates the token via **introspection**
-6. If valid → request proceeds to Calendar API
+6. If valid, a request proceeds to Calendar API
 7. Success!
 
 The key insight: the MCP server never sees passwords. It only validates tokens issued by a trusted authority (Keycloak).
