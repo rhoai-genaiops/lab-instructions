@@ -9,15 +9,14 @@ Spikee, as their [website](https://spikee.ai/) says, is a Simple Prompt Injectio
 1. Let's go back to your workbench and run the below commands in your terminal:
 
     ```bash
-    pip install spikee
-    cd /opt/app-root/src/experiments/6-guardrails/spikee
+    cd /opt/app-root/src/experiments/7-guardrails/spikee
     spikee init
     ```
 
-2. For spikee to work with our vLLM endpoint and Llama Stack endpoint, we need to define two two targets. Copy the existing python files that are pointing to out model and Llama Stack server under `targets/` folder by running the below commands:
+2. For spikee to work with our vLLM endpoint and Llama Stack endpoint, we need to define two targets. Copy the existing python files that are pointing to out model and Llama Stack server under `targets/` folder by running the below commands:
 
     ```bash
-    cd /opt/app-root/src/experiments/6-guardrails/spikee
+    cd /opt/app-root/src/experiments/7-guardrails/spikee
     mv llama_stack_shields.py targets/
     mv vllm_local.py targets/
     ```
@@ -29,7 +28,7 @@ Spikee, as their [website](https://spikee.ai/) says, is a Simple Prompt Injectio
     Then let's move this file under spikee's datasets folder.
 
     ```bash
-    cd /opt/app-root/src/experiments/6-guardrails/spikee
+    cd /opt/app-root/src/experiments/7-guardrails/spikee
     mv quick-test-diverse.jsonl datasets/
     ```
 
@@ -78,12 +77,7 @@ Spikee, as their [website](https://spikee.ai/) says, is a Simple Prompt Injectio
 
 6.  Apparently model's internal guardrailing is not great! Good thing that we put those detectors in place. Let's test them as well! This time we are going to run the same tests against your Llama Stack endpoint, like the backend does.
 
-    First we need to install llama-stack-client:
-
-    ```bash
-    pip install llama_stack_client==0.3.0 fire
-    ```
-    Then let's run the test:
+    Let's run the test:
 
     ```bash
     spikee test --dataset datasets/quick-test-diverse.jsonl --target llama_stack_shields  --attack best_of_n --attack-iterations 1
@@ -124,29 +118,18 @@ Spikee, as their [website](https://spikee.ai/) says, is a Simple Prompt Injectio
 
 8. This was only a couple prompts though. If you'd like to do a more realistic test, you can run a test based on the different datasets provided by Spikee under `dataset` folder. But these datasets are huge, for example `seeds-cybersec-2025-04` would take ~7 hours with our setup, but then it'll give you a more realistic results. If you are still curious; this is how you can use the existing dataset:
 
-    ```bash
-    spikee generate --seed-folder datasets/seeds-cybersec-2025-04 --plugins 1337 --tag mytest
-    ```
-
-    And then you can start the test by pointing to the generated dataset as below. ‼️ BUUUTT, as in all good cooking shows, you don't have to wait for the results. We got you covered! Continue to read for the results 😌
-
     <div class="highlight" style="background: #f7f7f7; overflow-x: auto; padding: 8px;">
     <pre><code class="language-bash"> 
-    spikee test --dataset datasets/cybersec-2025-04-user-input-mytest-dataset-*.jsonl --target llama_stack_shields  --attack best_of_n --attack-iterations 1
+    spikee generate --seed-folder datasets/seeds-cybersec-2025-04 --plugins 1337 --tag mytest
     </code></pre> 
     </div>
 
-9. After some waiting, when we checked the results with below command..
+    And then you can start the test by pointing to the generated dataset as below. ‼️ BUUUTT, as in all good cooking shows, you don't have to wait for the results. We got you covered! Continue to read for the results 😌
+
+9. After some waiting, when we checked the results, this is what we got:
 
     <div class="highlight" style="background: #f7f7f7; overflow-x: auto; padding: 8px;">
     <pre><code class="language-bash"> 
-    spikee results analyze --result-file  results/results_llama_stack_shields-shields_enabled_cybersec-2025-04-user-input-mytest-dataset*.jsonl | sed -n '1,/=== Breakdown by Jailbreak Type ===/p' | head -n -1
-    </code></pre> 
-    </div>  
-
-    ..and this is what we got:
-
-    ```bash
     _____ _____ _____ _  ________ ______ 
     / ____|  __ \_   _| |/ /  ____|  ____|
     | (___ | |__) || | | ' /| |__  | |__   
@@ -169,5 +152,10 @@ Spikee, as their [website](https://spikee.ai/) says, is a Simple Prompt Injectio
     Attack Success Rate (Overall): 37.50% 👈👈👈 not bad but also not perfect 🙃
     Attack Success Rate (Without Dynamic Attack): 27.30%
     Attack Success Rate (Improvement from Dynamic Attack): 10.20%
-    ```
+    </code></pre> 
+    </div>
+
     When you run such test, you can check the details in the report and see what kind of attacks got successfull and plan what you need to improve; maybe a better prompt injection model or retrain the existing one, maybe some simple additions to regex..
+
+
+Time to take the guardrails to higher environments 🌳🛡️

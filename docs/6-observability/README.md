@@ -1,4 +1,4 @@
-# Module 7 - The AI Watcher
+# Module 6 - The AI Watcher
 
 > Running AI in production without observability is like teaching a class in the dark with a blindfold on - you have no idea if students are learning, confused, or have already left the room. Let's give Canopy the vital signs and instrumentation it needs to stay healthy and trustworthy 📊
 
