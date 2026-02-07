@@ -13,7 +13,6 @@ But first, we need to set up our backend repository to handle the GenAI applicat
 2. We will store the prompts under `chart/values-test.yaml` and `chart/values-prod.yaml`. This will give us the traceability of prompt changes. Copy the below info to both files **under the `LLAMA_STACK_URL`** and make sure to bring your new favourite prompt to summarize the topics along with the settings you find the best in Llama Stack Playground:
 
   ```yaml
-  
   summarize:
     enabled: true
     model: vllm-llama32/llama32
@@ -58,7 +57,7 @@ Now let's deploy backend to test and prod environments using Argo CD!
     BACKEND_ENDPOINT: "http://canopy-backend:8000"
     image:
       name: "canopy-ui"
-      tag: "0.4"
+      tag: "0.5"
     ```
 3. `backend` will have a different `config.yaml` as it has two different values files.
 
@@ -105,7 +104,7 @@ Now let's deploy backend to test and prod environments using Argo CD!
     oc apply -f /opt/app-root/src/genaiops-gitops/appset-prod.yaml -n <USER_NAME>-toolings
     ```
 
-3. You should see the two canopy applications, one for `test` and one for `prod` each deployed in Argo CD. 
+3. You should see the canopy application, if filter in the search as `test` or `prod`. 
 
     ![canopy-gitops.png](./images/canopy-gitops.png)
 

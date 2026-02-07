@@ -103,3 +103,6 @@ Can you come up with something that explains the text even better without loosin
 	style="border: 1px solid transparent; border-radius: 1px;"
 	loading="lazy">
 ></iframe>
+
+
+Not sure about what is `Temperature` or `Max Tokens`? You have an access to a Large Language Model that is quite knowledgeable, right? Feel free to ask 🙃

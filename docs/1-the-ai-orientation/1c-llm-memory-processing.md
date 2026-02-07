@@ -1,12 +1,12 @@
-# 🧠 Memory and Processing in LLMs
+# 🧠 Memory and Processing in LLMs :id=memory-and-processing-in-llms
 
-## 📚 Contents
-- [🧠 Memory and Processing in LLMs](#-memory-and-processing-in-llms)
-  - [📚 Contents](#-contents)
-  - [👀 Attention Mechanism](#-attention-mechanism)
-  - [⚡ KV Cache and Performance](#-kv-cache-and-performance)
+## 📚 Contents :id=contents
+- [🧠 Memory and Processing in LLMs](#memory-and-processing-in-llms)
+  - [📚 Contents](#contents)
+  - [👀 Attention Mechanism](#attention-mechanism)
+  - [⚡ KV Cache and Performance](#kv-cache-and-performance)
 
-## 👀 Attention Mechanism
+## 👀 Attention Mechanism :id=attention-mechanism
 
 How does a language model know which part of a sentence matters most? That’s where **attention** comes in.
 
@@ -90,7 +90,7 @@ Which earlier token will the attention mechanism give the <b>highest weight</b> 
 
 ---
 
-## ⚡ KV Cache and Performance
+## ⚡ KV Cache and Performance :id=kv-cache-and-performance
 
 Generating answers can take time — especially for long responses. So how do LLMs stay fast?
 

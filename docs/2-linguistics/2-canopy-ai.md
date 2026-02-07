@@ -53,7 +53,7 @@ In OpenShift, you have an experimentation environment which is called `<USER_NAM
 
     ![canopy-helm](./images/canopy-helm.png)
 
-4. Hit `Create` and fill out the values as below:
+4. Hit `Create` , then expand `Canopy UI Helm Chart Values Schema` and fill out the values as below:
 
     - **SYSTEM_PROMPT:** Do you remember the great prompt you came up with in the previous section? Let's paste that here!
     - **MODEL_NAME:** `llama32`
