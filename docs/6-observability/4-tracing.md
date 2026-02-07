@@ -6,7 +6,7 @@ How do you know where time is spent? Which service is the bottleneck? Where erro
 
 ## Understanding Distributed Tracing
 
-Imagine following a student through their day on campus - from the library to the lab to office hours. You'd see where they spend the most time, where they get stuck, and what path they take. Distributed tracing does this for requests traveling through Canopy's microservices.
+Imagine following a student through their day on campus - from the library to the lab to office hours. You'd see where they spend the most time, where they get stuck, and what path they take (in a totally non-creepy, hypothetical way of course). Distributed tracing does this for requests traveling through Canopy's microservices.
 
 Each service instruments its code to emit **spans** - records of work done. These spans include:
 - **Operation name**: What work was performed (e.g., "RAG query", "LLM inference")
@@ -42,8 +42,6 @@ For Canopy UI and Canopy Backend, this means you get distributed tracing with mi
 
 The observability stack deployed with OpenShift AI includes the OpenTelemetry Operator. To enable tracing for Canopy's components, you would annotate the deployments. Because we're using python based apps (both for frontend and backend), we need to set the `instrumentation.opentelemetry.io/inject-python: "true"` label. We already did it by default in the [Canopy UI](https://github.com/rhoai-genaiops/frontend/blob/main/chart/templates/deployment.yaml#L18) and the [Canopy Backend](https://github.com/rhoai-genaiops/backend/blob/main/chart/templates/deployment.yaml#L20).
 
-This tells the operator to inject Python auto-instrumentation into the canopy-ui pods. The same approach works for the backend and other services.
-
 ## How Traces Flow Across Canopy AI App
 
 When a student asks a question, the request flows through multiple services: **Canopy-UI → Canopy-Backend → LlamaStack → vLLM**. 
@@ -53,9 +51,9 @@ When a student asks a question, the request flows through multiple services: **C
 Each component is instrumented with OpenTelemetry to create **spans** - records of work performed with timing data.
 
 **Trace Propagation:**
-- **Canopy-UI** (auto-instrumented): Creates the root span and propagates trace context via HTTP headers (W3C Trace Context standard)
-- **Canopy-Backend** (auto-instrumented): Receives the trace context, creates child spans for RAG queries and API calls
-- **LlamaStack** (`otel_trace` sink): Continues the trace with spans for inference operations, token counting, and model routing
+- **Canopy-UI**: Creates the root span and propagates trace context via HTTP headers
+- **Canopy-Backend** : Receives the trace context, creates child spans for RAG queries and API calls
+- **LlamaStack**: Continues the trace with spans for inference operations, token counting, and model routing
 - **vLLM**: Generates spans for model inference and token generation
 
 These spans connect into a **distributed trace** - a complete tree showing the request's journey across all services. OpenTelemetry automatically handles trace context propagation, ensuring spans link correctly even as the request crosses service boundaries. The traces are exported to **Red Hat build of Tempo** for storage and querying.
@@ -64,7 +62,7 @@ These spans connect into a **distributed trace** - a complete tree showing the r
 
 Now let's see distributed tracing in action by exploring your Canopy AI request traces.
 
-1. **Access the Traces Dashboard**: In your Grafana instance, navigate to the `<USER_NAME>-toolings Canopy Dashboards` folder and open **Llama Stack Traces**.
+1. **Access the Traces Dashboard**: In your Grafana instance, navigate to the `<USER_NAME>-toolings Canopy Dashboards` folder and open **Canopy Distributed Traces**.
 
    ![Trace List View](./images/tracing1.png)
 

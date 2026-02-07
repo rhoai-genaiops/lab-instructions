@@ -16,6 +16,8 @@ Let's see what Canopy is telling us in its logs.
 
 2. Let's filter to just Canopy in your test environment. Click **Show Query** and paste this LogQL query:
 
+   ![show-query.png](./images/show-query.png)
+   
    ```logql
    { log_type="application", kubernetes_pod_name=~"canopy-backend.*", kubernetes_namespace_name="<USER_NAME>-canopy" }
    ```
@@ -36,12 +38,11 @@ This solves a critical problem: **container logs are ephemeral**. When a contain
 ## Why Aggregation Matters
 
 If Canopy crashes at 2am and restarts automatically, you can still investigate what caused the crash because LokiStack:
+
 - Continuously collects logs from all containers automatically
 - Indexes them with Kubernetes metadata (namespace, pod, container)
 - Stores them for the configured retention period
 - Makes them searchable across all environments and timeframes
-
-"The system crashed yesterday at 3pm" becomes something you can actually investigate, even though the crashed pod is long gone.
 
 ## Generating and Querying Custom Logs
 
