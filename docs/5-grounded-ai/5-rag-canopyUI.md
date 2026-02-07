@@ -6,7 +6,7 @@ The Canopy application we deployed already has RAG built-in as you may have seen
 
 1. Go to your workbench and open the file `backend/chart/values-test.yaml`
 
-2. Edit the file to contain the `information-search` feature flag. Feel free to change the prompt, this is the system prompt just like before.
+2. Edit the file to contain the `information-search` feature flag. Feel free to change the prompt, this is a system prompt just like before.
 
     ```yaml
     LLAMA_STACK_URL: "http://llama-stack-service:8321"
@@ -34,14 +34,15 @@ The Canopy application we deployed already has RAG built-in as you may have seen
     git push
     ```
 
-4. Open the Canopy UI (https://canopy-ui-<USER_NAME>-test.<CLUSTER_DOMAIN> if you have closed it since last time), change to the Information Search feature in the left menu and ask something like `what is the total credits in Biotechnology program in Redwood Digital University?`
+4. Open the Canopy UI (https://canopy-ui-<USER_NAME>-test.<CLUSTER_DOMAIN> if you have closed it since last time), select the Information Search feature in the left menu and ask something like `what is the total credits in Biotechnology program in Redwood Digital University?`
 
-Replace "Biotechnology" in the prompt with the program syllabus you've uploaded to minio. For example, if you uploaded the "Computer Science" syllabus only, update the prompt to say "Computer Science" instead of "Biotechnology."
+Replace "Biotechnology" in the prompt with the program syllabus you've uploaded to Minio. For example, if you uploaded the "Computer Science" syllabus only, update the prompt to say "Computer Science" instead of "Biotechnology."
 
-    ![ask-canopy.png](images/ask-canopy.png)
+  ![ask-canopy.png](images/ask-canopy.png)
 
 Congratulations! 🎉  
 You now have a fully functioning RAG system where you can ingest complex documents as needed.
 
-But the question is, are we going to run the pipeline manually every time or do we have a better way to do this? And what about production? Are we going to push without any test?
+But the question is, are we going to run the pipeline manually every time or do we have a better way to do this? And what about production? Are we going to push without any testing?!
+
 Let's advance to the next section!

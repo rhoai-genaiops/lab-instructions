@@ -35,7 +35,7 @@ To be able to evaluate with Llama Stack we first need to enable it in our experi
    
     ![llama-stack-enable-evals-2.png](./images/llama-stack-enable-evals-2.png)
 
-3. After Llama Stack server is restarted (aka the circle is blue 🔵), go to your IDE and run through the notebook `experiments/4-ready-to-scale-201/1-llamastack-eval-test.ipynb`.
+3. After Llama Stack server is restarted (aka the circle is blue 🔵 in Topology view), go to your IDE and run through the notebook `experiments/4-ready-to-scale-201/1-llamastack-eval-test.ipynb`.
 
     ![llama-stack-enable-evals-3.png](./images/llama-stack-enable-evals-3.png)
 
