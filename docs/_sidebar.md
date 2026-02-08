@@ -56,6 +56,7 @@
   * [🧠 Understanding MaaS](11-maas/1-understanding-maas.md)
   * [🚀 Deploy LiteMaaS](11-maas/2-deploy-litemaas.md)
   * [🌳 Canopy Integration](11-maas/3-canopy-integration.md)
+  * [🔐 Take It to Prod Securely](11-maas/4-take-it-to-prod.md)
   * [👤 User Experience](11-maas/4-user-experience.md)
   * [👩‍💼 Admin Configuration](11-maas/5-admin-configuration.md)
   * [📊 Usage & Observability](11-maas/6-usage-observability.md)
