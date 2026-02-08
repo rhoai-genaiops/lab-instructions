@@ -38,7 +38,7 @@ Before we start, we need to enable MCP support in your Llama Stack instance:
 
     ![upgrade-lls](images/upgrade-lls.png)
 
-3. Open the **MCP section**, select **`enabled`**, and click **Upgrade**
+3. In the Form view, open the **MCP section**, select **`enabled`**, and click **Upgrade**
 
     ![enable-mcp](images/enable-mcp.png)
 

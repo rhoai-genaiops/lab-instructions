@@ -3,6 +3,7 @@
 ## From tools to agents
 
 You've seen how LLMs can use tools - they understand requests, format tool calls, and interpret results. But what if the LLM needs to use *multiple* tools afte each other? Or *reason* about which tool to use?  
+
 This is where **agentic workflows** come in.
 
 Instead of hardcoding "call tool A, then tool B", we give the LLM autonomy to figure out the right sequence of actions.
