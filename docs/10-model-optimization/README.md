@@ -1,4 +1,4 @@
-# Module 10 - Model Optimization
+# Module 10 - The Fitness Program
 
 > Your 70B model is brilliant. It's also eating $500/day in GPU costs and making students wait 10 seconds for answers. Time to put it on a diet. 🏋️
 

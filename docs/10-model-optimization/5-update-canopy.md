@@ -82,25 +82,25 @@ Once Llama Stack and backend are running, let's verify it can communicate with t
 
     LLAMA_STACK_URL: "http://llama-stack-service:8321"
     summarize:
-    enabled: true
-    model: vllm-llama32-fp8/llama32-fp8 # 👈 Update this  ❗︎❗︎
-    temperature: 0.9
-    max_tokens: 4096
-    prompt: |
+      enabled: true
+      model: vllm-llama32-fp8/llama32-fp8 # 👈 Update this  ❗︎❗︎
+      temperature: 0.9
+      max_tokens: 4096
+      prompt: |
         You are a helpful assistant. Summarize the given text please.
     information-search:
-    enabled: true
-    vector_db_id: latest
-    model: vllm-llama32-fp8/llama32-fp8 # 👈 Update this  ❗︎❗︎
-    prompt: |
+      enabled: true
+      vector_db_id: latest
+      model: vllm-llama32-fp8/llama32-fp8 # 👈 Update this  ❗︎❗︎
+      prompt: |
         You are a helpful assistant specializing in document intelligence and academic content analysis.
     student-assistant:         
-    enabled: true
-    model: vllm-llama32-fp8/llama32-fp8 # 👈 Update this  ❗︎❗︎
-    temperature: 0.1
-    vector_db_id: latest
-    mcp_calendar_url: "http://canopy-mcp-calendar-mcp-server:8080/sse"
-    prompt: |
+      enabled: true
+      model: vllm-llama32-fp8/llama32-fp8 # 👈 Update this  ❗︎❗︎
+      temperature: 0.1
+      vector_db_id: latest
+      mcp_calendar_url: "http://canopy-mcp-calendar-mcp-server:8080/sse"
+      prompt: |
         You are ...
     ```
 

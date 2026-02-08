@@ -1,4 +1,4 @@
-# Module 8 - The AI Agents
+# Module 8 - Autonomous Systems 101
 
 > An LLM alone is like a chef who can only describe recipes but never cook. Give it tools and agency, and suddenly it can search, schedule, calculate, and actually get things done. Welcome to the world of AI agents!
 

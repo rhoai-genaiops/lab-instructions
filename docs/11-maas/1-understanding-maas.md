@@ -6,13 +6,11 @@
 
 ## 🏫 The RDU Problem
 
-Let's set the scene at Redwood Digital University...
+Canopy was a hit! It has become the talk of the campus quite quickly! Now:
 
-Canopy was a hit! What started as a simple AI chatbot for the Computer Science department has become the talk of the campus. Now:
-
-* 🖥️ **CS Department**: "We need Canopy for our intro programming courses!"
-* 📊 **Business School**: "We need Canopy for our analytics curriculum!"
-* 📚 **Library**: "We need Canopy to help students navigate research databases!"
+* 🖥️ **CS Department**: "We need a Canopy-like service for our intro programming courses!"
+* 📊 **Business School**: "We also need a AI for our analytics curriculum!"
+* 📚 **Library**: "We need an assistant to help students navigate research databases!"
 
 Being good citizens, each department follows the same pattern you learned: they either get an access to a cloud model (💸💸💸) or deploy your own model using KServe/vLLM, connect their application, done!
 
@@ -52,11 +50,7 @@ Let's say a large company (totally not Red Hat 😉) decides to democratize AI b
 | Thursday | Finance submits urgent AI project request | "No GPUs available" |
 | Friday | Someone opens a ticket: "Why can't we get any GPUs?" | 7 devs: "Mine!" 🐿️ |
 
-This is the **Hardware Hoarding** anti-pattern:
-
-> When everyone can deploy their own model instance, they will — and they won't give it up, even when they're not using it.
-
-It's like everyone in an apartment building buying their own washer/dryer instead of sharing a laundry room. Expensive, inefficient, and leaves no room for actual... laundry.
+When everyone can deploy their own model instance, they will — and they won't give it up, even when they're not using it.
 
 ---
 
@@ -127,15 +121,13 @@ flowchart LR
     CS --> GW
     BIZ --> GW
     LIB --> GW
-    GW --> GRANITE[Granite Model]
-    GRANITE --> GPU["GPU #1 🎉 70%"]
+    GW --> LLAMA[Llama Model]
+    LLAMA --> GPU["GPU #1 🎉 70%"]
 ```
 
 ---
 
 ## 🎯 The MaaS Principles
-
-MaaS isn't just a technical solution — it's a mindset shift:
 
 ### 1️⃣ Become the Provider of Private AI
 
@@ -236,12 +228,6 @@ Before moving on, let's make sure the key concepts are clear:
 - 👤 **Consumer** — Uses the API to build applications
 </details>
 
----
-
-## 🎯 Next Steps
-
 Now that you understand *why* MaaS exists, it's time to build one!
 
 In the next lesson, you'll put on your 🔧 **AI Engineer** hat and deploy LiteMaaS on OpenShift.
-
-**Continue to [Deploy LiteMaaS](./2-deploy-litemaas.md)** →

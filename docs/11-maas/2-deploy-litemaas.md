@@ -48,14 +48,19 @@ Make sure you can access the cluster:
 
 ### 2. Existing Model Endpoints
 
-LiteMaaS is a *gateway* to models — it doesn't deploy models itself. We are going to put the models we've been using behind the gateway:
+LiteMaaS is a *gateway* to models. It doesn't deploy models itself. We are going to put the models we've been using behind the gateway:
 
   ```bash
   # Check if you have model inference services running
   oc get inferenceservices -n ai501
   ```
 
-You should see your Llama-3.2-3b or other model endpoints listed.
+You should see your Llama-3.2 3b (the cloud model) and quantized Llama, alongside with the guardrail models. And if you check your own experiment environment, you should see Tiny Llama:
+
+  ```bash
+  # Check if you have model inference services running
+  oc get inferenceservices -n <USER_NAME>-canopy
+  ```
 
 ### 3. Namespace Preparation
 
@@ -101,7 +106,7 @@ Up to now, we’ve been using Helm to package and parameterize Kubernetes manife
 
 ### 2.1 Provide your environment variables
 
-Under `litemaas/deployment/openshift` folder, we need to create a `user-values.env` file.
+Under `litemaas/deployment/openshift` folder, we need to create a `user-values.env` file. Run below command in your workspace's terminal:
 
 ```bash
 touch deployment/openshift/user-values.env
@@ -123,7 +128,7 @@ LITELLM_UI_USERNAME=admin
 LITELLM_UI_PASSWORD=change-me-ui-password
 ```
 
-> ⚠️ **Note:** In a real deployment, you'd use proper secrets management (e.g., External Secrets Operator, Vault). For the enablement, we're keeping it simple.
+> ⚠️ **Note:** In a real deployment, you'd use proper secrets management (e.g., External Secrets Operator, Vault). For now, we're keeping it simple.
 
 ---
 
@@ -131,7 +136,7 @@ LITELLM_UI_PASSWORD=change-me-ui-password
 
 LiteMaaS uses OpenShift OAuth for authentication. This means users can log in with their OpenShift credentials!
 
-### 3.1 Create an OAuth Client
+1. Create an OAuth Client by running the below command in your terminal:
 
 ```bash
 oc create -f - <<EOF
@@ -146,14 +151,14 @@ secret: $(openssl rand -base64 32)
 EOF
 ```
 
-### 3.2 Get the OAuth Client Secret
+2. Get the OAuth Client secret:
 
 ```bash
 # The secret was generated above - save it!
 oc get oauthclient litemaas-<USER_NAME> -o jsonpath='{.secret}'
 ```
 
-Update the `OAUTH_CLIENT_SECRET` variable in your environment file with the actual OAuth client secret.
+..and update the `OAUTH_CLIENT_SECRET` variable in your environment file with the actual OAuth client secret.
 
 ---
 
@@ -161,9 +166,7 @@ Update the `OAUTH_CLIENT_SECRET` variable in your environment file with the actu
 
 Now the fun part — let's deploy!
 
-### 4.1 Configure the deployment files with your values
-
-First run the preparation script. 
+1. Configure the deployment files with your values. First run the preparation script. 
 
   ```bash
   cd /opt/app-root/src/litemaas/deployment/openshift
@@ -178,7 +181,9 @@ First run the preparation script.
 
   Should show something like this:
 
-  ```bash
+
+  <div class="highlight" style="background: #f7f7f7; overflow-x: auto; padding: 8px;">
+    <pre><code class="language-bash"> 
   $ ls -la *.local
   -rw-r--r--. 1 1000960000 1000960000 4354 Dec 14 16:33 backend-deployment.yaml.local
   -rw-r--r--. 1 1000960000 1000960000  957 Dec 14 16:33 backend-secret.yaml.local
@@ -186,11 +191,11 @@ First run the preparation script.
   -rw-r--r--. 1 1000960000 1000960000  416 Dec 14 16:33 litellm-secret.yaml.local
   -rw-r--r--. 1 1000960000 1000960000  292 Dec 14 16:33 namespace.yaml.local
   -rw-r--r--. 1 1000960000 1000960000  200 Dec 14 16:33 postgres-secret.yaml.local
-  ```
 
-### 4.2 Run the deployment command
+  </code></pre>
+   </div>
 
-Run the below command to kick off the deployment:
+1. Run the deployment command to kick off the deployment:
 
    ```bash
    oc apply -k .
@@ -209,7 +214,7 @@ Run the below command to kick off the deployment:
    </code></pre>
   </div>
 
-### 4.3 Watch the Deployment
+3. Watch the deployment till all four pods become up and running (`1/1` under Ready column)
 
 ```bash
 # Watch pods come up
@@ -230,7 +235,7 @@ Do `Ctrl + C` to break the watch.
 
 ## ✨ Step 5: Access the LiteMaaS UI
 
-Open your browser and navigate to:
+1. Open your browser and navigate to:
 
 ```
 https://litemaas-<USER_NAME>-maas.<CLUSTER_DOMAIN>
@@ -248,9 +253,7 @@ By default you have admin privileges. That's why you have the `Administrator` se
 
 LiteMaaS uses [LiteLLM](https://github.com/BerriAI/litellm) as its backend proxy. We need to tell LiteLLM about our available models.
 
-### 6.1 Add Llama 3.2 3B to MaaS
-
-1. Let's add our initial cloud model to our  first. Go to `Administator` > `Model Management`  and click `Create Model`.
+1. Let's add our initial cloud model as our first. Go to `Administator` > `Model Management` and click `Create Model`.
 
   ![create-model.png](./images/create-model.png)
 
@@ -300,6 +303,8 @@ LiteMaaS uses [LiteLLM](https://github.com/BerriAI/litellm) as its backend proxy
 
     **Output Cost per Million Tokens:** `0,005`
 
+    _should we even charge for this?_ 🫣🫣🫣
+
   </details>
 
   <details>
@@ -324,8 +329,5 @@ LiteMaaS uses [LiteLLM](https://github.com/BerriAI/litellm) as its backend proxy
 
   ![maas-models-list.png](./images/maas-models-list.png)
 
----
 
-## 🎯 Next Steps
-
-Your infrastructure is ready! Now it's time to hand off to the 👩‍💼 **Service Admin** to configure users, roles, and budgets.
+Your infrastructure is ready! Now let's make Canopy to consume models from this MaaS instance!
