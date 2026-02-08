@@ -74,7 +74,9 @@ In OpenShift AI, we use **KServe** with **vLLM** as the serving runtime to deplo
 
     ![tiny-deploy.png](./images/tiny-deploy.png)
 
-    Expand `Customize resource requests and limits` to give a bit more CPU to TinyLlama:
+    Dont hit `Next` yet!
+
+4. Expand `Customize resource requests and limits` to give a bit more CPU to TinyLlama:
 
     **CPU Request:** 3
 
@@ -86,32 +88,22 @@ In OpenShift AI, we use **KServe** with **vLLM** as the serving runtime to deplo
 
     ![tiny-resources.png](./images/tiny-resources.png)
 
-    For **Model route** and **Token authentication**, leave them unchecked.
-    - **Uncheck** `Make deployed models available through an external route`
-    - **Uncheck** `Require token authentication`
+    Now click `Next`.
 
-    For **Source model location**:
-    - Select `OCI compliant registry - v1` as **Connection type**
+5. Don't change anything on this page. Especially For **Model access** and **Token authentication**, leave them unchecked.
 
-    **Connection name:** `quay`
+    - **Uncheck** `Make deployed models available through an external route` Because we don't want our model to be accesible outside of the cluster.
+    - **Uncheck** `Require token authentication` Because we'll get back to this a bt later :)
 
-    **Secret details:** copy below json snippet:
+  Click `Next` to review the deployment.
 
-    ```json
-    {
-     "auths": { }
-    }
-    ```
+6. The review should look like this:
 
-    **Registry host:** `quay.io`
+  ![tiny-review.png](./images/tiny-review.png)
 
-    **Model URI:** leave it as it.
+  Then click `Deploy model`!
 
-    ![tiny-conn.png](./images/tiny-conn.png)
-
-    And hit `Create`.
-
-4. Watch the deployment progress. Wait until the status becomes `Started`, indicating the model is ready to serve requests.
+1. Watch the deployment progress. Wait until the status becomes `Started`, indicating the model is ready to serve requests.
 
     ![tiny-deployed.png](./images/tiny-deployed.png)
 
@@ -160,6 +152,3 @@ Maybe it's not super fast for your taste, but it works! And most importantly, yo
 
 Now let's update Llama Stack and Canopy to use this new on-prem endpoint.
 
-## 🎯 Next Steps
-
-Continue to **[Update Canopy](9-on-prem-practicum/2-update-canopy.md)** to configure Llama Stack and your frontend to use the locally-hosted model.

@@ -12,7 +12,7 @@ Let's take our experiment environment from Tiny Llama and point it to the FP8 on
 
 3. Add the quantized Llama 3.2 FP8 model as another model endpoint to your Llama Stack like you did with TinyLlama previously. That way, we'd be able to access cloud model, TinyLlama, and to this new model.
     
-    Add it under `models` by clicking `Add models`:
+    In the Form view, add it under `models` by clicking `Add models`:
 
     - **Model Name**: `llama32-fp8`
     - **Model URL**: `http://llama-32-fp8-predictor.ai501.svc.cluster.local:8080/v1`
@@ -42,7 +42,7 @@ Let's take our experiment environment from Tiny Llama and point it to the FP8 on
 
 ### 🌳 Test Canopy with the New Model
 
-Once Llama Stack and backend are back up, let's verify it can communicate with the quantized model.
+Once Llama Stack and backend are running, let's verify it can communicate with the quantized model.
 
 1. Go to [Canopy UI](https://canopy-ui-<USER_NAME>-canopy.<CLUSTER_DOMAIN>) and test summarization. You can copy the text about Turkish tea from the previous chapters if you wish ☕️
 
@@ -58,14 +58,14 @@ Once Llama Stack and backend are back up, let's verify it can communicate with t
     models:
       - name: "llama32"
         url: "http://llama-32-predictor.ai501.svc.cluster.local:8080/v1"
-      - name: "llama32-fp8"     # 👈 Add this
-        url: "http://llama-32-fp8-predictor.ai501.svc.cluster.local:8080/v1" # 👈 Add this 
+      - name: "llama32-fp8"     # 👈 Add this ❗︎❗︎
+        url: "http://llama-32-fp8-predictor.ai501.svc.cluster.local:8080/v1" # 👈 Add this ❗︎❗︎
     eval:
-    enabled: true
+      enabled: true
     rag:                  
-    enabled: true
+      enabled: true
     mcp:                
-    enabled: true     
+      enabled: true     
     ```
 2. Push the changes:
 
@@ -76,14 +76,14 @@ Once Llama Stack and backend are back up, let's verify it can communicate with t
     git commit -m "🏦 Switch to FP8 🏦"
     git push
     ```
-3. Now let's update the `backend`. Open up `backend/chart/values-test.yaml` and update change every `llama32` to `llama32-fp8`.
+3. Now let's update the `backend`. Open up `backend/chart/values-test.yaml` and change every `llama32` to `llama32-fp8`.
 
     ```yaml
 
     LLAMA_STACK_URL: "http://llama-stack-service:8321"
     summarize:
     enabled: true
-    model: vllm-llama32-fp8/llama32-fp8 # 👈 Update this 
+    model: vllm-llama32-fp8/llama32-fp8 # 👈 Update this  ❗︎❗︎
     temperature: 0.9
     max_tokens: 4096
     prompt: |
@@ -91,12 +91,12 @@ Once Llama Stack and backend are back up, let's verify it can communicate with t
     information-search:
     enabled: true
     vector_db_id: latest
-    model: vllm-llama32-fp8/llama32-fp8 # 👈 Update this 
+    model: vllm-llama32-fp8/llama32-fp8 # 👈 Update this  ❗︎❗︎
     prompt: |
         You are a helpful assistant specializing in document intelligence and academic content analysis.
     student-assistant:         
     enabled: true
-    model: vllm-llama32-fp8/llama32-fp8 # 👈 Update this 
+    model: vllm-llama32-fp8/llama32-fp8 # 👈 Update this  ❗︎❗︎
     temperature: 0.1
     vector_db_id: latest
     mcp_calendar_url: "http://canopy-mcp-calendar-mcp-server:8080/sse"
@@ -108,12 +108,13 @@ Once Llama Stack and backend are back up, let's verify it can communicate with t
 
     ```bash
     cd /opt/app-root/src/backend
+    git pull
     git add chart/values-test.yaml
     git commit -m "🏦 Switch to FP8 🏦"
     git push
     ```
 
-    Do you remember what happens when we make a change in the backend? Yes! evaluation pipeline kicks off! Navigate to OpenShift console > Pipelines > Pipeline Runs under `<USER_NAME>-toolings` namespace and observe the evaluations. 
+    Do you remember what happens when we make a change in the backend? Yes! Evaluation pipeline kicks off! Navigate to OpenShift console > Pipelines > Pipeline Runs under `<USER_NAME>-toolings` namespace and observe the evaluations. 
 
 5. You can follow the same steps for **prod** files to move production Canopy to on prem as well!
 

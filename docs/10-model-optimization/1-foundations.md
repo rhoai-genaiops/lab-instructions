@@ -2,7 +2,7 @@
 
 ## The Problem: Great Models, Expensive Hardware
 
-You tried Tiny Llama, but you were not so happy. And you had a shiny big model that answers student questions beautifully. Why can't we have it again? But it needs 14GB of GPU memory, and your deployment budget says "absolutely not." 😭😭😭
+You tried Tiny Llama, but you were not so happy. And earlier you had this shiny big model that answers student questions beautifully. Why can't we have it again? But it needs 14GB of GPU memory, and your deployment budget says "absolutely not." 😭😭😭
 
 Welcome to quantization!! The art of making models smaller without making them dumber.
 
