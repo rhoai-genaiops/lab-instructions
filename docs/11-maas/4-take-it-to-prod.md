@@ -1,4 +1,4 @@
-# MaaS - Take it to the Prod!
+# Take it to the Prod _securely!_
 
 ## Sealed Secrets
 
@@ -20,12 +20,11 @@ In order to do that, we need to give what is the secret that it needs to seal:
 
     Then run the below command:
 
-
     ```bash
     cat << EOF > /tmp/test-api-token.yaml
     apiVersion: v1
     data:
-      api_token: "$(echo -n api_key | base64 -w0)"
+      api_token: "$(echo -n ${api_token} | base64 -w0)"
     kind: Secret
     metadata:
       name: llama-fp8-maas-token
@@ -46,7 +45,7 @@ In order to do that, we need to give what is the secret that it needs to seal:
     ```bash
     kubeseal < /tmp/test-api-token.yaml > /tmp/sealed-test-api-token.yaml \
     -n <USER_NAME>-test \
-    --controller-namespace sealed-secrets \
+    --controller-namespace ai501 \
     --controller-name sealed-secrets \
     -o yaml
     ```
@@ -57,7 +56,7 @@ In order to do that, we need to give what is the secret that it needs to seal:
     cat /tmp/sealed-test-api-token.yaml
     ```
 
-    We should now see the secret is sealed, so it is safe for us to store in our repository. It should look something a bit like this, but with longer password and username output.
+    We should now see the secret is sealed, so it is safe for us to store in our repository. It should look something a bit like this, but with a longer output.
 
     <div class="highlight" style="background: #f7f7f7">
     <pre><code class="language-yaml">
@@ -84,11 +83,11 @@ In order to do that, we need to give what is the secret that it needs to seal:
         api_token: AgAj3JQj+EP23pnzu...
     </code></pre></div>
 
-5. Open up `genaiops-gitops/test` and create a folder called `sealed-secrets`, and a `config.yaml` file under it.
+5. Open up `genaiops-gitops/canopy/test` and create a folder called `sealed-secrets`, and a `config.yaml` file under it.
 
     ```bash
-    mkdir /opt/app-root/src/mlops-gitops/toolings/sealed-secrets
-    touch /opt/app-root/src/mlops-gitops/toolings/sealed-secrets/config.yaml
+    mkdir /opt/app-root/src/genaiops-gitops/canopy/test/sealed-secrets
+    touch /opt/app-root/src/genaiops-gitops/canopy/test/sealed-secrets/config.yaml
     ```
 
 6. Open up the `sealed-secrets/config.yaml` file and paste the below yaml to `config.yaml`.
@@ -103,9 +102,6 @@ In order to do that, we need to give what is the secret that it needs to seal:
     Then, extend the `config.yaml` file with the encrypted password you got previously:
 
     ```yaml
-    repo_url: https://github.com/redhat-cop/helm-charts.git
-    chart_path: charts/helper-sealed-secrets
-    # ⬇️ extend by adding sealed secrets below
     secrets:
       # Additional secrets can be added to this list when necessary
       - name: llama-fp8-maas-token
@@ -133,9 +129,6 @@ Well, test first.
     ```yaml
     ---
     chart_path: charts/llama-stack-operator-instance
-    sealed_secrets:  # 👈 Add this ❗︎❗︎
-      enabled: true.    # 👈 Add this ❗︎❗︎
-      secretName: llama-fp8-maas-token  # 👈 Add this ❗︎❗︎
     models:
       - name: "llama32"
         url: "http://llama-32-predictor.ai501.svc.cluster.local:8080/v1"
@@ -148,7 +141,10 @@ Well, test first.
     rag:                  
       enabled: true
     mcp:                
-      enabled: true     
+      enabled: true 
+    sealed_secrets:  # 👈 Add this ❗︎❗︎
+      enabled: true    # 👈 Add this ❗︎❗︎
+      secretName: llama-fp8-maas-token  # 👈 Add this ❗︎❗︎    
     ```
 
   Yes, you are very right to think _why we are pushing an API key to Git? I don't think this is right!_, and we totally agree with you. We'll come to secret management conversation, promise!
@@ -163,14 +159,14 @@ Well, test first.
     git push
     ```
 
-4. Now let's update the `backend`. Open up `backend/chart/values-test.yaml` and update change every `llama32-fp8` to `Llama-3.2-3B-Instruct-FP8`.
+4. Now let's update the `backend`. Open up `backend/chart/values-test.yaml` and update change every `llama32-fp8` to `Llama-3.2-3B-Instruct-FP8` from MaaS (same model, just exposed through the MaaS gateway).
 
     ```yaml
 
     LLAMA_STACK_URL: "http://llama-stack-service:8321"
     summarize:
       enabled: true
-      model: vllm-Llama-3.2-3B-Instruct-FP8/Llama-3.2-3B-Instruct-FP8 # 👈 Update this 
+      model: vllm-Llama-3.2-3B-Instruct-FP8/Llama-3.2-3B-Instruct-FP8 # 👈 Update this ❗︎❗︎
       temperature: 0.9
       max_tokens: 4096
       prompt: |
@@ -178,12 +174,12 @@ Well, test first.
     information-search:
       enabled: true
       vector_db_id: latest
-      model: vllm-Llama-3.2-3B-Instruct-FP8/Llama-3.2-3B-Instruct-FP8 # 👈 Update this 
+      model: vllm-Llama-3.2-3B-Instruct-FP8/Llama-3.2-3B-Instruct-FP8 # 👈 Update this ❗︎❗︎
       prompt: |
         You are a helpful assistant specializing in document intelligence and academic content analysis.
     student-assistant:         
       enabled: true
-      model: vllm-Llama-3.2-3B-Instruct-FP8/Llama-3.2-3B-Instruct-FP8 # 👈 Update this 
+      model: vllm-Llama-3.2-3B-Instruct-FP8/Llama-3.2-3B-Instruct-FP8 # 👈 Update this ❗︎❗︎
       temperature: 0.1
       vector_db_id: latest
       mcp_calendar_url: "http://canopy-mcp-calendar-mcp-server:8080/sse"
@@ -203,4 +199,8 @@ Well, test first.
 
     Do you remember what happens when we make a change in the backend? Yes! Evaluation pipeline kicks off! Navigate to OpenShift console > Pipelines > Pipeline Runs under `<USER_NAME>-toolings` namespace and observe the evaluations. 
 
-5. You can follow the same steps for **prod** files to move production Canopy to MaaS as well!
+5. If you wish, you can follow the same steps for **prod** files to move production Canopy to MaaS as well!
+
+---
+
+**What we just did:** We practiced secure GitOps by using Sealed Secrets to safely store our API token in Git — encrypted so only the cluster can decrypt it. Then, by updating the backend configuration to point to the MaaS-served model (`Llama-3.2-3B-Instruct-FP8`), we seamlessly switched our application to consume the model through the LiteLLM gateway — without changing any application code. The push to Git automatically triggered the evaluation pipeline, ensuring our model swap is validated before deployment. This is GitOps done right: everything in Git, secrets included, but protected.

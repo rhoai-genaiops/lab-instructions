@@ -57,8 +57,8 @@
   * [🚀 Deploy LiteMaaS](11-maas/2-deploy-litemaas.md)
   * [🌳 Canopy Integration](11-maas/3-canopy-integration.md)
   * [🔐 Take It to Prod Securely](11-maas/4-take-it-to-prod.md)
-  * [👤 User Experience](11-maas/4-user-experience.md)
-  * [👩‍💼 Admin Configuration](11-maas/5-admin-configuration.md)
-  * [📊 Usage & Observability](11-maas/6-usage-observability.md)
+  <!-- * [👤 User Experience](11-maas/5-user-experience.md)
+  * [👩‍💼 Admin Configuration](11-maas/6-admin-configuration.md)
+  * [📊 Usage & Observability](11-maas/7-usage-observability.md) -->
 * [Campus Setup](15-campus-setup/README.md)
   * [🏫 Cluster Setup](15-campus-setup/1-cluster-setup.md)
