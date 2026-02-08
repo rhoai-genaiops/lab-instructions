@@ -22,21 +22,22 @@ We are specifically looking to automate the top part, how new documents go into 
    ---
    chart_path: charts/minio
    buckets:
-   - name: pipeline
-   - name: test-results
-   - name: documents # 👈 add this one
+     - name: pipeline
+     - name: test-results
+     - name: documents # 👈 add this one
    ```
 
 2. Let's commit this change!
 
    ```bash
    cd /opt/app-root/src/genaiops-gitops
+   git pull
    git add .
    git commit -m  "🪣 ADD - document bucket 🪣"
    git push
    ```
 
-3. But which document we are going to ingest, you asked! We are going to ingest RDU's syllabus for different programs! Let's head to the RDU's website (what? you didn't think we had a website 😒). 
+3. But which document we are going to ingest, you asked! We are going to ingest RDU's syllabus for different programs! Let's head to the RDU's website (what? you didn't think we had a website? 😒). 
 
    [🌲 Redwood Digital University website](https://rdu-website-ai501.<CLUSTER_DOMAIN>)
 
@@ -92,7 +93,7 @@ Time to run yet another pipeline!
    cd /opt/app-root/src/backend/rag-pipeline
    python kfp_pipeline.py
    ```
-   It should generate a file called `document-intelligence-rag.yaml`. Download it to your local machine.
+   It should generate a file called `document-intelligence-rag.yaml` under `backend/rag-pipeline` folder. Download it to your local machine.
    
 
 3. Go to OpenShift AI and enter your `<USER_NAME>-toolings` project. In there, go to `Pipelines` and click `Import pipeline`.
@@ -105,11 +106,13 @@ Time to run yet another pipeline!
 
 5. Let's start by running it ad-hoc to make sure it works, press on `Actions` in the pipeline view and `Create run`
 
-6. Give the run a name, like `Ingest physics syllabus`, and then change the Llama Stack values as below:
+   ![doc-ingest-run.png](./images/doc-ingest-run.png)
 
-   `llama_stack_url`: http://llama-stack-service.<USER_NAME>-test.svc.cluster.local:8321
+6. Give the run a name, like `Ingest physics syllabus`. Scroll down, there are a couple of parameters. You need to change the Llama Stack values as below:
 
-   `prod_llama_stack_url`: http://llama-stack-service.<USER_NAME>-prod.svc.cluster.local:8321
+   **llama_stack_url**: `http://llama-stack-service.<USER_NAME>-test.svc.cluster.local:8321`
+
+   **prod_llama_stack_url**: `http://llama-stack-service.<USER_NAME>-prod.svc.cluster.local:8321`
 
 
    It should look something like this:

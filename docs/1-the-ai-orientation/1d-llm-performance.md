@@ -1,15 +1,15 @@
-# 📊 LLM Performance and Hardware
+# 📊 LLM Performance and Hardware :id=llm-performance-and-hardware
 
-## 📚 Contents
-- [📊 LLM Performance and Hardware](#-llm-performance-and-hardware)
-  - [📚 Contents](#-contents)
-  - [📊 Key Performance Metrics](#-key-performance-metrics)
-  - [📦 Model Sizes and Requirements](#-model-sizes-and-requirements)
-  - [� How to Understand Model Resource Requirements from Model Cards](#-how-to-understand-model-resource-requirements-from-model-cards)
-  - [👀 Let's see this in practice](#-lets-see-this-in-practice)
-  - [✅ Summary](#-summary)
+## 📚 Contents :id=contents
+- [📊 LLM Performance and Hardware](#llm-performance-and-hardware)
+  - [📚 Contents](#contents)
+  - [📊 Key Performance Metrics](#key-performance-metrics)
+  - [📦 Model Sizes and Requirements](#model-sizes-and-requirements)
+  - [📃 How to Understand Model Resource Requirements from Model Cards](#how-to-understand-model-resource-requirements-from-model-cards)
+  - [👀 Let's see this in practice](#lets-see-this-in-practice)
+  - [✅ Summary](#summary)
 
-## 📊 Key Performance Metrics
+## 📊 Key Performance Metrics :id=key-performance-metrics
 
 Before we jump into hardware and sizes, it's helpful to understand how we measure a model's responsiveness and efficiency. These key metrics help us see how fast a model can start talking, how quickly it produces each word, and how much resource it uses.
 
@@ -90,7 +90,7 @@ Which single change will <b>most directly</b> improve what users feel?
 
 ---
 
-## 📦 Model Sizes and Requirements
+## 📦 Model Sizes and Requirements :id=model-sizes-and-requirements
 
 Models come in different sizes. The bigger the model (measured in billions of parameters), the smarter and more detailed its responses can be. But bigger models need more powerful GPUs and more memory, which can make them slower or more expensive to run.
 
@@ -109,7 +109,7 @@ For example, a 3B parameter model requires ~12GB of GPU memory to load and run.
 _* Quantization makes models take up less space, so they can run faster and fit on smaller GPUs. It slightly reduces quality but often works well enough._
 
 
-## 📃 How to Understand Model Resource Requirements from Model Cards
+## 📃 How to Understand Model Resource Requirements from Model Cards :id=how-to-understand-model-resource-requirements-from-model-cards
 
 
 [Hugging Face](https://huggingface.co/) is a platform and model hub where developers share, explore, and deploy machine learning models — especially Large Language Models.  
@@ -185,7 +185,7 @@ GPU budget: single A10 24 GB.
 </div>
 </div>
 
-## 👀 Let's see this in practice
+## 👀 Let's see this in practice :id=lets-see-this-in-practice
 
 Below you'll see two versions of Llama 3.2 3B side by side:
 
@@ -223,7 +223,7 @@ How does compressing a model to half its size *not* break it? That's what this m
 ---
 
 
-## ✅ Summary
+## ✅ Summary :id=summary
 
 Let's wrap up with a quick review of important concepts that you have seen through this chapter. These terms will help you understand how LLMs work under the hood and how to think about their performance and deployment.
 

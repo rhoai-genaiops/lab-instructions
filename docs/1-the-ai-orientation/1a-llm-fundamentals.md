@@ -1,14 +1,14 @@
-# LLM Fundamentals
+# LLM Fundamentals :id=llm-fundamentals
 
-## 📚 Contents
+## 📚 Contents :id=contents
 - [LLM Fundamentals](#llm-fundamentals)
-  - [📚 Contents](#-contents)
-  - [🔍 What is a Token?](#-what-is-a-token)
-  - [🔄 Next-Token Prediction](#-next-token-prediction)
-  - [🧠 Context Length and Window](#-context-length-and-window)
-  - [🔮 Are LLMs Fixed or Do They Change?](#-are-llms-fixed-or-do-they-change)
+  - [📚 Contents](#contents)
+  - [🔍 What is a Token?](#what-is-a-token)
+  - [🔄 Next-Token Prediction](#next-token-prediction)
+  - [🧠 Context Length and Window](#context-length-and-window)
+  - [🔮 Are LLMs Fixed or Do They Change?](#are-llms-fixed-or-do-they-change)
 
-## 🔍 What is a Token?
+## 🔍 What is a Token? :id=what-is-a-token
 
 Before an AI model can understand or generate text, it breaks everything down into tiny pieces called **tokens**.
 
@@ -109,7 +109,7 @@ Let’s test your understanding with a quick quiz!
     });
 </script>
 
-## 🔄 Next-Token Prediction
+## 🔄 Next-Token Prediction :id=next-token-prediction
 
 At their core, Large Language Models (LLMs) do something surprisingly simple:
 They guess the **next token**.
@@ -253,7 +253,7 @@ Imagine a prompt sent to an LLM reads exactly like this:
 
 </details>
 
-## 🧠 Context Length and Window
+## 🧠 Context Length and Window :id=context-length-and-window
 
   LLMs can't have infinite long inputs. When you send a message, the model needs room to:
 
@@ -278,6 +278,8 @@ Imagine a prompt sent to an LLM reads exactly like this:
   It’s like giving the model a writing limit. Let's try this:
 
   Ask the model `I need a Spanish tortilla recipe.` and change the `max_token` until you get a delicious recipe 🇪🇸
+
+  _Note: if you need, you can close the menu on the left by clicking the ㈢ button on top to view the exercise better_
 
 <iframe
 	src="https://ai-orientation-app-ai501.<CLUSTER_DOMAIN>/context?embed"
@@ -391,7 +393,7 @@ Which approach is the <em>most practical</em>?</p>
 
 
 
-## 🔮 Are LLMs Fixed or Do They Change?
+## 🔮 Are LLMs Fixed or Do They Change? :id=are-llms-fixed-or-do-they-change
 
 Once a large language model is trained, it becomes **frozen** — it doesn’t learn new things by talking to you. Every time you send a message (called a **prompt**), the model uses what it already knows and responds based only on:
 - Its original training data

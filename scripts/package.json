@@ -1,0 +1,13 @@
+{
+  "name": "lab-instructions-screenshots",
+  "version": "1.0.0",
+  "description": "Screenshot automation for lab instructions",
+  "scripts": {
+    "renew": "node renew-screenshots.js",
+    "renew:chapter2": "node renew-screenshots.js $CLUSTER $USER $PASS 2-linguistics",
+    "install-browsers": "npx playwright install chromium"
+  },
+  "dependencies": {
+    "playwright": "^1.40.0"
+  }
+}

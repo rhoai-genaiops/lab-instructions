@@ -1,4 +1,4 @@
-# Module 6 - The Honor Code
+# Module 7 - The Honor Code
 
 > Building AI you can trust means setting boundaries. Just like a good teacher establishes classroom rules, guardrails ensure your AI stays helpful, harmless, and honest 🛡️
 

@@ -118,7 +118,7 @@ The downside: At 2 bits, these abilities degrade severely. Anything below 4-bit 
 
 Enough theory—let's actually compare a quantized model against its baseline.
 
-Go to your workbench and open up **`experiments/9-model-optimization/4-evaluation.ipynb`**
+Go to your workbench and open up **`experiments/10-model-optimization/4-evaluation.ipynb`**
 
 In this exercise, you'll use `lm-evaluation-harness` to run the same benchmark against two deployed models and compare the results.
 

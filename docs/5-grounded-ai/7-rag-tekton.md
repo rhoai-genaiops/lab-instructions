@@ -1,6 +1,6 @@
 ## Automate the Flow with Tekton
 
-1. Let's automate this whole flow when there is a new document uplaoded to MinIO! For that we need to deploy a Tekton pipeline to handle triggering the kfp as well as some surrounding ops tasks (very similar to what we did in Ready to Scale 201).
+1. Let's automate this whole flow when there is a new document uplaoded to MinIO! For that we need to deploy a Tekton pipeline to handle triggering the KFP (Kubeflow Pipelines) as well as some surrounding ops tasks (very similar to what we did in Ready to Scale 201).
     In the end, the whole flow will look like this:
 
     ![doc-ingestion-tekton-flow.png](./images/doc-ingestion-tekton-flow.png)
@@ -25,21 +25,22 @@ Let's deploy the Tekton pipeline by creating a folder under `genaiops-gitops/too
 
     ```bash
     cd /opt/app-root/src/genaiops-gitops
+    git pull
     git add .
     git commit -m "🦁 RAG doc ingestion pipeline added 🦁"
     git push
     ```
 
 4. This pipeline will give you a webhook to add to MinIO so that when we upload a file, MinIO can trigger the Tekton pipeline.  
-Go to MinIO ([https://minio-ui-<USER_NAME>-toolings.<CLUSTER_DOMAIN>](https://minio-ui-<USER_NAME>-toolings.<CLUSTER_DOMAIN>)) > Events and click on `Add Event Destination` on the right top. Select `Webhook`:
+Go to MinIO ([https://minio-ui-<USER_NAME>-toolings.<CLUSTER_DOMAIN>](https://minio-ui-<USER_NAME>-toolings.<CLUSTER_DOMAIN>)) > `Events` and click on `Add Event Destination` on the right top. Select `Webhook`:
 
     ![minio-webhook-1.png](./images/minio-webhook-1.png)
 
 5. Fill out the form with these two information:
 
-    Identifier: `doc-ingestion-webhook`
+    **Identifier:** `doc-ingestion-webhook`
 
-    Endpoint: `http://el-canopy-doc-ingestion-event-listener.<USER_NAME>-toolings.svc.cluster.local:8080`
+    **Endpoint:** `http://el-canopy-doc-ingestion-event-listener.<USER_NAME>-toolings.svc.cluster.local:8080`
 
     ..and hit `Save Event Destination`.
 
@@ -61,7 +62,7 @@ Go to MinIO ([https://minio-ui-<USER_NAME>-toolings.<CLUSTER_DOMAIN>](https://mi
 
     ![rag-tekton-pipeline.png](./images/rag-tekton-pipeline.png)
 
-10. And if you go back to the OpenShift AI console, you'll see that doc-ingestion Kubeflow Pipeline is running:
+10. And if you go back to the OpenShift AI console, you'll see that `doc-ingestion` Kubeflow Pipeline is running:
 
     ![rag-kfp-pipelinerun.png](./images/rag-kfp-pipelinerun.png)
 
@@ -74,8 +75,10 @@ Go to MinIO ([https://minio-ui-<USER_NAME>-toolings.<CLUSTER_DOMAIN>](https://mi
 
     ![trigger-evals.png](./images/trigger-evals.png)
 
-    After the eval pipeline finishes, you can find a PR in `backend` repository to update vector DB ID in production.   
-    In the description, you'll see a link to evaluation results. You need to check the results and decide whether to accept this change or go back and do some more test, more data ingestions etc.   
+    After the eval pipeline finishes, you can find a PR in `backend` repository to update vector DB ID in production. 
+
+    In the description, you'll see a link to evaluation results. You need to check the results and decide whether to accept this change or go back and do some more test, more data ingestions etc. 
+      
     You are the human in the loop here :)
 
     ![canopy-be-rag-pr.png](./images/canopy-be-rag-pr.png)

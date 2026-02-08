@@ -33,9 +33,4 @@ Llama Stack provides some out of the box capabilities for RAG. Let's quickly imp
     After you have finished with the embeddings you are now ready to try a RAG workflow.  
     Continue to `experiments/5-rag/2-intro-to-RAG.ipynb` to get your hands on the RAG.
 
-    When you finish, come back so we can continue with making it prod ready and more automated!
-
-
-## 🎯 Next Steps: Intelligent Data Processing
-
-Next, continue to **[Docling](./2-docling.md)** to learn how to work with more complex data in your RAG system 🙌
+    When you finish, come back so we can continue with **[Docling](./2-docling.md)** to learn how to work with more complex data 🐣

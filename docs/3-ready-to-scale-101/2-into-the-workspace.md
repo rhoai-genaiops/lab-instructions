@@ -12,7 +12,7 @@ You’ll use this environment to:
 
 By the end of this section, you'll have a better grasp of how to integrate Llama Stack into your own workflows and applications — and set the stage for more advanced use cases.
 
-1. Login to [OpenShift AI](https://data-science-gateway.<CLUSTER_DOMAIN>/). You’ll see your `<USER_NAME>-canopy` project there too!
+1. Login to [OpenShift AI](https://data-science-gateway.<CLUSTER_DOMAIN>/). Use the same credentials to log in. You’ll see your `<USER_NAME>-canopy` project there too!
 
    ![openshift-ai.png](./images/openshift-ai.png)
 
@@ -50,7 +50,7 @@ When it is in running state, open it by clicking its name and use your credentia
 
    ![code-server-terminal.png](./images/code-server-terminal.png)
 
-5. Let's clone our Canopy repository that has some Notebooks in it and learn more about Llama Stack!
+5. Clone the Canopy experimentation repository that has some Notebooks, and let's learn more about Llama Stack!
 
    ```bash
    git clone https://<USER_NAME>:<PASSWORD>@gitea-gitea.<CLUSTER_DOMAIN>/<USER_NAME>/experiments.git

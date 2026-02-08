@@ -12,7 +12,7 @@ Just like a good prompt shapes a great model response, **a good user interface s
 
 In GenAI applications, **how people interact with the model often matters more than which model you use**.
 
-You can have the smartest LLM in the world, but if the UI doesn’t help users to easily interract with it — the value is lost.
+You can have the smartest LLM in the world, but if the UI doesn't help users to easily interact with it — the value is lost.
 
 This first iteration of **Canopy** is built to support:
 
@@ -32,10 +32,16 @@ Let's get you your own instance of Canopy up and running in just a few minutes.
 
 In OpenShift, you have an experimentation environment which is called `<USER_NAME>-canopy`. You'll use this environment to iterate over Canopy, bring in new features, update the frontend when new capabilities arrive, and so on.
 
-1. Go to [OpenShift Console](https://console-openshift-console.<CLUSTER_DOMAIN>) and use `Students` login.
+1. Go to [OpenShift Console](https://console-openshift-console.<CLUSTER_DOMAIN>) and select `Students` as the identity provider.
 
-    User: `<USER_NAME>`  
+    ![openshift-login.png](./images/openshift-login.png)
+
+    Enter your credentials:
+
+    User: `<USER_NAME>`
     Password: `<PASSWORD>`
+
+    After logging in, you will see the Projects page:
 
     ![openshift-console.png](./images/openshift-console.png)
 
@@ -47,7 +53,7 @@ In OpenShift, you have an experimentation environment which is called `<USER_NAM
 
     ![canopy-helm](./images/canopy-helm.png)
 
-4. Hit `Create` and fill out the values as below:
+4. Hit `Create` , then expand `Canopy UI Helm Chart Values Schema` and fill out the values as below:
 
     - **SYSTEM_PROMPT:** Do you remember the great prompt you came up with in the previous section? Let's paste that here!
     - **MODEL_NAME:** `llama32`
@@ -62,7 +68,7 @@ In OpenShift, you have an experimentation environment which is called `<USER_NAM
       - A UBI9-based Streamlit application that sends your chat requests to the LLM
       - A secure OpenShift route for us to access the app outside of the cluster
 
-5. Once the application is successfully running, click on the arrow on the side of the circle to access the Canopy UI 🌳🌳🌳
+5. Once the application is successfully running, click the external link icon (↗) in the top-right corner of the pod to access the Canopy UI 🌳🌳🌳
 
     ![canopy-ui-ocp.png](./images/canopy-ui-ocp.png)
 
