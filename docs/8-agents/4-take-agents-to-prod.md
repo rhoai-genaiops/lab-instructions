@@ -61,7 +61,7 @@ There are a few things we want to do, such as evaluating and observing the agent
         Summarize this in 10 sentences. 
     information-search:
       enabled: true
-      vector_db_id: genaiops_2026_02_07_22_29
+      vector_db_id: latest
       model: llama32
       prompt: |-
         You are a helpful assistant specializing in document intelligence and academic content analysis.
