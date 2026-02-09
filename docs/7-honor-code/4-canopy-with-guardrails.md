@@ -26,7 +26,17 @@ Now that we got experience with Guardrails and learned how to build confidence i
     Add below config:
 
     ```yaml
-    guardrails: # 👈 Add this block
+    chart_path: charts/llama-stack-operator-instance
+    models:
+      - name: "llama32"
+        url: "http://llama-32-predictor.ai501.svc.cluster.local:8080/v1"
+    eval:
+      enabled: true
+    rag:       
+      enabled: true   
+      milvus:           
+        service: "milvus-test"  # Mind that this should be different for prod
+    guardrails: # 👈 Add this block ❗︎ ❗︎ ❗︎ ❗︎ ❗︎
       enabled: true
       hap:
         enabled: true
