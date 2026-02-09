@@ -58,7 +58,7 @@ There are a few things we want to do, such as evaluating and observing the agent
       temperature: 0.9
       max_tokens: 4096
       prompt: | # your own prompt there
-        Summarize this in 10 sentences. 
+        Summarize the text in a few sentences.
     information-search:
       enabled: true
       vector_db_id: latest
