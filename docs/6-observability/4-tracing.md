@@ -99,3 +99,9 @@ Now let's see distributed tracing in action by exploring your Canopy AI request 
    ![Span Detail View](./images/tracing3.png)
 
    Each span includes rich metadata like HTTP headers, model parameters, input/output samples, and error details - essential for debugging complex AI workflows.
+
+## 🎯 Next Steps: Closing the Loop with Feedback
+
+You now have the three pillars of observability in place: metrics, logs, and traces. But there's one more signal that matters for AI systems -- **user feedback**. How do you know if the AI's responses are actually *good*?
+
+Continue to **[Feedback Loops](6-observability/5-feedback-loops.md)** to learn how user feedback completes the GenAIOps lifecycle 🔄
