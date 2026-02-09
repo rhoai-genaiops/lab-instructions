@@ -2,7 +2,7 @@
 
 Now that we got experience with Guardrails and learned how to build confidence in the system we are creating, let's bring all these learnings to Canopy!
 
-1. Let's bring it to our `test` and `prod` environment. First, let's deploy Trusty AI Guardrails Orchestrator in each environment. This will help us make updates in environments separately without affecting each out.
+1. Let's bring it to our `test` and `prod` environment. First, let's deploy Trusty AI Guardrails Orchestrator in each environment. This will help us make updates in the environments separately without affecting the other.
 
     Create `guardrails-orchestrator` folder by running the below commands:
 
