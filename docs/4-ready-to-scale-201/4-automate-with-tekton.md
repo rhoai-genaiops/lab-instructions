@@ -138,7 +138,9 @@ We will be triggering it from a Tekton Pipeline, where we both will have a step 
 
     ![githook](images/githook.png)
 
-9. Now do the same for **backend**. Go to `backend` repository > Settings > Webhook > Add > Gitea and add the same webhook. This will be the second webhook definition for the backend repository.
+9. Now do the same for **backend** repository 💥💥💥 
+
+    Go to `backend` repository > Settings > Webhook > Add > Gitea and add the same webhook. This will be the second webhook definition for the backend repository.
 
     ```bash
     http://el-canopy-evals-event-listener.<USER_NAME>-toolings.svc.cluster.local:8080

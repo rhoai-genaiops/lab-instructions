@@ -6,7 +6,7 @@
 
 You've built Canopy with summarization and RAG capabilities, but how do you know it's actually working well in production? This module introduces the three pillars of observability that transform your AI application from a black box into a transparent, monitorable system you can trust.
 
-You'll learn to use OpenShift AI's built-in observability stack: metrics to quantify performance, logs to understand behavior, and traces to follow requests through your distributed system. By the end, you'll have dashboards that show Canopy's health at a glance and the skills to debug issues quickly.
+You'll learn to use OpenShift AI's built-in observability stack: metrics to quantify performance, logs to understand behavior, and traces to follow requests through your distributed system. You'll also close the loop with user feedback -- collecting thumbs up/down signals, turning negative feedback into evaluation test cases, and using A/B testing to compare prompts side-by-side so you can make data-driven prompt engineering decisions. By the end, you'll have dashboards that show Canopy's health at a glance, a feedback-driven improvement cycle, and the skills to debug issues quickly.
 
 # 🖼️ Big Picture
 ![big-picture-observability](images/big-picture-monitoring.jpg)
@@ -19,6 +19,8 @@ You'll learn to use OpenShift AI's built-in observability stack: metrics to quan
 * Create custom Grafana dashboards to visualize AI-specific metrics and system health
 * Analyze logs using OpenShift's logging stack to debug issues and understand user interactions
 * Trace requests through distributed components to identify bottlenecks and latency sources
+* Collect user feedback and export negative signals as evaluation datasets to systematically improve prompts
+* Use A/B testing to compare prompt variants side-by-side and promote winners through GitOps
 
 # 🔨 Tools used in this module
 

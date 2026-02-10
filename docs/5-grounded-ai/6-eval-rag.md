@@ -60,6 +60,7 @@ tests:
   **Note:** These prompts are for the course AI501, depending on what course you ingested before you may need to change them to match your content. To find good prompts and expected responses you can try running a few through the **Canopy UI** or **Llamastack Playground**.
 
 4. After you are happy with the evaluation, make sure to commit it to git:
+
     ```bash
     cd /opt/app-root/src/evals/information-search
     git add .

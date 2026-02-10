@@ -17,7 +17,7 @@ The Canopy application we deployed already has RAG built-in as you may have seen
      max_tokens: 4096
      prompt: |
        You are a helpful assistant. Summarize the given text please.
-    information-search:         # 👈 add this block
+    information-search:         # 👈 add this block 📚❗︎
      enabled: true
      vector_db_id: latest
      model: llama32

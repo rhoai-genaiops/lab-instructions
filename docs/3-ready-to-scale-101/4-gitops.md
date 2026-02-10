@@ -99,7 +99,7 @@ Gitea is a lightweight, self-hosted Git server that allows teams to manage repos
 
     You will see a `genaiops-gitops` repository already created for you. It is the git repository that we are going to use for <span style="color:purple;" >GIT</span>Ops purposes. It will serve as a mono-repo holding both our tooling configuration and the application deployment definitions. In the real world, you may want to separate these into different repos! Anyways, let's get started!
 
-2. Let's go back to the `code-server` terminal and clone the repository.
+2. Let's go back to the `code-server` workbench terminal and clone the repository.
 
     ```bash
     cd /opt/app-root/src
@@ -138,7 +138,7 @@ Gitea is a lightweight, self-hosted Git server that allows teams to manage repos
     ```
 6. Now check the Argo CD's Application view on UI to see if ApplicationSet was able to see the subfolders under `toolings` and deploy the applications for us!
 
-7. As Argo CD sync's the resources we can see them in the cluster as well. In the `code-server` run the following:
+7. As Argo CD sync's the resources we can see them in the cluster as well. In the workbench run the following:
 
     ```bash
     oc get projects | grep <USER_NAME>
