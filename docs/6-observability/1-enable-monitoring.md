@@ -7,10 +7,11 @@ Without observability, running AI in production is like flying blind, you only k
 ## The Three Pillars of Observability
 
 Modern observability relies on three complementary data types:
+  - **Metrics** 📊 - Quantitative measurements over time (response latency, request rate, error percentage, time for first token).
 
-* **Metrics** 📊 - Quantitative measurements over time (response latency, request rate, error percentage, time for first token).
-* **Logs** 📝 - Detailed event records from your application (error messages, user requests, system events).
-* **Traces** 🔍 - Request paths through distributed services (how a student's question flows through Canopy's microservices, MCP tools, and LLMs).
+  - **Logs** 📝 - Detailed event records from your application (error messages, user requests, system events).
+
+  - **Traces** 🔍 - Request paths through distributed services (how a student's question flows through Canopy's microservices, MCP tools, and LLMs).
 
 Together, these three pillars give you complete visibility into Canopy's behavior. Let's see how to enable observability for Canopy!
 
@@ -68,6 +69,6 @@ These environment variables configure LlamaStack to:
 
 ## 🎯 Next Steps: Understanding Metrics
 
-With the RHOAI Observability platform and UWM configured, it is now collecting metrics from vLLM (token generation, latency), LlamaStack (token usage), and Canopy UI/Backend (HTTP requests, response times). In the next section, you'll query these metrics in Prometheus, deploy Grafana for visualization, and interpret dashboards to understand your AI stack's performance.
+With the RHOAI Observability platform and OpenShift User Workload Monitoring configured, it is now collecting metrics from vLLM (token generation, latency), LlamaStack (token usage), and Canopy UI/Backend (HTTP requests, response times). In the next section, you'll query these metrics in Prometheus, deploy Grafana for visualization, and interpret dashboards to understand your AI stack's performance.
 
 Continue to **[Metrics](6-observability/2-metrics.md)** to explore what your AI stack is telling you about its performance.

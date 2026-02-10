@@ -50,7 +50,7 @@ We'll separate out the LLM business logic from the frontend into its own backend
 
 3. Then, go a little bit down, expand the `image` value and update the tag to point to a newer version:
    
-   - tag: `0.4`
+   - tag: `0.5` (replace it with `simple-0.1`)
   
   ..and now hit `Upgrade`!
 
@@ -70,6 +70,8 @@ We'll separate out the LLM business logic from the frontend into its own backend
 
 Now that we're happy with the first iteration of our Canopy student assistant, it's time to put it in the hands of real users. To do that, we need to deploy everything we've built so far into a test, and eventually a production environment. But this time, we'll do it in a more robust, consistent, and repeatable way. That's why we're stepping into the world of: GitOps 🐙.
 
-By releasing early, we get feedback sooner, allowing us to make course corrections before investing too much. By investing in automation and GitOps, we can release often.
+By releasing early, we get feedback sooner, allowing us to make course corrections before investing too much. 
+
+And by investing in automation and GitOps, we can release often! 
 
   ![keep-calm.png](./images/keep-calm.png ':size=300 :class=center')

@@ -14,7 +14,7 @@ First, let's get familiar with Guardrails Orchestrator.
 
   You don't need to make any changes, just hit Create!
 
-2. And go back to your workbench and open up `6-guardrails/1-intro-to-guardrails.ipynb` notebook to get interract with Guardrails Orchestrator directly.
+2. And go back to your workbench and open up `experiments/7-guardrails/1-intro-to-guardrails.ipynb` notebook to get interract with Guardrails Orchestrator directly.
 
   When you are done, come back here and let's continue to integrate it with Llama Stack.
 
@@ -42,7 +42,7 @@ In the notebook, we directly talked with model and the detectors. But we have Ll
 
   ![canopy-topology.png](./images/canopy-topology.png)
 
-4. Now let's play a bit more with the guardrails. This time Guardrails + System Prompt together. Previous chapter we instructed the model in system prompt to not to do _something_. Then we enforced it with detectors in the detectors. Now let's combine them!
+1. Now let's play a bit more with the guardrails. This time Guardrails + System Prompt together. Previous chapter we instructed the model in system prompt to not to do _something_. Then we enforced it with the detectors. Now let's combine them!
 
     Go to Llama Stack Playground. You can either click on the little arrow next to playful Llama or you can go to the link below:
 
@@ -50,7 +50,7 @@ In the notebook, we directly talked with model and the detectors. But we have Ll
     https://llama-stack-playground-<USER_NAME>-canopy.<CLUSTER_DOMAIN>/
     ```
 
-5. On the left menu, you'll see two options for processing mode. We've been using `Direct`, but now we need to select `Agent-based`.
+2. On the left menu, you'll see two options for processing mode. We've been using `Direct`, but now we need to select `Agent-based`.
 
   ![agent-based.png](./images/agent-based.png)
 
@@ -71,4 +71,5 @@ In the notebook, we directly talked with model and the detectors. But we have Ll
 
   ![fight-club-spanish.png](./images/fight-club-spanish.png)
 
-Now let's bring all these to the enduser.
+
+We did a couple of tests and satisfy with the results. But before we bring all these to our endusers, let's increase our confidence to our system even more!

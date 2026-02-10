@@ -8,10 +8,11 @@ And I agree, so that's the end of this section!
 
 ...
 
-However, since we already have an evaluation framework it would be a shame not to use it, so let's add some evaluations to make sure our RAG performs as expected after all.  
+However, since we already have an evaluation framework it would be a shame not to use it, so let's add some evaluations to make sure our RAG performs as expected after all.
+
 To do that, we simply need to add a new eval folder with some tests in it.
 
-1. Go to your workbench and navigate to `evals`
+1. Go to your workbench and navigate to `evals` folder.
 
 2. Then start by making a copy of the `Summary` folder and rename it as `information-search`. Here are the commands if you don't want to do it manually:
 
@@ -25,7 +26,7 @@ To do that, we simply need to add a new eval folder with some tests in it.
     - The endpoint 
     - And of course the prompts
 
-  Open up `evals/information-search/information_search_tests.yaml` and paste this and overwrite the whole file for a good baseline:
+  Open up `evals/information-search/information_search_tests.yaml` and paste this to overwrite the whole file for a good baseline:
 
 
 ```yaml
@@ -56,9 +57,10 @@ tests:
 ```
     
 
-  Note: These prompts are for the course AI501, depending on what course you ingested before you may need to change them to match your content. To find good prompts and expected responses you can try running a few through the **Canopy UI** or **Llamastack Playground**.
+  **Note:** These prompts are for the course AI501, depending on what course you ingested before you may need to change them to match your content. To find good prompts and expected responses you can try running a few through the **Canopy UI** or **Llamastack Playground**.
 
 4. After you are happy with the evaluation, make sure to commit it to git:
+
     ```bash
     cd /opt/app-root/src/evals/information-search
     git add .
@@ -66,6 +68,6 @@ tests:
     git push
     ```
 
-5. Our eval pipeline should trigger off of this git push, just like in the `Ready to Scale 201` section you can go to OpenShift Pipelines to see how it's progressing.
+5. Our eval pipeline should trigger off of this git push, just like in the `Ready to Scale 201` section, you can go to OpenShift Pipelines to see how it's progressing.
 
-You can find the results in MinIo `test-results` bucket but let's continue to automate this whole flow and see the results in our little Prompt Tracker application.
+You can find the results in MinIO `test-results` bucket but let's continue to automate this whole flow and see the results in our little Prompt Tracker application.

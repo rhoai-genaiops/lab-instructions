@@ -61,6 +61,12 @@ out/
 # Project specific
 *.gradio
 
-# Claude
+# Claude (keep commands, ignore local settings)
 CLAUDE.md
-.claude/
+.claude/settings.local.json
+
+# Playwright
+.playwright-mcp/
+playwright-report/
+test-results/
+error-screenshot.png

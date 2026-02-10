@@ -39,7 +39,9 @@ More specifically, we load them into a ConfigMap which then gets mounted to our 
 
 ## 🧪 Updating a prompt
 
-1. Go to your `backend` folder in your workbench and update the `values-test.yaml` file to have a new prompt. Perhaps something like `Summarize the text in no more than 10 sentences.` 
+1. Go to your `backend` folder in your workbench and update the `values-test.yaml` file to have a new prompt. 
+
+    Perhaps something like `Summarize the text in no more than 10 sentences.` 
 
 2. Then commit & push the changes:
 

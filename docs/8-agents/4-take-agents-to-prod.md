@@ -8,16 +8,31 @@ There are a few things we want to do, such as evaluating and observing the agent
 1. We need to start by upgrading our test and prod Llama Stack, go to `genaiops-gitops/canopy/test/llama-stack/config.yaml` and update to this:
 
     ```yaml
+    ---
     chart_path: charts/llama-stack-operator-instance
     models:
       - name: "llama32"
         url: "http://llama-32-predictor.ai501.svc.cluster.local:8080/v1"
     eval:
       enabled: true
-    rag:                  
+    rag:                
+      enabled: true     
+      milvus:                 
+        service: "milvus-test" 
+    guardrails:
       enabled: true
-    mcp:                # 👈 Add this 
-      enabled: true     # 👈 Add this 
+      hap:
+        enabled: true
+      language_detection:
+        enabled: true
+      prompt_injection:
+        enabled: true
+      regex:
+        enabled: true
+        filter:
+          - (?i).*fight club.*
+    mcp:                # 👈 Add this ❗︎❗︎
+      enabled: true     # 👈 Add this ❗︎❗︎❗︎
     ```
 
 2. Push this to git so that it takes effect:
@@ -39,18 +54,25 @@ There are a few things we want to do, such as evaluating and observing the agent
     LLAMA_STACK_URL: "http://llama-stack-service:8321"
     summarize:
       enabled: true
-      model: llama32
+      model: vllm-llama32/llama32
       temperature: 0.9
       max_tokens: 4096
-      prompt: |
-        You are a helpful assistant. Summarize the given text please.
+      prompt: | # your own prompt there
+        Summarize the text in a few sentences.
     information-search:
       enabled: true
       vector_db_id: latest
       model: llama32
-      prompt: |
+      prompt: |-
         You are a helpful assistant specializing in document intelligence and academic content analysis.
-    student-assistant:         # 👈 add this large block
+    shields:
+      enabled: true
+      input_shields:
+        - hap
+        - language_detection
+        - prompt_injection      
+      output_shields: [] 
+    student-assistant:         # 👈 add this large block ❗︎❗︎❗︎ ❗︎❗︎❗︎ ❗︎❗︎❗︎
       enabled: true
       model: llama32
       temperature: 0.1
@@ -82,7 +104,7 @@ There are a few things we want to do, such as evaluating and observing the agent
         - Do NOT include sid, status, or creation_time
     ```
 
-5. Push the change to git:
+1. Push the change to git:
 
     ```bash
     cd /opt/app-root/src/backend/chart
@@ -92,7 +114,7 @@ There are a few things we want to do, such as evaluating and observing the agent
     git push
     ```
   
-6. Deploy calendar API for your test environment as well so that you can freely continue iterating on your experiment environment while further evluation tests can happen in the test environment before taking the current setup to production. 
+2. Deploy calendar API for your test environment as well so that you can freely continue iterating on your experiment environment while further evluation tests can happen in the test environment before taking the current setup to production. 
   But this time, let's deploy it via GitOps! Create `calendar-mcp` folder under `/opt/app-root/src/genaiops-gitops/canopy/test` , then create `config.yaml` file, or simply run below command:
 
   ```bash
@@ -111,8 +133,8 @@ There are a few things we want to do, such as evaluating and observing the agent
 7. Push te changes to Git..because, you know, GitOps!
 
   ```bash
-    git pull
     cd /opt/app-root/src/genaiops-gitops/canopy/
+    git pull
     git add test/calendar-mcp
     git commit -m "📆 Calendar MCP added 📆"
     git push

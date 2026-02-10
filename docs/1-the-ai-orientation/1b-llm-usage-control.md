@@ -1,16 +1,16 @@
-# 💭 Using and Controlling LLMs
+# 💭 Using and Controlling LLMs :id=using-and-controlling-llms
 
-## 📚 Contents
-- [💭 Using and Controlling LLMs](#-using-and-controlling-llms)
-  - [📚 Contents](#-contents)
-  - [💭 Prompting Techniques](#-prompting-techniques)
-  - [🚨 Understanding Hallucinations](#-understanding-hallucinations)
+## 📚 Contents :id=contents
+- [💭 Using and Controlling LLMs](#using-and-controlling-llms)
+  - [📚 Contents](#contents)
+  - [💭 Prompting Techniques](#prompting-techniques)
+  - [🚨 Understanding Hallucinations](#understanding-hallucinations)
     - [How can we reduce hallucinations?](#how-can-we-reduce-hallucinations)
-  - [🛡️ Implementing Guardrails](#️-implementing-guardrails)
-    - [🔍 Hands-on Exercises - Do LLMs have built in Memory?](#-hands-on-exercises---do-llms-have-built-in-memory)
-    - [🔍 Hands-on Exercises - Are LLMs deterministic?](#-hands-on-exercises---are-llms-deterministic)
+  - [🛡️ Implementing Guardrails](#implementing-guardrails)
+    - [🔍 Hands-on Exercises - Do LLMs have built in Memory?](#hands-on-exercises-do-llms-have-built-in-memory)
+    - [🔍 Hands-on Exercises - Are LLMs deterministic?](#hands-on-exercises-are-llms-deterministic)
 
-## 💭 Prompting Techniques
+## 💭 Prompting Techniques :id=prompting-techniques
 
 The way you *ask* a model something has a big impact on how it answers. This is called **prompting** — and it’s how we guide the model’s behavior.
 
@@ -93,7 +93,7 @@ The model has no temperature tricks and uses default sampling.<br>
 
 ---
 
-## 🚨 Understanding Hallucinations
+## 🚨 Understanding Hallucinations :id=understanding-hallucinations
 
 Sometimes, language models **make things up** — they sound confident but give you answers that are false or even fictional. This is called a **hallucination**.
 
@@ -168,7 +168,7 @@ Let’s explore this with a quick quiz:
 
 ---
 
-## 🛡️ Implementing Guardrails
+## 🛡️ Implementing Guardrails :id=implementing-guardrails
 
 What if you need to make sure the model:
 - Doesn’t say harmful things?
@@ -290,7 +290,7 @@ Here’s a quiz that explores when to use guardrails and when to be more flexibl
 
 
 
-### 🔍 Hands-on Exercises - Do LLMs have built in Memory?
+### 🔍 Hands-on Exercises - Do LLMs have built in Memory? :id=hands-on-exercises-do-llms-have-built-in-memory
 
 Try sending this question to the model:  
 
@@ -320,7 +320,7 @@ What did the model respond with?
 <!-- Now try the same thing in **Canopy** and compare. Does it remember what you said? What makes it different? -->
 
 
-### 🔍 Hands-on Exercises - Are LLMs deterministic?
+### 🔍 Hands-on Exercises - Are LLMs deterministic? :id=hands-on-exercises-are-llms-deterministic
 
 Now ask the model something simple like:  
 

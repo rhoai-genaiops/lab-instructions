@@ -1,4 +1,4 @@
-# Module 12 - Models as a Service
+# Module 11 - Supply & Demand 101
 
 > Giving everyone a GPU is like giving everyone their own power plant. What if we just... shared the electricity instead? ⚡
 

@@ -96,10 +96,13 @@ Can you come up with something that explains the text even better without loosin
 </details>
 
 <iframe
-	src="https://gradio-app-ai501.<CLUSTER_DOMAIN>/prompt-playground"
+	src="https://ai-orientation-app-ai501.<CLUSTER_DOMAIN>/playground"
 	frameborder="0"
 	width="1600"
 	height="800"
 	style="border: 1px solid transparent; border-radius: 1px;"
 	loading="lazy">
 ></iframe>
+
+
+Not sure about what is `Temperature` or `Max Tokens`? You have an access to a Large Language Model that is quite knowledgeable, right? Feel free to ask 🙃

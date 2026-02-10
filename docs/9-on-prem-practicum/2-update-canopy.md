@@ -4,10 +4,6 @@ Now that we have a model running locally, it's time to connect it to our applica
 
 ## 🦙 Update Llama Stack Configuration
 
-Llama Stack acts as the middleware between your frontend and the LLM. Currently, it's configured to use the cloud-hosted endpoint. Let's reconfigure it to use our locally-deployed TinyLlama.
-
-### Update via Helm
-
 1. Navigate to **OpenShift Console** → **Helm** → **Releases** and find your `llama-stack-operator-instance` release in the `<USER_NAME>-canopy` project.
 
 2. Click on the release and select **Upgrade**.
@@ -16,7 +12,7 @@ Llama Stack acts as the middleware between your frontend and the LLM. Currently,
 
 3. Let's add your newly deployed on-prem TinyLlama as another model endpoint to your Llama Stack. That way, you'd be able to access both cloud model Llama 3.2 3B and TinyLlama via Llama Stack. 
 
-    Add the TinyLlama endpoint to the Llama Stack configuration under `models` by clicking `Add models`:
+    In the Form view, add the TinyLlama endpoint to the Llama Stack configuration under `models` by clicking **Add models**:
 
     - **Model Name**: `tinyllama`
     - **Model URL**: `http://tinyllama-predictor:8080/v1`
@@ -35,16 +31,14 @@ Llama Stack acts as the middleware between your frontend and the LLM. Currently,
     ```yaml
     summarize:
       enabled: true
-      max_tokens: 512 # 👈 update this ❗️❗️❗️
-      model: tinyllama # 👈 update this ❗️❗️❗️
+      max_tokens: 512 # 👈 ADD this ❗️❗️❗️
+      model: vllm-tinyllama/tinyllama # 👈 UPDATE this ❗️❗️❗️
       prompt: "<your prompt>"
     ```
 
 7. Click **Upgrade** to apply the changes.
 
     ![tiny-backend-upgrade2.png](./images/tiny-backend-upgrade2.png)
-
-    While the rest of the use cases (document search, student assistant) continue using Llama 3.2 3B through the same Llama Stack, we can experiment with TinyLlama for Canopy's summarization feature.
 
 ### 🌳 Test Canopy with the New Model
 
@@ -81,8 +75,6 @@ Running models on CPU introduces different performance characteristics:
 
 For development and testing, CPU inference is perfectly acceptable. For production workloads with higher traffic, you'll want to revisit GPU allocation or consider model optimization techniques 😉
 
-You've successfully deployed an LLM on-premises and connected your entire Canopy stack to use it. Your student data now can stay completely within your infrastructure.
-
-But are your fellow students and professors going be happy with this? 
+You found a way to keep the student data completely within your infrastructure.But are your fellow students and professors going be happy with this?
 
 Let's look into model optimization and compression before we settle with TinyLlama actually 🦙🌿

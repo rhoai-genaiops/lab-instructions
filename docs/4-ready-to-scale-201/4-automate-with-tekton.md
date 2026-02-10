@@ -7,9 +7,10 @@ To do this, we can create a Tekton pipeline with a git hook to the relevant repo
 
 Just like we enabled evaluations for Llama Stack in our `experimentation` environment, we need to enable it for our `test` environment.
 
-1. Open up your workbench in the `<USER_NAME>-canopy` namespace.
+1. Go back to your workbench in the `<USER_NAME>-canopy` namespace.
 
 2. Inside of `genaiops-gitops/canopy/test/llama-stack/config.yaml` add this line:
+
    (This is basically the same as checking the `eval` box in the previous section.)
 
     ```yaml
@@ -25,7 +26,7 @@ Just like we enabled evaluations for Llama Stack in our `experimentation` enviro
     models:
      - name: "llama32"
        url: "http://llama-32-predictor.ai501.svc.cluster.local:8080/v1"
-    eval:
+    eval:      # 👈 added
       enabled: true
     </code></pre>
     </div>
@@ -45,15 +46,16 @@ We also need to set up our pipeline server for our `toolings` namespace, but thi
 
 1. Like before, open your workbench in the `<USER_NAME>-canopy` namespace.
 
-2. Let's add a dspa (which stands for DataSciencePipelineApplication, and is our pipeline server) folder and `config.yaml` under `genaiops-gitops/canopy/toolings`, you can do that by running these commands:
+2. Let's add a DSPA (which stands for **D**ata**S**cience**P**ipeline**A**pplication, and is our pipeline server) folder and `config.yaml` under `genaiops-gitops/canopy/toolings`, you can do that by running these commands:
 
     ```bash
     mkdir /opt/app-root/src/genaiops-gitops/toolings/dspa
     touch /opt/app-root/src/genaiops-gitops/toolings/dspa/config.yaml
     ```
-    We don't have any specific settings inside for our dspa, let's add it to the config.yaml in the next step
+    We don't have any specific settings inside for our DSPA, let's add it to the `config.yaml` in the next step
 
 3. Inside of `genaiops-gitops/toolings/dspa/config.yaml` add this:
+
     ```yaml
     ---
     chart_path: charts/dspa
@@ -68,7 +70,7 @@ We also need to set up our pipeline server for our `toolings` namespace, but thi
     git push 
     ```
 
-5. As soon as it's ready you can go to OpenShift AI -> Projects -> <USER_NAME>-toolings -> Pipelines and see that it's available to start importing pipelines:  
+5. As soon as it's ready you can go to `OpenShift AI` -> `Projects` -> `<USER_NAME>-toolings` -> `Pipelines` and see that it's available to start importing pipelines:  
 
     ![dspa-ready](images/dspa-ready.png)
 
@@ -109,7 +111,10 @@ We will be triggering it from a Tekton Pipeline, where we both will have a step 
     git push
     ```
 
-4. Now let's look at it by going to the OpenShift Dashboard -> Pipelines -> <USER_NAME>-toolings -> `canopy-evals-pipeline`. You can see that all it does is a simple git clone followed by starting the kubeflow pipeline.  
+4. Now let's look at it by going to the `OpenShift Dashboard` -> `Pipelines` -> `<USER_NAME>-toolings` -> `canopy-evals-pipeline`.
+
+    You can see that all it does is a simple `git clone` followed by starting the Kubeflow pipeline.  
+
     After the pipeline is complete it also raises the changes in `test` as a PR to `prod`.
 
     ![tekton-pipeline](images/tekton-pipeline.png)
@@ -133,7 +138,9 @@ We will be triggering it from a Tekton Pipeline, where we both will have a step 
 
     ![githook](images/githook.png)
 
-9. Now do the same for `backend`. Go to `backend` repository > Settings > Webhook > Add > Gitea and add the same webhook:
+9. Now do the same for **backend** repository 💥💥💥 
+
+    Go to `backend` repository > Settings > Webhook > Add > Gitea and add the same webhook. This will be the second webhook definition for the backend repository.
 
     ```bash
     http://el-canopy-evals-event-listener.<USER_NAME>-toolings.svc.cluster.local:8080
@@ -143,6 +150,7 @@ We will be triggering it from a Tekton Pipeline, where we both will have a step 
 
 
 Congratulations! 🎉  
+
 You have now added evals pipelines to your backend and eval repos, so whenever you update your evaluations or prompts, you will run through the tests.
 
 In practice we would also run the tests whenever we build a new backend, but since we are using pre-built backend images we are skipping that for now.
@@ -151,7 +159,7 @@ In practice we would also run the tests whenever we build a new backend, but sin
 
 Let's go and add some more useful tests to trigger the pipeline 🧪
 
-1. Go to your workbench and enter the `backend/chart/values-test.yaml` file.  
+1. Go back to your workbench and enter the `backend/chart/values-test.yaml` file.  
     In there you'll find your system prompt for test environment. Update your prompt as you see fit.
 
 2. After you have finished updating it, commit it to git:
@@ -172,3 +180,5 @@ Let's go and add some more useful tests to trigger the pipeline 🧪
     ![evals-results-prompt-tracker.png](./images/evals-results-prompt-tracker.png)
 
 6. Finally, if you go to your backend repository in Gitea you should now see a PR ([https://gitea-gitea.<CLUSTER_DOMAIN>/<USER_NAME>/backend/pulls?type=all&state=open](https://gitea-gitea.<CLUSTER_DOMAIN>/<USER_NAME>/backend/pulls?type=all&state=open)) that can be reviewed and accepted if the results looked good enough to go to prod.  
+
+    When you accept the PR, Argo CD will detect the changes in the values files (aka in the prompt), syncs the changes to prod environment, then your prod Canopy starts using the new prompt 🙌

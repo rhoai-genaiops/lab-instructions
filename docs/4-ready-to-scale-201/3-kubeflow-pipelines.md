@@ -70,7 +70,7 @@ The evaluation pipeline is inside of a repository called `evals`, where both the
     </code></pre>
     </div>
 
-4. Scroll down to near the bottom of the file (around line 840) and edit the `repo_url` argument as below:
+4. Scroll down to near the bottom of the file (around line 995) and edit the `repo_url` argument as below:
     ```python
     arguments = {
         "repo_url": "https://<USER_NAME>:<PASSWORD>@gitea-gitea.<CLUSTER_DOMAIN>/<USER_NAME>/evals.git", # 🚨 replace with your own repo URL
@@ -111,7 +111,10 @@ The evaluation pipeline is inside of a repository called `evals`, where both the
 
     ![running-kfp-pipeline](images/running-kfp-pipeline.png)
 
-7.  After it has finished running, you can login to this URL with <USER_NAME> and <PASSWORD> to download your results. If you open up the HTML file, you'll see your results:  
+7.  After it has finished running, you can login to this URL with`<USER_NAME>` and `<PASSWORD>` to download your results. 
+
+    If you open up the HTML file, you'll see your results:  
+    
     ```bash
     https://minio-ui-<USER_NAME>-canopy.<CLUSTER_DOMAIN>/browser/test-results
     ```

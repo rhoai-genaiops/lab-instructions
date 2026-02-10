@@ -1,10 +1,8 @@
-# Module 9 - Model Optimization
+# Module 10 - The Fitness Program
 
 > Your 70B model is brilliant. It's also eating $500/day in GPU costs and making students wait 10 seconds for answers. Time to put it on a diet. 🏋️
 
 # 🧑‍🍳 Module Intro
-
-You've built Canopy, connected it to RAG, added guardrails, and set up monitoring. Now finance is asking why your GPU bill looks like a phone number.
 
 This module is about making models smaller, faster, and cheaper—without making them dumber. We'll compress LLMs using quantization, test that they still work, and deploy them through your GitOps pipeline.
 
