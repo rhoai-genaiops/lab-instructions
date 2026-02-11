@@ -84,6 +84,10 @@ Let's deploy a Grafana instance in your toolings namespace to support the end-to
 
     Use your OpenShift credentials and click `Allow selected permissions` to log in.
 
+> If ArgoCD gets stuck while syncing, sync the `canopy-grafana-sa-token` manually by clicking the 3 dots and triggering a sync for that CR object.
+
+   ![Grafana Issue 1](./images/grafana-argocd-issue.png)
+
 5. To view the dashboards, navigate to **Dashboards** → **Browse** and look for the `<USER_NAME>-toolings Canopy Dashboards` folder.
 
    ![Obsv 1](./images/metrics1.png)
