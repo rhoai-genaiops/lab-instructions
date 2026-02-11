@@ -4,17 +4,7 @@
 
 # 🧑‍🍳 Module Intro
 
-Remember how Canopy started? A simple chatbot experiment in Module 2. Fast forward through GitOps deployments, RAG-powered document intelligence, guardrails for academic integrity, and agentic capabilities... and now everyone at Redwood Digital University wants their own Canopy.
-
-**The Computer Science department wants one. The Business School wants one. The Library wants one.**
-
-And here's the problem: each team is deploying their own Llama model. Three identical models. Three GPUs. Sitting idle 90% of the time. Meanwhile, students can't get GPU access for their projects because there are "no available resources."
-
-*Sound familiar?*
-
-This module introduces **Models as a Service (MaaS)** — a pattern that transforms how organizations provide AI access. Instead of everyone deploying their own models (and hoarding precious GPUs), you deploy each model **once** and provide access through a managed API gateway.
-
-Think of it as the difference between everyone digging their own well vs. building a shared water system. 🚰
+Remember how Canopy started? A simple chatbot experiment in Module 2. Fast forward through GitOps deployments, RAG-powered document intelligence, guardrails for academic integrity, and agentic capabilities... and now everyone at Redwood Digital University wants Canopy-like applications.
 
 ---
 
@@ -34,6 +24,10 @@ As you go through each lesson, you'll "wear different hats" to understand MaaS f
 ---
 
 # 🖼️ Big Picture
+
+![big-picture-complete.png](./images/big-picture-complete.png)
+
+The goal is:
 
 ![Before and After MaaS comparison showing resource consolidation](images/before-after-maas.svg)
 
@@ -67,11 +61,3 @@ By the end of this module, you will be able to:
 * **OpenShift OAuth** — Enterprise authentication integration for seamless user onboarding
 
 * **Your favorite HTTP client** — curl, Postman, or Python requests to make API calls
-
----
-
-# 🎬 Ready to Start?
-
-Let's begin by understanding *why* MaaS exists in the first place. Spoiler: it involves a lot of frustrated IT folks and some very expensive paperweights (GPUs).
-
-Continue to [Understanding MaaS](12-maas/1-understanding-maas.md).

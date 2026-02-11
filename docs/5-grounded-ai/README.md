@@ -9,7 +9,7 @@ This module bridges the gap between basic AI interactions and intelligent system
 At RDU, we're building Canopy to help educators and students interact with vast amounts of academic content. RAG is the technology that makes this possible, turning your documents into searchable, queryable knowledge that enhances every AI interaction.
 
 # 🖼️ Big Picture
-![big-picture-rag](images/big-picture-rag.jpg)
+![big-picture-rag](images/big-picture-rag.png)
 
 # 🔮 Learning Outcomes
 

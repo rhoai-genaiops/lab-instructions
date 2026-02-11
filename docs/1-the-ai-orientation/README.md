@@ -6,7 +6,7 @@
 Dive into the fundamental mechanics of Large Language Models (LLMs), exploring how they process text, generate responses, and operate in real-world deployments. This module equips you with essential knowledge for practical LLM implementation.
 
 # 🖼️ Big Picture
-![big-picture-orientation.jpg](images/big-picture-orientation.jpg)
+![big-picture-orientation.jpg](images/big-picture-orientation.png)
 
 # 🔮 Learning Outcomes
 * Understand how LLMs process and generate text through tokens

@@ -9,7 +9,7 @@ This module introduces the critical practice of implementing safety guardrails f
 At RDU, we're committed to building Canopy as a trustworthy educational tool. Guardrails are what transform a powerful language model into a responsible assistant that students and educators can rely on without concerns about academic integrity, bias, or harmful content.
 
 # 🖼️ Big Picture
-![big-picture-guardrails.jpg](images/big-picture-guardrails.jpg)
+![big-picture-guardrails.png](images/big-picture-guardrails.png)
 
 # 🔮 Learning Outcomes
 

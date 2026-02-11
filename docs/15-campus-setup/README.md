@@ -8,6 +8,8 @@ In this exercise, we will walk through the steps required to set up the GenAIOps
 
 This setup process deploys a complete multi-tenant AI/ML learning environment on OpenShift, enabling students to experiment with Large Language Models, prompt engineering, model optimization, and AI governance.
 
+![big-picture-campus-setup](./images/big-picture-campus-setup.png)
+
 ## 🔮 Learning Outcomes
 
 - [ ] Can deploy the GenAIOps lab infrastructure using Helm

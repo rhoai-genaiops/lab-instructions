@@ -9,7 +9,7 @@ RDU is expanding Canopy to handle student-related confidential data: grades, aca
 This module walks you through deploying models directly on your OpenShift cluster using vLLM. You'll learn how to evaluate models based on your hardware constraints, serve them locally, and update your Llama Stack and Canopy configurations to use these self-hosted endpoints. By the end, you'll have a fully functional on-prem AI stack that keeps sensitive data exactly where it belongs: on your own infrastructure.
 
 # 🖼️ Big Picture
-![big-picture-onprem](images/big-picture-onprem.jpg)
+![big-picture-onprem.png](images/big-picture-onprem.png)
 
 # 🔮 Learning Outcomes
 

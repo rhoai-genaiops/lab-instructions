@@ -9,7 +9,7 @@ You've built Canopy with summarization and RAG capabilities, but how do you know
 You'll learn to use OpenShift AI's built-in observability stack: metrics to quantify performance, logs to understand behavior, and traces to follow requests through your distributed system. You'll also close the loop with user feedback -- collecting thumbs up/down signals, turning negative feedback into evaluation test cases, and using A/B testing to compare prompts side-by-side so you can make data-driven prompt engineering decisions. By the end, you'll have dashboards that show Canopy's health at a glance, a feedback-driven improvement cycle, and the skills to debug issues quickly.
 
 # 🖼️ Big Picture
-![big-picture-observability](images/big-picture-monitoring.jpg)
+![big-picture-observability](images/big-picture-monitoring.png)
 
 # 🔮 Learning Outcomes
 

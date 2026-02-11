@@ -19,9 +19,9 @@ Being good citizens, each department follows the same pattern you learned: they 
 ```mermaid
 flowchart LR
     subgraph RDU AI Infrastructure
-        CS[CS Canopy] --> G1[Granite Model] --> GPU1["GPU #1 💤 3%"]
-        BIZ[Biz Canopy] --> G2[Granite Model] --> GPU2["GPU #2 💤 2%"]
-        LIB[Lib Canopy] --> G3[Granite Model] --> GPU3["GPU #3 💤 1%"]
+        CS[CS Canopy] --> G1[Llama Model] --> GPU1["GPU #1 💤 3%"]
+        BIZ[Biz Canopy] --> G2[Llama Model] --> GPU2["GPU #2 💤 2%"]
+        LIB[Lib Canopy] --> G3[Llama Model] --> GPU3["GPU #3 💤 1%"]
     end
     STUDENT["Student 😭"] -. NO GPUS AVAILABLE .-> GPU1
 ```
@@ -44,7 +44,7 @@ Let's say a large company (totally not Red Hat 😉) decides to democratize AI b
 
 | Day | Event | GPU Count |
 |-----|-------|-----------|
-| Monday | 7 developers discover they can deploy Granite 3-8B | 7 GPUs allocated |
+| Monday | 7 developers discover they can deploy Llama 3B | 7 GPUs allocated |
 | Tuesday | All 7 GPUs sit at 0% utilization (devs are in meetings) | 7 GPUs... waiting |
 | Wednesday | Marketing asks for access | "No GPUs available" |
 | Thursday | Finance submits urgent AI project request | "No GPUs available" |
@@ -63,7 +63,7 @@ The Owner might think: "Surely there's an easy fix?" Let's explore the options:
 | Approach | Problem |
 |----------|---------|
 | Increase auto-scaling max | GPUs cost $10K-$40K each. 19K employees × even 0.1 GPUs = 💸💸💸 |
-| Add more nodes | Still doesn't solve duplication — now you have 14 Granite instances |
+| Add more nodes | Still doesn't solve duplication — now you have 14 Llama instances |
 
 **Result:** You've made the cloud bill team very unhappy.
 
@@ -80,7 +80,7 @@ The Owner might think: "Surely there's an easy fix?" Let's explore the options:
 
 | Approach | Problem |
 |----------|---------|
-| NVIDIA MIG partitioning | Slices are too small for modern LLMs (Granite 3-8B needs ~16GB VRAM) |
+| NVIDIA MIG partitioning | Slices are too small for modern LLMs |
 | Smaller models | Defeats the purpose — users want the good models |
 
 **Result:** You've made everyone unhappy AND the models don't fit.
@@ -97,7 +97,7 @@ The MaaS approach:
 
 | Before (Self-Service GPUs) | After (Models as a Service) |
 |---------------------------|----------------------------|
-| 7 users deploy 7 Granite instances | 1 expert team deploys 1 Granite instance |
+| 7 users deploy 7 Llama instances | 1 expert team deploys 1 Llama instance |
 | 7 GPUs at 3% utilization each | 1 GPU at 70%+ utilization |
 | "No GPUs available" errors | Everyone gets instant API access |
 | No visibility into usage | Full usage tracking per user/team |
@@ -209,7 +209,7 @@ Before moving on, let's make sure the key concepts are clear:
 <details>
 <summary>❓ Why is "giving everyone access to GPUs" problematic at scale?</summary>
 
-✅ **Answer:** When everyone can deploy their own model instances, they do — leading to duplicate deployments, low utilization, and resource exhaustion. Seven people with seven identical Granite instances = seven GPUs at 3% utilization, while others can't get any GPU access at all.
+✅ **Answer:** When everyone can deploy their own model instances, they do — leading to duplicate deployments, low utilization, and resource exhaustion. Seven people with seven identical Llama instances = seven GPUs at 3% utilization, while others can't get any GPU access at all.
 </details>
 
 <details>
