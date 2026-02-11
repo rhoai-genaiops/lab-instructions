@@ -192,15 +192,7 @@ Instead of guessing which prompt produces better summaries, you let real users d
 
 ### Configure Prompt B
 
-1. In your workbench, go to your `backend` repo and open up `chart/values-test.yaml`. First, let's disable thumbs up/downs:
-
-   ```yaml
-   feedback:
-     enabled: false # 👈 DISABLE IT ❗︎
-   ```
-
-
-2. In the same file, for `summarize`,  add an alternative prompt with `prompt_b` key. Also enable A/B testing:
+1. In the same file, for `summarize`,  add an alternative prompt with `prompt_b` key. Also enable A/B testing:
 
    ```yaml
    summarize:
@@ -217,7 +209,7 @@ Instead of guessing which prompt produces better summaries, you let real users d
 
    Make sure `feedback: enabled: true` is also set -- A/B testing builds on the feedback infrastructure.
 
-3. Commit and push your changes. Wait for ArgoCD to sync the deployment.
+2. Commit and push your changes. Wait for ArgoCD to sync the deployment.
 
     ```bash
     cd /opt/app-root/src/backend
@@ -226,27 +218,27 @@ Instead of guessing which prompt produces better summaries, you let real users d
     git push origin main
     ```
 
-4. Open your Canopy UI again and pick **Summarization**:
+3. Open your Canopy UI again and pick **Summarization**:
 
    ```bash
    https://canopy-ui-<USER_NAME>-test.<CLUSTER_DOMAIN>/
    ```
 
-5. Paste the same text if you wish and click **Summarize**
+4. Paste the same text if you wish and click **Summarize**
 
    ```bash
    Collecting constant user feedback is one of the most reliable ways to make sure you’re building the right thing—and building it well. It helps you validate assumptions early, catch usability issues before they turn into costly rework, and prioritize improvements based on real-world needs instead of internal guesses. A steady feedback loop also makes product quality more resilient over time: as user expectations, workflows, and constraints change, feedback acts like an early-warning system that surfaces friction, confusion, and missing capabilities. Just as importantly, it builds trust—when users see their input reflected in updates, they feel heard and become more willing to engage, which strengthens adoption and creates a virtuous cycle of better insights and better outcomes.
    ```
 
-6. When you click `Summarize`, two columns should appear: **Response A** and **Response B** -- both stream simultaneously from different prompts
+5. When you click `Summarize`, two columns should appear: **Response A** and **Response B** -- both stream simultaneously from different prompts
 
    ![ab-testing.png](./images/ab-testing.png)
 
    After both responses complete, two buttons appear: **A is better** and **B is better**
 
-7. Pick your preference and try a couple of more to generate some data. The system records which actual prompt won.
+6. Pick your preference and try a couple of more to generate some data. The system records which actual prompt won.
 
-8. Let's navigate to the Feedback Dashboard again. You'll see win-rate metrics: how many times Prompt A won, Prompt B won. Expand individual entries to see both responses side-by-side along with the user's preference.
+7. Let's navigate to the Feedback Dashboard again. You'll see win-rate metrics: how many times Prompt A won, Prompt B won. Expand individual entries to see both responses side-by-side along with the user's preference.
 
    ![ab-testing-results.png](./images/ab-testing-results.png)
 
@@ -255,7 +247,7 @@ Instead of guessing which prompt produces better summaries, you let real users d
 
 When one prompt consistently wins across multiple comparisons:
 
-1. Let's promote the winning prompt to `summarize.prompt` in your GitOps config. Copy the prompt your users liked the most, and paste it for `prompt:` key. Andemove `prompt_b`.
+1. Let's promote the winning prompt to `summarize.prompt` in your GitOps config. Copy the prompt your users liked the most, and paste it for `prompt:` key. And remove `prompt_b`.
 
 2. Disable `feedback` and `ab_testing` by setting the `enabled` value to `false`.
 
