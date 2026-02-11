@@ -64,10 +64,7 @@
   * [👩‍💼 Admin Configuration](11-maas/6-admin-configuration.md)
   * [📊 Usage & Observability](11-maas/7-usage-observability.md) -->
 * [Fine-Tuning](12-fine-tuning/README.md)
-  * [🎯 When to Fine-Tune](12-fine-tuning/1-why-fine-tuning.md)
-  * [🧪 Synthetic Data Generation](12-fine-tuning/2-synthetic-data.md)
-  * [🏋️ Training with LoRA](12-fine-tuning/3-training.md)
-  * [📊 Evaluation](12-fine-tuning/4-evaluation.md)
-  * [🚀 Deploy to Canopy](12-fine-tuning/5-deploy-canopy.md)
+  * [🎯 Fine-Tune a Model](12-fine-tuning/1-fine-tune-a-model.md)
+  * [🚀 Deploy to Canopy](12-fine-tuning/2-deploy-to-canopy.md)
 * [Campus Setup](15-campus-setup/README.md)
   * [🏫 Cluster Setup](15-campus-setup/1-cluster-setup.md)
