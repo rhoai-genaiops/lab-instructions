@@ -58,7 +58,7 @@ Now let's deploy backend to test and prod environments using Argo CD!
     BACKEND_ENDPOINT: "http://canopy-backend:8000"
     image:
       name: "canopy-ui"
-      tag: "0.6"
+      tag: "0.5"
     ```
 3. `backend` will have a different `config.yaml` as it has two different values files.
 
