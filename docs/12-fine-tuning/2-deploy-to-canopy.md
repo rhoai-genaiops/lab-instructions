@@ -186,4 +186,4 @@ Congratulations! 🎉
 You have now gone through the full flow of tuning and onboarding a model, not a small feat. 
 
 Next step is to automate all of this so that your model gets updated with the click of a button (or merge of a PR).  
-That would be something we call a Continous Training (CT) pipeline and is covered extensively in [**AI500**](https://www.redhat.com/en/services/training/ai500-mlops-practices-with-red-hat-openshift-ai) if you are interested.
+That would be something we call a Continous Training (CT) pipeline and is covered extensively in [**AI500 MLOps Enablement with Red Hat AI Enterprise**](https://www.redhat.com/en/services/training/ai500-mlops-practices-with-red-hat-openshift-ai) if you are interested.
