@@ -10,11 +10,38 @@ There are a few things that fine-tuning does better than just improved prompts o
 - Model needs domain terminology
 - Prompts are getting too long
 
-## Use Case
+## 📚 The Socratic Tutor Use Case
 
-So why do we want to fine-tune?  
-To improve Canopy, we want a feature where Canopy acts as a Socratic tutor, leading the students towards the right answers with clever follow-up questions rather than straight up giving the answers.  
-This requires quite a long prompt and becomes fragile, so we instead decide to fine-tune this behaviour into our model.
+To improve Canopy, we want a feature where Canopy acts as a Socratic tutor, leading the students towards the right answers with clever follow-up questions rather than straight up giving the answers. This requires quite a long prompt and becomes fragile, so we instead decide to fine-tune this behaviour into our model.
+
+The prompt would be something like this?
+
+```
+You are a Socratic math tutor for Redwood Digital University...
+CORE BEHAVIORS: Never give the final answer immediately...
+FORBIDDEN BEHAVIORS: Do not solve the problem for them...
+EXAMPLE INTERACTIONS: [Student]: How do I solve 2x + 5 = 13?...
+```
+
+**How fine-tuning can help?:**
+
+
+| Challenge | How Fine-Tuning Helps |
+|-----------|----------------------|
+| 800-token system prompt | Reduce to ~10 tokens |
+| Jailbreak vulnerability | Behavior is in weights, not suggestions |
+| Inconsistent responses | Learn from hundreds of examples |
+| Per-request token cost | 72% reduction in input tokens |
+| Latency | Fewer tokens = faster time-to-first-token |
+
+So after fine tuning, all you need to say: 
+
+```
+You are Canopy, RDU's math tutor.
+```
+
+In another word, the Socratic behavior would be *in the weights*.
+
 
 ## Preliminary setup
 
@@ -53,4 +80,4 @@ Go back to your workbench and run **`experiments/12-fine-tuning/2-lora-training.
 
 We will have our standard online evaluations that we will use when updaing Canopy, but here we also do some offline evaluations before the model gets deployed just to have a sanity check that it's better than our existing one.  
 
-To evaluate the new model, go to through the notebook **`experiments/12-fine-tuning/3-evaluation.ipynb`** and then go to **`experiments/12-fine-tuning/4-save-model.ipynb`** to save and push the model to the model registry.
+To evaluate the new model, go through the notebook **`experiments/12-fine-tuning/3-evaluation.ipynb`** and then go to **`experiments/12-fine-tuning/4-save-model.ipynb`** to save and push the model to the model registry.

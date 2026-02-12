@@ -9,12 +9,16 @@ For a more rigerous process you
 In the previous notebook you just pushed your model to the Model Registry, let's go and take a look at how it looks like!
 
 1. Go to OpenShift AI Dashboard -> AI hub -> Registry
-![model-registry](images/model-registry.png)
 
-2. In here you can see the model you just created a modelcar for 🚗  
-    Go to the `Latest version` (0.0.1) and then copy the `Model location URI`, we will need it when deploying.  
-    You can also see any metadata or details about the model in here:D
-![uri-copy](images/uri-copy.png)
+  ![model-registry](images/model-registry.png)
+
+2. In here you can see the model you just created a modelcar🚗 for your newly fine tuned model!
+
+  Go to the `Latest version` (0.0.1) and then copy the `Model location URI`, we will need it when deploying.  
+  
+  You can also see any metadata or details about the model in here 🤩
+
+  ![uri-copy](images/uri-copy.png)
 
 3. Now just click `Deploy` in the top right corner and choose `<USER_NAME>-canopy` as the project and press Deploy.
 ![choose-deploy-project.png](images/choose-deploy-project.png)
@@ -29,25 +33,34 @@ In the previous notebook you just pushed your model to the Model Registry, let's
     ![model-details.png](images/model-details.png)
 
 5. In the Model deployment page, select these options:
+
 - Name: **socratic-model**
-- Click on `Customize resource request and limits` and set `Memory requests` and `Memory limits` both to 8GiB
+
+- Click on `Customize resource request and limits` and set `Memory requests` and `Memory limits` both to **8 GiB**
+
 - Serving runtime: `CUSTOM - vLLM Serving Runtime for CPU`  
-Leave the rest as is and press Next
-![model-deployment.png](images/model-deployment.png)
 
-6. In the Advanced settings page leave all as is and just press Next, then press Deploy model in the Review page after making sure all the details look correct
-![advanced-and-review.png](images/advanced-and-review.png)
+Leave the rest as is and press Next.
 
-7. To see your model being deployed, go to AI hub -> Deployments and wait for the model to be deployed.  
-If it doesn't update automatically, try refreshing the screen.
-![deployment.png](images/deployment.png)
+  ![model-deployment.png](images/model-deployment.png)
+
+6. In the `Advanced settings` page, leave all as is and just press Next, then press `Deploy model` in the Review page after making sure all the details look correct.
+
+  ![advanced-and-review.png](images/advanced-and-review.png)
+
+7. To see your model being deployed, go to `AI hub` -> `Deployments` and wait for the model to be deployed.  
+
+  If it doesn't update automatically, try refreshing the page.
+  
+  ![deployment.png](images/deployment.png)
 
 ## Add the model to MaaS
 
 Now that we have a new model deployed, let's add it to our MaaS so anyone who needs it can use it 🚀
 
 1. Go to your MaaS dashboard (https://litemaas-<USER_NAME>-maas.<CLUSTER_DOMAIN> if you closed it) and add a new model.
-![create-model.png](images/create-model.png)
+
+  ![create-model.png](images/create-model.png)
 
 2. Enter these details:
 - **Model name:** socratic-model
@@ -65,15 +78,15 @@ Now that we have a new model deployed, let's add it to our MaaS so anyone who ne
 
 5. Make sure to copy the API key, we will use it in the next section 🤭
 
-## Add the new model to LlamaStack
+## Add the new model to Llama Stack
 
-Now that we have the new model in MaaS, let's add it to our test llamastack so we can test it in Canopy! 🙌
+Now that we have the new model in MaaS, let's add it to our test Llama Stack so we can test it in Canopy! 🙌
 
 1. Go into your workbench and open `genaiops/test/llama-stack/config.yaml`
 
 2. Add a new model in the yaml to reflect the socratic-model:
 
-  ```yaml
+```yaml
   ---
   chart_path: charts/llama-stack-operator-instance
   models:
@@ -95,7 +108,8 @@ Now that we have the new model in MaaS, let's add it to our test llamastack so w
   sealed_secrets:
     enabled: true
     secretName: llama-fp8-maas-token 
-  ```
+```
+
   (Yes I know we are pushing a key to git, which is not secure... Feel free to go through seeled secret with this one as well, but in favor of time we'll take the easy path this once 🙈)
 
   3. Commit this to git:
@@ -107,8 +121,9 @@ git commit -m "💭 Add Socratic Model from MaaS 💭"
 git push
 ```
 
-And now we have the new model in LlamaStack ready to use!  
-Just make sure that LlamaStack starts properly after this and we are ready to add the new model into a new Canopy feature 😁
+And now we have the new model in Llama Stack ready to use!  
+
+Just make sure that LlamaStack starts properly after this (check Topology view in the `<USER_NAME>-test` namespace and verify 🔵 circle for Llama Stack for), and we are ready to add the new model into a new Canopy feature 😁
 
 ## Socratic Canopy
 
@@ -151,19 +166,25 @@ Let's get this Socratic tutor fully set up in Canopy!
   ```
 
 2. Commit to git:
-```bash
-cd /opt/app-root/src/backend
-git pull
-git add .
-git commit -m "🤔 Add the Socratic Tutor feature 🤔"
-git push
-```
+
+  ```bash
+  cd /opt/app-root/src/backend
+  git pull
+  git add .
+  git commit -m "🤔 Add the Socratic Tutor feature 🤔"
+  git push
+  ```
 
 3. Open up Canopy, select Socratic Tutor in the left menu and try asking some questions, for example `What is 1+1?`.  
-Note that the tutor might be a bit slow, this is because it's running on CPU 🙈
-![tutor-in-action](images/tutor-in-action.png)
+
+_(Note that the tutor might be a bit slow, this is because it's running on CPU 🙈)_
+
+  ![tutor-in-action](images/tutor-in-action.png)
 
 Congratulations! 🎉  
-You have now gone through the full flow of tuning and onboarding a model, not a small feat.  
+
+You have now gone through the full flow of tuning and onboarding a model, not a small feat. 
+
 Next step is to automate all of this so that your model gets updated with the click of a button (or merge of a PR).  
-That would be something we call a Continous Training (CT) pipeline and is covered extensively in **AI500** if you are interested.
+
+That would be something we call a Continous Training (CT) pipeline and is covered extensively in [**AI500 MLOps Enablement with Red Hat AI Enterprise**](https://www.redhat.com/en/services/training/ai500-mlops-practices-with-red-hat-openshift-ai) if you are interested.
