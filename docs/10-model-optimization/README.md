@@ -9,8 +9,7 @@ This module is about making models smaller, faster, and cheaper—without making
 **The big question:** *How much can we compress before students are impacted?*
 
 # 🖼️ Big Picture
-<!-- TODO: Add architecture diagram showing quantization workflow -->
-![big-picture-quantization.jpg](images/big-picture-quantization.png)
+![big-picture-optimization.png](images/big-picture-optimization.png)
 
 # 🔮 Learning Outcomes
 

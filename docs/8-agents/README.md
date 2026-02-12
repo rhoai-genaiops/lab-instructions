@@ -9,7 +9,7 @@ This module takes you from understanding LLMs as text generators to building aut
 At RDU, we're evolving Canopy from a smart chatbot into a true student assistant that can search knowledge bases, schedule meetings with professors, and autonomously help students navigate their academic journey. By the end of this module, you'll have deployed an agent that combines RAG, tool calling, and intelligent decision-making.
 
 # 🖼️ Big Picture
-![big-picture-agents](images/big-picture-agents.jpg)
+![big-picture-agents](images/big-picture-agents.png)
 
 # 🔮 Learning Outcomes
 

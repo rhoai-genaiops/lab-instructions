@@ -7,7 +7,7 @@
  This module introduces Llama Stack to establish a consistent, extensible interface for integrating new capabilities into our application. Alongside this, we bring in a backend component and GitOps practices to ensure everything we build is reliable, repeatable, and ready for real users.
 
 # 🖼️ Big Picture
-![big-picture-llamastack](./images/big-picture-llamastack.jpg)
+![big-picture-llamastack](./images/big-picture-llamastack.png)
 # 🔮 Learning Outcomes
 * Understand the motivation behind adopting Llama Stack
 * Learn how Llama Stack works and how to deploy it in a development environment
