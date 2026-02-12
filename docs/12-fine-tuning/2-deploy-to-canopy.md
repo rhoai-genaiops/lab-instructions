@@ -159,9 +159,11 @@ git commit -m "🤔 Add the Socratic Tutor feature 🤔"
 git push
 ```
 
-3. Open up Canopy, select Socratic Tutor in the left menu and try asking some questions
+3. Open up Canopy, select Socratic Tutor in the left menu and try asking some questions, for example `What is 1+1?`.  
+Note that the tutor might be a bit slow, this is because it's running on CPU 🙈
+![tutor-in-action](images/tutor-in-action.png)
 
 Congratulations! 🎉  
 You have now gone through the full flow of tuning and onboarding a model, not a small feat.  
 Next step is to automate all of this so that your model gets updated with the click of a button (or merge of a PR).  
-That would be something we call a Continous Training (CT) loop/pipeline and is covered extensively in **AI500** if you are interested.
+That would be something we call a Continous Training (CT) pipeline and is covered extensively in **AI500** if you are interested.
