@@ -60,7 +60,7 @@
   * [🚀 Deploy LiteMaaS](11-maas/2-deploy-litemaas.md)
   * [🌳 Canopy Integration](11-maas/3-canopy-integration.md)
   * [🔐 Take It to Prod Securely](11-maas/4-take-it-to-prod.md)
-* [Fine-Tuning](12-fine-tuning/README.md)
+* [The Tuning Room](12-fine-tuning/README.md)
   * [🎯 Fine-Tune a Model](12-fine-tuning/1-fine-tune-a-model.md)
   * [🚀 Deploy to Canopy](12-fine-tuning/2-deploy-to-canopy.md)
 * [Campus Setup](15-campus-setup/README.md)
