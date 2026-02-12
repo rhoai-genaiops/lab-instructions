@@ -85,13 +85,13 @@ Let's get the LiteMaaS code:
 
 Take a moment to explore the structure:
 
-```
+```bash
 litemaas/
-├── frontend/          # React + PatternFly UI
-├── backend/           # Fastify API server
-├── deploy/           # Kubernetes manifests
-│   ├── base/         # Base resources
-│   └── overlays/     # Environment-specific configs
+├── frontend/         # React + PatternFly UI
+├── backend/          # Fastify API server
+├── deployment/       # Deployment recipes
+│   ├── helm/         # Helm recipe
+│   └── kustomize/    # Kustomize recipe
 ├── docker/           # Container build files
 └── docs/             # Additional documentation
 ```
@@ -100,121 +100,76 @@ litemaas/
 
 ## ⚙️ Step 2: Configure the Deployment
 
-The deployment needs a few configuration values. We’ll create a Kustomize overlay for our environment.
+We are going to use the Helm recipe to deploy LiteMaaS, with a few configuration values.
 
-Up to now, we’ve been using Helm to package and parameterize Kubernetes manifests. For this topic, we’ll use Kustomize instead: it takes a base set of YAML manifests and applies environment-specific overlays (patches and substitutions) to produce the final manifests.
-
-### 2.1 Provide your environment variables
-
-Under `litemaas/deployment/openshift` folder, we need to create a `user-values.env` file. Run below command in your workspace's terminal:
+Under `litemaas/deployment/helm/litemaas` folder, create a copy of the file `values.yaml`:
 
 ```bash
-touch deployment/openshift/user-values.env
+cd deployment/helm/litemaas
+cp values.yaml my-values.yaml
 ```
-and paste the below values to this newly created file.
 
-```yaml
-LITEMAAS_VERSION=0.1.2
-CLUSTER_DOMAIN_NAME=<CLUSTER_DOMAIN>
-NAMESPACE=<USER_NAME>-maas
-PG_ADMIN_PASSWORD=change-me-pg-password
-NODE_TLS_REJECT_UNAUTHORIZED=0
-JWT_SECRET=change-me-secure-jwt-secret-for-production
-OAUTH_CLIENT_ID=litemaas-<USER_NAME>
-OAUTH_CLIENT_SECRET=change-me-oauth-secret # 👈 we are going to change it in a moment 
-ADMIN_API_KEY=change-me-admin-key
-LITELLM_API_KEY=sk-change-me-litellm-admin-key
-LITELLM_UI_USERNAME=admin
-LITELLM_UI_PASSWORD=change-me-ui-password
-```
+Edit the file and modify all the `changeme` field for more robust passwords.
 
 > ⚠️ **Note:** In a real deployment, you'd use proper secrets management (e.g., External Secrets Operator, Vault). For now, we're keeping it simple.
 
 ---
 
-## 🔐 Step 3: Configure OAuth with OpenShift
-
-LiteMaaS uses OpenShift OAuth for authentication. This means users can log in with their OpenShift credentials!
-
-1. Create an OAuth Client by running the below command in your terminal:
-
-```bash
-oc create -f - <<EOF
-apiVersion: oauth.openshift.io/v1
-kind: OAuthClient
-metadata:
-  name: litemaas-<USER_NAME>
-grantMethod: auto
-redirectURIs:
-  - https://litemaas-<USER_NAME>-maas.<CLUSTER_DOMAIN>/api/auth/callback
-secret: $(openssl rand -base64 32)
-EOF
-```
-
-2. Get the OAuth Client secret:
-
-```bash
-# The secret was generated above - save it!
-oc get oauthclient litemaas-<USER_NAME> -o jsonpath='{.secret}'
-```
-
-..and update the `OAUTH_CLIENT_SECRET` variable in your environment file with the actual OAuth client secret.
-
----
-
-## 🚀 Step 4: Deploy to OpenShift
+## 🚀 Step 3: Deploy to OpenShift
 
 Now the fun part — let's deploy!
 
-1. Configure the deployment files with your values. First run the preparation script. 
+1. Still in the `litemaas/deployment/helm/litemaas` folder.
+2. Run the deployment command to kick off the deployment:
 
   ```bash
-  cd /opt/app-root/src/litemaas/deployment/openshift
-  ./preparation.sh
-  ```
-..and verify the generated files:
-
-   ```bash
-   # Check that .local files were created successfully
-   ls -la *.local
+  helm install litemaas . \
+  -n <USER_NAME>-maas \
+  -f my-values.yaml \
+  --set route.enabled=true
   ```
 
-  Should show something like this:
+You should get this output after a few seconds:
 
+```bash
+I0212 10:22:02.565638   55774 request.go:655] Throttling request took 1.087707749s, request: GET:https://...:6443/apis/export.kubevirt.io/v1alpha1?timeout=32s
+I0212 10:22:12.765641   55774 request.go:655] Throttling request took 11.287628662s, request: GET:https://...:6443/apis/kyverno.io/v2beta1?timeout=32s
+I0212 10:22:22.765647   55774 request.go:655] Throttling request took 21.287555267s, request: GET:https://...:6443/apis/odf.openshift.io/v1alpha1?timeout=32s
+NAME: litemaas
+LAST DEPLOYED: Thu Feb 12 10:22:30 2026
+NAMESPACE: <USER_NAME>-maas
+STATUS: deployed
+REVISION: 1
+TEST SUITE: None
+NOTES:
+LiteMaaS has been deployed successfully!
 
-  <div class="highlight" style="background: #f7f7f7; overflow-x: auto; padding: 8px;">
-    <pre><code class="language-bash"> 
-  $ ls -la *.local
-  -rw-r--r--. 1 1000960000 1000960000 4354 Dec 14 16:33 backend-deployment.yaml.local
-  -rw-r--r--. 1 1000960000 1000960000  957 Dec 14 16:33 backend-secret.yaml.local
-  -rw-r--r--. 1 1000960000 1000960000 1808 Dec 14 16:33 frontend-deployment.yaml.local
-  -rw-r--r--. 1 1000960000 1000960000  416 Dec 14 16:33 litellm-secret.yaml.local
-  -rw-r--r--. 1 1000960000 1000960000  292 Dec 14 16:33 namespace.yaml.local
-  -rw-r--r--. 1 1000960000 1000960000  200 Dec 14 16:33 postgres-secret.yaml.local
+Components:
+  - PostgreSQL:  litemaas-postgresql:5432
+  - LiteLLM:     litemaas-litellm:4000
+  - Backend:     litemaas-backend:8080
+  - Frontend:    litemaas:8080
 
-  </code></pre>
-   </div>
+OAuth mode: serviceaccount
+  Client ID:  system:serviceaccount:<USER_NAME>-maas:litemaas
+  Token secret: litemaas-oauth-token
+  NOTE: No OAuthClient CR needed — the ServiceAccount acts as the OAuth client.
+  A post-install hook will auto-configure the OAuth redirect URI and backend
+  secrets from the Route hostname. The backend may restart once after install.
 
-1. Run the deployment command to kick off the deployment:
+Initial admin users: <USER_NAME>
+  (Auto-detected from deploying user)
 
-   ```bash
-   oc apply -k .
-  ```
+Access the application via OpenShift Routes:
+  kubectl get routes -n <USER_NAME>-maas
+  LiteLLM:  kubectl get route litemaas-litellm -n <USER_NAME>-maas -o jsonpath='{.spec.host}'
 
-**Note:** Do not worry about the error below. It won't affect the installation. It happens because your user doesn't have enough privilege to edit a namespace.
+Post-deployment:
+  1. Configure AI models via LiteMaaS or LiteLLM admin UI
+  2. Wait for backend to sync models, or restart the backend deployment
+```
 
-  <div class="highlight" style="background: #f7f7f7; overflow-x: auto; padding: 8px;">
-    <pre><code class="language-bash"> 
-    Error from server (Forbidden): error when applying patch:
-    {"metadata":{"annotations":{"kubectl.kubernetes.io/last-applied-configuration":"{\"apiVersion\":\"v1\",\"kind\":\"Namespace\",\"metadata\":{\"annotations\":{},\"labels\":{\"app.kubernetes.io/component\":\"<USER_NAME>-maas\",\"app.kubernetes.io/instance\":\"litemaas\",\"app.kubernetes.io/name\":\"litemaas\",\"app.kubernetes.io/part-of\":\"litemaas\",\"app.kubernetes.io/version\":\"0.1.2\",\"name\":\"<USER_NAME>-maas\"},\"name\":\"<USER_NAME>-maas\"}}\n"},"labels":{"app.kubernetes.io/component":"<USER_NAME>-maas","app.kubernetes.io/instance":"litemaas","app.kubernetes.io/name":"litemaas","app.kubernetes.io/part-of":"litemaas","app.kubernetes.io/version":"0.1.2","name":"<USER_NAME>-maas"}}}
-    to:
-    Resource: "/v1, Resource=namespaces", GroupVersionKind: "/v1, Kind=Namespace"
-    Name: "<USER_NAME>-maas", Namespace: ""
-    for: ".": error when patching ".": namespaces "<USER_NAME>-maas" is forbidden: User "<USER_NAME>" cannot patch resource "namespaces" in API group "" in the namespace "<USER_NAME>-maas"
-   </code></pre>
-  </div>
-
-3. Watch the deployment till all four pods become up and running (`1/1` under Ready column)
+2. Watch the deployment till all four pods become up and running (`1/1` under Ready column)
 
 ```bash
 # Watch pods come up
@@ -222,6 +177,7 @@ oc get pods -n <USER_NAME>-maas -w
 ```
 
 You should see:
+
 - `postgresql-*` — Database pod
 - `litemaas-backend-*` — API server
 - `litemaas-frontend-*` — React UI
@@ -233,7 +189,7 @@ Do `Ctrl + C` to break the watch.
 
 ---
 
-## ✨ Step 5: Access the LiteMaaS UI
+## ✨ Step 4: Access the LiteMaaS UI
 
 1. Open your browser and navigate to:
 
@@ -249,7 +205,7 @@ By default you have admin privileges. That's why you have the `Administrator` se
 
 ---
 
-## 🔗 Step 6: Configure Model Connections
+## 🔗 Step 5: Configure Model Connections
 
 LiteMaaS uses [LiteLLM](https://github.com/BerriAI/litellm) as its backend proxy. We need to tell LiteLLM about our available models.
 
@@ -328,6 +284,5 @@ LiteMaaS uses [LiteLLM](https://github.com/BerriAI/litellm) as its backend proxy
   </details>
 
   ![maas-models-list.png](./images/maas-models-list.png)
-
 
 Your infrastructure is ready! Now let's make Canopy to consume models from this MaaS instance!
