@@ -51,6 +51,6 @@ Go back to your workbench and run **`experiments/12-fine-tuning/2-lora-training.
 
 ## Evaluate and Save
 
-We will have our standard online evaluations that we will use when updaing Canopy, but here we also do some offline evaluations before the model gets deployed just to have a sanity check that it's better than our existing one.  
+We will have our standard online evaluations that we will use when updating Canopy, but here we also do some offline evaluations before the model gets deployed just to have a sanity check that it's better than our existing one.  
 
 To evaluate the new model, go to through the notebook **`experiments/12-fine-tuning/3-evaluation.ipynb`** and then go to **`experiments/12-fine-tuning/4-save-model.ipynb`** to save and push the model to the model registry.
