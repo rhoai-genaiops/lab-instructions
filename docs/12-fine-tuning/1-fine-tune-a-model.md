@@ -80,4 +80,12 @@ Go back to your workbench and run **`experiments/12-fine-tuning/2-lora-training.
 
 We will have our standard online evaluations that we will use when updating Canopy, but here we also do some offline evaluations before the model gets deployed just to have a sanity check that it's better than our existing one.  
 
+Before you save the model though, you will need to make sure you are logged into the cluster in your workbench.  
+Please run this in the workbench terminal before going through notebook `4-save-model.ipynb`:
+
+  ```bash
+    export CLUSTER_DOMAIN=<CLUSTER_DOMAIN>
+    oc login --server=https://api.${CLUSTER_DOMAIN##apps.}:6443 -u <USER_NAME> -p <PASSWORD>
+  ```
+
 To evaluate the new model, go through the notebook **`experiments/12-fine-tuning/3-evaluation.ipynb`** and then go to **`experiments/12-fine-tuning/4-save-model.ipynb`** to save and push the model to the model registry.
