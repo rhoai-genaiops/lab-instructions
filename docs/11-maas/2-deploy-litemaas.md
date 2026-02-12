@@ -122,12 +122,12 @@ Now the fun part — let's deploy!
 1. Still in the `litemaas/deployment/helm/litemaas` folder.
 2. Run the deployment command to kick off the deployment:
 
-  ```bash
-  helm install litemaas . \
-  -n <USER_NAME>-maas \
-  -f my-values.yaml \
-  --set route.enabled=true
-  ```
+```bash
+helm install litemaas . \
+-n <USER_NAME>-maas \
+-f my-values.yaml \
+--set route.enabled=true
+```
 
 You should get this output after a few seconds:
 
