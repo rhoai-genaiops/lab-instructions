@@ -22,7 +22,7 @@ This first iteration of **Canopy** is built to support:
 
 - Live streaming output 🌱 so you see each token bloom.
 
-In future modules, this same interface will evolve to handle content creation, grading, and personalized feedback.
+In future modules, this same interface will evolve to handle information search, intelligent student assistance, and socratic tutoring.
 
 ## 🚀 Getting Started with Canopy on OpenShift
 
