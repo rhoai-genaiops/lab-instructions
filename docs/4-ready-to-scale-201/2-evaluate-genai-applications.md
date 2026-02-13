@@ -27,7 +27,7 @@ Llama Stack has three different endpoints for evaluating models:
 
 To be able to evaluate with Llama Stack we first need to enable it in our experiment environment.  
 
-1. In OpenShift console, go to `Helm` > `Releases` and click `Upgrade` for Llama Stack Operator Instance.
+1. In OpenShift console, go to your <USER_NAME>-canopy project > `Helm` > `Releases` and click `Upgrade` for Llama Stack Operator Instance.
 
     ![llama-stack-enable-evals.png](./images/llama-stack-enable-evals.png)
 

@@ -44,7 +44,7 @@ For this, we are going to set up Milvus. If you recognize the name it's because 
 5. Wait till you see that both Milvus pods are operational, in other words you see `1/1` under `Ready` column:
 
   ```bash
-  oc get po -n user2-test -w
+  oc get po -n <USER_NAME>-test -w
   ```
 
     <div class="highlight" style="background: #f7f7f7">

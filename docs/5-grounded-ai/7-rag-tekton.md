@@ -50,7 +50,7 @@ Go to MinIO ([https://minio-ui-<USER_NAME>-toolings.<CLUSTER_DOMAIN>](https://mi
 
     ![minio-webhook-3.png](./images/minio-webhook-3.png)
 
-7. Now, let's associate this webhook with `documents` bucket. Go to Buckets > `documents` > Events and click `Subscribe to Event`. Select your newly created webhook from the dropdown menu of ARN, and check `PUT - Object Uploaded` as the event. `Save` your changes. You don't have to restart it again :)
+7. Now, let's associate this webhook with `documents` bucket. Go to Buckets > documents > Events and click `Subscribe to Event`. Select your newly created webhook from the dropdown menu of ARN, and check `PUT - Object Uploaded` as the event. `Save` your changes. You don't have to restart it again :)
 
     ![minio-webhook-4.png](./images/minio-webhook-4.png)
 
@@ -83,7 +83,7 @@ Go to MinIO ([https://minio-ui-<USER_NAME>-toolings.<CLUSTER_DOMAIN>](https://mi
 
     ![canopy-be-rag-pr.png](./images/canopy-be-rag-pr.png)
 
-    And your evals doesn't cover anything related to the last PDF you uploaded?  
-    Feel free to update your evals, add more prompt & expected result pairs (Prompt Engineering Yay!). 
+    And what if your evals doesn't cover anything related to the last PDF you uploaded?  
+    Feel free to update your evals by for example adding more prompt & expected result pairs (Prompt Engineering Yay!). 
 
     ![prompt-tracker-eval-results.png](./images/prompt-tracker-eval-results.png)

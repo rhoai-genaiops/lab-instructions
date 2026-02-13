@@ -123,7 +123,7 @@ We will be triggering it from a Tekton Pipeline, where we both will have a step 
 
     ![super-important-meme](images/super-important-meme.jpg)
 
-    To get some use of our Tekton pipeline, let's make it trigger automatically from our git repos.  
+    To get some use of our Tekton pipeline, let's make it trigger automatically from git changes in our repos.  
     Start by going to Gitea.
 
 6. Inside of Gitea, navigate to your `evals` repository. Go to Settings.

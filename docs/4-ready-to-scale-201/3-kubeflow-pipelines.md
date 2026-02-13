@@ -49,7 +49,7 @@ The evaluation pipeline is inside of a repository called `evals`, where both the
 
 2. Inside, you will find a few folders, one called `evals-pipeline` and one for each usecase that we are going to want to run evaluations on - `Summary` is the only one relevant for us for now, the rest are slight spoilers for the upcoming modules 🤫  
 
-    Open up `Summary/summary_tests.yaml` to see what tests we will run. Make sure to add some of your own examples as well ✍️
+    Open up `evals/Summary/summary_tests.yaml` to see what tests we will run. Make sure to add some of your own examples as well ✍️
 
     ![summary_test.png](images/summary_tests.png)
 
@@ -60,7 +60,7 @@ The evaluation pipeline is inside of a repository called `evals`, where both the
         expected_result: "AI and ML have transformed industries through healthcare diagnostics, autonomous vehicles, and recommendation systems, but also raise concerns about bias, job displacement, and privacy."
     ```
 
-3. The code for the kubeflow pipeline that is running these evaluations is inside of `evals-pipeline/kfp_pipeline.py`. Go ahead and open it up and take a look. It may look large, but most of it is HTML to create a nice looking output. You will recognize these lines, somewhere around line ~740: 
+3. The code for the kubeflow pipeline that is running these evaluations is inside of `evals-pipeline/kfp_pipeline.py`. Go ahead and open it up and take a look. It may look large, but most of it is HTML to create a nice looking output. You will recognize these lines, somewhere around line ~887: 
 
     <div class="highlight" style="background: #f7f7f7">
     <pre><code class="language-python">
@@ -70,7 +70,7 @@ The evaluation pipeline is inside of a repository called `evals`, where both the
     </code></pre>
     </div>
 
-4. Scroll down to near the bottom of the file (around line 995) and edit the `repo_url` argument as below:
+4. Scroll down to near the bottom of the file (around line 993) and edit the `repo_url` argument as below:
     ```python
     arguments = {
         "repo_url": "https://<USER_NAME>:<PASSWORD>@gitea-gitea.<CLUSTER_DOMAIN>/<USER_NAME>/evals.git", # 🚨 replace with your own repo URL

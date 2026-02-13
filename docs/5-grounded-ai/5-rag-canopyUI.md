@@ -12,7 +12,7 @@ The Canopy application we deployed already has RAG built-in as you may have seen
     LLAMA_STACK_URL: "http://llama-stack-service:8321"
     summarize:
      enabled: true
-     model: llama32
+     model: vllm-llama32/llama32
      temperature: 0.9
      max_tokens: 4096
      prompt: |
@@ -20,7 +20,7 @@ The Canopy application we deployed already has RAG built-in as you may have seen
     information-search:         # 👈 add this block 📚❗︎
      enabled: true
      vector_db_id: latest
-     model: llama32
+     model: vllm-llama32/llama32
      prompt: |
        You are a helpful assistant specializing in document intelligence and academic content analysis.
     ```
