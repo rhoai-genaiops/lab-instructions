@@ -84,7 +84,7 @@ Let's deploy a Grafana instance in your toolings namespace to support the end-to
 
     Use your OpenShift credentials and click `Allow selected permissions` to log in.
 
-> If ArgoCD gets stuck while syncing, sync the `canopy-grafana-sa-token` manually by clicking the 3 dots and triggering a sync for that CR object.
+> If ArgoCD gets stuck while syncing, click on Synching, Terminate the sync, and then manually sync the `canopy-grafana-sa-token` object by clicking the 3 dots and triggering a sync for that CR object.
 
    ![Grafana Issue 1](./images/grafana-argocd-issue.png)
 
