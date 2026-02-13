@@ -13,6 +13,12 @@ There are typically two key parts to prompting:
 
 Together, they guide the model’s behavior and shape its response.
 
+> ℹ️ **Extra Info:** The System Prompt and User Prompt are not sent in seperately to the LLM, they are combined into a single prompt.  
+Typically like this:  
+\<System> *some system prompt*   
+\<User> *some user prompt*  
+and the model have just learned to treat the two parts differently.
+
 ## 🎯 Why Prompt Engineering Matters for RDU’s Canopy
 
 At Redwood Digital University, we’re building **Canopy**, a platform designed to adapt to diverse student needs and teaching styles. That means that we not only need a good LLM, but also need to refine our prompts.
@@ -28,7 +34,7 @@ But before we can trust an AI to assist learners, we need to explore how it beha
 
 ## 🧪 Hands-On: The Prompt Playground
 
-We’ve created a **Gradio-based app** where you can experiment with different prompting strategies.  
+We’ve created a **FastAPI Javascript app** where you can experiment with different prompting strategies.  
 Your goal is to find the **best system prompt** and configuration to **summarize** a given text.
 
 Here’s what you can configure:
@@ -37,7 +43,7 @@ Here’s what you can configure:
 | ---------------- | ------------------------------------------- | ----------------------------- |
 | 🧾 System Prompt | Sets the AI’s role or behavior              | “You are a helpful tutor."     |
 | 💬 User Prompt   | The task you give                           | “This text is about...”        |
-| 🔥 Temperature   | Creativity level (0 = serious, 1 = playful) | “0.2 = strict, 0.8 = playful”  |
+| 🔥 Temperature   | How creative/varied the output will be (0 = serious and deterministic, 1 = creative and random) | “0.2 = strict, 0.8 = creative”  |
 | 🔢 Max Tokens    | Limits response length                      | “50 = short, 200 = detailed”   |
 
 
@@ -105,4 +111,4 @@ Can you come up with something that explains the text even better without loosin
 ></iframe>
 
 
-Not sure about what is `Temperature` or `Max Tokens`? You have an access to a Large Language Model that is quite knowledgeable, right? Feel free to ask 🙃
+Want more information about `Temperature` or `Max Tokens`? You have access to a Large Language Model that is quite knowledgeable, right? Feel free to ask 🙃

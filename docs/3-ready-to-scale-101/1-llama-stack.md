@@ -9,7 +9,7 @@ That’s where **Llama Stack** comes in.
 Llama Stack provides a modular foundation for building LLM applications with:
 
 * 🔌 **Consistent APIs** for interacting with models (local or remote)
-* 📦 **Support for prompt templates**, vector databases, and agentic workflows and tools
+* 📦 **Support for prompt templates**, vector databases, and tools
 * 🧠 **Built-in observability** and hooks for evaluation
 * 🔐 **On-prem friendly** deployment patterns
 
@@ -52,7 +52,7 @@ Think of it as your control room for:
 
 - 🌐 Experimenting with RAG systems and different tools
 
-- 📊 Previewing evaluation hooks or guardrails
+- 📊 Testing guardrails to secure your interactions
 
 In another word, all the cool stuff we will get to later on!
 
