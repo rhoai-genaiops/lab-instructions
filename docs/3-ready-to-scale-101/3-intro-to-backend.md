@@ -50,7 +50,7 @@ We'll separate out the LLM business logic from the frontend into its own backend
 
 3. Then, go a little bit down, expand the `image` value and update the tag to point to a newer version:
    
-   - tag: `0.5` (replace it with `simple-0.1`)
+   - tag: `0.5` (replace it with `simple-0.2`)
   
   ..and now hit `Upgrade`!
 
