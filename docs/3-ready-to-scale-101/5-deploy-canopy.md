@@ -89,7 +89,7 @@ Now let's deploy backend to test and prod environments using Argo CD!
 
   For now, we are happy with the default Llama Stack values. We will get some exciting updates as we continue to the other chapters :)
 
-1. Let's get all of these deployed! Of course - they are not real unless they are in git!
+5. Let's get all of these deployed! Of course - they are not real unless they are in git!
 
     ```bash
     cd /opt/app-root/src/genaiops-gitops
@@ -98,18 +98,21 @@ Now let's deploy backend to test and prod environments using Argo CD!
     git push 
     ```
 
-2. With all the application values stored in Git, let's tell Argo CD to start picking up changes to these environments. To do this, simply we need to create ApplicationSets:
+6. With all the application values stored in Git, let's tell Argo CD to start picking up changes to these environments. To do this, simply we need to create ApplicationSets:
 
     ```bash
     oc apply -f /opt/app-root/src/genaiops-gitops/appset-test.yaml -n <USER_NAME>-toolings
     oc apply -f /opt/app-root/src/genaiops-gitops/appset-prod.yaml -n <USER_NAME>-toolings
     ```
 
-3. You should see the canopy application, if filter in the search as `test` or `prod`. 
+7. You should see the canopy application, if filter in the search as `test` or `prod`. 
 
     ![canopy-gitops.png](./images/canopy-gitops.png)
 
-4. You can also go to OpenShift Console, check `<USER_NAME>-test` namespace to see if Canopy is deployed.
+8. You can also go to OpenShift Console, check `<USER_NAME>-test` namespace to see if Canopy is deployed.
 
     ![canopy-test-ns.png](./images/canopy-test-ns.png)
 
+9. Now that you have Canopy deployed, open up the Canopy UI and send a prompt to make sure it works! :D
+
+    ![canopy-test.png](./images/canopy-test.png)

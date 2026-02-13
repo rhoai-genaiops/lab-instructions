@@ -52,7 +52,7 @@ Think of it as your control room for:
 
 - 🌐 Experimenting with RAG systems and different tools
 
-- 📊 Previewing evaluation hooks or guardrails
+- 📊 Testing guardrails to secure your interactions
 
 In another word, all the cool stuff we will get to later on!
 
