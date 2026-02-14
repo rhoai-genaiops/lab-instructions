@@ -111,7 +111,7 @@ cp values.yaml my-values.yaml
 
 Edit the file and modify all the `changeme` field for more robust passwords.
 
-> ⚠️ **Note:** In a real deployment, you'd use proper secrets management (e.g., External Secrets Operator, Vault). For now, we're keeping it simple.
+> ⚠️ **Note:** In a real deployment, you'd use proper secrets management (e.g., External Secrets Operator, Vault). For now, we're keeping it simple, but we will come to this topic very soon :)
 
 ---
 
@@ -126,7 +126,8 @@ Now the fun part — let's deploy!
 helm install litemaas . \
 -n <USER_NAME>-maas \
 -f my-values.yaml \
---set route.enabled=true
+--set route.enabled=true \
+--set backend.nodeTlsRejectUnauthorized="0"
 ```
 
 You should get this output after a few seconds:
