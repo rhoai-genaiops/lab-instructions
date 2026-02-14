@@ -65,6 +65,9 @@ Let's directly do this in `test` environment for simplicity.
 
    Click thumbs up on a summary that works well 🥹 👍
 
+   > ⚠️ **Note:** If you don't see this or see an error, restart the `canopy-ui` pod inside of the `<USER_NAME>-test` namespace in OpenShift. Easiest way to do this is just to delete the pod
+   ![delete-pod-for-feedback.png](./images/delete-pod-for-feedback.png)
+
 6. Try a few more to generate some data, give some thumbs up and downs, then we'll review the result!
 
    ![canopy-feedback.png](./images/canopy-feedback.png)
@@ -108,7 +111,7 @@ Collecting feedback is only half the story. The real value comes from using nega
    You can also export from the terminal. Actually let's do that for the simplicity. First create a folder specific for the feedback evals and set up the judge prompt:
 
    ```bash
-   mkdir /opt/app-root/src/evals/
+   mkdir /opt/app-root/src/evals/feedback/
    cd /opt/app-root/src/evals/
    cp Summary/judge_prompt.txt feedback/
    ```
@@ -235,6 +238,9 @@ Instead of guessing which prompt produces better summaries, you let real users d
    ![ab-testing.png](./images/ab-testing.png)
 
    After both responses complete, two buttons appear: **A is better** and **B is better**
+
+   > ⚠️ **Note:** If you don't see this or see an error, restart the `canopy-ui` pod inside of the `<USER_NAME>-test` namespace in OpenShift. Easiest way to do this is just to delete the pod
+   ![delete-pod-for-feedback.png](./images/delete-pod-for-feedback.png)
 
 6. Pick your preference and try a couple of more to generate some data. The system records which actual prompt won.
 
