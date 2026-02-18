@@ -1,5 +1,11 @@
 # 🗂️ Prompt Versioning
 
+## Exercise Setup
+
+Make sure you are in the `user2-test` project.
+
+## Steps
+
 > *Organizing ideas into repeatable, structured formats.*
 
 You’ve explored how prompt design can dramatically shape model behavior, it’s time to **bring order to your creativity**.
@@ -57,7 +63,7 @@ More specifically, we load them into a ConfigMap which then gets mounted to our 
 
     ![canopy-be-pr.png](./images/canopy-be-pr.png)
 
-    Open up that link and document why you picked this prompt. Perhaps your user research revealed that people need summary not longer than 10 sentences. This adds narrative and visibility to prompt decisions. And then click `Create Pull Request`.  
+    Open up that link and document why you picked this prompt. Perhaps your user research revealed that people need summary not longer than 10 sentences. This adds narrative and visibility to prompt decisions.  
 
     ![canopy-be-pr-2.png](./images/canopy-be-pr-2.png)
 

@@ -41,6 +41,8 @@ To be able to evaluate with Llama Stack we first need to enable it in our experi
 
     If you re asked to select a kernel, pick the first one.
 
+    Step through or run the application.
+
     ![select-kernel.png](./images/select-kernel.png)
 
     When you are done, come back here to continue with the instructions.

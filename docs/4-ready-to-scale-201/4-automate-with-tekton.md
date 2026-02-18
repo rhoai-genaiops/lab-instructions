@@ -110,8 +110,9 @@ We will be triggering it from a Tekton Pipeline, where we both will have a step 
     git commit -m "🚄 Evaluation Pipelines 🚄"
     git push
     ```
+4. Open the `OpenShift Console` to perform the next steps.
 
-4. Now let's look at it by going to the `OpenShift Dashboard` -> `Pipelines` -> `<USER_NAME>-toolings` -> `canopy-evals-pipeline`.
+5. From within the `OpenShift Dashboard,` locate `Pipelines` in the Explorer and click: `Pipelines` -> `<USER_NAME>-toolings` -> `canopy-evals-pipeline`.
 
     You can see that all it does is a simple `git clone` followed by starting the Kubeflow pipeline.  
 
@@ -119,26 +120,26 @@ We will be triggering it from a Tekton Pipeline, where we both will have a step 
 
     ![tekton-pipeline](images/tekton-pipeline.png)
 
-5. Great, we have our pipeline! However, so far we would still need to trigger it manually, the only difference from before is that we now trigger a Tekton pipeline that then triggers our Kubeflow pipeline and nothing more...
+6. Great, we have our pipeline! However, so far we would still need to trigger it manually, the only difference from before is that we now trigger a Tekton pipeline that then triggers our Kubeflow pipeline and nothing more...
 
     ![super-important-meme](images/super-important-meme.jpg)
 
     To get some use of our Tekton pipeline, let's make it trigger automatically from git changes in our repos.  
     Start by going to Gitea.
 
-6. Inside of Gitea, navigate to your `evals` repository. Go to Settings.
+7. Inside of Gitea, navigate to your `evals` repository. Go to Settings.
 
     ![gitea-evals-settings.png](./images/gitea-evals-settings.png)
 
-7. Click `Webhooks` > `Add` and choose Gitea.
+8. Click `Webhooks` > `Add` and choose Gitea.
 
     ![gitea-evals-webhook.png](./images/gitea-evals-webhook.png)
 
-8. Enter `http://el-canopy-evals-event-listener.<USER_NAME>-toolings.svc.cluster.local:8080` -> click `Add Webhook`
+9. Enter `http://el-canopy-evals-event-listener.<USER_NAME>-toolings.svc.cluster.local:8080` -> click `Add Webhook`
 
     ![githook](images/githook.png)
 
-9. Now do the same for **backend** repository 💥💥💥 
+10. Now do the same for **backend** repository 💥💥💥 
 
     Go to `backend` repository > Settings > Webhook > Add > Gitea and add the same webhook. This will be the second webhook definition for the backend repository.
 
