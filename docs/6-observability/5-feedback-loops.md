@@ -200,7 +200,7 @@ Instead of guessing which prompt produces better summaries, you let real users d
    ```yaml
    summarize:
      enabled: true
-     model: llama32
+     model: vllm-llama32/llama32
      prompt: |
       Summarize the following text in a clear and detailed manner:
      prompt_b: |                         # 👈 ADD under your current prompt. Feel free to get creative 🤸
@@ -272,7 +272,7 @@ When one prompt consistently wins across multiple comparisons:
       information-search: 
         enabled: true
         vector_db_id: genaiops_2026_02_09_22_26
-        model: llama32
+        model: vllm-llama32/llama32
         prompt: |-
           You are a helpful assistant specializing in document intelligence and academic content analysis.
       feedback:
