@@ -32,11 +32,7 @@ Let's get you your own instance of Canopy up and running in just a few minutes.
 
 In OpenShift, you have an experimentation environment which is called `<USER_NAME>-canopy`. You'll use this environment to iterate over Canopy, bring in new features, update the frontend when new capabilities arrive, and so on.
 
-1. Go to [OpenShift Console](https://console-openshift-console.<CLUSTER_DOMAIN>) and select `Students` as the identity provider.
-
-    ![openshift-login.png](./images/openshift-login.png)
-
-    Enter your credentials:
+1. Go to [OpenShift Console](https://console-openshift-console.<CLUSTER_DOMAIN>) and enter your credentials:
 
     User: `<USER_NAME>`
     Password: `<PASSWORD>`
