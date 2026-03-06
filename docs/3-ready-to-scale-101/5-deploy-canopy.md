@@ -57,7 +57,7 @@ Now let's deploy backend to test and prod environments using Argo CD!
     BACKEND_ENDPOINT: "http://canopy-backend:8000"
     image:
       name: "canopy-ui"
-      tag: "0.5"
+      tag: "0.6"
     ```
 3. `backend` will have a different `config.yaml` as it has two different values files.
 
@@ -112,6 +112,6 @@ Now let's deploy backend to test and prod environments using Argo CD!
 
     ![canopy-test-ns.png](./images/canopy-test-ns.png)
 
-9. Now that you have Canopy deployed, open up the Canopy UI and send a prompt to make sure it works! :D
+9. Now that you have Canopy deployed in the `test` environment, open up [the Canopy UI](https://canopy-ui-<USER_NAME>-test.<CLUSTER_DOMAIN>/) and send a prompt to make sure it works! :D
 
     ![canopy-test.png](./images/canopy-test.png)
