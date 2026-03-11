@@ -20,7 +20,14 @@ Before we test the whole agent, let's make sure each individual tool works corre
 
 The canopy backend already has unit tests set up for the student assistant tools. Let's run them!
 
-Run the unit tests:
+As explained in `backend/tests/README.md` we first need to install some dependencies:
+
+    ```bash
+    cd /opt/app-root/src/backend
+    pip install -r tests/requirements-test.txt
+    ```
+
+And then we can run the unit tests:
 
     ```bash
     pytest tests/test_tools.py -v
