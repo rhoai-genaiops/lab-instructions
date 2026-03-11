@@ -100,6 +100,11 @@ Let's deploy a Grafana instance in your toolings namespace to support the end-to
 
    _If you don't see all the dashboards, that means they haven't synced yet. Just refresh the page a couple of times :)_
 
+
+_Click on the title to access more details on metrics and dashboards!_
+<details>
+<summary><b><h2>📚 EXTRA CREDITS 🤓</h2></b></summary>
+
 ### Exploring Pre-configured Dashboards
 
 The Grafana instance you deployed includes several pre-configured dashboards for monitoring your complete AI stack: the shared vLLM model, your Canopy UI, your Canopy Backend and LlamaStack.
@@ -250,6 +255,7 @@ Your AI assistant spans four layers, each with its own metrics:
 **4. Shared vLLM Model (ai501 namespace)** - The inference engine
 - Metrics show: token throughput, latency, queue depth, cache usage
 - **What it tells you**: Is the shared model healthy and responsive? -->
+</details>
 
 ## 🎯 Next Steps: Understanding Behavior with Logs
 
