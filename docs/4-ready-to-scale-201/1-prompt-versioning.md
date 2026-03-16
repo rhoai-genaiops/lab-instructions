@@ -69,6 +69,13 @@ More specifically, we load them into a ConfigMap which then gets mounted to our 
 5. If you go and chat with Canopy now you can see how it reacts differently as it uses the new prompt.  
     If you are really curious you can also see how the config which the backend is reading from has changed: [https://console-openshift-console.<CLUSTER_DOMAIN>/k8s/ns/<USER_NAME>-test/configmaps/canopy-config](https://console-openshift-console.<CLUSTER_DOMAIN>/k8s/ns/<USER_NAME>-test/configmaps/canopy-config)
 
+6. Later we will continue updating our backend, so let's make sure we're on the main branch and if we can pull the merged changes down to our workbench:  
+
+```bash
+cd /opt/app-root/src/backend
+git checkout main && git pull
+```
+
 ## Prompt Tracker
 
 We use Git to track our changes and to be able to tell which prompts and settings are currently effective in Canopy, or _were_ at a given time. But going through a Git commit history to figure out such answers can be tedious. For that reason, we built and deployed a tracker for you to visualize your changes.
