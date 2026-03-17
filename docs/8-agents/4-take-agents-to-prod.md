@@ -62,7 +62,7 @@ There are a few things we want to do, such as evaluating and observing the agent
     information-search:
       enabled: true
       vector_db_id: latest
-      model: llama32
+      model: vllm-llama32/llama32
       prompt: |-
         You are a helpful assistant specializing in document intelligence and academic content analysis.
     shields:
@@ -74,7 +74,7 @@ There are a few things we want to do, such as evaluating and observing the agent
       output_shields: [] 
     student-assistant:         # 👈 add this large block ❗︎❗︎❗︎ ❗︎❗︎❗︎ ❗︎❗︎❗︎
       enabled: true
-      model: llama32
+      model: vllm-llama32/llama32
       temperature: 0.1
       vector_db_id: latest
       mcp_calendar_url: "http://canopy-mcp-calendar-mcp-server:8080/sse"
