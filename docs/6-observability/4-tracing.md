@@ -30,7 +30,7 @@ One of the powerful features of OpenShift's observability stack is the ability t
 
 ### How Auto-Instrumentation Works
 
-The OpenTelemetry Operator can automatically [inject instrumentation](https://docs.redhat.com/en/documentation/openshift_container_platform/4.19/html/red_hat_build_of_opentelemetry/otel-configuration-of-instrumentation) into your pods by:
+The OpenTelemetry Operator can automatically [inject instrumentation](https://docs.redhat.com/en/documentation/red_hat_build_of_opentelemetry/3.9/html/configuring_the_instrumentation/otel-configuration-of-instrumentation#otel-autoinstrumentation_otel-configuration-of-instrumentation) into your pods by:
 1. Detecting the programming language (Python, Node.js, Java, etc.)
 2. Injecting the appropriate OTel SDK as a sidecar or init container
 3. Configuring environment variables to enable auto-instrumentation
