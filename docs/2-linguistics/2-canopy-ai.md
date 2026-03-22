@@ -74,7 +74,7 @@ In OpenShift, you have an experimentation environment which is called `<USER_NAM
 
 ### 🧪 2. Try the Summarization UI
 
-1. You can copy the text about Canopy from Wikipedia: https://en.wikipedia.org/wiki/Canopy_(biology). And paste it to the application to summarize. So paste the content to the text box, press `Summarize` and then watch the model generate a summary in real-time ✨
+1. You can copy the text about Canopy from Wikipedia: https://en.wikipedia.org/wiki/Canopy_(biology). And paste it to the application to summarize. So paste the content to the text box, press `Send 💬` and then watch the model generate a summary in real-time ✨
 
     ![summarize-with-canopy](./images/summarize-with-canopy.png)
 
