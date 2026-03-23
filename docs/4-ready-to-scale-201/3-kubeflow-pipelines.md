@@ -105,7 +105,11 @@ The evaluation pipeline is inside of a repository called `evals`, where both the
 
     ![trigger-kfp.png](./images/trigger-kfp.png)
 
-    > Note: If you get an error, please restart the workbench by stopping and starting it.
+    > Note: If you get an error, please restart the workbench by stopping and starting it. If you're already on a terminal, this quick oneliner will do the job:
+    
+    ```bash
+    oc delete -n <USER_NAME>-canopy pod -l notebook-name=<USER_NAME>-canopy
+    ```
 
     And now navigate to the OpenShift AI dashboard > `Develop & train` > `Pipelines` > `Runs`
 
