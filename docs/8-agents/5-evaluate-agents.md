@@ -22,16 +22,16 @@ The canopy backend already has unit tests set up for the student assistant tools
 
 As explained in `backend/tests/README.md` we first need to install some dependencies:
 
-    ```bash
-    cd /opt/app-root/src/backend
-    pip install -r tests/requirements-test.txt
-    ```
+```bash
+cd /opt/app-root/src/backend
+pip install -r tests/requirements-test.txt
+```
 
 And then we can run the unit tests:
 
-    ```bash
-    pytest tests/test_tools.py -v
-    ```
+```bash
+pytest tests/test_tools.py -v
+```
 
 You should see output like this:
 
