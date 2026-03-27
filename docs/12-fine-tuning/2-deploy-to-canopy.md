@@ -95,9 +95,9 @@ Now that we have the new model in MaaS, let's add it to our test Llama Stack so 
     - name: "llama32-fp8"   
       url: "http://llama-32-fp8-predictor.ai501.svc.cluster.local:8080/v1" 
     - name: "Llama-3.2-3B-Instruct-FP8"
-      url: "https://litellm-<USER_NAME>-maas.<CLUSTER_DOMAIN>/v1"
+      url: "https://litemaas-litellm-<USER_NAME>-maas.<CLUSTER_DOMAIN>/v1"
     - name: "socratic-model"    # 👈 Add this ❗︎❗︎
-      url: "https://litellm-<USER_NAME>-maas.<CLUSTER_DOMAIN>/v1"   # 👈 Add this ❗︎❗︎
+      url: "https://litemaas-litellm-<USER_NAME>-maas.<CLUSTER_DOMAIN>/v1"   # 👈 Add this ❗︎❗︎
       token: "<YOUR-COPIED-API-KEY>"    # 👈 Add this ❗︎❗︎
   eval:
     enabled: true
