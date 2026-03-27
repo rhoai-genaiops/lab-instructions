@@ -102,7 +102,7 @@ litemaas/
 
 We are going to use the Helm recipe to deploy LiteMaaS, with a few configuration values.
 
-Under `litemaas/deployment/helm/litemaas` folder, create a copy of the file `values.yaml`:
+1. Under `litemaas/deployment/helm/litemaas` folder, create a copy of the file `values.yaml`:
 
 ```bash
 cd deployment/helm/litemaas
@@ -112,6 +112,20 @@ cp values.yaml my-values.yaml
 Edit the file and modify all the `changeme` field for more robust passwords.
 
 > ⚠️ **Note:** In a real deployment, you'd use proper secrets management (e.g., External Secrets Operator, Vault). For now, we're keeping it simple, but we will come to this topic very soon :)
+
+2. We need to activate DB Schema configuration by upgrading the litemaas chart, go to `templates/litellm-deployment.yaml` and update to this:
+
+```yaml
+            - name: STORE_MODEL_IN_DB
+              value: "True"
+            - name: DISABLE_SCHEMA_UPDATE
+              value: "false"  # 👈 Modify this line to define "false" == Activate DB Schema Update ❗︎❗︎
+            - name: REDIS_HOST
+              value: "release-name-litemaas-redis"
+            - name: REDIS_PORT
+              value: "6379"
+              
+```
 
 ---
 
