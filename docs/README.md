@@ -1,9 +1,9 @@
 # 🧑‍🏫📚 GenAIOps Enablement Lab Exercises (AI501)
 
-<!-- ## Slide Decks
-Slide decks are published along side the exercise instructions. To add a new slide deck or update any existing ones, simply navigate to `docs/slides/content` and edit and existing file or create a new `.md` file. This will auto generate the slide deck once published. You can view or edit the for testing by running the docsify server. See the GitHub repo for more information
+## Slide Decks
+Slide decks are published along side the exercise instructions.
 
-👨‍🏫 👉 [The Published Slides Live Here](https://rhoai-genaiops.github.io/lab-instructions/slides/) 👈 🧑‍💻 -->
+👨‍🏫 👉 [The Published Slides Live Here](https://rhoai-genaiops.github.io/lab-instructions/slides/ai501-index.html) 👈 🧑‍💻
 
 ## 🪄 Customize The Instructions
 The box at the top of the page allows you to load the docs with your team's variables prefilled. Fill in the following fields and click **Save**:
