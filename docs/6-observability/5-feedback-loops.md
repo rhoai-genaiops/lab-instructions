@@ -249,6 +249,9 @@ Instead of guessing which prompt produces better summaries, you let real users d
    ![ab-testing-results.png](./images/ab-testing-results.png)
 
 
+> ⚠️ **Note:** We randomize which prompt is displayed as A or B in the frontend to avoid positioning bias, but then map it to the correct A or B prompt in the feedback view. This means that if you press that A is better you might see that B gets a point in the feedback view cause it was really prompt B underneath discuising as prompt A for the user 🥷
+
+
 ### Act on the Data
 
 When one prompt consistently wins across multiple comparisons:
