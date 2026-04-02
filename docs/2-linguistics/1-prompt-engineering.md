@@ -13,7 +13,7 @@ There are typically two key parts to prompting:
 
 Together, they guide the model’s behavior and shape its response.
 
-> ℹ️ **Extra Info:** The System Prompt and User Prompt are not sent in seperately to the LLM, they are combined into a single prompt.  
+> ℹ️ **Reminder:** The System Prompt and User Prompt are not sent in seperately to the LLM, they are combined into a single prompt.  
 Typically like this:  
 \<System> *some system prompt*   
 \<User> *some user prompt*  
@@ -23,19 +23,13 @@ and the model have just learned to treat the two parts differently.
 
 At Redwood Digital University, we’re building **Canopy**, a platform designed to adapt to diverse student needs and teaching styles. That means that we not only need a good LLM, but also need to refine our prompts.
 
-With effective prompts, we can:
-
-* Make content more accessible for different learning levels.
-* Generate study guides, quiz questions, summaries, or personalized feedback.
-* Help educators save time while maintaining quality and consistency.
-
-But before we can trust an AI to assist learners, we need to explore how it behaves under different prompting conditions.
+Let's explore how our LLM behaves under different prompting conditions.
 
 
 ## 🧪 Hands-On: The Prompt Playground
 
-We’ve created a **FastAPI Javascript app** where you can experiment with different prompting strategies.  
-Your goal is to find the **best system prompt** and configuration to **summarize** a given text.
+We’ve created a little prompt playground where you can experiment with different prompting strategies.  
+Your goal is to find the best system prompt and configuration to **summarize** a given text.
 
 Here’s what you can configure:
 
@@ -59,7 +53,7 @@ Use the Prompt Playground to:
 
 * Compare how different **system prompts** change the behavior of the same model.
 * Adjust **temperature** and **max tokens** to explore how output varies.
-* Decide on a system prompt template that will work well for **Canopy’s learning assistant** in future modules.
+* Decide on a system prompt template that will work well for Canopy’s Summarization feature.
 
 📌 **Tip**: Try changing the tone, specificity, or format of your system prompt to see how much it shapes the output. Don’t be afraid to get creative!
 
@@ -102,10 +96,6 @@ Explain the given text using only emojis.
 
 Can you come up with something that explains the text even better without loosing important info?
 
-💡 If so, paste it into the Optional System Prompt Box on the top to keep hold of it for using across future lab exercise(s)
-```
-<PROMPT>
-```
 
 <iframe
 	src="https://ai-orientation-app-ai501.<CLUSTER_DOMAIN>/playground"
