@@ -2,7 +2,7 @@
 
 We deployed our `canopy` in experiment environment manually, but for the higher environments we need to store the definitions in Git and deploy our applications via Argo CD to get all the benefits that GitOps brings. 
 
-But first, we need to set up our backend repository to handle the GenAI application logic for test and production environments.
+But there are two things we need to do first. One is having a space for production-ready prompts (the system prompts we want to "promote" to production). And secondly, we need to set up our GitOps repository to handle the GenAI application logic for test and production environments.
 
 1. Clone the backend repository to your workbench.
 

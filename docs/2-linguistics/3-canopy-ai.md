@@ -1,16 +1,12 @@
 # 🌿 What is Canopy?
 
-<div class="terminal-curl"></div>
-
-**Canopy** is an intelligent, leafy little assistant designed to support teaching and learning at **Redwood Digital University**. From summarizing texts to generating quizzes and scoring assignments — it’s your educational AI buddy in action.
-
-Canopy frontend gives you a clean, playful UI built in Streamlit, powered by your choice of LLMs. Whether hosted in OpenShift or running locally, it’s built for experimentation and enablement.
+**Canopy** is an intelligent, leafy little assistant designed to support teaching and learning at **Redwood Digital University**. From summarizing texts to generating quizzes and scoring assignments — it will be your educational AI buddy in action.
 
 ## 🎯 Why This Frontend Matters for Prompt Engineering
 
-Just like a good prompt shapes a great model response, **a good user interface shapes great exploration**.
+Just like a good prompt shapes a great model response, a good user interface shapes great exploration.
 
-In GenAI applications, **how people interact with the model often matters more than which model you use**.
+In GenAI applications, how people interact with the model often matters more than which model you use.
 
 You can have the smartest LLM in the world, but if the UI doesn't help users to easily interact with it — the value is lost.
 
@@ -22,11 +18,11 @@ This first iteration of **Canopy** is built to support:
 
 - Live streaming output 🌱 so you see each token bloom.
 
-In future modules, this same interface will evolve to handle information search, intelligent student assistance, and socratic tutoring.
+In future modules, this same interface will evolve to handle information search, intelligent student assistance, and more.
 
 ## 🚀 Getting Started with Canopy on OpenShift
 
-Let's get you your own instance of Canopy up and running in just a few minutes.
+Let's get you your own instance of Canopy up and running!
 
 ### 📦 1. Deploy the Frontend to OpenShift
 
@@ -51,10 +47,10 @@ In OpenShift, you have an experimentation environment which is called `<USER_NAM
 
 4. Hit `Create` , then expand `Canopy UI Helm Chart Values Schema` and fill out the values as below:
 
-    - **SYSTEM_PROMPT:** Do you remember the great prompt you came up with in the previous section? Let's paste that here or use the one you pasted to the top of the instructions!
-```
-<PROMPT>
-```
+    - **MLFLOW_PROMPT_NAME:** Do you remember the great prompt you just saved up to the registry? We need to provide its name here. Let's say that you put `summarization` as the name, then put it here. 
+    
+    You can also go back to [MLflow](https://rh-ai.<CLUSTER_DOMAIN>/mlflow) > `<USER_NAME>-canopy` > `Prompts` and see what you chose previously.
+
     - **MODEL_NAME:** `llama32`
     - **LLM_ENDPOINT:** `https://llama32-ai501.<CLUSTER_DOMAIN>`
   
@@ -78,6 +74,16 @@ In OpenShift, you have an experimentation environment which is called `<USER_NAM
 
     ![summarize-with-canopy](./images/summarize-with-canopy.png)
 
+### ✨ 3. Update the System Prompt
+
+We know that you just put your best system prompt to the registry but let's see how you can continue experimenting with system prompts without rebuilding your Canopy application. 
+
+1. Go back to [MLflow](https://rh-ai.<CLUSTER_DOMAIN>/mlflow) > `<USER_NAME>-canopy` > `Prompts` > `Summarization prompt` and registry a new version by clicking `Create prompt version`. Add a change that you may recognize in the response. Something like "use bullet points" or "only respond in emojis" - just for the sake of test, you can take rollback to your initial prompt if you wish as it is stored in the registry :)
+
+2. Then go to your [Canopy UI](https://canopy-ui-<USER_NAME>-canopy.<CLUSTER_DOMAIN>) and refresh the page. Send the same request from previous step and notice the difference!
+
+    You didn't have to change anything because your new prompt became the `latest` prompt automatically. Of course we won't be YOLO and use `latest` prompt for the production without any testing and evaluations. But before talking about the test and prod environments, we need to introduce one more exiting piece of tool! 🦙🦙🦙
+
 ---
 
 ✅ What you have accomplished
@@ -86,6 +92,7 @@ In OpenShift, you have an experimentation environment which is called `<USER_NAM
 
    - Connected it to the provided LLM endpoint
 
-   - Used the system prompt to shape the assistant's behavior
+   - Fetched the latest system prompt from prompt registry which is used to shape the assistant's behavior
 
    - Understood the relationship between prompting and summarization style
+

@@ -26,7 +26,7 @@ For this chapter, we are going to focus on its prompt registry & versioning feat
 
 Let's go to MLflow and store your favourite Summarization prompt for `<USER_NAME>-canopy` experiment environment. We'll get to talk about production later 🤫🤫🤫
 
-1. Access to [MLflow](Login to [OpenShift AI](https://rh-ai.<CLUSTER_DOMAIN>/)mlflow). Use the same credentials to log in. You’ll see your `<USER_NAME>-canopy` project there too!
+1. Access to [MLflow](https://rh-ai.<CLUSTER_DOMAIN>/mlflow). Use the same credentials to log in. You’ll see your `<USER_NAME>-canopy` project there too!
 
 2. Click `<USER_NAME>-canopy` and go to `Prompts` from the menu on the left.
 
@@ -35,4 +35,6 @@ Let's go to MLflow and store your favourite Summarization prompt for `<USER_NAME
     Alternatively you can add a nice commit message there too, and hit `Create`. 
 
     This is the first version (Version 1) of your prompt and it automatically gets `latest` tag. 
+
+    Now it's time to put your system prompt to work!
 
