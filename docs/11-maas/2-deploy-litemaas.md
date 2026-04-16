@@ -169,8 +169,13 @@ Post-deployment:
   1. Configure AI models via LiteMaaS or LiteLLM admin UI
   2. Wait for backend to sync models, or restart the backend deployment
 ```
+2. Set the environment variable `DISABLE_SCHEMA_UPDATE` to `false` to make sure all tables are initialized:
 
-2. Watch the deployment till all four pods become up and running (`1/1` under Ready column)
+```bash
+oc set env deployment/litemaas-litellm DISABLE_SCHEMA_UPDATE=false -n <USER_NAME>-maas
+```
+
+4. Watch the deployment till all four pods become up and running (`1/1` under Ready column)
 
 ```bash
 # Watch pods come up
