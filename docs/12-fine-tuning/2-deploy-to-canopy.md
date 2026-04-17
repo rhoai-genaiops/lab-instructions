@@ -65,7 +65,7 @@ Now that we have a new model deployed, let's add it to our MaaS so anyone who ne
 2. Enter these details:
 - **Model name:** socratic-model
 - **Description:** A fine-tuned Qwen2-0.5B-Instruct model to act as a socratic tutor
-- **API Base URL:** http://socratic-model-predictor.<USER_NAME>-canopy.svc.cluster.local/v1
+- **API Base URL:** http://socratic-model-predictor.<USER_NAME>-canopy.svc.cluster.local:8080/v1
 - **Backend Model Name:** socratic-model
 - **API Key:** fakekey
 ![maas-model](images/maas-model.png)
