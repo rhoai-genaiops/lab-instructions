@@ -16,25 +16,27 @@ This makes collaboration hard and reproducibility nearly impossible—especially
 
 There are a variety of different strategies here on where to store your prompts and how to load them into your application. 
 
-In our case, we are going to store the prompt in MLflow Prompt Registry! 
+In our case, we are going to store the prompts in MLflow Prompt Registry! 
 
-## MLflow Prompt Registry
+## Prompt Registry
 
-MLFlow provides bunch of capabilities for developing, debugging, and evaluating LLM applications.
+We are going to store our prompts on our Prompt Registry, add notes, tags, etc when necessary and fetch these prompts from our backend during the runtime. 
 
-For this chapter, we are going to focus on its prompt registry & versioning feature. We are going to store our prompts on MLflow, add notes, tags, etc when necessary and fetch these prompts from our backend during the runtime. 
+1. Let's go to `Gen AI studio` > `Prompts` from the left menu and store your favourite Summarization prompt under the experiment environment. We'll get to talk about production later 🤫🤫🤫
 
-Let's go to MLflow and store your favourite Summarization prompt for `<USER_NAME>-canopy` experiment environment. We'll get to talk about production later 🤫🤫🤫
+    _Note: We will be able to store prompts directly from the Playground very soon._
 
-1. Access to [MLflow](https://rh-ai.<CLUSTER_DOMAIN>/mlflow). Use the same credentials to log in. You’ll see your `<USER_NAME>-canopy` project there too!
+    ![prompt-registry.png](./images/prompt-registry.png)
 
-2. Click `<USER_NAME>-canopy` and go to `Prompts` from the menu on the left.
-
-3. Click `Create prompt` and call it something like `summarization`. You need this info for the next section :) And paste your new favourite System Prompt for the task. 
+2. Click `Create prompt` and call it something like `summarization`. Remember the name you choose, because you need this info for the next section :) And paste your new favourite System Prompt for the task. 
 
     Alternatively you can add a nice commit message there too, and hit `Create`. 
 
+    ![summarization-prompt-1.png](./images/summarization-prompt-1.png)
+
     This is the first version (Version 1) of your prompt and it automatically gets `latest` tag. 
 
-    Now it's time to put your system prompt to work!
+    ![summarization-prompt-2.png](./images/summarization-prompt-2.png)
+
+    Now it's time to put your system prompt to work! That means, deploying Canopy to your experimentation environment on OpenShift cluster and let it fetch the prompt from your Prompt Registry.
 

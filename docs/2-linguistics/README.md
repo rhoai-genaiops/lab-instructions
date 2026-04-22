@@ -17,7 +17,7 @@ This module bridges the gap between raw LLM capabilities and practical applicati
 
 # 🔨 Tools used in this module
 
-* Prompt Playground - Interactive Gradio interface for experimenting with prompt engineering
+* Prompt Playground - Interactive interface for experimenting with prompt engineering
 * [MLflow](https://mlflow.org/) - Provides capabilities to debug, evaluate, monitor, and optimize AI applications
 * OpenShift & Helm Charts - To deploy Canopy UI in a development environment
 
