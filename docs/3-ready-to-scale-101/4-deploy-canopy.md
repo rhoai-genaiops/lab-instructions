@@ -2,37 +2,28 @@
 
 We deployed our `canopy` in experiment environment manually, but for the higher environments we need to store the definitions in Git and deploy our applications via Argo CD to get all the benefits that GitOps brings. 
 
-But there are two things we need to do first. One is having a space for production-ready prompts (the system prompts we want to "promote" to production). And secondly, we need to set up our GitOps repository to handle the GenAI application logic for test and production environments.
+But there are two things we need to do first. One is having a seperate space for production-ready prompts (the system prompts we want to "promote" to production). And secondly, we need to set up our GitOps repository to handle the GenAI application logic for test and production environments.
 
-1. Clone the backend repository to your workbench.
+Let's start with the prompts.
 
-  ```bash
-    cd /opt/app-root/src
-    git clone https://<USER_NAME>:<PASSWORD>@gitea-gitea.<CLUSTER_DOMAIN>/<USER_NAME>/backend.git
-  ```
-2. We will store the prompts under `chart/values-test.yaml` and `chart/values-prod.yaml`. This will give us the traceability of prompt changes. Copy the below info to both files **under the `LLAMA_STACK_URL`** and make sure to bring your new favourite prompt to summarize the topics along with the settings you find the best in Llama Stack Playground:
+1. Go back to OpenShift AI dashboard, go to `Gen AI studio` > `Prompts` from the left menu. This time select **`<USER_NAME>-toolings`** as the project. `<USER_NAME>-toolings` becomes this central area where we keep tools we need on the way to production!
 
-  ```yaml
-  LLAMA_STACK_URL: "http://llama-stack-service:8321"
-  summarize:    # 👈 ADD this block ‼️
-    enabled: true
-    model: vllm-llama32/llama32
-    temperature: 0.9
-    max_tokens: 4096
-    prompt: |
-      <PROMPT>
-  ```
+  ![prompt-toolings](./images/prompt-toolings.png)
 
-1. And let's push the changes to Git:
+2. Click `Create prompt` and call it the same name you used before; ie `summarization`. And paste the System Prompt you want to take into test environment. 
 
-    ```bash
-    cd /opt/app-root/src/backend
-    git add .
-    git commit -m  "🎒 ADD - test & prod prompts 🎒 "
-    git push
-    ```
+  Alternatively you can add a nice commit message there too, and hit `Create`. 
 
-Now let's deploy backend to test and prod environments using Argo CD!
+  ![prompt-toolings-2.png](./images/prompt-toolings-2.png)
+
+
+  We know that because this is the first version (Version 1) of your prompt, it automatically gets `latest` tag. But we are not going to use a floating tag. Let's give it a tag `test` and `prod` for the sake of example. Click `Add` button next to `Alieases` and write `test` and `prod` there. 
+
+  ![prompt-toolings-3.png](./images/prompt-toolings-3.png)
+
+  ![prompt-toolings-4.png](./images/prompt-toolings-4.png)
+
+  Now on to the GitOps part. Head to your workbench!
 
 ### Set Up Canopy with Argo CD
 
@@ -57,16 +48,19 @@ Now let's deploy backend to test and prod environments using Argo CD!
     BACKEND_ENDPOINT: "http://canopy-backend:8000"
     image:
       name: "canopy-ui"
-      tag: "0.6"
+      tag: "0.7"
     ```
-3. `backend` will have a different `config.yaml` as it has two different values files.
-
-    TEST (`genaiops-gitops/canopy/test/backend/config.yaml`):
+3. For `backend`, paste the below yaml to test and prod `config.yaml` files. Mind that they are pointing to different alieses, although for now they are the same. As we iterate over prompts, we'll see this is going to change.
 
     ```yaml
     repo_url: https://gitea-gitea.<CLUSTER_DOMAIN>/<USER_NAME>/backend
     chart_path: chart
-    values_file: values-test.yaml # ‼️‼️ this is different for PROD
+    summarize:
+      enabled: true
+      model: llama32
+      endpoint: "http://llama-32-predictor.ai501.svc.cluster.local:80/v1"
+      mlflow_prompt: summarization
+      mlflow_prompt_version: test # 👈 what we wrote as alias
     ```
 
     PROD (`genaiops-gitops/canopy/prod/backend/config.yaml`):
@@ -74,19 +68,24 @@ Now let's deploy backend to test and prod environments using Argo CD!
     ```yaml
     repo_url: https://gitea-gitea.<CLUSTER_DOMAIN>/<USER_NAME>/backend
     chart_path: chart
-    values_file: values-prod.yaml # ‼️‼️
+    summarize:
+      enabled: true
+      model: llama32
+      endpoint: "http://llama-32-predictor.ai501.svc.cluster.local:80/v1"
+      mlflow_prompt: summarization
+      mlflow_prompt_version: prod # 👈 what we wrote as alias
     ```
 
-4. Lastly, let's setup Llama Stack to deploy via Argo CD. We just need Llama Stack Server here, Playground is something we only use in the experimentation phase. Update **both** `test/llama-stack/config.yaml` and `prod/llama-stack/config.yaml` as below:
+<!-- 4. Lastly, let's setup Llama Stack to deploy via Argo CD. We just need Llama Stack Server here, Playground is something we only use in the experimentation phase. Update **both** `test/llama-stack/config.yaml` and `prod/llama-stack/config.yaml` as below:
 
     ```yaml
     chart_path: charts/llama-stack-operator-instance
     models:
       - name: "llama32"
         url: "http://llama-32-predictor.ai501.svc.cluster.local:8080/v1"
-    ```
+    ```  -->
 
-  For now, we are happy with the default Llama Stack values. We will get some exciting updates as we continue to the other chapters :)
+  <!-- For now, we are happy with the default Llama Stack values. We will get some exciting updates as we continue to the other chapters :) -->
 
 5. Let's get all of these deployed! Of course - they are not real unless they are in git!
 

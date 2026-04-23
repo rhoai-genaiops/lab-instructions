@@ -23,6 +23,7 @@ At RDU, we're building Canopy to help educators and students interact with vast 
 
 # 🔨 Tools used in this module
 
+* [Llama Stack](https://llama-stack.readthedocs.io/en/latest/) - An open-source framework for building generative AI applications
 * **LlamaStack RAG APIs**: Three-layer architecture for building retrieval-augmented applications
 * **Milvus Vector Database**: High-performance vector database for semantic search and retrieval
 * **Docling**: Advanced document processing pipeline for PDF analysis and content extraction

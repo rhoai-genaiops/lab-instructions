@@ -46,7 +46,7 @@ In order to interact with OpenShift via the command line ou will need to log int
       * Repository URL: `https://rhoai-genaiops.github.io/genaiops-helmcharts/`
       * Select `Helm` from the right GIT/HELM drop down menu
       * Chart: `token-visualizer`
-      * Version: `1.0.1`
+      * Version: `1.0.2`
    * On the "DESTINATION" box
       * Cluster URL: `https://kubernetes.default.svc`
       * Namespace: `<USER_NAME>-toolings`

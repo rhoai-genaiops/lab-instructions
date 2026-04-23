@@ -1,14 +1,20 @@
 # 🎓 GenAI 101: Model Mannerisms
 
 ## 📚 Contents
-- [🧠 There is a lot of different AI out there](#there-is-a-lot-of-different-ai-out-there)
-- [🤖 Generative AI Models](#generative-ai-models)
-- [📜 4 Truths about GenAI Models](#4-truths-about-genai-models)
-- [🔍 Truth 1: They only speak when spoken to](#truth-1-they-only-speak-when-spoken-to)
-- [🎲 Truth 2: They are non-deterministic](#truth-2-they-are-non-deterministic)
-- [🤥 Truth 3: They don't speak the truth, they speak the probable](#truth-3-they-don't-speak-the-truth-they-speak-the-probable)
-- [🧠 Truth 4: They have no memory](#truth-4-they-have-no-memory)
-- [✅ Recap](#recap)
+- [🎓 GenAI 101: Model Mannerisms](#-genai-101-model-mannerisms)
+  - [📚 Contents](#-contents)
+  - [🧠 There is a lot of different AI out there :id=there-is-a-lot-of-different-ai-out-there](#-there-is-a-lot-of-different-ai-out-there-idthere-is-a-lot-of-different-ai-out-there)
+  - [🤖 Generative AI Models :id=generative-ai-models](#-generative-ai-models-idgenerative-ai-models)
+  - [📜 4 Truths about GenAI Models :id=4-truths-about-genai-models](#-4-truths-about-genai-models-id4-truths-about-genai-models)
+  - [🔍 Truth 1: They only speak when spoken to :id=truth-1-they-only-speak-when-spoken-to](#-truth-1-they-only-speak-when-spoken-to-idtruth-1-they-only-speak-when-spoken-to)
+    - [🔍 Hands-on: Let's play!](#-hands-on-lets-play)
+  - [🎲 Truth 2: They are non-deterministic :id=truth-2-they-are-non-deterministic](#-truth-2-they-are-non-deterministic-idtruth-2-they-are-non-deterministic)
+    - [🔍 Hands-on: Test it yourself](#-hands-on-test-it-yourself)
+  - [🤥 Truth 3: They don't speak the truth, they speak the probable :id=truth-3-they-dont-speak-the-truth-they-speak-the-probable](#-truth-3-they-dont-speak-the-truth-they-speak-the-probable-idtruth-3-they-dont-speak-the-truth-they-speak-the-probable)
+    - [🔍 Hands-on: Can the model lie?](#-hands-on-can-the-model-lie)
+  - [🧠 Truth 4: They have no memory :id=truth-4-they-have-no-memory](#-truth-4-they-have-no-memory-idtruth-4-they-have-no-memory)
+    - [🔍 Hands-on: Does the model remember you?](#-hands-on-does-the-model-remember-you)
+  - [✅ Recap :id=recap](#-recap-idrecap)
 
 ## 🧠 There is a lot of different AI out there :id=there-is-a-lot-of-different-ai-out-there
 
@@ -193,7 +199,7 @@ Compare the two responses. Did you get the same answer?
 </div>
 
 
-## 🤥 Truth 3: They don't speak the truth, they speak the probable :id=truth-3-they-don't-speak-the-truth-they-speak-the-probable
+## 🤥 Truth 3: They don't speak the truth, they speak the probable :id=truth-3-they-dont-speak-the-truth-they-speak-the-probable
 
 LLMs don't actually "know" anything! They produce the **most probable** next words based on patterns they've seen during training.
 

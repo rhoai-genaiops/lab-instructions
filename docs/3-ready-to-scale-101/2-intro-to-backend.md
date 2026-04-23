@@ -10,21 +10,21 @@ We'll separate out the LLM business logic from the frontend into its own backend
 
     ![canopy-be-helm.png](./images/canopy-be-helm.png)
 
-3. Open up the `YAML view` to update the variables.
+3. Open up the `YAML view`. There are a lot of default variables there. For now don't worry about them and just override the values with the ones provided below.
 
-    As we discussed, backend will be the one talking to Llama Stack, therefore we need to make sure we provide the correct Llama Stack connection details.
+    As we discussed, backend will be the one talking to the model, to the registry, and more. Therefore we need to make sure we provide the correct connection details.
 
     We also need to provide your chosen System Prompt. Because as we did on the Notebooks, we need to include the prompt while calling Llama Stack endpoint.
 
     Copy the below YAML snippet, add your own system prompt, and mind the indentation please 🙏
 
     ```yaml
-    LLAMA_STACK_URL: 'http://llama-stack-service:8321'
-    summarize:  
+    summarize:
       enabled: true
-      model: vllm-llama32/llama32
-      prompt: |               
-        <PROMPT> # 👈 update this line with your own prompt
+      model: llama32
+      endpoint: 'http://llama-32-predictor.ai501.svc.cluster.local:80/v1'
+      mlflow_prompt_version: latest
+      mlflow_prompt: summarization # 👈 your prompt registry entry 
     ```
 
     ![canopy-be-values.png](./images/canopy-be-values.png)
@@ -34,6 +34,8 @@ We'll separate out the LLM business logic from the frontend into its own backend
 4. Verify that it is running on the OpenShift Console.
    
    ![canopy-be-ocp.png](./images/canopy-be-ocp.png)
+
+   _The third running pod is your Playground🛝_
 
 
 ## Update Canopy Frontend
@@ -50,7 +52,7 @@ We'll separate out the LLM business logic from the frontend into its own backend
 
 3. Then, go a little bit down, expand the `image` value and update the tag to point to a newer version:
    
-   - tag: **0.6** (replace `simple-0.3` with it)
+   - tag: **0.7** (replace `simple-0.4` with it)
   
   ..and now hit `Upgrade`!
 
