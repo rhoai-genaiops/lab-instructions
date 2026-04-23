@@ -79,7 +79,7 @@ In OpenShift, you have an experimentation environment which is called `<USER_NAM
 
 We know that you just put your best system prompt to the registry but let's see how you can continue experimenting with system prompts without rebuilding your Canopy application. 
 
-1. Go back to [OpenShift AI](https://data-science-gateway.<CLUSTER_DOMAIN>/) > `Gen AI stuido` > `Prompts` > `Summarization prompt` under `<USER_NAME>-canopy` project. And register a new version by clicking `Create prompt version`. Add a change that you may recognize in the response. Something like "use bullet points" or "only respond in emojis", just for the sake of test, you can take rollback to your initial prompt if you wish as it is stored in the registry :)
+1. Go back to [OpenShift AI](https://data-science-gateway.<CLUSTER_DOMAIN>/) > `Gen AI stuido` > `Prompts` > `Summarization prompt` under `<USER_NAME>-canopy` project. And register a new version by clicking `Create prompt version`. Add a change that you may recognize in the response. Something like "use bullet points" or "only respond in emojis", just for the sake of test, you can rollback to your initial prompt (by deleting the new one, we will have nicer ways to rollback later) if you wish as it is stored in the registry :)
 
     ![summarization-prompt-3.png](./images/summarization-prompt-3.png)
 
