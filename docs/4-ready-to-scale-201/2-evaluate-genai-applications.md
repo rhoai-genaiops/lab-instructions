@@ -36,38 +36,33 @@ There are a few components we can evaluate in our GenAI application:
 3. **The workflow components** - rather than just testing them through the backend as a blackbox, we also want to test these components individually to make sure that each component does as it should.
 
 In this section, we will primarily focus on evaluating the application backend, as we have already chosen an LLM and don't have any additional components that are used from the backend.  
+We will evaluate the application backend by evaluating the final prompt that gets traced by MLFlow before it's sent to the LLM, as this contains all and any transformations done by the backend.
 
 You will see examples of the other tests in later sections.
 
 ## Evaluating with MLflow
 
-We will be using Llama Stack to evaluate our backend on how well it responds to our inputs.  
-Llama Stack has three different endpoints for evaluating models:
-1. **Eval** - This evaluates an LLM answer (called `generated_answer`) based on the expected answer (called `expected_answer`)
-2. **Dataset** - This gives us easy access to use datasets, in this case datasets containing tests
-3. **Benchmarks** - Benchmarks tie Eval and Datasets together to automatically run the dataset through the LLM and then evaluate the answers. We will be skipping these for now as we want greater control.
+We will be using MLFlow to evaluate our prompts that goes into the LLM.  
+To do this, we can add `expectations` to our traces and then evaluate those traces with new prompts using `scorers`.  
+For example, one scorer we will use is to make sure that the summarized text is less than a certain number of words.
 
-To be able to evaluate with Llama Stack we first need to enable it in our experiment environment.  
+For now, go to Experiments (MLflow) -> user1-canopy -> canopy-backend -> traces
 
-1. In OpenShift console, go to your <USER_NAME>-canopy project > `Helm` > `Releases` and click `Upgrade` for Llama Stack Operator Instance.
+Pick your favorite trace
 
-    ![llama-stack-enable-evals.png](./images/llama-stack-enable-evals.png)
+On the right hand side, click "+ Add expectation", this allows us to add an expected value we want from this trace.  
+Fill in these exact settings:
 
-2. In the `Form view`, check the box to enable evals in the values ✅ and `Upgrade`!
-   
-    ![llama-stack-enable-evals-2.png](./images/llama-stack-enable-evals-2.png)
+- **Assessment Name**: length
+- **Data Type**: Number
+- **Value**: 200
 
-3. After Llama Stack server is restarted (aka the circle is blue 🔵 in Topology view), go to your workbench and run through the notebook `experiments/4-ready-to-scale-201/1-llamastack-eval-test.ipynb`.
+This will create a key, value pair (Assessment Name, Value) which we later can fetch in our scorer to see if the number of characters in the response is less than 200 :)
 
-    ![llama-stack-enable-evals-3.png](./images/llama-stack-enable-evals-3.png)
+Finally, we just need to add this trace to our dataset by clicking on the "+ Add to dataset" button at the top. Create a new dataset, call it `eval_dataset`, select it and press Export to add our trace to this dataset.
 
-    If you re asked to select a kernel, pick the first one.
+Now, let's go into our Workbench and open `mlflow-eval` to use our newly created eval dataset to run some evaluations!
 
-    ![select-kernel.png](./images/select-kernel.png)
-
-    When you are done, come back here to continue with the instructions.
-
-> *In case the Llamastack Operator Pod is stuck in the ContainerCreating state, scale down the old deployment to release the PVC.*
 
 ## Speed tests with GuideLLM
 
