@@ -6,6 +6,28 @@ To do this, we will set up automatic evaluations that trigger at different times
 
 But, before we can set up any automatic evaluations, we need to understand how they work.
 
+But even before that, in order to evaluate the behaviour Canopy, we need to know the behaviour of it.
+
+This is where we are going to utilize MLflow's Tracing capabilities. We will go back to tracing concept to deep dive later on. 
+
+## MLflow tracing
+
+1. Go to OpenShift AI > `Develop & train` > `Experiments (MLflow)` and select `<USER_NAME>-canopy`. Click `canopy-backend` as the experiment.
+
+    ![mlflow-traces.png](./images/mlflow-traces.png)
+
+2. Select `Traces` from the menu. Do the prompts look familiar? 🙃 
+
+    ![mlflow-traces-2.png](./images/mlflow-traces-2.png)
+
+3. Click one of them. It's magic! You are able to see what was the system prompt, what was the user prompt, and what was the response from the model in such a neat way.
+
+    ![mlflow-traces-3.png](./images/mlflow-trace-3.png)
+
+Since we are able to see all these, we are also capable of _evaluate_ whether the response is as expected, is good or not.
+
+Alright, let's onto the evaluations!
+
 ## How to evaluate a GenAI application?
 
 There are a few components we can evaluate in our GenAI application:
@@ -17,7 +39,7 @@ In this section, we will primarily focus on evaluating the application backend, 
 
 You will see examples of the other tests in later sections.
 
-## Evaluating with Llama Stack
+## Evaluating with MLflow
 
 We will be using Llama Stack to evaluate our backend on how well it responds to our inputs.  
 Llama Stack has three different endpoints for evaluating models:

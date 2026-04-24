@@ -69,8 +69,5 @@ When it is in running state, open it by clicking its name and use your credentia
 
    And now, feel free to experiment! Read and run the cells in the notebook! When you are done, come back here:)
 
-   ![](https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExYjM0ZzFhNjRtemJ1NHNtOTkxYm52b3h3c3pnZ2VvdXBtNjBiZjZzcCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/i68Balzk8Fewg/giphy.gif)
-
-
 You have now set up your wokspace for these exercises and demonstrated interacting with a model.
 
