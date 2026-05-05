@@ -57,7 +57,7 @@ Let's start with the prompts.
     ```yaml
     repo_url: https://gitea-gitea.<CLUSTER_DOMAIN>/<USER_NAME>/backend
     chart_path: chart
-    summarize:
+    summarization:
       enabled: true
       model: llama32
       endpoint: "http://llama-32-predictor.ai501.svc.cluster.local:80/v1"
@@ -70,7 +70,7 @@ Let's start with the prompts.
     ```yaml
     repo_url: https://gitea-gitea.<CLUSTER_DOMAIN>/<USER_NAME>/backend
     chart_path: chart
-    summarize:
+    summarization:
       enabled: true
       model: llama32
       endpoint: "http://llama-32-predictor.ai501.svc.cluster.local:80/v1"
