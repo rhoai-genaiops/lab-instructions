@@ -16,8 +16,8 @@ Let's start with the prompts.
 
   ![prompt-toolings-2.png](./images/prompt-toolings-2.png)
 
-
-  We know that because this is the first version (Version 1) of your prompt, it automatically gets `latest` tag. But we are not going to use a floating tag. Let's give it a tag `test` and `prod` for the sake of example. Click `Add` button next to `Alieases` and write `test` and `prod` there. 
+  We will be using the latest prompt for test, so we are always up-to-date, and then we will have an alias (tag) for the prompts which are in prod. We call this alias `prod`.
+  Go ahead and add that alias to your new prompt.
 
   ![prompt-toolings-3.png](./images/prompt-toolings-3.png)
 
@@ -52,6 +52,8 @@ Let's start with the prompts.
     ```
 3. For `backend`, paste the below yaml to test and prod `config.yaml` files. Mind that they are pointing to different alieses, although for now they are the same. As we iterate over prompts, we'll see this is going to change.
 
+    TEST (`genaiops-gitops/canopy/test/backend/config.yaml`):
+
     ```yaml
     repo_url: https://gitea-gitea.<CLUSTER_DOMAIN>/<USER_NAME>/backend
     chart_path: chart
@@ -60,7 +62,7 @@ Let's start with the prompts.
       model: llama32
       endpoint: "http://llama-32-predictor.ai501.svc.cluster.local:80/v1"
       mlflow_prompt: summarization
-      mlflow_prompt_version: test # 👈 what we wrote as alias
+      mlflow_prompt_version: latest # 👈 always on latest
     ```
 
     PROD (`genaiops-gitops/canopy/prod/backend/config.yaml`):

@@ -19,7 +19,7 @@ We'll separate out the LLM business logic from the frontend into its own backend
     Copy the below YAML snippet, add your own system prompt, and mind the indentation please 🙏
 
     ```yaml
-    summarize:
+    summarization:
       enabled: true
       model: llama32
       endpoint: 'http://llama-32-predictor.ai501.svc.cluster.local:80/v1'
@@ -27,7 +27,7 @@ We'll separate out the LLM business logic from the frontend into its own backend
       mlflow_prompt: summarization # 👈 your prompt registry entry 
     ```
 
-    ![canopy-be-values.png](./images/canopy-be-values.png)
+    !!! [TBD IMAGE REQUIRED, ./images/canopy-be-values.png]
  
     ..leave the rest default and hit `Create`.
 
@@ -42,7 +42,7 @@ We'll separate out the LLM business logic from the frontend into its own backend
 
 1. Now it is time to make Canopy UI to talk with backend, instead of directly sending requests to the LLM. In order to do that, we need to update some values in our helm chart. In the `Workloads` >  `Topology` view, find the frontend called `canopy-ui` and click on the three dots underneath > `Upgrade`
 
-    ![update-canopy-ui.png](./images/update-canopy-ui.png)
+    !!! [TBD IMAGE REQUIRED, ./images/update-canopy-ui.png]
 
 2. In the values, open up the `Form view`, find the `BACKEND_ENDPOINT` key and add the below value.
    
@@ -52,15 +52,15 @@ We'll separate out the LLM business logic from the frontend into its own backend
 
 3. Then, go a little bit down, expand the `image` value and update the tag to point to a newer version:
    
-   - tag: **0.7** (replace `simple-0.4` with it)
+   - tag: **0.8** (replace `simple-0.5` with it)
   
   ..and now hit `Upgrade`!
 
-    ![update-canopy-ui-3.png](./images/update-canopy-ui-3.png)
+    !!! [TBD IMAGE REQUIRED, ./images/update-canopy-ui-3.png]
 
 4. Verify that Canopy UI still works as expected by clicking the little arrow and accesing the UI:
    
-    ![update-canopy-ui-4.png](./images/update-canopy-ui-4.png)
+   !!! [TBD IMAGE REQUIRED, ./images/update-canopy-ui-4.png]
 
 5. Ask it to summarize a text again!
 
