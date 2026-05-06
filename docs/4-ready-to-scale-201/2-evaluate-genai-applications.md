@@ -12,17 +12,17 @@ This is where we are going to utilize MLflow's Tracing capabilities. We will go 
 
 ## MLflow tracing
 
-1. Go to OpenShift AI > `Develop & train` > `Experiments (MLflow)` and select `<USER_NAME>-canopy`. Click `canopy-backend` as the experiment.
+1. Go to OpenShift AI > `Develop & train` > `Experiments (MLflow)` and select `<USER_NAME>-canopy`. Click `summarization` as the experiment.
 
-    ![mlflow-traces.png](./images/mlflow-traces.png)
+    !!! [TBD IMAGE REQUIRED, ./images/mlflow-traces.png]
 
 2. Select `Traces` from the menu. Do the prompts look familiar? 🙃 
 
-    ![mlflow-traces-2.png](./images/mlflow-traces-2.png)
+    !!! [TBD IMAGE REQUIRED, ./images/mlflow-traces-2.png]
 
 3. Click one of them. It's magic! You are able to see what was the system prompt, what was the user prompt, and what was the response from the model in such a neat way.
 
-    ![mlflow-traces-3.png](./images/mlflow-trace-3.png)
+    ![mlflow-trace-3.png](./images/mlflow-trace-3.png)
 
 Since we are able to see all these, we are also capable of _evaluate_ whether the response is as expected, is good or not.
 
@@ -42,26 +42,53 @@ You will see examples of the other tests in later sections.
 
 ## Evaluating with MLflow
 
-We will be using MLFlow to evaluate our prompts that goes into the LLM.  
-To do this, we can add `expectations` to our traces and then evaluate those traces with new prompts using `scorers`.  
-For example, one scorer we will use is to make sure that the summarized text is less than a certain number of words.
+We will be using MLFlow to evaluate our prompts.  
+To do this, we can add `expectations` to our traces which says "given this context and a prompt, what kind of outputs are we expecting".
+Then, we can send those traces with new prompts into our LLM, get a new output and evaluate that new output against the expectation using `scorers`.
+For example, one scorer we will use is to make sure that the summarized text is shorter than a desired length.
 
-For now, go to Experiments (MLflow) -> user1-canopy -> canopy-backend -> traces
+Let's see this in action!
 
-Pick your favorite trace
+1. Go to Experiments (MLflow) -> <USER_NAME>-canopy -> summarization -> Traces
 
-On the right hand side, click "+ Add expectation", this allows us to add an expected value we want from this trace.  
-Fill in these exact settings:
+    ![traces](./images/traces.png)
 
-- **Assessment Name**: length
-- **Data Type**: Number
-- **Value**: 200
+2. Pick your favorite trace by clicking on it
 
-This will create a key, value pair (Assessment Name, Value) which we later can fetch in our scorer to see if the number of characters in the response is less than 200 :)
+3. Press `Show assessments` in the top left corner 
 
-Finally, we just need to add this trace to our dataset by clicking on the "+ Add to dataset" button at the top. Create a new dataset, call it `eval_dataset`, select it and press Export to add our trace to this dataset.
+    ![show-assessments](./images/show-assessments.png)
 
-Now, let's go into our Workbench and open `mlflow-eval` to use our newly created eval dataset to run some evaluations!
+4. Press `+ Add expectations` and add one with:
+
+    - Assessment Name: length
+    - Data Type: Number
+    - Value: 200
+    - Rationale: Whatever you feel like adding 🧙‍♂️
+
+    It should look something like below. When done, hit `Create`.
+
+    ![expectation](./images/expectation.png)
+
+    This will create a key, value pair (Assessment Name, Value) which we later can fetch in our scorer to see if the number of characters in the response is less than 200 :)
+
+5. Now, we just need to add this trace to our evaluation dataset by clicking on the `+ Add to dataset` button at the top
+
+    ![add-to-dataset](./images/add-to-dataset.png)
+
+6. Create a new dataset, call it `eval`
+
+    ![create-dataset](./images/create-dataset.png)
+
+7. Finally, select the new dataset and press `Export` to add our trace to this dataset
+
+    ![add-to-eval-dataset.png](./images/add-to-eval-dataset.png)
+
+8. If you go back out of the trace and into Datasets you should now see the eval dataset with the single trace and expectation in it.
+
+    ![new-dataset](./images/new-dataset.png)
+
+Now, let's go into our Workbench and open `experiments/4-ready-to-scale-201/1-mlflow-eval.ipynb` to use our newly created eval dataset and run some evaluations!
 
 
 ## Speed tests with GuideLLM
