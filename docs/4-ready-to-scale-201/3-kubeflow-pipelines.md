@@ -49,7 +49,7 @@ The evaluation pipeline is inside of a repository called `evals`, where both the
 
 2. Inside, you will find a few folders, one called `evals-pipeline` and one for each usecase that we are going to want to run evaluations on - `Summary` is the only one relevant for us for now, the rest are slight spoilers for the upcoming modules 🤫  
 
-    Open up `evals/Summary/summary_tests.yaml` to see what tests we will run. Make sure to add some of your own examples as well ✍️
+    Open up `evals/summarization/summary_tests.yaml` to see what tests we will run. Make sure to add some of your own examples as well ✍️
 
     ![summary_test.png](images/summary_tests.png)
 
