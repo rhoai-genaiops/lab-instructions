@@ -56,8 +56,12 @@ The evaluation pipeline is inside of a repository called `evals`, where both the
     For example:
 
     ```yaml
-      - prompt: "Artificial intelligence and machine learning have revolutionized numerous industries in recent years. From healthcare diagnostics that can detect diseases earlier than human doctors, to autonomous vehicles that promise safer transportation, to recommendation systems that personalize our digital experiences, AI technologies are becoming increasingly sophisticated. However, these advances also bring challenges including ethical concerns about bias in algorithms, job displacement due to automation, and the need for robust data privacy protections."
-        expected_result: "AI and ML have transformed industries through healthcare diagnostics, autonomous vehicles, and recommendation systems, but also raise concerns about bias, job displacement, and privacy."
+    inputs:
+        messages:
+            - role: "user"
+            content: "Llama 3.2 is a state-of-the-art language model that excels in various natural language processing tasks, including summarization, translation, and question answering."
+    expectations:
+        expected_result: "Llama 3.2 is a top-tier language model for NLP tasks."
     ```
 
 3. The code for the kubeflow pipeline that is running these evaluations is inside of `evals-pipeline/kfp_pipeline.py`. Go ahead and open it up and take a look. It may look large, but most of it is HTML to create a nice looking output. You will recognize these lines, somewhere around line ~887: 
@@ -73,12 +77,12 @@ The evaluation pipeline is inside of a repository called `evals`, where both the
 4. Scroll down to near the bottom of the file (around line 993) and edit the `repo_url` argument as below:
     ```python
     arguments = {
-        "repo_url": "https://<USER_NAME>:<PASSWORD>@gitea-gitea.<CLUSTER_DOMAIN>/<USER_NAME>/evals.git", # 🚨 replace with your own repo URL
-        "branch": "main",
-        "base_url": "http://llama-stack-service:8321",
-        "backend_url": "http://canopy-backend:8000",
-        "secret_name": "test-results",
-        "git_hash": "test",
+        "repo_url":             "https://user5:thisisthepassword@gitea-gitea.apps.cluster-h4dc8.h4dc8.sandbox1133.opentlc.com/user5/evals.git",  # 🚨 replace with your own repo URL
+        "branch":               "main",
+        "backend_url":          "http://canopy-backend:8000",
+        "llm_endpoint":         "http://llama-32-predictor.ai501.svc.cluster.local:80",
+        "mlflow_tracking_uri":  "https://mlflow.redhat-ods-applications.svc.cluster.local:8443",
+        "git_hash":             "test",
     }
     ```
     These arguments instruct your pipeline how to run, make sure to replace the repo_url with your own.
@@ -99,7 +103,7 @@ The evaluation pipeline is inside of a repository called `evals`, where both the
 
     ```bash
     cd /opt/app-root/src/evals
-    python evals-pipeline/kfp_pipeline.py
+    python evals-pipeline/mlflow_pipeline.py
     ```
     You should see an output like this:
 
@@ -111,17 +115,8 @@ The evaluation pipeline is inside of a repository called `evals`, where both the
 
     ![running-kfp-pipeline](images/running-kfp-pipeline.png)
 
-7.  After it has finished running, you can login to this URL with`<USER_NAME>` and `<PASSWORD>` to download your results. 
+7.  After it has finished running, you can see the results in Experiments (MLFlow) in the workspace `<USER_NAME>-canopy`, experiment `summarization` and under `Evaluation runs` in the left menu.
 
-    If you open up the HTML file, you'll see your results:  
-    
-    ```bash
-    https://minio-ui-<USER_NAME>-canopy.<CLUSTER_DOMAIN>/browser/test-results
-    ```
-
-    ![test-results](images/test-results.png)
-
-    Congratulations on running your first evaluation pipeline! 🎉
-
+![summary_eval](./images/summary_eval.png)
 
 In the next section, we will see how to automatically trigger this pipeline on git changes.
