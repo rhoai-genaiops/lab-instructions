@@ -21,6 +21,8 @@ Before we test the whole agent, let's make sure each individual tool works corre
 The canopy backend already has unit tests set up for the student assistant tools. Let's run them!
 
 ```bash
+cd /opt/app-root/src/backend
+pip install pytest pytest-asyncio
 pytest tests/test_tools.py -v
 ```
 
