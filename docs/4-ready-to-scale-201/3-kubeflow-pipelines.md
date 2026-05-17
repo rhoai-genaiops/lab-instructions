@@ -47,7 +47,7 @@ The evaluation pipeline is inside of a repository called `evals`, where both the
    git clone https://<USER_NAME>:<PASSWORD>@gitea-gitea.<CLUSTER_DOMAIN>/<USER_NAME>/evals.git
    ```
 
-2. Inside, you will find a few folders, one called `evals-pipeline` and one for each usecase that we are going to want to run evaluations on - `Summary` is the only one relevant for us for now, the rest are slight spoilers for the upcoming modules 🤫  
+2. Inside, you will find a few folders, one called `evals-pipeline` and one for each usecase that we are going to want to run evaluations on - `summariztion` is the only one relevant for us for now, the rest are slight spoilers for the upcoming modules 🤫  
 
     Open up `evals/summarization/summary_tests.yaml` to see what tests we will run. Make sure to add some of your own examples as well ✍️
 
@@ -64,23 +64,13 @@ The evaluation pipeline is inside of a repository called `evals`, where both the
         expected_result: "Llama 3.2 is a top-tier language model for NLP tasks."
     ```
 
-3. The code for the kubeflow pipeline that is running these evaluations is inside of `evals-pipeline/kfp_pipeline.py`. Go ahead and open it up and take a look. It may look large, but most of it is HTML to create a nice looking output. You will recognize these lines, somewhere around line ~887: 
-
-    <div class="highlight" style="background: #f7f7f7">
-    <pre><code class="language-python">
-    scoring_response = lls_client.scoring.score(
-        input_rows=eval_rows, scoring_functions=scoring_params
-    )
-    </code></pre>
-    </div>
-
-4. Scroll down to near the bottom of the file (around line 993) and edit the `repo_url` argument as below:
+3. The code for the Kubeflow pipeline that is running these evaluations is inside of `evals-pipeline/mlflow_pipeline.py`. Go ahead and open it up and take a look. Scroll down to near the bottom of the file (around line 336) and edit the `repo_url` argument as below:
     ```python
     arguments = {
-        "repo_url":             "https://user5:thisisthepassword@gitea-gitea.apps.cluster-h4dc8.h4dc8.sandbox1133.opentlc.com/user5/evals.git",  # 🚨 replace with your own repo URL
+        "repo_url":             "https://<USER_NAME>:thisisthepassword@gitea-gitea.<CLUSTER_DOMAIN>/<USER_NAME>/evals.git",  # 🚨 replace with your own repo URL
         "branch":               "main",
         "backend_url":          "http://canopy-backend:8000",
-        "llm_endpoint":         "http://llama-32-predictor.ai501.svc.cluster.local:80",
+        "llm_endpoint":         "http://llama-32-predictor.ai501.svc.cluster.local:8080",
         "mlflow_tracking_uri":  "https://mlflow.redhat-ods-applications.svc.cluster.local:8443",
         "git_hash":             "test",
     }
@@ -119,4 +109,4 @@ The evaluation pipeline is inside of a repository called `evals`, where both the
 
 ![summary_eval](./images/summary_eval.png)
 
-In the next section, we will see how to automatically trigger this pipeline on git changes.
+In the next section, we will see how to automatically trigger this pipeline on changes like system prompts.

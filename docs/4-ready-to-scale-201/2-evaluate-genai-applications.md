@@ -1,12 +1,12 @@
 # Evaluating GenAI Applications
 
-Now that we have a backend in production that we have manually tested works OK, we want to make sure that any changes we do to it work at least as well.  
+Now that we have a backend in production that we have manually tested and it works OK. And we want to make sure that any changes we do to it work at least as well.  
 
 To do this, we will set up automatic evaluations that trigger at different times 💫  
 
 But, before we can set up any automatic evaluations, we need to understand how they work.
 
-But even before that, in order to evaluate the behaviour Canopy, we need to know the behaviour of it.
+But even before that, in order to evaluate the behaviour of Canopy, we need to know the behaviour of it. How are we going to evaluate it if we don't know how it answers to our customers.
 
 This is where we are going to utilize MLflow's Tracing capabilities. We will go back to tracing concept to deep dive later on. 
 
@@ -14,11 +14,11 @@ This is where we are going to utilize MLflow's Tracing capabilities. We will go 
 
 1. Go to OpenShift AI > `Develop & train` > `Experiments (MLflow)` and select `<USER_NAME>-canopy`. Click `summarization` as the experiment.
 
-    !!! [TBD IMAGE REQUIRED, ./images/mlflow-traces.png]
+    ![mlflow-traces.png](./images/mlflow-traces.png)
 
 2. Select `Traces` from the menu. Do the prompts look familiar? 🙃 
 
-    !!! [TBD IMAGE REQUIRED, ./images/mlflow-traces-2.png]
+    ![mlflow-traces-2.png](./images/mlflow-traces-2.png)
 
 3. Click one of them. It's magic! You are able to see what was the system prompt, what was the user prompt, and what was the response from the model in such a neat way.
 
@@ -61,10 +61,10 @@ Let's see this in action!
 
 4. Press `+ Add expectations` and add one with:
 
-    - Assessment Name: length
-    - Data Type: Number
-    - Value: 200
-    - Rationale: Whatever you feel like adding 🧙‍♂️
+    - Assessment Name: `length`
+    - Data Type: `Number`
+    - Value: `200`
+    - Rationale: _Whatever you feel like adding 🧙‍♂️_
 
     It should look something like below. When done, hit `Create`.
 
@@ -84,12 +84,21 @@ Let's see this in action!
 
     ![add-to-eval-dataset.png](./images/add-to-eval-dataset.png)
 
-8. If you go back out of the trace and into Datasets you should now see the eval dataset with the single trace and expectation in it.
+8. If you go back out of the trace and into `Datasets`, you should now see the eval dataset with the single trace and expectation in it.
 
     ![new-dataset](./images/new-dataset.png)
 
 Now, let's go into our Workbench and open `experiments/4-ready-to-scale-201/1-mlflow-eval.ipynb` to use our newly created eval dataset and run some evaluations!
 
+When you are done, come back here to check `Evaluation runs` on the OpenShift AI dashboard.
+
+![eval-runs.png](./images/eval-runs.png)
+
+And click the traces to get the detailed results of the evaluations:
+
+![eval-runs-2.png](./images/eval-runs-2.png)
+
+Now, onto the performance based evaluations!
 
 ## Speed tests with GuideLLM
 

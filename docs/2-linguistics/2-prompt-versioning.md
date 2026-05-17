@@ -28,9 +28,13 @@ We are going to store our prompts on our Prompt Registry, add notes, tags, etc w
 
     ![prompt-registry.png](./images/prompt-registry.png)
 
-2. Click `Create prompt` and call it something like `summarization`. Remember the name you choose, because you need this info for the next section :) And paste your new favourite System Prompt for the task. 
+2. Click `Create prompt` and call it: `summarization`. 
 
-    Alternatively you can add a nice commit message there too, and hit `Create`. 
+    ```bash
+    summarization
+    ```
+
+    And paste your new favourite System Prompt for the task 🫶 Alternatively you can add a nice commit message there too, and hit `Create`. 
 
     ![summarization-prompt-1.png](./images/summarization-prompt-1.png)
 

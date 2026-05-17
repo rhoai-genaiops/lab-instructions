@@ -6,11 +6,11 @@ But there are two things we need to do first. One is having a seperate space for
 
 Let's start with the prompts.
 
-1. Go back to OpenShift AI dashboard, go to `Gen AI studio` > `Prompts` from the left menu. This time select **`<USER_NAME>-toolings`** as the project. `<USER_NAME>-toolings` becomes this central area where we keep tools we need on the way to production!
+1. Go back to OpenShift AI dashboard, go to `Gen AI studio` > `Prompts` from the left menu. This time select **`<USER_NAME>-toolings`** as the project. `<USER_NAME>-toolings` becomes this central area where we keep tools we need on the way to production! And prompt registry is one of those tools.
 
   ![prompt-toolings](./images/prompt-toolings.png)
 
-2. Click `Create prompt` and call it the same name you used before; ie `summarization`. And paste the System Prompt you want to take into test environment. 
+1. Click `Create prompt` and call it the same name we used before; `summarization`. And paste the System Prompt you want to take into test environment.
 
   Alternatively you can add a nice commit message there too, and hit `Create`. 
 
@@ -60,7 +60,7 @@ Let's start with the prompts.
     summarization:
       enabled: true
       model: llama32
-      endpoint: "http://llama-32-predictor.ai501.svc.cluster.local:80/v1"
+      endpoint: "http://llama-32-predictor.ai501.svc.cluster.local:8080/v1"
       mlflow_prompt: summarization
       mlflow_prompt_version: latest # 👈 always on latest
     ```
@@ -73,7 +73,7 @@ Let's start with the prompts.
     summarization:
       enabled: true
       model: llama32
-      endpoint: "http://llama-32-predictor.ai501.svc.cluster.local:80/v1"
+      endpoint: "http://llama-32-predictor.ai501.svc.cluster.local:8080/v1"
       mlflow_prompt: summarization
       mlflow_prompt_version: prod # 👈 what we wrote as alias
     ```

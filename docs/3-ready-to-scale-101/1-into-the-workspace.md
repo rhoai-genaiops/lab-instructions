@@ -15,7 +15,7 @@ You’ll use this environment to:
 
 By the end of this section, you'll have a better grasp of how to integrate a model into your own workflows and applications — and set the stage for more advanced use cases.
 
-1. Login to [OpenShift AI](https://data-science-gateway.<CLUSTER_DOMAIN>/). Use the same credentials to log in. You’ll see your `<USER_NAME>-canopy` project there too!
+1. Login to [OpenShift AI](https://data-science-gateway.<CLUSTER_DOMAIN>/). Use the same credentials to log in.
 
    ![openshift-ai.png](./images/openshift-ai.png)
 

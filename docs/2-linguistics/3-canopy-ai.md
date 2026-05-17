@@ -48,9 +48,9 @@ In OpenShift, you have an experimentation environment which is called `<USER_NAM
 
 4. Hit `Create` , then expand `Canopy UI Helm Chart Values Schema` and fill out the values as below:
 
-    - **MLFLOW_PROMPT_NAME:** Do you remember the great prompt you just saved in the registry? We need to provide its name here. Let's say that you put `summarization` as the name, then put it here. 
+    - **MLFLOW_PROMPT_NAME:** Do you remember the great prompt you just saved in the registry? We need to provide its name here. We used `summarization` as the name, so let's put it here. 
     
-    You can also go back to [MLflow](https://rh-ai.<CLUSTER_DOMAIN>/mlflow) > `<USER_NAME>-canopy` > `Prompts` and see what you chose previously.
+    You can also go back to [MLflow](https://rh-ai.<CLUSTER_DOMAIN>/mlflow) > `<USER_NAME>-canopy` > `Prompts` and see what you used previously.
 
     - **MODEL_NAME:** `llama32`
     - **LLM_ENDPOINT:** `https://llama32-ai501.<CLUSTER_DOMAIN>`
@@ -68,6 +68,7 @@ In OpenShift, you have an experimentation environment which is called `<USER_NAM
 
     ![canopy-ui-ocp.png](./images/canopy-ui-ocp.png)
 
+    _Note: The other pod represents your GenAI playground._
 
 ### 🧪 2. Try the Summarization UI
 
@@ -87,7 +88,7 @@ We know that you just put your best system prompt to the registry but let's see 
 
     _It takes a minute or two for Canopy to invalidate cache and pull the new system prompt. If you don't want to wait, just restart the pod💀_
 
-    Notice that you didn't have to change anything in the code or redeploy because your new prompt became the `latest` prompt automatically. Of course we won't be YOLO and use `latest` prompt for the production without any testing and evaluations. But before talking about these, we need to have a better understanding of what is happening in the background and create test and prod environments in a more robust, reproducable way!
+    Notice that you didn't have to change anything in the code or redeploy because your new prompt became the `latest` prompt automatically. Of course we won't be YOLO and use `latest` prompt for the production without any testing and evaluations. But before talking about these, we need to have a better understanding of what is happening in the background, and also create test and prod environments in a more robust, reproducable way!
 
     ![summarization-prompt-4.png](./images/summarization-prompt-4.png)
 

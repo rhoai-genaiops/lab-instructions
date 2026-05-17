@@ -188,7 +188,5 @@ Gitea is a lightweight, self-hosted Git server that allows teams to manage repos
 
   ![gitops-webhook-2.png](./images/gitops-webhook-2.png)
 
-11. And now do the same thing for **backend** repo. It is going to save us waiting Argo CD's cycle time 😌
-
 🪄🪄 Magic! You've now deployed an `ApplicationSet` to scaffold our tooling and projects in a repeatable and auditable way (via git!). Now, let's deploy Canopy the same way! 🪄🪄
 
