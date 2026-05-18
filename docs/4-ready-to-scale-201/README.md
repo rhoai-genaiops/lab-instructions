@@ -18,7 +18,8 @@ This module takes your GenAI application to the next level by introducing essent
 
 # 🔨 Tools used in this module
 
-* [Llama Stack Eval API](https://llama-stack.readthedocs.io/en/latest/) - Framework for evaluating LLM responses against expected outputs
 * [GuideLLM](https://github.com/neuralmagic/guidellm) - Performance testing tool for measuring LLM throughput and latency
+* [MLflow](https://mlflow.org/) - Provides capabilities to debug, evaluate, monitor, and optimize AI applications
+
 * [Kubeflow Pipelines](https://www.kubeflow.org/docs/components/pipelines/) - Platform for building and orchestrating machine learning workflows
 * [Tekton](https://tekton.dev/) - Cloud-native CI/CD framework for automating build, test, and deployment pipelines

@@ -1,10 +1,134 @@
-# Deploy milvus in test and prod
-genai-gitops update
+# 📊 Deploy Milvus Test & Prod
 
-# OGX - a unifying framework
-We now chose Milvus, but there is a chance that we don't only want to use that vector databse.
-OGX allows us to change out the vector database without changing our application layer, it becomes just a simple config change in OGX.
-OGX also has some additional functionality to support a variety of retrieval modes, but we won't dig too deep into that here. You can read more about those here: [https://ogx-ai.github.io/docs/concepts/file_operations_vector_stores#search-capabilities](https://ogx-ai.github.io/docs/concepts/file_operations_vector_stores#search-capabilities)
+1. Go back to your workbench 🧑‍🏭
+
+2. Under `genaiops-gitops` folder, we'll create separate configurations for test and prod environments:
+
+    ```bash
+    mkdir -p /opt/app-root/src/genaiops-gitops/canopy/test/milvus
+    mkdir -p /opt/app-root/src/genaiops-gitops/canopy/prod/milvus
+    touch /opt/app-root/src/genaiops-gitops/canopy/test/milvus/config.yaml
+    touch /opt/app-root/src/genaiops-gitops/canopy/prod/milvus/config.yaml
+    ```
+
+3. Update both `canopy/test/milvus/config.yaml` and `canopy/prod/milvus/config.yaml` with the same configuration:
+
+    **Both TEST and PROD:**
+
+    ```yaml
+    chart_path: charts/milvus
+    ```
+
+    For now, we're happy with the default Milvus values.
+
+4. Now let's get these configurations deployed! Commit the files to Git:
+
+    ```bash
+    cd /opt/app-root/src/genaiops-gitops
+    git pull
+    git add .
+    git commit -m "📊 ADD - Milvus test & prod vector databases 📊"
+    git push
+    ```
+
+5. Wait till you see that both Milvus pods are operational, in other words you see `1/1` under `Ready` column:
+
+  ```bash
+  oc get po -n <USER_NAME>-test -w
+  ```
+
+    <div class="highlight" style="background: #f7f7f7">
+    <pre><code class="language-python">
+    $ oc get po -n user2-test -w
+    NAME                                      READY   STATUS    RESTARTS   AGE
+    canopy-backend-6785f999cf-946fx           1/1     Running   0          15m
+    canopy-ui-568d7cd989-zsqbx                1/1     Running   0          4h9m
+    llama-stack-5f7778c6c-wh8hw               1/1     Running   0          22m
+    milvus-test-attu-5dd559c7dd-xtgzc         1/1     Running   0          2m14s
+    milvus-test-standalone-67585987cd-k72b7   1/1     Running   0          2m14s
+    </code></pre>
+    </div>
+
+  _Do `Ctrl + C` to break the watch._
+
+1. Each Milvus deployment includes Attu like we experienced before. If you'd like to take a look at the test one we just deployed 👇
+
+    ```
+    https://milvus-test-attu-<USER_NAME>-test.<CLUSTER_DOMAIN>
+    ```
+    Update the Milvus Address as below to connect:
+    
+    ```bash
+    http://milvus-test.<USER_NAME>-test.svc.cluster.local:19530
+    ```
+
+    ![milvus-attu-connect.png](./images/milvus-attu-connect.png)
+
+    As you can see, it's completely empty, but we'll fix that soon 🔨  
+
+# 🦙 OGX (Open GenAI Stack) - A unifying framework
+
+Until now, Canopy has always talked to the model directly — a single hardcoded endpoint. That was enough when all we needed was to send a prompt and get a response.
+
+RAG adds a second component: the vector database. Different teams use different ones — Chroma, pgvector, Weaviate — and we might want to swap ours out as our requirements evolve. Your application shouldn't need to know or care which one it's talking to.
+
+**OGX (Open GenAI Stack, formerly Llama Stack)** sits between your application and your RAG infrastructure. It provides a unified API for vector store operations, so swapping the database backend becomes a config change in OGX rather than a code change in your application.
+
+OGX also supports a variety of retrieval modes (hybrid search, reranking, and more) that we won't dig into here. You can read more at: [https://ogx-ai.github.io/docs/concepts/file_operations_vector_stores#search-capabilities](https://ogx-ai.github.io/docs/concepts/file_operations_vector_stores#search-capabilities)
+
+Let's deploy OGX for Canopy! 
+
+(a little hint: your Gen AI Playground has been based on OGX from the start 🥳)
+
+1. Let's quickly deploy it to our experimentation environment the same way we deployed Canopy UI. In Openshift console, again expand `Helm` section from the left menu, click `Releases` and make sure you are on `<USER_NAME>-canopy` project. Then from the top right select `Create Helm Release`. 
+
+    ![llama-stack-helm-release.png](./images/llama-stack-helm-release.png)
+
+2. Select `GenAIOps Helm Charts` from the Chart Repositories list and choose `Llama Stack Operator Instance`
+
+    ![llama-stack-helmchart.png](./images/llama-stack-helmchart.png)
+
+3. We need to provide our LLM endpoint to Llama Stack, the same way we did to Canopy frontend. The helm chart already comes with good default values. Check if the below values are set correctly under `models`:
+
+    - name: `llama32`
+    - url: `http://llama-32-predictor.ai501.svc.cluster.local:8080/v1`
+    - token: (leave it empty)
+
+..and click `Create`.
+
+3. Observe that the Llama Stack is running in your environment:
+
+    ![llama-stack-ocp.png](./images/llama-stack-ocp.png)
+
+4. For `test` and `prod`, let's setup Llama Stack to deploy via Argo CD. Create `test/ogx/config.yaml` and `prod/ogx/config.yaml`:
+
+    ```bash
+    mkdir -p /opt/app-root/src/genaiops-gitops/canopy/test/ogx
+    mkdir -p /opt/app-root/src/genaiops-gitops/canopy/prod/ogx
+    touch /opt/app-root/src/genaiops-gitops/canopy/test/ogx/config.yaml
+    touch /opt/app-root/src/genaiops-gitops/canopy/prod/ogx/config.yaml
+    ```
+
+    And paste the below config to both `config.yaml`:
+
+    ```yaml
+    chart_path: charts/ogx-operator-instance
+    models:
+      - name: "llama32"
+        url: "http://llama-32-predictor.ai501.svc.cluster.local:8080/v1"
+    ``` 
+    
+5. Let's get them deployed! Of course - they are not real unless they are in git!
+
+    ```bash
+    cd /opt/app-root/src/genaiops-gitops
+    git pull
+    git add .
+    git commit -m  "🦙 ADD - Open GenAI Stack instances 🦙"
+    git push 
+    ```
+
+    And now, let's get our hands to it!
 
 # Send a request to milvus through OGX
 To see how it works

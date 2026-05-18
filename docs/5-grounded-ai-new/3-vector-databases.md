@@ -6,9 +6,11 @@ Vector databases are optimized to store and search across millions of vectors ef
 
 ## Using Milvus
 
-1. Before we can use Milvus, let's deploy it inside our Canopy namespace.  
-    Start by going to the OpenShift console -> Helm -> Releases (make sure you are in <USER_NAME>-canopy namespace) -> Create Helm Release and deploy Milvus  
-    Press Create again when you see the yaml view, no need to change any settings.
+1. Before we can use Milvus, let's deploy it inside our Canopy project.  
+
+    Start by going to the OpenShift console -> Helm -> Releases (make sure you are in `<USER_NAME>-canopy` project) -> Create Helm Release and deploy Milvus.
+
+    Press `Create` again when you see the yaml view, no need to change any settings.
 
     ![deploy-milvus](./images/deploy-milvus.png)
 
@@ -19,8 +21,8 @@ Vector databases are optimized to store and search across millions of vectors ef
     ![open-attu](./images/open-attu.png)
 
 3. To log into Attu, use the following Address and Database:
-    - Milvus Address: milvus.user5-canopy.svc.cluster.local
-    - Database: default
+    - Milvus Address: `milvus.<USER_NAME>-canopy.svc.cluster.local`
+    - Database: `default`
 
     ![attu](./images/attu.png)
 
@@ -28,4 +30,4 @@ Vector databases are optimized to store and search across millions of vectors ef
 
 4. Go to your workbench and run through the notebook `experiments/5-rag/2-vector-databases.ipynb`
 
-After you are done with the notebook you can continue to learn about [Docling](./4-docling.md), which will teach you ways to process more complex document and formats.
+After you are done with the notebook you can continue to learn about [Docling](5-grounded-ai-new/4-docling.md), which will teach you ways to process more complex document and formats.
