@@ -25,7 +25,7 @@ By the end of this section, you'll have a better grasp of how to integrate a mod
    
    ![create-workbench.png](./images/create-workbench.png)
 
-3. Select a name you want, could be something like `<USER_NAME>-canopy` 🌳
+3. Name it as `<USER_NAME>-canopy` 🌳
 
     **Notebook Image:** 
 

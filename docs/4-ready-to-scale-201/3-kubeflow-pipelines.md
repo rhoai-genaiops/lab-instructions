@@ -109,4 +109,6 @@ The evaluation pipeline is inside of a repository called `evals`, where both the
 
 ![summary_eval](./images/summary_eval.png)
 
-In the next section, we will see how to automatically trigger this pipeline on changes like system prompts.
+In the next section, we will see how to automatically trigger this pipeline on changes like system prompts. 
+
+Also, let's not forget GuideLLM test!

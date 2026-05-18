@@ -1,44 +1,7 @@
 # Automatically trigger on git changes
 
-Now that we have successfully ran our evaluation pipeline (🎉), we would like it to run automatically everytime we make a change to our tests, prompts, or backend.  
-To do this, we can create a Tekton pipeline with a git hook to the relevant repos. This Tekton pipeline will then trigger our evaluation kubeflow pipeline. 🔗
-
-## Update Llama Stack in test
-
-Just like we enabled evaluations for Llama Stack in our `experimentation` environment, we need to enable it for our `test` environment.
-
-1. Go back to your workbench in the `<USER_NAME>-canopy` namespace.
-
-2. Inside of `genaiops-gitops/canopy/test/llama-stack/config.yaml` add this line:
-
-   (This is basically the same as checking the `eval` box in the previous section.)
-
-    ```yaml
-    eval:
-      enabled: true
-    ```
-
-    Your final `config.yaml` should look something like this:
-
-    <div class="highlight" style="background: #f7f7f7; overflow-x: auto; padding: 8px;">
-    <pre><code class="language-yaml"> 
-    chart_path: charts/llama-stack-operator-instance
-    models:
-     - name: "llama32"
-       url: "http://llama-32-predictor.ai501.svc.cluster.local:8080/v1"
-    eval:      # 👈 added
-      enabled: true
-    </code></pre>
-    </div>
-
-3. Let's push the changes for Argo CD to pick it up.
-
-    ```bash
-    cd /opt/app-root/src/genaiops-gitops
-    git add .
-    git commit -m  "🤔 enable evaluation 🤔"
-    git push 
-    ```
+Now that we have successfully ran our evaluation pipeline (🎉), we would like it to run automatically everytime we make a change to our evaluation tests, prompts, or backend.  
+To do this, we can create a Tekton pipeline with a git hook to the relevant endpoints. This Tekton pipeline will then trigger our evaluation kubeflow pipeline (that we just ran manually).
 
 ## Install Pipeline Server
 
@@ -46,7 +9,7 @@ We also need to set up our pipeline server for our `toolings` namespace, but thi
 
 1. Like before, open your workbench in the `<USER_NAME>-canopy` namespace.
 
-2. Let's add a DSPA (which stands for **D**ata**S**cience**P**ipeline**A**pplication, and is our pipeline server) folder and `config.yaml` under `genaiops-gitops/canopy/toolings`, you can do that by running these commands:
+2. Let's add a DSPA (which stands for **D**ata **S**cience **P**ipeline **A**pplication, and is our pipeline server) folder and `config.yaml` under `genaiops-gitops/canopy/toolings`, you can do that by running these commands:
 
     ```bash
     mkdir /opt/app-root/src/genaiops-gitops/toolings/dspa
@@ -70,7 +33,7 @@ We also need to set up our pipeline server for our `toolings` namespace, but thi
     git push 
     ```
 
-5. As soon as it's ready you can go to `OpenShift AI` -> `Projects` -> `<USER_NAME>-toolings` -> `Pipelines` and see that it's available to start importing pipelines:  
+5. As soon as it's ready, you can go to `OpenShift AI` -> `Projects` -> `<USER_NAME>-toolings` -> `Pipelines` and see that it's available to start importing pipelines:  
 
     ![dspa-ready](images/dspa-ready.png)
 
@@ -79,7 +42,7 @@ Great, now you are all set up!
 ## Trigger our Kubeflow pipeline through a Tekton pipeline
 
 Now we are ready to set up automatic runs of our Kubeflow pipeline!  
-We will be triggering it from a Tekton Pipeline, where we both will have a step for our Llama Stack Evals and for GuideLLM.  
+We will be triggering it from a Tekton Pipeline, where we both will have a step for our MLflow evals and for GuideLLM.  
 
 1. Let's deploy the Tekton pipeline through ArgoCD. Start by running: 
 
@@ -92,15 +55,14 @@ We will be triggering it from a Tekton Pipeline, where we both will have a step 
 2. Open up the `evaluation-pipeline/config.yaml` file and paste the below yaml to config.yaml.
 
     ```yaml
+    ---
     chart_path: charts/canopy-evals-pipeline
     USER_NAME: <USER_NAME>
     CLUSTER_DOMAIN: <CLUSTER_DOMAIN>
     kfp:
-      llsUrl: http://llama-stack-service.<USER_NAME>-test.svc.cluster.local:8321
       backendUrl: http://canopy-backend.<USER_NAME>-test.svc.cluster.local:8000
+      llmEndpoint: "http://llama-32-predictor.ai501.svc.cluster.local:8080"
     ```
-
-    As you may have noticed, we are pointing our base (Llama Stack) url and backend url to our test namespace, as that's what we want to run our tests on.
 
 3. And finally commit and push it to git, as it only counts if it's in git 😉
 
@@ -134,7 +96,7 @@ We will be triggering it from a Tekton Pipeline, where we both will have a step 
 
     ![gitea-evals-webhook.png](./images/gitea-evals-webhook.png)
 
-8. Enter the URL Below for the Pipeline Event Listener and click `Add Webhook`
+8. Enter the URL below for the Pipeline Event Listener and click `Add Webhook`
 
     ```bash
     http://el-canopy-evals-event-listener.<USER_NAME>-toolings.svc.cluster.local:8080
@@ -142,16 +104,17 @@ We will be triggering it from a Tekton Pipeline, where we both will have a step 
 
     ![githook](images/githook.png)
 
-9. Now do the same for **backend** repository 💥💥💥 
+9. Now do the same for **prompts** 💥💥💥 
 
-    Go to `backend` repository > Settings > Webhook > Add > Gitea and add the same webhook. This will be the second webhook definition for the backend repository.
+    Go to your code-server workbench, and open up the `experiments/4-ready-to-scale-201/3-mlflow-webhook.ipynb` and run the first cells. It will create a webhook on MLflow side, when you add a new prompt, it will trigger the Tekton pipeline.
 
-    ```bash
-    http://el-canopy-evals-event-listener.<USER_NAME>-toolings.svc.cluster.local:8080
-    ```
+10. After you are done running the cells, let's test it by going to OpenShift AI Dashboard > Gen AI studio > Prompts and select `<USER_NAME>-toolings`. Go to `summarization` and Create a new prompt version. 
 
-    Here we have a filter in our Trigger so that only changes to the `values-test.yaml` file (in other words the prompts) will trigger the pipeline. If you are interested, you can take a look the definition [here](https://github.com/rhoai-genaiops/genaiops-helmcharts/blob/main/charts/canopy-evals-pipeline/templates/triggers/triggers.yaml#L54).
+    ![new-prompt-toolings.png](./images/new-prompt-toolings.png)
 
+11. Observe that the Tekton pipeline has kicked off. Now, as the human in the loop, you can not just test the Canopy in the test environment, but also see the eval results and decide whether this prompt is good to go to production.
+
+    ![new-prrompt-eval-pipeline.png](./images/new-prrompt-eval-pipeline.png)
 
 Congratulations! 🎉  
 
@@ -159,33 +122,47 @@ You have now added evals pipelines to your backend and eval repos, so whenever y
 
 In practice we would also run the tests whenever we build a new backend, but since we are using pre-built backend images we are skipping that for now.
 
-## Try updating your prompt and run evaluations
+## How to take the prompt changes to production?
 
-Let's go and add some more useful tests to trigger the pipeline 🧪
+You ran your evals, you look at the GuideLLM results, everything looks good enough for production as well. So how to we can update the system prompt in production in a way that we have visibility of what changed and easy to rollback in case of a problem.
 
-1. Go back to your workbench and enter the `backend/chart/values-test.yaml` file.  
-    In there you'll find your system prompt for test environment. Update your prompt as you see fit.
+1. You decided take your latest prompt version for `summarization`. We'll do this by moving `prod` alias to that version. And adding an alias the prompt will trigger a pipeline to update our GitOps repository with the ID of that prompt. So we know what is on production and when. In order to do this, let's add another pipeline to our toolings by creating a folder called `prompt-promotion-pipeline`. 
 
-2. After you have finished updating it, commit it to git:
+    Let's deploy the Tekton pipeline through ArgoCD. Start by running: 
+
     ```bash
-    cd /opt/app-root/src/backend
+    mkdir /opt/app-root/src/genaiops-gitops/toolings/prompt-promotion-pipeline
+    touch /opt/app-root/src/genaiops-gitops/toolings/prompt-promotion-pipeline/config.yaml
+    ```
+
+    This will create a config file inside `genaiops-gitops/toolings/prompt-promotion-pipeline`.
+
+2. Open up the `prompt-promotion-pipeline/config.yaml` file and paste the below yaml to config.yaml.
+
+    ```yaml
+    chart_path: charts/canopy-evals-pipeline
+    USER_NAME: <USER_NAME>
+    CLUSTER_DOMAIN: <CLUSTER_DOMAIN>
+
+3. And again commit and push it to git, as it only counts if it's in git 😉
+
+    ```bash
+    cd /opt/app-root/src/genaiops-gitops
     git add .
-    git commit -m "🍋 triggering the evals 🍋"
+    git commit -m "🌊 Prompt Promotion Pipelines 🌊"
     git push
     ```
-3. Let's go back to the OpenShift console pipeline view to see if the pipeline started properly.  
 
-    ![pipeline-started](images/pipeline-started.png)
+4. Go back to the notebook you were (`experiments/4-ready-to-scale-201/3-mlflow-webhook.ipynb`), just to run the last cell to add the webhook definition to MLFlow strictly to trigger when a new alias is added to the prompt versions.
 
-4. Whenever the pipeline is ran, it produces and saves the results in a MinIO bucket called `test-results`. Go there and see how well your tests performed: 
-    ```bash
-    https://minio-ui-<USER_NAME>-toolings.<CLUSTER_DOMAIN>/browser/test-results
-    ```
 
-5. Alternatively, you can see the results in your Prompt Tracker application (it's in the `Quick Links` in the top right of your lab instructions if you have already closed it 😉). The results will be attached in the related git commit.
-   
-    ![evals-results-prompt-tracker.png](./images/evals-results-prompt-tracker.png)
+5. Then let's test this out! OpenShift AI Dashboard > Gen AI studio > Prompts and select `<USER_NAME>-toolings`. Go to `summarization` and add `prod` alias to the latest one. 
 
-6. Finally, if you go to your backend repository in Gitea you should now see a PR ([https://gitea-gitea.<CLUSTER_DOMAIN>/<USER_NAME>/backend/pulls?type=all&state=open](https://gitea-gitea.<CLUSTER_DOMAIN>/<USER_NAME>/backend/pulls?type=all&state=open)) that can be reviewed and accepted if the results looked good enough to go to prod.  
+5. Watch that the pipeline is running in OpenShift console > Pipelines > select `<USER_NAME>-toolings` as the project.
 
-    When you accept the PR, Argo CD will detect the changes in the values files (aka in the prompt), syncs the changes to prod environment, then your prod Canopy starts using the new prompt 🙌
+6. When the pipeline is finished, check the GitOps repo being updated. Go to Gitea > `genaiops-gitops` and see there is a new commit made by a Tekton the Peaceful Cat 🐈
+
+
+> Alternatively, we could push this change to a branch and raise a PR for another human to approve. In this flow, though, the human review already happens when we assess the evaluation result
+
+And with that, we have an end-to-end automated process that is traceable, observable, and ready to grow into more complex use cases. Let’s gooooo! 🚀
