@@ -30,6 +30,8 @@ Llama Stack provides some out of the box capabilities for RAG. Let's quickly imp
 
     Go back to your workbench and open up `experiments/5-rag/1-embeddings.ipynb` and get the feeling of it! 
 
+4. Let's deploy Milvus in canopy so we can store the embedings somewhere! [TBD!!!!]
+
     After you have finished with the embeddings you are now ready to try a RAG workflow.  
     Continue to `experiments/5-rag/2-intro-to-RAG.ipynb` to get your hands on the RAG.
 
