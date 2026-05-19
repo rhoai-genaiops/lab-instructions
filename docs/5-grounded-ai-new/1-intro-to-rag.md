@@ -1,16 +1,14 @@
-# Try the playground
+# Try RAG at the playground
 
 RAG allows us to "ground" our answers in some information, prompting the model to answer based on that information rather than hallucinating.  
+
 This is done by sending this extra information/context in together with the prompt, and adding extra instructions to primarily looking at that information before answering any question.  
+
 Let's try it out!
 
 First thing first, did you know that we (RDU) has a website? Go check it out: [https://rdu-website-ai501.<CLUSTER_DOMAIN>/](https://rdu-website-ai501.<CLUSTER_DOMAIN>/)
 
-From there, choose a course you are interested in and download the PDF. We will be asking our LLM about it ;)
-
-### Let's have a taste of RAG
-
-Remember OpenShift AI provides a GenAI Playground for quick experimentation. The playground also has the capability of RAG. Without getting more details, let's just experinece it.
+Browse the programs in the "Academic Excellence" section, and download the syllabus for your favorite programs by clicking the "Learn More" link. Once on a program page, click "Download Program Info Sheet (PDF)" to download it! We will be asking our LLM about it ;)
 
 1. Go to OpenShift AI Dashboard > Gen AI studio > Playground > and make sure you have <USER_NAME>-canopy selected as the project.
 

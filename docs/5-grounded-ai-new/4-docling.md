@@ -1,4 +1,4 @@
-# Docling
+# Document Intelligence with Docling
 It's not always just text that we want to ask about in our RAG application, sometimes it's images, diagrams, tables, etc.
 
 To be able to process these we can use Docling.
@@ -18,6 +18,8 @@ To be able to process these we can use Docling.
 Let's try it out to see how Docling works in practice!
 
 Go to your workbench and go through the notebook `experiments/5-rag/3-docling.ipynb`.
+
+---
 
 Now that we went through below stages hands on:
 

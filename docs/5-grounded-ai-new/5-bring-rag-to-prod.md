@@ -1,4 +1,8 @@
-# 📊 Deploy Milvus Test & Prod
+# Get prepared for prod
+
+So far we experienced RAG pieces on our workbench or playground. We need to set things up with GitOps for the higher environments, bring more automation, and introduce an orchestration layer that will make our RAG more powerful and portable — more on that shortly!
+
+## 📊 Deploy Milvus Test & Prod
 
 1. Go back to your workbench 🧑‍🏭
 
@@ -64,7 +68,7 @@
 
     ![milvus-attu-connect.png](./images/milvus-attu-connect.png)
 
-    As you can see, it's completely empty, but we'll fix that soon 🔨  
+    As you can see, it's completely empty, but we'll fix that soon in an automated way 🔨  
 
 # 🦙 OGX (Open GenAI Stack) - A unifying framework
 
@@ -72,13 +76,19 @@ Until now, Canopy has always talked to the model directly — a single hardcoded
 
 RAG adds a second component: the vector database. Different teams use different ones — Chroma, pgvector, Weaviate — and we might want to swap ours out as our requirements evolve. Your application shouldn't need to know or care which one it's talking to.
 
-**OGX (Open GenAI Stack, formerly Llama Stack)** sits between your application and your RAG infrastructure. It provides a unified API for vector store operations, so swapping the database backend becomes a config change in OGX rather than a code change in your application.
+**OGX (Open GenAI Stack, formerly Llama Stack)** sits between your application and your RAG infrastructure. It provides a unified API for vector store operations, so swapping the database backend becomes a config change in OGX rather than a code change in your application. It supports 16 vector store providers out of the box — Milvus, Chroma, pgvector, Qdrant, Weaviate, and more.
 
-OGX also supports a variety of retrieval modes (hybrid search, reranking, and more) that we won't dig into here. You can read more at: [https://ogx-ai.github.io/docs/concepts/file_operations_vector_stores#search-capabilities](https://ogx-ai.github.io/docs/concepts/file_operations_vector_stores#search-capabilities)
+Beyond provider portability, OGX also unlocks RAG capabilities that are hard to build yourself:
+
+- **Hybrid search** — combine vector similarity with keyword search in a single query, which significantly improves retrieval quality for real-world content
+- **Contextual chunking** — instead of splitting documents by token count, an LLM enriches each chunk with its surrounding context before it's stored, making retrieval much more accurate
+- **Multiple embedding models** — switch between nomic-embed, BGE, MiniLM, or any sentence-transformers model without changing your application code
+
+We won't use all of these today, but they're there when you need them. You can read more at: [https://ogx-ai.github.io/docs/concepts/file_operations_vector_stores#search-capabilities](https://ogx-ai.github.io/docs/concepts/file_operations_vector_stores#search-capabilities)
 
 Let's deploy OGX for Canopy! 
 
-(a little hint: your Gen AI Playground has been based on OGX from the start 🥳)
+(a little hint: your Gen AI Playground has been using OGX from the start 🥳)
 
 1. Let's quickly deploy it to our experimentation environment the same way we deployed Canopy UI. In Openshift console, again expand `Helm` section from the left menu, click `Releases` and make sure you are on `<USER_NAME>-canopy` project. Then from the top right select `Create Helm Release`. 
 
@@ -109,15 +119,32 @@ Let's deploy OGX for Canopy!
     touch /opt/app-root/src/genaiops-gitops/canopy/prod/ogx/config.yaml
     ```
 
-    And paste the below config to both `config.yaml`:
+    And paste the below config to the respective `config.yaml`:
+
+    **FOR TEST**:
 
     ```yaml
     chart_path: charts/ogx-operator-instance
     models:
       - name: "llama32"
         url: "http://llama-32-predictor.ai501.svc.cluster.local:8080/v1"
+    rag:
+      milvus:
+        service: "milvus-test"
     ``` 
-    
+
+    **FOR PROD**:
+
+    ```yaml
+    chart_path: charts/ogx-operator-instance
+    models:
+      - name: "llama32"
+        url: "http://llama-32-predictor.ai501.svc.cluster.local:8080/v1"
+    rag:
+      milvus:
+        service: "milvus-prod"
+    ``` 
+
 5. Let's get them deployed! Of course - they are not real unless they are in git!
 
     ```bash
@@ -131,4 +158,9 @@ Let's deploy OGX for Canopy!
     And now, let's get our hands to it!
 
 # Send a request to milvus through OGX
-To see how it works
+
+There is one more Notebook we'd like to go through and it is to get you hands on wth OGX before we update our backend to use it.
+
+Head over to you workbench and follow `experiments/5-rag/4-using-ogx.ipynb` notebook.
+
+When you are done, let's enable some  automation for RDU students 🌳📚
