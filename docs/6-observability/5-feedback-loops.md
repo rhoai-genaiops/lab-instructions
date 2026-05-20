@@ -6,7 +6,7 @@ User feedback is the missing piece that closes the GenAIOps loop. By collecting 
 
 ## Why Feedback Matters
 
-Consider this scenario: your Canopy summarization feature has great latency (metrics look healthy), no errors in the logs, and clean traces through LlamaStack. Everything *looks* fine from an infrastructure perspective. But users are consistently getting poor summaries for some prompts because the system prompt isn't well-tuned for certain types of input, and you are not capturing this use case in the evals and you are not aware of it!
+Consider this scenario: your Canopy summarization feature has great latency (metrics look healthy), no errors in the logs, and clean traces through MLFlow. Everything *looks* fine from an infrastructure perspective. But users are consistently getting poor summaries for some prompts because the system prompt isn't well-tuned for certain types of input, and you are not capturing this use case in the evals and you are not aware of it!
 
 Without user feedback, you'd never know. The observability pillars you've learned (metrics, logs, traces) monitor **system health**. Feedback monitors **output quality** -- and that's what ultimately matters for AI applications.
 
@@ -25,14 +25,14 @@ The feedback feature is behind a feature flag, just like the other Canopy capabi
 
 Let's directly do this in `test` environment for simplicity.
 
-1. In your workbench, go to your `backend` repo and update `chart/values-test.yaml` to enable feedback. Let's first pull the changes though:
+1. In your workbench, go to your `genaiops-gitos` repo and update `canopy/test/backend/config.yaml` to enable feedback. Let's first pull the changes though:
 
     ```bash
-    cd /opt/app-root/src/backend
+    cd /opt/app-root/src/genaiops-gitops
     git pull
     ```
 
-   And update `chart/values-test.yaml` by adding the below block:
+   And update `canopy/test/backend/config.yaml` by adding the below block at the end:
 
    ```yaml
    feedback:
@@ -42,7 +42,7 @@ Let's directly do this in `test` environment for simplicity.
 2. Commit and push your changes. Wait for ArgoCD to sync the deployment.
 
     ```bash
-    cd /opt/app-root/src/backend
+    cd /opt/app-root/src/genaiops-gitops
     git add .
     git commit -m  "🫶 Enable feedback collection 🫶"
     git push origin main
@@ -56,7 +56,7 @@ Let's directly do this in `test` environment for simplicity.
 4. Paste some text and click **Summarize**
 
    ```bash
-   Collecting constant user feedback is one of the most reliable ways to make sure you’re building the right thing—and building it well. It helps you validate assumptions early, catch usability issues before they turn into costly rework, and prioritize improvements based on real-world needs instead of internal guesses. A steady feedback loop also makes product quality more resilient over time: as user expectations, workflows, and constraints change, feedback acts like an early-warning system that surfaces friction, confusion, and missing capabilities. Just as importantly, it builds trust—when users see their input reflected in updates, they feel heard and become more willing to engage, which strengthens adoption and creates a virtuous cycle of better insights and better outcomes.
+   Collecting constant user feedback is one of the most reliable ways to make sure you're building the right thing—and building it well. It helps you validate assumptions early, catch usability issues before they turn into costly rework, and prioritize improvements based on real-world needs instead of internal guesses. A steady feedback loop also builds trust—when users see their input reflected in updates, they feel heard and become more willing to engage, which strengthens adoption and creates a virtuous cycle of better insights and better outcomes.
    ```
 
 5. After the summary appears, you should see a **"Was this summary helpful?"** prompt with thumbs up and thumbs down buttons 👍👎
@@ -72,120 +72,68 @@ Let's directly do this in `test` environment for simplicity.
 
    ![canopy-feedback.png](./images/canopy-feedback.png)
 
-## Review Feedback in the Dashboard
+## Review Feedback in MLflow
 
-We created a dedicated Feedback Dashboard accessible at `/feedback`. Think this like a "admin view" page. The purpose is to give you a product-level view of how users are responding to the AI.
+Because Canopy already uses MLflow for tracing, feedback is stored **directly on the trace** that produced the response — no separate system needed. Each 👍 or 👎 becomes a `user_satisfaction` assessment attached to the exact span.
 
-1. In your browser, navigate to your Canopy UI URL and append `/feedback` to the path.
+1. Go to OpenShift AI Dashboard. Navigate to Develop & train > Experiments (MLflow) > choose **<USER_NAME>-test** as the project and  **summarization** as the experiment > **Traces**
 
-   ```bash
-   https://canopy-ui-<USER_NAME>-test.<CLUSTER_DOMAIN>/feedback
-   ```
+2. You'll see each conversation as a trace. Click on any trace to open it.
 
-2. You should see:
-   
-   - **Metrics** at the top: total feedback count, positive count, negative count
+3. In the trace detail view, look for the **Assessments** panel. You'll see the `user_satisfaction` feedback as `True` (for thumbs up) or `False` (for thumbs down).
 
-   - **Filter controls** to view all, positive only, or negative only
+   ![mlflow-trace-feedback.png](./images/mlflow-trace-feedback.png)
 
-   - **Collapsible entries** for each feedback submission -- click to expand and see the full prompt and response
+4. You can also get a more general feeling by adding the `user_satisfaction` Column on the `Traces` view. 
 
-   ![canopy-feedback-dashboard.png](./images/canopy-feedback-dashboard.png)
+This is quite powerful because the feedback sits right next to the full prompt, response, latency, and model metadata.
 
-3. Expand a few entries and review the full text. Notice how the dashboard gives you immediate visibility into which prompts produced unsatisfactory results.
-
-4. At the bottom, you'll find an **Export for Evaluation** section (if there are any negative feedback entries). We'll use this in the next steps. Because what good does collecting feedback do if you are not act on them? 🙃
+   ![mlflow-trace-feedback-2.png](./images/mlflow-trace-feedback-2.png)
 
 ## From Feedback to Evaluations
 
-Collecting feedback is only half the story. The real value comes from using negative feedback to improve your AI system. Let's export the thumbs-down feedback as an evaluation dataset.
+Collecting feedback is only half the story. The real value comes from using negative feedback to improve your AI system. Now that thumbs-down responses are visible as traces in MLflow, you can turn them directly into an evaluation dataset.
 
-1. The very first thing you need to do is to improve your system prompts to turn these frowns into happy faces. There are several approaches to prompt optimization -- from manual iteration (which we're performing now) to automated techniques like [DSPy](https://dspy.ai/) (which programmatically optimizes prompts using training examples) or [MLflow's prompt engineering tools](https://mlflow.org/docs/latest/llms/prompt-engineering/index.html) (which we can discuss further). Even simple manual changes (being more specific, adding examples, adjusting tone) can make a big difference.
+1. The very first thing you need to do is to improve your system prompts to turn these frowns into happy faces. There are several approaches to prompt optimization -- from manual iteration (which we're performing now) to automated techniques like [DSPy](https://dspy.ai/) or [MLflow's prompt engineering tools](https://mlflow.org/docs/latest/llms/prompt-engineering/index.html). Even simple manual changes (being more specific, adding examples, adjusting tone) can make a big difference.
 
-    But here's the catch: how do you know your improved prompt doesn't *regress* on the cases that were already working? That's exactly why we turn negative feedback into evaluation test cases. The thumbs-down entries become regression tests -- so when you tweak your prompt, you can verify it fixes the bad cases without breaking the good ones.
+But here's the catch: how do you know your improved prompt doesn't *regress* on the cases that were already working? That's exactly why we turn negative feedback into evaluation test cases. The thumbs-down entries become regression tests -- so when you tweak your prompt, you can verify it fixes the bad cases without breaking the good ones.
 
-2. In the Feedback Dashboard (`/feedback`), scroll to the **Export for Evaluation** section and click **Download feedback-eval-dataset.yaml**.
+2. In MLflow, filter your traces for negative feedback (Assessment `user_satisfaction = false`). These are your problem cases.
 
-   ![canopy-feedback-evals.png](./images/canopy-feedback-evals.png)
+3. Build an evaluation dataset from those traces like we did before. Select one of those traces and create an `expectation` with the assessment of `expected_result` as in like a better summary, Then add it to evaluation dataset.
 
-   You can also export from the terminal. Actually let's do that for the simplicity. First create a folder specific for the feedback evals and set up the judge prompt:
+   ![mlflow-add-trace-expectation-evals.png](./images/mlflow-add-trace-expectation-evals.png)
 
-   ```bash
-   mkdir /opt/app-root/src/evals/feedback/
-   cd /opt/app-root/src/evals/
-   cp Summary/judge_prompt.txt feedback/
+4. Then `Create dataset`, and name it as `eval`. Then select the this `eval` dataset and `Export` the traces there.
+
+   ![mlflow-add-trace-evals-2.png](./images/mlflow-add-trace-evals-2.png)
+
+   ![mlflow-add-trace-evals-3.png](./images/mlflow-add-trace-evals-3.png)
+
+   _We could build an evaluation dataset from those traces using `mlflow.genai.create_dataset()` by running below steps in our workbench. This is useful when we want to bring feedback. But we're only sharing this as a reference for now:_
+
+   ```python
+   # In your notebook or evaluation script
+   negative_traces = mlflow.search_traces(
+      experiment_names=["summarization"],
+      filter_string="assessments.user_satisfaction.value = 'false'",
+   )
+
+   eval_dataset = mlflow.genai.create_dataset(
+      name="eval",
+      experiment_id=experiment.experiment_id,
+      tags={"source": "negative-user-feedback"},
+   )
+   eval_dataset.merge_records(negative_traces)
    ```
 
-   Then export the dataset:
+4. As the human in the loop, review what responses the user was not happy with and add expectations to the traces -- what a good summary should look like for each case. This turns real user dissatisfaction into concrete test cases.
 
-   ```bash
-   cd /opt/app-root/src/evals/feedback
-   curl -s http://canopy-backend.<USER_NAME>-test.svc.cluster.local:8000/feedback/export -o feedback_tests.yaml
-   ```
+5. Now iterate on your system prompt. Change your summarization prompt from OpenShift AI Dashboard > Gen AI studio > Prompts > **<USER_NAME>-toolings** > summarization and create a new one. 
 
-3. The output matches the same `summary_tests.yaml` format used by the Canopy evaluation suite:
+6. And do you remember what happens when we create a new prompt here? YES! The evaluation pipeline kicks off and runs against all the evaluation dataset we have, including the one we just created! 
 
-   ```yaml
-   name: feedback_eval_tests
-   description: Tests generated from negative user feedback on summarization.
-   endpoint: /summarize
-   scoring_params:
-     llm-as-judge::base:
-       judge_model: llama32
-       prompt_template: judge_prompt.txt
-       type: llm_as_judge
-       judge_score_regexes:
-       - 'Answer: (A|B|C|D|E)'
-     basic::subset_of: null
-   tests:
-   - prompt: "the text that got a thumbs down"
-     expected_result: ""
-   ```
-
-4. As the human in the loop needs to check what is the response that user is not happy with and fill in the `expected_result` field with what a good summary should look like for each case. This turns real user dissatisfaction into concrete test cases.
-
-   So feel free to do that! 😌
-
-5. After that, let's push the changes and trigger the evals pipeline once again!
-
-    ```bash
-    cd /opt/app-root/src/evals/
-    git add .
-    git commit -m "👍 Evals based on feedback added 👍"
-    git push
-    ```
-
-6. And change your summarization prompt under `backend/chart/values-test.yaml` file to see the effect:
-
-   ```yaml
-   summarize:
-     enabled: true
-     model: vllm-llama32/llama32
-     temperature: 0.9
-     max_tokens: 4096
-     prompt: | # 👈 Update this ❗︎
-       Summarize the following text in a clear and detailed manner:
-   ```
-
-   ..and push the changes:
-
-    ```bash
-    cd /opt/app-root/src/backend
-    git add .
-    git commit -m  "🏃 kick off the evals pipeline 🏃"
-    git push origin main
-    ```
-
-7. Observe that evals pipeline kicked off after your push:
-
-   ![feedback-eval-pipeline.png](./images/feedback-eval-pipeline.png)
-
-   After it is complete, you can check the results in [Prompt Tracker](https://prompt-tracker-ai501.<CLUSTER_DOMAIN>/<USER_NAME>/<CLUSTER_DOMAIN>) and see how well your system did. 
-
-   The feedback tests have endpoint: `/summarize`, same as your Summary tests. The pipeline groups HTML results by endpoint, so the feedback test results would be merged into the same `Summarize Evaluation Results`.
-
-   ![feedback-eval-pipeline-result.png](./images/feedback-eval-pipeline-result.png)
-
+7. After the pipeline finishes succesfully, you can go to MLflow Evaluation runs under **<USER_NAME>-toolings** and see the results.
 
 ## A/B Testing: Data-Driven Prompt Engineering
 
@@ -193,47 +141,53 @@ Collecting thumbs up/down feedback tells you *whether* users are satisfied -- bu
 
 Instead of guessing which prompt produces better summaries, you let real users decide -- just like how production ML systems compare model variants.
 
-### Configure Prompt B
+This uses a **champion/challenger** pattern: your current prompt is the **champion** (what users are getting today), and the new one you want to test is the **challenger**. Both prompts live in the MLflow Prompt Registry.
 
-1. In the same file, for `summarize`,  add an alternative prompt with `prompt_b` key. Also enable A/B testing:
+### Set Up the Champion/Challenger Prompts
+
+1. First, let's mark your current prompt as the **champion** in MLflow. Add `champion` alias to your current prompt version in **<USER_NAME>-toolings** project for `summarization`. 
+
+2. Now create your challenger prompt and register it as a new version. The new version automatically gets the `latest` alias. Your `champion` alias is untouched.
+
+3. Update `genaiops-gitops/canopy/test/backend/config.yaml` to enable A/B testing. Point Prompt A at `champion` and tell the A/B config to use `latest` as the challenger:
 
    ```yaml
-   summarize:
+   summarization:
      enabled: true
-     model: vllm-llama32/llama32
-     prompt: |
-      Summarize the following text in a clear and detailed manner:
-     prompt_b: |                         # 👈 ADD under your current prompt. Feel free to get creative 🤸
-       Provide a brief, concise summary:  # 👈 ADD under your current prompt. Feel free to get creative
+     mlflow_prompt: summarization
+     mlflow_prompt_version: champion  # 👈 pin to champion for A/B ❗︎
 
-   ab_testing: # 👈 AND ADD THIS ❗︎
-     enabled: true  # 👈 AND ADD THIS ❗︎
+   feedback:
+     enabled: true
+
+   ab_testing:               # 👈 ADD THIS ❗︎
+     enabled: true           # 👈 ADD THIS ❗︎
+     mlflow_prompt_b_version: latest  # 👈 the challenger ❗︎
    ```
 
-   Make sure `feedback: enabled: true` is also set -- A/B testing builds on the feedback infrastructure.
-
-2. Commit and push your changes. Wait for ArgoCD to sync the deployment.
+4. Commit and push your changes. Wait for ArgoCD to sync the deployment.
 
     ```bash
-    cd /opt/app-root/src/backend
+    cd /opt/app-root/src/genaiops-gitops
+    git pull
     git add .
-    git commit -m  "💙 A/B Testing enabled 💚"
+    git commit -m  "💙 A/B Testing enabled: champion vs challenger 💚"
     git push origin main
     ```
 
-3. Open your Canopy UI again and pick **Summarization**:
+5. Open your Canopy UI again and pick **Summarization**:
 
    ```bash
    https://canopy-ui-<USER_NAME>-test.<CLUSTER_DOMAIN>/
    ```
 
-4. Paste the same text if you wish and click **Summarize**
+6. Paste some text and click **Summarize**
 
    ```bash
-   Collecting constant user feedback is one of the most reliable ways to make sure you’re building the right thing—and building it well. It helps you validate assumptions early, catch usability issues before they turn into costly rework, and prioritize improvements based on real-world needs instead of internal guesses. A steady feedback loop also makes product quality more resilient over time: as user expectations, workflows, and constraints change, feedback acts like an early-warning system that surfaces friction, confusion, and missing capabilities. Just as importantly, it builds trust—when users see their input reflected in updates, they feel heard and become more willing to engage, which strengthens adoption and creates a virtuous cycle of better insights and better outcomes.
+   Collecting constant user feedback is one of the most reliable ways to make sure you're building the right thing—and building it well. It helps you validate assumptions early, catch usability issues before they turn into costly rework, and prioritize improvements based on real-world needs instead of internal guesses. A steady feedback loop also makes product quality more resilient over time: as user expectations, workflows, and constraints change, feedback acts like an early-warning system that surfaces friction, confusion, and missing capabilities. Just as importantly, it builds trust—when users see their input reflected in updates, they feel heard and become more willing to engage, which strengthens adoption and creates a virtuous cycle of better insights and better outcomes.
    ```
 
-5. When you click `Summarize`, two columns should appear: **Response A** and **Response B** -- both stream simultaneously from different prompts
+7. When you click `Summarize`, two columns should appear: **Response A** and **Response B** -- both stream simultaneously from different prompts
 
    ![ab-testing.png](./images/ab-testing.png)
 
@@ -242,57 +196,44 @@ Instead of guessing which prompt produces better summaries, you let real users d
    > ⚠️ **Note:** If you don't see this or see an error, restart the `canopy-ui` pod inside of the `<USER_NAME>-test` namespace in OpenShift. Easiest way to do this is just to delete the pod
    ![delete-pod-for-feedback.png](./images/delete-pod-for-feedback.png)
 
-6. Pick your preference and try a couple of more to generate some data. The system records which actual prompt won.
+8. Pick your preference and try a couple more to generate some data. The system records which actual prompt won as an `ab_preference` assessment on each trace in MLflow.
 
-7. Let's navigate to the Feedback Dashboard again. You'll see win-rate metrics: how many times Prompt A won, Prompt B won. Expand individual entries to see both responses side-by-side along with the user's preference.
+9. Go back to **MLflow → Traces**. Each A/B response generates its own trace with an `ab_preference` assessment: `true` for the winner, `false` for the loser. You can filter traces by this to see which prompt consistently wins.
 
-   ![ab-testing-results.png](./images/ab-testing-results.png)
-
-
-> ⚠️ **Note:** We randomize which prompt is displayed as A or B in the frontend to avoid positioning bias, but then map it to the correct A or B prompt in the feedback view. This means that if you press that A is better you might see that B gets a point in the feedback view cause it was really prompt B underneath discuising as prompt A for the user 🥷
+   > ⚠️ **Note:** We randomize which prompt is displayed as A or B in the frontend to avoid positioning bias, but then map it to the correct `champion` or `challenger` when logging feedback. This means if you press "A is better" you might see that the challenger gets the win in MLflow -- because it was really the challenger underneath disguising as A for the user 🥷
 
 
 ### Act on the Data
 
 When one prompt consistently wins across multiple comparisons:
 
-1. Let's promote the winning prompt to `summarize.prompt` in your GitOps config. Copy the prompt your users liked the most, and paste it for `prompt:` key. And remove `prompt_b`.
+1. If the **challenger wins**, promote it to `champion` in MLflow -- no config file change needed for the prompt text itself.
 
-2. Disable `feedback` and `ab_testing` by setting the `enabled` value to `false`.
+   Your running app will pick up the new champion on the next request.
 
-   So your `backend/chart/values-test.yaml` file should look like below:
+2. Update `canopy/test/backend/config.yaml` to restore normal operation -- point back to `latest` and disable A/B:
 
-    <div class="highlight" style="background: #f7f7f7">
-    <pre><code class="language-yaml">
-      LLAMA_STACK_URL: "http://llama-stack-service:8321"
-      summarize:
-        enabled: true
-        model: vllm-llama32/llama32
-        temperature: 0.9
-        max_tokens: 4096
-        prompt: |
-          Provide a brief, concise summary: 
-      information-search: 
-        enabled: true
-        vector_db_id: genaiops_2026_02_09_22_26
-        model: vllm-llama32/llama32
-        prompt: |-
-          You are a helpful assistant specializing in document intelligence and academic content analysis.
-      feedback:
-        enabled: false
-      ab_testing: 
-        enabled: false 
-    </code></pre></div>
+    ```yaml
+    summarization:
+      enabled: true
+      mlflow_prompt: summarization
+      mlflow_prompt_version: latest  # back to normal iteration
 
-3. Commit, push, and let ArgoCD redeploy:
+    feedback:
+      enabled: false                 # 👈 UPDATE THIS ❗︎
 
-    ```bash
-    cd /opt/app-root/src/backend
-    git add .
-    git commit -m  "🦋 System prompt updated based on feedback 🦋"
-    git push origin main
+    ab_testing:
+      enabled: false                  # 👈 UPDATE THIS ❗︎
     ```
 
+3. Commit, push, and let Argo CD redeploy:
+
+    ```bash
+    cd /opt/app-root/src/genaiops-gitops
+    git add .
+    git commit -m  "🦋 Challenger promoted to champion 🦋"
+    git push origin main
+    ```
 
 This creates a continuous improvement cycle driven by real user preferences rather than subjective judgment.
 
@@ -310,10 +251,10 @@ What you've built in this section completes the GenAIOps lifecycle:
   Collect User Feedback              <-- This section
        |
        v
-  Export as Eval Dataset
+  MLflow Traces with Assessments
        |
        v
-  Run Evaluations (Module 4)
+  Build Eval Dataset (Module 4)
        |
        v
   Improve Prompts / Models
@@ -324,62 +265,6 @@ What you've built in this section completes the GenAIOps lifecycle:
        '-------> back to Observe
 ```
 
-This is the fundamental difference between a demo AI project and a production AI system: production systems **learn from their users** and **improve systematically**. Observability gives you the infrastructure to make that possible.
+This is the fundamental difference between a demo AI project and a production AI system: production systems **learn from their users** and **improve systematically**. By attaching feedback directly to MLflow traces, you get a single place to see what was said, how fast it was, and whether users were satisfied -- and a direct path from that signal to your evaluation pipeline.
 
-In this section, we collected user feedback with thumbs up/down, turned negative feedback into evaluation test cases, used A/B testing to compare prompts side-by-side, and promoted the winning prompt -- all through GitOps. Next, we'll look at how to protect your AI application from harmful inputs and outputs with **guardrails**.
-
---
-
-
-
-<!-- 
-
-## See Feedback in Logs (LokiStack)
-
-Every feedback submission is logged as structured JSON on STDOUT -- which means LokiStack automatically collects it. Let's find the feedback events.
-
-1. Navigate to **OpenShift Console -> Observe -> Logs**
-
-2. Click **Show Query** and paste this LogQL query to find all feedback events:
-
-   ```logql
-   { log_type="application", kubernetes_pod_name=~"canopy-backend.*", kubernetes_namespace_name="<USER_NAME>-canopy" } |= `feedback_submitted` | json
-   ```
-
-3. You should see structured JSON entries for each feedback submission with fields like:
-   - `rating`: `"thumbs_up"` or `"thumbs_down"`
-   - `feature`: `"summarize"`
-   - `input_length` and `response_length`: size of the text
-   - `timestamp`: when the feedback was submitted
-
-4. Filter for only negative feedback to find problem areas:
-
-   ```logql
-   { log_type="application", kubernetes_pod_name=~"canopy-backend.*", kubernetes_namespace_name="<USER_NAME>-canopy" } |= `feedback_submitted` | json | rating="thumbs_down"
-   ```
-
-   This is the query an operations team would use to monitor user satisfaction in real-time.
-
-## See Feedback in Traces (Tempo)
-
-Since Canopy Backend has OpenTelemetry auto-instrumentation enabled (via the `instrumentation.opentelemetry.io/inject-python` annotation), every `POST /feedback` request automatically generates a trace span.
-
-1. Open the **Canopy Distributed Traces** dashboard in Grafana
-2. Look for traces containing `POST /feedback` operations
-3. Click a trace to see the span details including timing and HTTP status
-
-No extra code was needed for this -- the auto-instrumentation you configured in the earlier tracing section handles it automatically. This demonstrates the power of the OpenTelemetry approach: new endpoints get observability for free.
-
-## See Feedback in Metrics (Prometheus)
-
-The auto-instrumented OpenTelemetry SDK also emits HTTP server metrics for every FastAPI endpoint. You can track feedback submission volume in Prometheus.
-
-1. Navigate to **OpenShift Console -> Observe -> Metrics**
-
-2. Query for feedback request count:
-
-   ```promql
-   http_server_request_count{http_route="/feedback", namespace="<USER_NAME>-canopy"}
-   ```
-
-   This shows the total number of feedback submissions over time. -->
+In this section, we collected user feedback with thumbs up/down, surfaced it in MLflow traces, turned negative feedback into evaluation test cases, used A/B testing to compare prompts side-by-side, and promoted the winning prompt -- all through GitOps. Next, we'll look at how to protect your AI application from harmful inputs and outputs with **guardrails**.

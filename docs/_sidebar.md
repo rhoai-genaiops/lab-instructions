@@ -17,7 +17,7 @@
   * [🏃 Automate It with Kubeflow!](4-ready-to-scale-201/3-kubeflow-pipelines.md)
   * [🏃 Pipeline of Pipelines!](4-ready-to-scale-201/4-automate-with-tekton.md) 
 * [The Library](5-grounded-ai-new/README.md)
-  * [RAG 101](5-grounded-ai-new/README.md)
+  * [RAG 101](5-grounded-ai-new/rag-101.md)
     * [🧠 Intro to RAG](5-grounded-ai-new/1-intro-to-rag.md)
     * [🐣 Understanding RAG](5-grounded-ai-new/2-rag-basics.md)  
     * [📊 Vector Stores & Milvus](5-grounded-ai-new/3-vector-databases.md)

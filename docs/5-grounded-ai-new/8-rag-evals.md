@@ -65,8 +65,6 @@ endpoint: /information-search
 scorers:
   - answer_quality
 judge_prompt: judge_prompt.txt
-datasets:
-  - eval
 tests:
   - inputs:
       prompt: "Describe the main learning outcomes for students completing the Advanced Generative AI Systems course."
