@@ -147,6 +147,8 @@ This uses a **champion/challenger** pattern: your current prompt is the **champi
 
 1. First, let's mark your current prompt as the **champion** in MLflow. Add `champion` alias to your current prompt version in **<USER_NAME>-toolings** project for `summarization`. 
 
+   ![champ-prompt.png](./images/champ-prompt.png)
+
 2. Now create your challenger prompt and register it as a new version. The new version automatically gets the `latest` alias. Your `champion` alias is untouched.
 
 3. Update `genaiops-gitops/canopy/test/backend/config.yaml` to enable A/B testing. Point Prompt A at `champion` and tell the A/B config to use `latest` as the challenger:
@@ -154,6 +156,8 @@ This uses a **champion/challenger** pattern: your current prompt is the **champi
    ```yaml
    summarization:
      enabled: true
+     model: llama32
+     endpoint: "http://llama-32-predictor.ai501.svc.cluster.local:8080/v1"
      mlflow_prompt: summarization
      mlflow_prompt_version: champion  # 👈 pin to champion for A/B ❗︎
 
@@ -196,12 +200,13 @@ This uses a **champion/challenger** pattern: your current prompt is the **champi
    > ⚠️ **Note:** If you don't see this or see an error, restart the `canopy-ui` pod inside of the `<USER_NAME>-test` namespace in OpenShift. Easiest way to do this is just to delete the pod
    ![delete-pod-for-feedback.png](./images/delete-pod-for-feedback.png)
 
-8. Pick your preference and try a couple more to generate some data. The system records which actual prompt won as an `ab_preference` assessment on each trace in MLflow.
+8. Pick your preference and try a couple more to generate some data. The system records which actual prompt won as an `ab_preference` assessment on each trace in MLflow. (You can select the `ab_preference` from the Columns list.)
 
 9. Go back to **MLflow → Traces**. Each A/B response generates its own trace with an `ab_preference` assessment: `true` for the winner, `false` for the loser. You can filter traces by this to see which prompt consistently wins.
 
    > ⚠️ **Note:** We randomize which prompt is displayed as A or B in the frontend to avoid positioning bias, but then map it to the correct `champion` or `challenger` when logging feedback. This means if you press "A is better" you might see that the challenger gets the win in MLflow -- because it was really the challenger underneath disguising as A for the user 🥷
 
+   ![ab_preference.png](./images/ab_preference.png)
 
 ### Act on the Data
 
@@ -211,7 +216,7 @@ When one prompt consistently wins across multiple comparisons:
 
    Your running app will pick up the new champion on the next request.
 
-2. Update `canopy/test/backend/config.yaml` to restore normal operation -- point back to `latest` and disable A/B:
+2. Update `genaiops-gitops/canopy/test/backend/config.yaml` to restore normal operation -- point back to `latest` and disable A/B:
 
     ```yaml
     summarization:
