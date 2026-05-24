@@ -13,11 +13,11 @@ Spikee, as their [website](https://spikee.ai/) says, is a Simple Prompt Injectio
     spikee init
     ```
 
-2. For spikee to work with our vLLM endpoint and Llama Stack endpoint, we need to define two targets. Copy the existing python files that are pointing to out model and Llama Stack server under `targets/` folder by running the below commands:
+2. For spikee to work with our vLLM endpoint and Llama Stack endpoint, we need to define two targets. Copy the existing python files that are pointing to our model and Llama Stack server under `targets/` folder by running the below commands:
 
     ```bash
     cd /opt/app-root/src/experiments/7-guardrails/spikee
-    mv llama_stack_shields.py targets/
+    mv llama_stack_nemo.py targets/
     mv vllm_local.py targets/
     ```
 
@@ -80,13 +80,13 @@ Spikee, as their [website](https://spikee.ai/) says, is a Simple Prompt Injectio
     Let's run the test:
 
     ```bash
-    spikee test --dataset datasets/quick-test-diverse.jsonl --target llama_stack_shields  --attack best_of_n --attack-iterations 1
+    spikee test --dataset datasets/quick-test-diverse.jsonl --target llama_stack_nemo  --attack best_of_n --attack-iterations 1
     ```
 
 7. Let's see the results:
 
     ```bash
-    spikee results analyze --result-file  results/results_llama_stack_shields-shields_enabled_quick-test-diverse*.jsonl | sed -n '1,/=== Breakdown by Jailbreak Type ===/p' | head -n -1
+    spikee results analyze --result-file  results/results_llama_stack_nemo-shields_enabled_quick-test-diverse*.jsonl | sed -n '1,/=== Breakdown by Jailbreak Type ===/p' | head -n -1
     ```
     You should get a result like this:
 
