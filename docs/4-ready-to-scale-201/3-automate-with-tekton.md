@@ -198,7 +198,7 @@ You ran your evals, you look at the GuideLLM results, everything looks good enou
 
 You can grow your evaluation dataset from MLflow traces, just like you did in the [Evaluating with MLflow](2-evaluate-genai-applications.md#evaluating-with-mlflow) section. Each environment stores traces in its own workspace.
 
-To add traces from your test environment to the eval dataset:
+For example, to add traces from your test environment to the eval dataset:
 
 1. Go to **OpenShift AI Dashboard** > **Experiments (MLflow)** and select `<USER_NAME>-test`.
 2. Open **summarization** > **Traces** and pick a trace.

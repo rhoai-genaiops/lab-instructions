@@ -75,8 +75,8 @@ Time to run yet another pipeline!
    arguments = {
         "minio_secret_name": "documents", 
         "minio_bucket_name": "documents",  
-        "embedding_model": "all-MiniLM-L6-v2",
-        "embedding_dimension": 384,
+        "embedding_model": "sentence-transformers/nomic-ai/nomic-embed-text-v1.5",
+        "embedding_dimension": 768,
         "chunk_size_tokens": 512,
         "vector_provider": "milvus",
         "docling_service": "http://docling-v0-7-0-predictor.ai501.svc.cluster.local:5001",

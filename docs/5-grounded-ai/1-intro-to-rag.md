@@ -28,6 +28,6 @@ Browse the programs in the "Academic Excellence" section, and download the sylla
 
     ![upload-doc](./images/upload-doc.png)
 
-4. Wait for the upload to finish and then try asking the same thing again. Do you get a better answer this time? You should see the response is grounded on the PDF you provided :)
+4. Wait for the upload to finish and then try asking the same thing again. Do you get a better answer this time? You should see the response is ✨ grounded ✨ on the PDF you provided :)
 
-Now that we have seen RAG in practice, let's try to implement it into Canopy. For that, continue to [RAG Basics](./2-rag-basics.md) to understand how `embeddings` work.
+Now that we have seen RAG in practice, let's try to implement it into Canopy. For that, continue to RAG basics to understand how `embeddings` work.

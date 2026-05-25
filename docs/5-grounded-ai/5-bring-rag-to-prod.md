@@ -74,7 +74,7 @@ So far we experienced RAG pieces on our workbench or playground. We need to set 
 
 Until now, Canopy has always talked to the model directly — a single hardcoded endpoint. That was enough when all we needed was to send a prompt and get a response.
 
-RAG adds a second component: the vector database. Different teams use different ones — Chroma, pgvector, Weaviate — and we might want to swap ours out as our requirements evolve. Your application shouldn't need to know or care which one it's talking to.
+RAG adds a second component: the vector database. Different teams use different ones and we might want to swap ours out as our requirements evolve. Your application shouldn't need to know or care which one it's talking to.
 
 **OGX (Open GenAI Stack, formerly Llama Stack)** sits between your application and your RAG infrastructure. It provides a unified API for vector store operations, so swapping the database backend becomes a config change in OGX rather than a code change in your application. It supports 16 vector store providers out of the box — Milvus, Chroma, pgvector, Qdrant, Weaviate, and more.
 
@@ -86,11 +86,11 @@ Beyond provider portability, OGX also unlocks RAG capabilities that are hard to 
 
 We won't use all of these today, but they're there when you need them. You can read more at: [https://ogx-ai.github.io/docs/concepts/file_operations_vector_stores#search-capabilities](https://ogx-ai.github.io/docs/concepts/file_operations_vector_stores#search-capabilities)
 
-Let's deploy OGX for Canopy! 
+Let's deploy some OGX (Llama Stack) for Canopy! 
 
 (a little hint: your Gen AI Playground has been using OGX from the start 🥳)
 
-1. Let's quickly deploy it to our experimentation environment the same way we deployed Canopy UI. In Openshift console, again expand `Helm` section from the left menu, click `Releases` and make sure you are on `<USER_NAME>-canopy` project. Then from the top right select `Create Helm Release`. 
+1. Let's quickly deploy it to our experimentation environment the same way we deployed other tools. In Openshift console, again expand `Helm` section from the left menu, click `Releases` and make sure you are on `<USER_NAME>-canopy` project. Then from the top right select `Create Helm Release`. 
 
     ![llama-stack-helm-release.png](./images/llama-stack-helm-release.png)
 
@@ -98,19 +98,21 @@ Let's deploy OGX for Canopy!
 
     ![llama-stack-helmchart.png](./images/llama-stack-helmchart.png)
 
-3. We need to provide our LLM endpoint to Llama Stack, the same way we did to Canopy frontend. The helm chart already comes with good default values. Check if the below values are set correctly under `models`:
+3. We need to provide our LLM endpoint to Llama Stack, the same way we did to Canopy frontend. The helm chart already comes with good default values. Check if the below values are set correctly under `models`, and RAG is enabled:
 
     - name: `llama32`
     - url: `http://llama-32-predictor.ai501.svc.cluster.local:8080/v1`
-    - token: (leave it empty)
+    - rag: `enabled:true`
 
 ..and click `Create`.
 
-3. Observe that the Llama Stack is running in your environment:
+4. Observe that the Llama Stack is running in your environment:
 
     ![llama-stack-ocp.png](./images/llama-stack-ocp.png)
 
-4. For `test` and `prod`, let's setup Llama Stack to deploy via Argo CD. Create `test/ogx/config.yaml` and `prod/ogx/config.yaml`:
+5. From an enduser point of view, there shouldn't be any change. Now OGX (Llama Stack) is accessing the model (and soon to Milvus DB) instead of backend accessing them directly. You can check it by connecting to Canopy UI in the `<USER_NAME>-canopy` environment.
+
+6. For `test` and `prod`, let's setup Llama Stack to deploy via Argo CD. Create `test/ogx/config.yaml` and `prod/ogx/config.yaml`:
 
     ```bash
     mkdir -p /opt/app-root/src/genaiops-gitops/canopy/test/ogx
@@ -124,11 +126,13 @@ Let's deploy OGX for Canopy!
     **FOR TEST**:
 
     ```yaml
-    chart_path: charts/ogx-operator-instance
+    ---
+    chart_path: charts/llama-stack-operator-instance
     models:
       - name: "llama32"
         url: "http://llama-32-predictor.ai501.svc.cluster.local:8080/v1"
     rag:
+      enabled: true
       milvus:
         service: "milvus-test"
     ``` 
@@ -136,16 +140,18 @@ Let's deploy OGX for Canopy!
     **FOR PROD**:
 
     ```yaml
-    chart_path: charts/ogx-operator-instance
+    ---
+    chart_path: charts/llama-stack-operator-instance
     models:
       - name: "llama32"
         url: "http://llama-32-predictor.ai501.svc.cluster.local:8080/v1"
     rag:
+      enabled: true
       milvus:
         service: "milvus-prod"
     ``` 
 
-5. Let's get them deployed! Of course - they are not real unless they are in git!
+7. Let's get them deployed! Of course - they are not real unless they are in git!
 
     ```bash
     cd /opt/app-root/src/genaiops-gitops
@@ -157,10 +163,10 @@ Let's deploy OGX for Canopy!
 
     And now, let's get our hands to it!
 
-# Send a request to milvus through OGX
+# Send a request to Milvus through OGX
 
-There is one more Notebook we'd like to go through and it is to get you hands on wth OGX before we update our backend to use it.
+There is one more Notebook we'd like to go through and it is to get you hands on with OGX before we update our backend to use it.
 
 Head over to you workbench and follow `experiments/5-rag/4-using-ogx.ipynb` notebook.
 
-When you are done, let's enable some  automation for RDU students 🌳📚
+When you are done, let's enable some automation for RDU students 🌳📚

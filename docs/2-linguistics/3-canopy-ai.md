@@ -28,7 +28,7 @@ Let's get you your own instance of Canopy up and running!
 
 In OpenShift, you have an experimentation environment which is called `<USER_NAME>-canopy`. You'll use this environment to iterate over Canopy, bring in new features, update the frontend when new capabilities arrive, and so on.
 
-1. Go to [OpenShift Console](https://console-openshift-console.<CLUSTER_DOMAIN>) and enter your credentials:
+1. Go to [OpenShift Console](https://console-openshift-console.<CLUSTER_DOMAIN>) and enter the same credentials:
 
     User: `<USER_NAME>`
 
@@ -48,11 +48,10 @@ In OpenShift, you have an experimentation environment which is called `<USER_NAM
 
 4. Hit `Create` , then expand `Canopy UI Helm Chart Values Schema` and fill out the values as below:
 
-    - **MLFLOW_PROMPT_NAME:** Do you remember the great prompt you just saved in the registry? We need to provide its name here. We used `summarization` as the name, so let's put it here. 
-    
-    You can also go back to [MLflow](https://rh-ai.<CLUSTER_DOMAIN>/mlflow) > `<USER_NAME>-canopy` > `Prompts` and see what you used previously.
+    - **MLFLOW_PROMPT_NAME:** Do you remember the great prompt you just saved in the registry? We need to provide its name here. We used `summarization`, so make sure it's there. 
 
     - **MODEL_NAME:** `llama32`
+  
     - **LLM_ENDPOINT:** `https://llama32-ai501.<CLUSTER_DOMAIN>`
   
     Leave the rest as it is for now.

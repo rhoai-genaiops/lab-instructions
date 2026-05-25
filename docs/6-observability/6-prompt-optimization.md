@@ -56,3 +56,5 @@ By the end of the notebook you'll have:
 - A concrete path to promoting the winning prompt back to Canopy (via config or the Prompt Registry)
 
 The loop that started with a user clicking 👎 ends with a measurably better AI application.
+
+![mlflow-gepa.png](./images/mlflow-gepa.png)

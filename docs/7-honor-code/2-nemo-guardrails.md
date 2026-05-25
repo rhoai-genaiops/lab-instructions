@@ -23,7 +23,7 @@ The rules themselves are written in **Colang** — a simple domain-specific lang
 
     You don't need to change any values — just hit **Create**!
 
-2. Wait for all components to come up: the NeMo service, the HAP detector (Granite Guardian), the prompt injection detector (DeBERTa), and the Lingua language detector. Check the Topology view — everything should be green 💚
+2. Wait for the NeMo service  to come up. The HAP detector (Granite Guardian), the prompt injection detector (DeBERTa), and the Lingua language detector are already deployed for you. Check the Topology view — everything should be green 💚
 
 ## Experience the Guardrails
 
@@ -33,4 +33,4 @@ Now let's see the rails in action. Go to your workbench and open:
 experiments/7-guardrails/1-intro-to-guardrails.ipynb
 ```
 
-The notebook will walk you through sending different types of prompts to the NeMo endpoint and watching different rails fire. When you're done, come back here and we'll wire it all up to Llama Stack!
+The notebook will walk you through sending different types of prompts to the NeMo endpoint and watching different rails fire. When you're done, come back here and we'll wire it to Canopy!

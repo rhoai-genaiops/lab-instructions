@@ -56,15 +56,18 @@ The evaluation pipeline is inside of a repository called `evals`, where both the
     For example:
 
     ```yaml
-    inputs:
-        messages:
-            - role: "user"
-            content: "Llama 3.2 is a state-of-the-art language model that excels in various natural language processing tasks, including summarization, translation, and question answering."
-    expectations:
-        expected_result: "Llama 3.2 is a top-tier language model for NLP tasks."
+      - inputs:
+          messages:
+              - role: "user"
+                content: "The Forest Canopy Structure course at Redwood Digital University covers the vertical layering of forest ecosystems, including the emergent, canopy, understory, and forest floor layers. Each layer supports distinct plant and animal communities adapted to the varying light, temperature, and humidity conditions found at different heights."
+        expectations:
+          expected_result: "The course covers forest ecosystem layers - emergent, canopy, understory, and forest floor - each with distinct communities adapted to their light, temperature, and humidity conditions."
+
     ```
 
-3. The code for the Kubeflow pipeline that is running these evaluations is inside of `evals-pipeline/mlflow_pipeline.py`. Go ahead and open it up and take a look. Scroll down to near the bottom of the file (around line 336) and edit the `repo_url` argument as below:
+    _**A word of warning from someone who has been burned before:** YAML is a religion that worships the space bar. If you are adding your own evals, please mind the gap. 🥲_
+
+3. The code for the Kubeflow pipeline that is running these evaluations is inside of `evals-pipeline/mlflow_pipeline.py`. Go ahead and open it up and take a look. Scroll down to near the bottom of the file (around line 350) and edit the `repo_url` argument as below:
     ```python
     arguments = {
         "repo_url":             "https://<USER_NAME>:thisisthepassword@gitea-gitea.<CLUSTER_DOMAIN>/<USER_NAME>/evals.git",  # 🚨 replace with your own repo URL

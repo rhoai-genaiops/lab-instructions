@@ -53,7 +53,7 @@ Let's see this in action!
 
     ![traces](./images/traces.png)
 
-2. Pick your favorite trace by clicking on it
+2. Pick your favorite trace by clicking on it.
 
 3. Press `Show assessments` in the top left corner 
 
@@ -72,15 +72,15 @@ Let's see this in action!
 
     This will create a key, value pair (Assessment Name, Value) which we later can fetch in our scorer to see if the number of characters in the response is less than 200 :)
 
-5. Now, we just need to add this trace to our evaluation dataset by clicking on the `+ Add to dataset` button at the top
+5. Now, we just need to add this trace to our evaluation dataset by clicking on the `+ Add to dataset` button at the top.
 
     ![add-to-dataset](./images/add-to-dataset.png)
 
-6. Create a new dataset, call it `eval`
+6. Create a new dataset, call it `eval`.
 
     ![create-dataset](./images/create-dataset.png)
 
-7. Finally, select the new dataset and press `Export` to add our trace to this dataset
+7. Finally, select the new dataset and press `Export` to add our trace to this dataset. Congrats, you just created your first evaluation dataset 😊
 
     ![add-to-eval-dataset.png](./images/add-to-eval-dataset.png)
 

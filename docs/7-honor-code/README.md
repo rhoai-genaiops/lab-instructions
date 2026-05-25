@@ -17,16 +17,14 @@ At RDU, we're committed to building Canopy as a trustworthy educational tool. Gu
 * Learn the limitations of prompt-level guardrails and why they need external enforcement
 * Deploy and configure NeMo Guardrails for multi-layered safety using a Helm chart
 * Experience how different detectors catch different types of problematic content
-* Integrate NeMo Guardrails into Llama Stack as the safety provider for Canopy
 * Test and harden your AI application against creative attempts to bypass safety measures
 
 # 🔨 Tools used in this module
 
-* **NeMo Guardrails**: External policy layer that applies Colang-defined safety rails — regex filters, classifiers, language detection, PII detection, and LLM-as-judge — before content reaches or leaves the LLM
-* **Llama Stack Safety APIs**: Integration layer that registers NeMo as a safety shield provider
+* **NeMo Guardrails**: External policy layer that applies Colang-defined safety rails
 * **Regex Rules**: Pattern-based filters for blocking or flagging specific content patterns
 * **HAP Detector**: Classifier for detecting hate speech, abuse, and profanity (Granite Guardian)
 * **Prompt Injection Detector**: Security layer to identify attempts to manipulate the AI's behavior (DeBERTa)
 * **Language Detector**: Ensures responses stay in English (Lingua)
-* **Spikee**: Automated prompt injection testing toolkit to benchmark your guardrails
+* **Spikee**: Open Source automated prompt injection testing toolkit to benchmark your guardrails
 * **OpenShift & Helm Charts**: To deploy NeMo Guardrails infrastructure in development and production environments

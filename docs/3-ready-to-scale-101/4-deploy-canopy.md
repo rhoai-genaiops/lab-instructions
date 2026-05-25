@@ -48,7 +48,7 @@ Let's start with the prompts.
     BACKEND_ENDPOINT: "http://canopy-backend:8000"
     image:
       name: "canopy-ui"
-      tag: "0.9"
+      tag: "0.10"
     ```
 3. For `backend`, paste the below yaml to test and prod `config.yaml` files. Mind that they are pointing to different alieses, although for now they are the same. As we iterate over prompts, we'll see this is going to change.
 

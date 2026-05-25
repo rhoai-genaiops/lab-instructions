@@ -14,9 +14,9 @@ We'll separate out the LLM business logic from the frontend into its own backend
 
     As we discussed, backend will be the one talking to the model, to the registry, and more. Therefore we need to make sure we provide the correct connection details.
 
-    We also need to provide your chosen System Prompt. Because as we did on the Notebooks, we need to include the system prompt while calling the model.
+    We also need to provide your chosen System Prompt. BecJust like we did in the Notebooks, we need to include the system prompt while calling the model.
 
-    Copy the below YAML snippet, and mind the indentation please 🙏
+    Delete the content of the box, and just copy the below YAML snippet 🙏
 
     ```yaml
     summarization:
@@ -68,7 +68,7 @@ We'll separate out the LLM business logic from the frontend into its own backend
     Tea preparation involves the controlled extraction of bioactive compounds from processed Camellia sinensis leaves. Begin by heating water to near 100°C to optimize solubility. Introduce a tea bag to a ceramic vessel, then infuse with hot water to initiate steeping—typically 3–5 minutes to allow for the diffusion of polyphenols and caffeine. Upon removal of the bag, optional additives like sucrose or lipid-based emulsions may be introduced to alter flavor profiles. The infusion is then ready for consumption.
     ```
    
-   ![canopy-ui-llamastack.png](./images/canopy-ui-llamastack.png)
+   ![canopy-ui-after-backend.png](./images/canopy-ui-after-backend.png)
 
 Now that we're happy with the first iteration of our Canopy student assistant, it's time to put it in the hands of real users. To do that, we need to deploy everything we've built so far into a test, and eventually a production environment. But this time, we'll do it in a more robust, consistent, and repeatable way. That's why we're stepping into the world of: GitOps 🐙.
 

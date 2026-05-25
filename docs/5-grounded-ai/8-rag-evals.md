@@ -14,14 +14,15 @@ To do that, we simply need to add a new eval folder with some tests in it.
 
 1. Go to your workbench and navigate to `evals` folder.
 
-2. Then start by making a copy of the `Summary` folder and rename it as `information-search`. Here are the commands if you don't want to do it manually:
+2. Then start by creating a `information-search`, and `judge_prompt.txt` and `information_search_tests.yaml` files under it. Here are the commands if you don't want to do it manually:
 
     ```bash
-    cp -r /opt/app-root/src/evals/summarization /opt/app-root/src/evals/information-search
-    mv /opt/app-root/src/evals/information-search/summary_tests.yaml /opt/app-root/src/evals/information-search/information_search_tests.yaml
+    mkdir /opt/app-root/src/evals/information-search
+    touch /opt/app-root/src/evals/information-search/information_search_tests.yaml
+    touch /opt/app-root/src/evals/information-search/judge_prompt.txt
     ```
 
-3. Replace the `judge_prompt.txt` in the `information-search` folder with a RAG-specific one. The summarization prompt penalises answers that introduce facts not present in the user's question, which would incorrectly fail valid RAG responses that draw from retrieved documents. Overwrite it with:
+3. Add below text to the `judge_prompt.txt` in the `information-search` folder. The summarization's judge prompt penalises answers that introduce facts not present in the user's question, which would incorrectly fail valid RAG responses that draw from retrieved documents. That's why we need a RAG specific one:
 
     ```bash
     You are an expert evaluator judging the quality of a generated answer to a question.
@@ -49,12 +50,7 @@ To do that, we simply need to add a new eval folder with some tests in it.
     Respond with only "yes" or "no".
     ```
 
-4. After that, there are a few things we need to change in our new `information-search` folder, specifically inside `information_search_tests.yaml`:
-    - The name
-    - The endpoint 
-    - And of course the prompts
-
-  Open up `evals/information-search/information_search_tests.yaml` and paste this to overwrite the whole file for a good baseline:
+4. Open up `evals/information-search/information_search_tests.yaml` and paste this to have a good baseline:
 
 
 ```yaml
@@ -104,7 +100,7 @@ tests:
     git push
     ```
 
-6. Our eval pipeline should trigger off of this git push, just like in the `Ready to Scale 201` section, you can go to OpenShift Pipelines to see how it's progressing.
+6. Remeber, our eval pipeline should trigger off of this git push! 🥳 Just like in the `Ready to Scale 201` section, you can go to OpenShift Pipelines to see how it's progressing.
 
   ![rag-eval-pipeline-run.png](./images/rag-eval-pipeline-run.png)
 

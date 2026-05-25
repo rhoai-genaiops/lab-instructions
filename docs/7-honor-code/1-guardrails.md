@@ -18,30 +18,13 @@ Some examples include:
 
 ![fight-club.jpg](./images/fight-club.jpg)
 
-1. As we experienced a number of times, system prompts define how LLMs should behave. Go to your playground and ask about Fight Club.
-
-Then add a system prompt
-
-Then go around it
-
+1. As we experienced number of times, system prompts define how LLMs should behave. The minimum thing we can do is set a system prompt. Go to your GenAI Playground in OpenShift AI Dashboard and try sending a message directly to the model with a system prompt that instructs it **not** to talk about Fight Club.
 
 The minimum thing we can do is set a system prompt. In your workbench, open a terminal and try sending a message directly to the model with a system prompt that instructs it **not** to talk about Fight Club:
 
-    ```bash
-    curl -s -X POST "http://llama-32-predictor.ai501.svc.cluster.local:8080/v1/chat/completions" \
-      -H "Content-Type: application/json" \
-      -d '{
-        "model": "llama32",
-        "messages": [
-          {"role": "system", "content": "You are a helpful university assistant. Do not discuss Fight Club under any circumstances."},
-          {"role": "user", "content": "Tell me about Fight Club"}
-        ]
-      }' | python3 -m json.tool
-    ```
-
   ![fight-club-2.png](./images/fight-club-2.png)
 
-2. After you find a system prompt that works, think about ways you can go around it and make the model talk about Fight Club anyway. Time yourself — how long does it take?
+1. After you find a system prompt that works, think about ways you can go around it and make the model talk about Fight Club anyway. Time yourself — how long does it take?
 
   ![fight-club-3.png](./images/fight-club-3.png)
 

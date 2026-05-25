@@ -30,7 +30,7 @@ The Canopy backend already has a RAG setup behind a feature flag, we just need t
       mlflow_prompt_version: latest
     information-search:          # 👈 add this block 📚❗︎❗︎❗︎❗︎❗︎
       enabled: true
-      endpoint: "http://llama-stack-service:8321"
+      endpoint: "http://llama-stack-service:8321/v1"
       model: vllm-llama32/llama32
       vector_db_id: latest
       mlflow_prompt: information-search

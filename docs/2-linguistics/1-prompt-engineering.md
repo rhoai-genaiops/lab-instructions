@@ -28,7 +28,11 @@ Red Hat OpenShift AI provides the ability to create a playground where you can e
 
 Let's create a Playground!
 
-1. Login to [OpenShift AI](https://data-science-gateway.<CLUSTER_DOMAIN>/). Use the same credentials to log in. You’ll see some `Projects`. The one that is called `<USER_NAME>-canopy` is your experimentation environment! This is where we validate ideas before going to test and production stages 💪
+1. Login to [OpenShift AI](https://data-science-gateway.<CLUSTER_DOMAIN>/). You’ll see some `Projects`. The one that is called `<USER_NAME>-canopy` is your experimentation environment! This is where we validate ideas before going to test and production stages 💪
+
+    User: `<USER_NAME>`
+
+    Password: `<PASSWORD>`
 
    ![openshift-ai.png](./images/openshift-ai.png)
 

@@ -23,4 +23,4 @@ Here we have a lot of options, the simplest just being keyword search, but imagi
 
 **Embeddings** let us do just that, to learn about embeddings, go into your workbench and run through `experiments\5-rag\1-embeddings.ipynb`.  
 
-When you are done, continue to [vector databases](./3-vector-databases.md) to learn how we can store these embeddings.
+When you are done, continue to vector databases to learn how we can store these embeddings.

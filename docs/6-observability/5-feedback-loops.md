@@ -39,6 +39,30 @@ Let's directly do this in `test` environment for simplicity.
      enabled: true
    ```
 
+   It should look like this:
+
+      ```yaml
+      ---
+      repo_url: https://gitea-gitea.apps.cluster-v7kr7.v7kr7.sandbox763.opentlc.com/user2/backend
+      chart_path: chart
+      summarization:
+        enabled: true
+        model: llama32
+        endpoint: "http://llama-32-predictor.ai501.svc.cluster.local:8080/v1"
+        mlflow_prompt: summarization
+        mlflow_prompt_version: latest
+      information-search:         
+        enabled: true
+        endpoint: "http://llama-stack-service:8321/v1"
+        model: vllm-llama32/llama32
+        vector_db_id: genaiops_2026_05_25_21_39
+        mlflow_prompt: information-search
+        mlflow_prompt_version: latest
+      feedback:  # 👈 add this block 📚❗︎❗︎❗︎❗︎❗︎
+        enabled: true
+      ```
+
+   
 2. Commit and push your changes. Wait for ArgoCD to sync the deployment.
 
     ```bash
@@ -64,6 +88,8 @@ Let's directly do this in `test` environment for simplicity.
    Click thumbs down on a summary you find unsatisfactory 🥺 👎 
 
    Click thumbs up on a summary that works well 🥹 👍
+
+   _It might take a second for the UI to report as "Thanks for the feedback!", as it might take time for the trace to be registered in MLflow._
 
    > ⚠️ **Note:** If you don't see this or see an error, restart the `canopy-ui` pod inside of the `<USER_NAME>-test` namespace in OpenShift. Easiest way to do this is just to delete the pod
    ![delete-pod-for-feedback.png](./images/delete-pod-for-feedback.png)
@@ -110,7 +136,7 @@ But here's the catch: how do you know your improved prompt doesn't *regress* on 
 
    ![mlflow-add-trace-evals-3.png](./images/mlflow-add-trace-evals-3.png)
 
-   _We could build an evaluation dataset from those traces using `mlflow.genai.create_dataset()` by running below steps in our workbench. This is useful when we want to bring feedback. But we're only sharing this as a reference for now:_
+   _We could build an evaluation dataset from those traces using `mlflow.genai.create_dataset()` by running below steps in our workbench. This is useful when we want to bring feedback. But we're only sharing this as a reference for now, just as a FYI 😊:_
 
    ```python
    # In your notebook or evaluation script
@@ -159,7 +185,15 @@ This uses a **champion/challenger** pattern: your current prompt is the **champi
      model: llama32
      endpoint: "http://llama-32-predictor.ai501.svc.cluster.local:8080/v1"
      mlflow_prompt: summarization
-     mlflow_prompt_version: champion  # 👈 pin to champion for A/B ❗︎
+     mlflow_prompt_version: champion  # 👈 ❗︎❗︎❗︎ pin to champion for A/B ❗︎❗︎❗︎❗︎❗︎❗︎
+
+   information-search:         
+     enabled: true
+     endpoint: "http://llama-stack-service:8321/v1"
+     model: vllm-llama32/llama32
+     vector_db_id: genaiops_2026_05_25_21_39
+     mlflow_prompt: information-search
+     mlflow_prompt_version: latest
 
    feedback:
      enabled: true
@@ -197,6 +231,8 @@ This uses a **champion/challenger** pattern: your current prompt is the **champi
 
    After both responses complete, two buttons appear: **A is better** and **B is better**
 
+   _Again, it might take a second for the UI to respond, as it might take time for the trace to be registered in MLflow._
+
    > ⚠️ **Note:** If you don't see this or see an error, restart the `canopy-ui` pod inside of the `<USER_NAME>-test` namespace in OpenShift. Easiest way to do this is just to delete the pod
    ![delete-pod-for-feedback.png](./images/delete-pod-for-feedback.png)
 
@@ -222,7 +258,7 @@ When one prompt consistently wins across multiple comparisons:
     summarization:
       enabled: true
       mlflow_prompt: summarization
-      mlflow_prompt_version: latest  # back to normal iteration
+      mlflow_prompt_version: latest  # back to normal iteration ❗︎
 
     feedback:
       enabled: false                 # 👈 UPDATE THIS ❗︎
