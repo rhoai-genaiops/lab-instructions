@@ -29,7 +29,7 @@
     * [🥼 RAG Evals](5-grounded-ai/8-rag-evals.md)
     * [🐉 Pipeline of Pipelines!](5-grounded-ai/9-end-to-end.md)
 * [The AI Watcher](6-observability/README.md)
-  * [👁️ Enable Monitoring](6-observability/1-enable-monitoring.md)
+  <!-- * [👁️ Enable Monitoring](6-observability/1-enable-monitoring.md) -->
   * [📊 Metrics](6-observability/2-metrics.md)
   * [📝 Logging](6-observability/3-logging.md)
   * [🔍 Tracing](6-observability/4-tracing.md)
