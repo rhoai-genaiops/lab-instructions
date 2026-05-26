@@ -30,7 +30,7 @@ We did a few tests and are satisfied with the results. But before we bring all t
     rag:
       enabled: true
       milvus:
-        service: "milvus-test"  # change to "milvus-prod" for prod
+        service: "milvus-test"  
     guardrails: # 👈 Add this block ❗︎ ❗︎ ❗︎ ❗︎ ❗︎
       enabled: true
     ```
@@ -40,9 +40,10 @@ We did a few tests and are satisfied with the results. But before we bring all t
 1. Open `genaiops-gitops/canopy/test/backend/config.yaml` and add:
 
     ```yaml
-    shields:
+    shields:   # 👈 Add this block ❗︎
       enabled: true
-      shield_id: nemo-guardrail
+      endpoint: http://canopy-guardrails.user2-canopy.svc.cluster.local/v1
+      config: canopy-guardrails
     ```
 
     but also update `summarization` block to go through Llama Stack:
