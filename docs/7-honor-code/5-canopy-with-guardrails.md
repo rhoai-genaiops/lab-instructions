@@ -4,24 +4,21 @@ We did a few tests and are satisfied with the results. But before we bring all t
 
 ## Deploy NeMo Guardrails via GitOps
 
-1. Let's bring it to our `test` and `prod` environments. First, deploy NeMo Guardrails in each environment by creating a config folder and file:
+1. Let's bring NeMo to our tooling by creating below folder under `toolings`:
 
     ```bash
-    mkdir -p /opt/app-root/src/genaiops-gitops/canopy/test/nemo-guardrails-orchestrator
-    mkdir -p /opt/app-root/src/genaiops-gitops/canopy/prod/nemo-guardrails-orchestrator
-    touch /opt/app-root/src/genaiops-gitops/canopy/test/nemo-guardrails-orchestrator/config.yaml
-    touch /opt/app-root/src/genaiops-gitops/canopy/prod/nemo-guardrails-orchestrator/config.yaml
+    mkdir -p /opt/app-root/src/genaiops-gitops/toolings/nemo-guardrails-orchestrator
+    touch /opt/app-root/src/genaiops-gitops/toolings/nemo-guardrails-orchestrator/config.yaml
     ```
 
     In each newly created `config.yaml`, add:
 
     ```yaml
     chart_path: charts/nemo-guardrails-orchestrator
-    ```
 
 ## Enable NeMo in Llama Stack
 
-2. Open up `llamastack/config.yaml` for both `test` and `prod` and add the guardrails block:
+1. Open up `genaiops-gitops/canopy/test/ogx`  and add the guardrails block:
 
     ```yaml
     chart_path: charts/llama-stack-operator-instance
@@ -36,20 +33,28 @@ We did a few tests and are satisfied with the results. But before we bring all t
         service: "milvus-test"  # change to "milvus-prod" for prod
     guardrails: # 👈 Add this block ❗︎ ❗︎ ❗︎ ❗︎ ❗︎
       enabled: true
-      nemo:
-        url: "http://canopy-guardrails.<USER_NAME>-canopy.svc.cluster.local"
-        config_id: "canopy-guardrails"
     ```
 
 ## Enable Shields in the Backend
 
-3. Open `backend/chart/values-test.yaml` and add:
+1. Open `genaiops-gitops/canopy/test/backend/config.yaml` and add:
 
     ```yaml
     shields:
       enabled: true
-      endpoint: "http://llama-stack-service:8321"
+      shield_id: nemo-guardrail
     ```
+
+    but also update `summarization` block to go through Llama Stack:
+
+    ```yaml
+    summarization:
+      enabled: true
+      endpoint: http://llama-stack-service:8321/v1   # 👈 UPDATE THIS ❗︎
+      mlflow_prompt: summarization
+      mlflow_prompt_version: latest
+      model: vllm-llama32/llama32   # 👈 UPDATE THIS ❗︎
+  ```
 
 ## Push It All
 
@@ -59,15 +64,7 @@ We did a few tests and are satisfied with the results. But before we bring all t
     cd /opt/app-root/src/genaiops-gitops
     git pull
     git add .
-    git commit -m "🔦 ADD - NeMo Guardrails for test and prod 🔦"
-    git push
-    ```
-
-    ```bash
-    cd /opt/app-root/src/backend
-    git pull
-    git add .
-    git commit -m "🔦 ADD - Enable nemo-guardrail shield in backend 🔦"
+    git commit -m  "🐡 NeMo Guardrails added 🐡"
     git push
     ```
 
@@ -100,5 +97,3 @@ Every time you send a request, this is the flow happening behind the scenes:
         ↓
 6. If safe → Stream back to user
 ```
-
-And as you're well aware by now — making a change in the backend triggers the evals. We didn't change the system prompt or the model, but we changed our overall system, which requires running evaluations. #continuousEvals 🤘
