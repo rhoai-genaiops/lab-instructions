@@ -104,19 +104,23 @@ We will be triggering it from a Tekton Pipeline, where we both will have a step 
 
     ![githook](images/githook.png)
 
-9. Now do the same for **prompts** 💥💥💥 
+9. We also need to trigger our evals whenever there is a change in the system. Let's say we change something in the settings, add a new feature, etc, we need to asses the system again. So let's add the webhook for `genaiops-gitops` repo too. That is where we keep the externalized backend config.
+
+    But don't worry, we won't be triggering the pipeline for _every push_ to GitOps repo. We have an interceptor config that triggers the pipeline **only** when there is change in `canopy/test/backend/config.yaml` and `canopy/prod/backend/config.yaml` files.
+
+10. And lastly we need to do the same for **prompts** 💥💥💥 
 
     Go to your code-server workbench, and open up the `experiments/4-ready-to-scale-201/3-mlflow-webhook.ipynb` and run the first cells. It will create a webhook on MLflow side, when you add a new prompt, it will trigger the Tekton pipeline.
 
-10. After you are done running the cells, let's test it by going to OpenShift AI Dashboard > Gen AI studio > Prompts and select `<USER_NAME>-toolings`. Go to `summarization` and Create a new prompt version. 
+11. After you are done running the cells, let's test it by going to OpenShift AI Dashboard > Gen AI studio > Prompts and select `<USER_NAME>-toolings`. Go to `summarization` and Create a new prompt version. 
 
     ![new-prompt-toolings.png](./images/new-prompt-toolings.png)
 
-11. Observe that the Tekton pipeline has kicked off. Now, as the human in the loop, you can not just test the Canopy in the test environment, but also see the eval results and decide whether this prompt is good to go to production.
+12. Observe that the Tekton pipeline has kicked off. Now, as the human in the loop, you can not just test the Canopy in the test environment, but also see the eval results and decide whether this prompt is good to go to production.
 
     ![new-prrompt-eval-pipeline.png](./images/new-prrompt-eval-pipeline.png)
 
-12. When the pipeline finish, in OpenShift AI Dashboard, go to `Experiments (MLFlow)` > select `<USER_NAME>-toolings` as the project > `summarization` > `Evaluation runs` and check the latest evaluation result based on your latest prompt. 
+13. When the pipeline finish, in OpenShift AI Dashboard, go to `Experiments (MLFlow)` > select `<USER_NAME>-toolings` as the project > `summarization` > `Evaluation runs` and check the latest evaluation result based on your latest prompt. 
 
     ![eval-results.png](./images/eval-results.png)
 
@@ -198,9 +202,9 @@ You ran your evals, you look at the GuideLLM results, everything looks good enou
 
 You can grow your evaluation dataset from MLflow traces, just like you did in the [Evaluating with MLflow](2-evaluate-genai-applications.md#evaluating-with-mlflow) section. Each environment stores traces in its own workspace.
 
-For example, to add traces from your test environment to the eval dataset:
+For example, to add traces from your production environment to the eval dataset:
 
-1. Go to **OpenShift AI Dashboard** > **Experiments (MLflow)** and select `<USER_NAME>-test`.
+1. Go to **OpenShift AI Dashboard** > **Experiments (MLflow)** and select `<USER_NAME>-prod`.
 2. Open **summarization** > **Traces** and pick a trace.
 3. Click **Show assessments** > **Add expectations** (e.g., `length` = `200`).
 4. Click **Add to dataset** and select the existing `eval` dataset, then **Export**.
