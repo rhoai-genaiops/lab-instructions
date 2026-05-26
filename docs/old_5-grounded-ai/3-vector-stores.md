@@ -49,7 +49,7 @@ For this, we are going to set up Milvus. If you recognize the name it's because 
 
     <div class="highlight" style="background: #f7f7f7">
     <pre><code class="language-python">
-    $ oc get po -n user2-test -w
+    $ oc get po -n <USER_NAME>-test -w
     NAME                                      READY   STATUS    RESTARTS   AGE
     canopy-backend-6785f999cf-946fx           1/1     Running   0          15m
     canopy-ui-568d7cd989-zsqbx                1/1     Running   0          4h9m
