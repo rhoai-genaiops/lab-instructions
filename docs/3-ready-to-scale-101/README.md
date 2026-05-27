@@ -7,7 +7,7 @@
 This module dives deeper into how Canopy interacts with the model using the OpenAI-compatible API and introduces MLflow for prompt management. Alongside this, we bring in a backend component and GitOps practices to ensure everything we build is reliable, repeatable, and ready for real users.
 
 # 🖼️ Big Picture
-![big-picture-llamastack](./images/big-picture-llamastack.png)
+![big-picture-gitops](./images/big-picture-gitops.jpg)
 
 # 🔮 Learning Outcomes
 * Understand how to interact with a model using the OpenAI-compatible API

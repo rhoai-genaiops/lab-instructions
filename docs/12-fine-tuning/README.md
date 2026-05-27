@@ -14,7 +14,7 @@ This module is about teaching the model to *be* a Socratic tutor, not just *pret
 
 # 🖼️ Big Picture
 
-![big-picture-fine-tuning.png](./images/big-picture-fine-tuning.png)
+![big-picture-fine-tuning.jpg](./images/big-picture-fine-tuning.jpg)
 
 # 🔮 Learning Outcomes
 

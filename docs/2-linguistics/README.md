@@ -7,7 +7,7 @@
 This module bridges the gap between raw LLM capabilities and practical applications.
 
 # 🖼️ Big Picture
-![big-picture-canopy.jpg](images/big-picture-canopy.png)
+![big-picture-canopy.jpg](images/big-picture-canopy.jpg)
 
 # 🔮 Learning Outcomes
 

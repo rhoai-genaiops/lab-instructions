@@ -6,7 +6,7 @@
 In this section, we'll cover the fundamentals of Generative AI and Large Language Models (LLMs) through interactive exercises and quizzes.
 
 # 🖼️ Big Picture
-![big-picture-orientation.jpg](images/big-picture-orientation.png)
+![big-picture-orientation.jpg](images/big-picture-orientation.jpg)
 
 # 🔮 Learning Outcomes
 * Understand difference between Generative AI and Predictive AI

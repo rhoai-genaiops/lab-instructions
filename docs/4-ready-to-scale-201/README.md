@@ -7,7 +7,7 @@
 This module takes your GenAI application to the next level by introducing essential production practices. You'll learn how to version and track prompts systematically, evaluate application quality using automated frameworks, and build CI/CD pipelines that ensure your AI system remains reliable and performant as it scales.
 
 # 🖼️ Big Picture
-![big-picture-evals](images/big-picture-evals.png)
+![big-picture-evals](images/big-picture-evals.jpg)
 
 # 🔮 Learning Outcomes
 

@@ -9,7 +9,7 @@ This module is about making models smaller, faster, and cheaper—without making
 **The big question:** *How much can we compress before students are impacted?*
 
 # 🖼️ Big Picture
-![big-picture-optimization.png](images/big-picture-optimization.png)
+![big-picture-optimization.jpg](images/big-picture-optimization.jpg)
 
 # 🔮 Learning Outcomes
 

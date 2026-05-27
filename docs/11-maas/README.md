@@ -25,7 +25,7 @@ As you go through each lesson, you'll "wear different hats" to understand MaaS f
 
 # 🖼️ Big Picture
 
-![big-picture-complete.png](./images/big-picture-complete.png)
+![big-picture-complete.jpg](./images/big-picture-maas.jpg)
 
 The goal is:
 
