@@ -4,6 +4,21 @@ Your agent is now live, helping students and scheduling meetings with professors
 
 Just like with testing in the earlier chapters, the same question gets answered differently every time. And that's fine... usually, but makes things a bit tricky.
 
+## Agent traces
+
+Just like with summarization and RAG we get traces for our agents as well, which give good insight into which tools were used and in what order.  
+Let's take a look!
+
+1. Go to OpenShift AI -> Develop & train -> Experiments (MLflow) -> <USER_NAME>-test Project and click on your student-assistant experiment
+
+2. Click on any trace and look at the Summary and Details & Timeline
+
+    ![agent-traces](./images/agent-traces.png)
+
+    Here you get the full interaction with all the tools and agent choices, all the way until the decision if it should continue or not.
+    We will use what we have in these traces as a basis for our testing.
+
+
 ## Three layers of agent testing
 
 When evaluating agents, we will focus on three areas:
