@@ -60,6 +60,8 @@ usecase: information-search
 endpoint: /information-search
 scorers:
   - answer_quality
+  - retrieval_relevance
+  - retrieval_groundedness
 judge_prompt: judge_prompt.txt
 tests:
   - inputs:
