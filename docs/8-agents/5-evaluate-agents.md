@@ -114,22 +114,52 @@ We will see it action soon, but first, let's make sure that our end-to-end tests
 ```yaml
 name: student_assistant_tests
 description: End-to-end tests for the student assistant agent with tool choice validation
-model: llama32
+usecase: student-assistant
 endpoint: /student-assistant
-scoring_params:
-    "llm-as-judge::base":
-        "judge_model": llama32
-        "prompt_template": e2e_judge_prompt.txt
-        "type": "llm_as_judge"
-        "judge_score_regexes": ["Answer: (A|B|C|D|E)"]
-    "basic::tool_choice": null
+scorers:
+  - answer_quality
+  - tool_choice
+judge_prompt: judge_prompt.txt
 tests:
-  - prompt: "What is a forest canopy?"
-    expected_result: "A forest canopy is the upper layer of a forest, formed by the crowns of trees. It's an important ecosystem component that provides habitat for many species and plays a crucial role in photosynthesis and the forest's overall health."
-    expected_tools: ["search_knowledge_base"]
-  - prompt: "Who can help me with machine learning?"
-    expected_result: "Dr. Sarah Chen from the Computer Science department can help you with machine learning. She specializes in Machine Learning, Neural Networks, AI Ethics, and Agentic Workflows. You can reach her at s.chen@university.edu."
-    expected_tools: ["find_professors_by_expertise"]
+  - inputs:
+      prompt: "What is a forest canopy?"
+    expectations:
+      expected_result: "A forest canopy is the upper layer of a forest, formed by the crowns of trees. It's an important ecosystem component that provides habitat for many species and plays a crucial role in photosynthesis and the forest's overall health."
+      expected_tools:
+        - search_knowledge_base
+  - inputs:
+      prompt: "Who can help me with machine learning?"
+    expectations:
+      expected_result: "Dr. Sarah Chen from the Computer Science department can help you with machine learning. She specializes in Machine Learning, Neural Networks, AI Ethics, and Agentic Workflows. You can reach her at s.chen@university.edu."
+      expected_tools:
+        - find_professors_by_expertise
+```
+
+And also add a `judge-prompt.txt` in the same folder:
+```bash
+You are an expert evaluator judging the quality of a generated answer to a question.
+
+Your task is to decide whether the GENERATED_ANSWER correctly and faithfully answers the QUESTION, compared against the EXPECTED_ANSWER.
+
+A high-quality answer must satisfy ALL of the following criteria:
+- It correctly addresses the QUESTION
+- Its key facts and claims are consistent with the EXPECTED_ANSWER
+- It does not contradict or misrepresent information present in the EXPECTED_ANSWER
+- It is coherent and directly useful as a standalone answer
+
+INPUT:
+{{ inputs }}
+
+GENERATED_ANSWER:
+{{ outputs }}
+
+EXPECTED_ANSWER:
+{{ expectations }}
+
+Answer "yes" if the GENERATED_ANSWER meets all of the criteria above.
+Answer "no" if it gives incorrect information, contradicts the expected answer, or fails to address the question.
+
+Respond with only "yes" or "no".
 ```
 
 4. Notice the `expected_tools` field in the tests - this tells the evaluator which tools the agent should call. The eval pipeline will check:
