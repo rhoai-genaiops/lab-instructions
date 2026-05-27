@@ -14,7 +14,7 @@ We'll separate out the LLM business logic from the frontend into its own backend
 
     As we discussed, backend will be the one talking to the model, to the registry, and more. Therefore we need to make sure we provide the correct connection details.
 
-    We also need to provide your chosen System Prompt. BecJust like we did in the Notebooks, we need to include the system prompt while calling the model.
+    We also need to provide your chosen System Prompt. Just like we did in the Notebooks, we need to include the system prompt while calling the model.
 
     Delete the content of the box, and just copy the below YAML snippet 🙏
 
@@ -52,7 +52,7 @@ We'll separate out the LLM business logic from the frontend into its own backend
 
 3. Then, go a little bit down, expand the `image` value and update the tag to point to a newer version:
    
-   - tag: **0.9** (replace `simple-0.5` with it)
+   - tag: **0.10** (replace `simple-0.5` with it)
   
   ..and now hit `Upgrade`!
 
