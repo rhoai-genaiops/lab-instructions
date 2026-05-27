@@ -124,7 +124,7 @@ In order to do that, we need to give what is the secret that it needs to seal:
 
 Well, test first. 
 
-1. Open `genaiops-gitops/canopy/test/llama-stack/config.yaml` and let Llama Stack know where to get the API token. Also, we need to provide the model name and the endpoint URL we get from LiteMaaS. Update it by adding the model to the list:
+1. Open `genaiops-gitops/canopy/test/ogx/config.yaml` and let Llama Stack know where to get the API token. Also, we need to provide the model name and the endpoint URL we get from LiteMaaS. Update it by adding the model to the list:
 
     ```yaml
     ---

@@ -5,7 +5,7 @@ There are a few things we want to do, such as evaluating and observing the agent
 
 ## Deploy the Agent through GitOps
 
-1. We need to start by upgrading our test and prod Llama Stack, go to `genaiops-gitops/canopy/test/llama-stack/config.yaml` and update to this:
+1. We need to start by upgrading our test and prod Llama Stack, go to `genaiops-gitops/canopy/test/ogx/config.yaml` and update to this:
 
     ```yaml
     ---

@@ -78,7 +78,7 @@ Let's start with the prompts.
       mlflow_prompt_version: prod # 👈 what we wrote as alias
     ```
 
-<!-- 4. Lastly, let's setup Llama Stack to deploy via Argo CD. We just need Llama Stack Server here, Playground is something we only use in the experimentation phase. Update **both** `test/llama-stack/config.yaml` and `prod/llama-stack/config.yaml` as below:
+<!-- 4. Lastly, let's setup Llama Stack to deploy via Argo CD. We just need Llama Stack Server here, Playground is something we only use in the experimentation phase. Update **both** `test/ogx/config.yaml` and `prod/ogx/config.yaml` as below:
 
     ```yaml
     chart_path: charts/llama-stack-operator-instance
@@ -89,7 +89,7 @@ Let's start with the prompts.
 
   <!-- For now, we are happy with the default Llama Stack values. We will get some exciting updates as we continue to the other chapters :) -->
 
-5. Let's get all of these deployed! Of course - they are not real unless they are in git!
+1. Let's get all of these deployed! Of course - they are not real unless they are in git!
 
     ```bash
     cd /opt/app-root/src/genaiops-gitops
@@ -98,21 +98,21 @@ Let's start with the prompts.
     git push 
     ```
 
-6. With all the application values stored in Git, let's tell Argo CD to start picking up changes to these environments. To do this, simply we need to create ApplicationSets:
+2. With all the application values stored in Git, let's tell Argo CD to start picking up changes to these environments. To do this, simply we need to create ApplicationSets:
 
     ```bash
     oc apply -f /opt/app-root/src/genaiops-gitops/appset-test.yaml -n <USER_NAME>-toolings
     oc apply -f /opt/app-root/src/genaiops-gitops/appset-prod.yaml -n <USER_NAME>-toolings
     ```
 
-7. You should see the canopy application, if filter in the search as `test` or `prod`. 
+3. You should see the canopy application, if filter in the search as `test` or `prod`. 
 
     ![canopy-gitops.png](./images/canopy-gitops.png)
 
-8. You can also go to OpenShift Console, check `<USER_NAME>-test` namespace to see if Canopy is deployed.
+4. You can also go to OpenShift Console, check `<USER_NAME>-test` namespace to see if Canopy is deployed.
 
     ![canopy-test-ns.png](./images/canopy-test-ns.png)
 
-9. Now that you have Canopy deployed in the `test` environment, open up [the Canopy UI](https://canopy-ui-<USER_NAME>-test.<CLUSTER_DOMAIN>/) and send a prompt to make sure it works! :D
+5. Now that you have Canopy deployed in the `test` environment, open up [the Canopy UI](https://canopy-ui-<USER_NAME>-test.<CLUSTER_DOMAIN>/) and send a prompt to make sure it works! :D
 
     ![canopy-test.png](./images/canopy-test.png)

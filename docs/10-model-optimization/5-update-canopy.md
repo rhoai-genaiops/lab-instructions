@@ -31,9 +31,11 @@ Let's take our experiment environment from Tiny Llama and point it to the FP8 on
     ```yaml
     summarize:
       enabled: true
+      mlflow_prompt_version: latest
+      mlflow_prompt: summarization
+      endpoint: 'http://llama-stack-service:8321/v1'
       max_tokens: 2048 # 👈 update this ❗️❗️❗️
       model: vllm-llama32-fp8/llama32-fp8 # 👈 update this ❗️❗️❗️
-      prompt: "<your prompt>"
     ```
 
 7. Click **Upgrade** to apply the changes.
@@ -50,7 +52,7 @@ Once Llama Stack and backend are running, let's verify it can communicate with t
 
 ### Move Test and Prod to On Prem 🦙
 
-1. Let's first update Llama Stack configs. Go back to your workbench and open up `genaiops-gitops/canopy/test/llama-stack/config.yaml` for **test** and add new model name and model url:
+1. Let's first update Llama Stack configs. Go back to your workbench and open up `genaiops-gitops/canopy/test/ogx/config.yaml` for **test** and add new model name and model url:
 
     ```yaml
     ---
@@ -60,14 +62,40 @@ Once Llama Stack and backend are running, let's verify it can communicate with t
         url: "http://llama-32-predictor.ai501.svc.cluster.local:8080/v1"
       - name: "llama32-fp8"     # 👈 Add this ❗︎❗︎
         url: "http://llama-32-fp8-predictor.ai501.svc.cluster.local:8080/v1" # 👈 Add this ❗︎❗︎
-    eval:
+    rag:
       enabled: true
-    rag:                  
-      enabled: true
-    mcp:                
-      enabled: true     
+      milvus:
+        service: "milvus-test"
+    guardrails:  # 👈 Update this too❗︎ ❗︎ ❗︎ ❗︎ ❗︎
+      enabled: false # 👈 Update this too❗︎ ❗︎ ❗︎ ❗︎ ❗︎  
     ```
-2. Push the changes:
+
+2. Now let's update the `backend`. Open up `genaiops-gitops/canopy/test/backend/config.yaml` and change every `llama32` to `llama32-fp8`.
+
+    ```yaml
+
+    LLAMA_STACK_URL: "http://llama-stack-service:8321"
+    summarize:
+      enabled: true
+      model: vllm-llama32-fp8/llama32-fp8 # 👈 Update this  ❗︎❗︎
+    information-search:
+      enabled: true
+      vector_db_id: latest
+      model: vllm-llama32-fp8/llama32-fp8 # 👈 Update this  ❗︎❗︎
+    student-assistant:         
+      enabled: true
+      model: vllm-llama32-fp8/llama32-fp8 # 👈 Update this  ❗︎❗︎
+      temperature: 0.1
+      vector_db_id: latest
+      mcp_calendar_url: "http://canopy-mcp-calendar-mcp-server:8080/sse"
+    shields:   
+      enabled: false # 👈 Update this  ❗︎❗︎
+      endpoint: http://canopy-guardrails/v1
+      model: llama32
+      config: canopy-guardrails
+    ```
+
+3. Push the changes:
 
     ```bash
     cd /opt/app-root/src/genaiops-gitops
@@ -76,47 +104,10 @@ Once Llama Stack and backend are running, let's verify it can communicate with t
     git commit -m "🏦 Switch to FP8 🏦"
     git push
     ```
-3. Now let's update the `backend`. Open up `backend/chart/values-test.yaml` and change every `llama32` to `llama32-fp8`.
-
-    ```yaml
-
-    LLAMA_STACK_URL: "http://llama-stack-service:8321"
-    summarize:
-      enabled: true
-      model: vllm-llama32-fp8/llama32-fp8 # 👈 Update this  ❗︎❗︎
-      temperature: 0.9
-      max_tokens: 4096
-      prompt: |
-        You are a helpful assistant. Summarize the given text please.
-    information-search:
-      enabled: true
-      vector_db_id: latest
-      model: vllm-llama32-fp8/llama32-fp8 # 👈 Update this  ❗︎❗︎
-      prompt: |
-        You are a helpful assistant specializing in document intelligence and academic content analysis.
-    student-assistant:         
-      enabled: true
-      model: vllm-llama32-fp8/llama32-fp8 # 👈 Update this  ❗︎❗︎
-      temperature: 0.1
-      vector_db_id: latest
-      mcp_calendar_url: "http://canopy-mcp-calendar-mcp-server:8080/sse"
-      prompt: |
-        You are ...
-    ```
-
-4. Now let's push the changes:
-
-    ```bash
-    cd /opt/app-root/src/backend
-    git pull
-    git add chart/values-test.yaml
-    git commit -m "🏦 Switch to FP8 🏦"
-    git push
-    ```
 
     Do you remember what happens when we make a change in the backend? Yes! Evaluation pipeline kicks off! Navigate to OpenShift console > Pipelines > Pipeline Runs under `<USER_NAME>-toolings` namespace and observe the evaluations. 
 
-5. You can follow the same steps for **prod** files to move production Canopy to on prem as well!
+4. You can follow the same steps for **prod** files to move production Canopy to on prem as well!
 
 ---
 

@@ -31,14 +31,21 @@ Now that we have a model running locally, it's time to connect it to our applica
     ```yaml
     summarize:
       enabled: true
-      max_tokens: 512 # 👈 ADD this ❗️❗️❗️
+      mlflow_prompt_version: latest
+      mlflow_prompt: summarization
+      endpoint: 'http://llama-stack-service:8321/v1'
       model: vllm-tinyllama/tinyllama # 👈 UPDATE this ❗️❗️❗️
-      prompt: "<your prompt>"
+      max_tokens: 512 # 👈 ADD this ❗️❗️❗️
     ```
 
-7. Click **Upgrade** to apply the changes.
+7. And let's disable `guardrails` to make things slightly faster for the tinyllama's sake:)
 
-    ![tiny-backend-upgrade2.png](./images/tiny-backend-upgrade2.png)
+    ```yaml
+    shields:
+      enabled: false # 👈 UPDATE this ❗️❗️❗️
+    ```
+
+8. Click **Upgrade** to apply the changes.
 
 ### 🌳 Test Canopy with the New Model
 

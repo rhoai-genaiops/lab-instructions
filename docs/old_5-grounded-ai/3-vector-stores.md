@@ -77,7 +77,7 @@ For this, we are going to set up Milvus. If you recognize the name it's because 
 
     As you can see, it's completely empty, but we'll fix that soon 🔨  
 
-7. Update your Llama Stack config in test and prod by opening up `genaiops-gitops/canopy/test/llama-stack/config.yaml` (test) and `genaiops-gitops/canopy/prod/llama-stack/config.yaml` (prod) and update the files as below:
+7. Update your Llama Stack config in test and prod by opening up `genaiops-gitops/canopy/test/ogx/config.yaml` (test) and `genaiops-gitops/canopy/prod/ogx/config.yaml` (prod) and update the files as below:
 
     **FOR TEST:**
 
