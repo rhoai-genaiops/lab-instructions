@@ -1,4 +1,4 @@
-# Integrate NeMo Guardrails with Llama Stack
+# Integrate NeMo Guardrails with Open GenAI Stack (Llama Stack)
 
 In the notebook, we talked directly to NeMo Guardrails. But in Chapter 5 we introduced Llama Stack as our abstraction layer — it's what routes requests from Canopy's backend to the model. We can also plug NeMo in as a **safety provider** in Llama Stack, so every request that flows through Llama Stack automatically goes through the guardrails.
 
@@ -10,7 +10,7 @@ Canopy Backend → Llama Stack → NeMo Guardrails → LLM
                            (blocks if unsafe)
 ```
 
-## Update the Llama Stack Operator
+## Update the Llama Stack
 
 1. In your `<USER_NAME>-canopy` environment, go to **Helm > Releases > llama-stack-operator-instance > Upgrade**.
 
@@ -22,7 +22,18 @@ Canopy Backend → Llama Stack → NeMo Guardrails → LLM
 
     This registers a Llama Stack **shield** called `nemo-guardrail` backed by your NeMo service. The Canopy backend already knows to use it — when shields are enabled, it passes `guardrails: ["nemo-guardrail"]` with every request.
 
-3. Check the Topology view to make sure everything is healthy ❤️
+3. We haven't moved `summarization` feature to use OGX, we did that only for RAG. Let's move `summarization` feature to use the orchestration feature as well. Again go to **Helm > Releases > canopy-backend > Upgrade**. In the YAML view, find `summarization` block and update the `model` and `endpoint` value:
+
+    ```yaml
+    summarization:
+      enabled: true
+      model: vllm-llama32/llama32  # 👈 UPDATE THIS ‼️‼️‼️‼️
+      endpoint: 'http://llama-stack-service:8321/v1' # 👈 UPDATE THIS ‼️‼️‼️‼️
+      mlflow_prompt: summarization
+    mlflow_prompt_version: latest
+  ```
+
+4. Check the Topology view to make sure everything is healthy ❤️
 
     ![canopy-topology.png](./images/canopy-topology.png)
 

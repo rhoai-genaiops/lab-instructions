@@ -14,19 +14,18 @@ You'll learn to use OpenShift AI's built-in observability stack: metrics to quan
 # 🔮 Learning Outcomes
 
 * Understand the three pillars of observability and why they're essential for production AI systems
-* Deploy and configure OpenShift AI's observability stack with OpenTelemetry, Prometheus, and Tempo
+* Deploy and configure OpenShift AI's observability stack with OpenTelemetry, Prometheus, and MLflow
 * Query metrics using PromQL to monitor Canopy's performance and resource usage
 * Create custom Grafana dashboards to visualize AI-specific metrics and system health
 * Analyze logs using OpenShift's logging stack to debug issues and understand user interactions
-* Trace requests through distributed components to identify bottlenecks and latency sources
+* Trace requests to identify bottlenecks and latency sources
 * Collect user feedback and export negative signals as evaluation datasets to systematically improve prompts
-* Use A/B testing to compare prompt variants side-by-side and promote winners through GitOps
+* Use A/B testing to compare prompt variants side-by-side and promote winners
 
 # 🔨 Tools used in this module
 
 * **OpenTelemetry Collector (OTel)**: Vendor-neutral standard for collecting telemetry data from your AI workloads
 * **Prometheus**: Time-series database that stores metrics and powers alerting
 * **Grafana**: Visualization platform that turns metrics into actionable dashboards
-* **Red Hat build of Tempo**: Distributed tracing system that follows requests across microservices
 * **LokiStack**: Scalable log aggregation system integrated with OpenShift
 * **OpenShift User Workload Monitoring**: Pre-configured monitoring stack for tracking custom application metrics and model performance

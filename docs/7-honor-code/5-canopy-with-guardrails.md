@@ -4,11 +4,13 @@ We did a few tests and are satisfied with the results. But before we bring all t
 
 ## Deploy NeMo Guardrails via GitOps
 
-1. Let's bring NeMo to our tooling by creating below folder under `toolings`:
+1. Let's bring NeMo to test and prod evironments by creating the necessary folders. We want separate instances, cause when we update our guardrails to evaluate things, we wouldn't want effect production.
 
     ```bash
-    mkdir -p /opt/app-root/src/genaiops-gitops/toolings/nemo-guardrails-orchestrator
-    touch /opt/app-root/src/genaiops-gitops/toolings/nemo-guardrails-orchestrator/config.yaml
+    mkdir -p /opt/app-root/src/genaiops-gitops/canopy/test/nemo-guardrails-orchestrator
+    touch /opt/app-root/src/genaiops-gitops/canopy/test/nemo-guardrails-orchestrator/config.yaml
+    mkdir -p /opt/app-root/src/genaiops-gitops/canopy/prod/nemo-guardrails-orchestrator
+    touch /opt/app-root/src/genaiops-gitops/canopy/prod/nemo-guardrails-orchestrator/config.yaml
     ```
 
     In each newly created `config.yaml`, add:
@@ -42,7 +44,8 @@ We did a few tests and are satisfied with the results. But before we bring all t
     ```yaml
     shields:   # 👈 Add this block ❗︎
       enabled: true
-      endpoint: http://canopy-guardrails.user2-canopy.svc.cluster.local/v1
+      endpoint: http://canopy-guardrails/v1
+      model: llama32
       config: canopy-guardrails
     ```
 
@@ -94,7 +97,7 @@ Every time you send a request, this is the flow happening behind the scenes:
         ↓
 4. If safe → LLM generates response (streaming)
         ↓
-5. Response chunks → NeMo Guardrails (output rails: regex, HAP, PII)
+5. Response chunks → NeMo Guardrails (output rails: regex, HAP, PII, LLM judge)
         ↓
 6. If safe → Stream back to user
 ```

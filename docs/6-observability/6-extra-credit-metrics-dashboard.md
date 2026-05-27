@@ -1,0 +1,152 @@
+## 📚 EXTRA CREDITS 🤓
+
+### Exploring Pre-configured Dashboards
+
+The Grafana instance you deployed includes several pre-configured dashboards for monitoring your complete AI stack: the shared vLLM model, your Canopy UI, your Canopy Backend and LlamaStack.
+
+### Dashboard 1: vLLM Shared Model Performance
+
+This dashboard shows the health and performance of the shared llama-3.2 inference service that all users depend on. Unlike traditional web applications that focus on request count and response time, LLM systems require specialized metrics that reflect the unique characteristics of AI workloads.
+
+Before trying below steps make sure you are logged-in to OpenShift through CLI. To log in to OpenShift, go to the web console, click on your account name, select "Copy Login Command," and then use the command to login to the terminal.
+
+Open the **vLLM AI501 Metrics Dashboard** to see AI-specific performance metrics:
+
+   ![Metrics Dashboard](./images/metrics2.1.png)
+
+   **Token Throughput Metrics:**
+   - **Generation Token Throughput (TPS)**: How many tokens per second the model is generating. This measures how fast the response streams - higher TPS means faster completion of answers. During peak hours, you want to ensure TPS doesn't degrade. This is fundamentally different from traditional "requests per second" because it measures the model's text generation speed, not just API throughput.
+   - **Prompt Token Throughput**: How many prompt tokens per second are being processed (indicates request volume and context size trends)
+   - **Scheduler State**: Number of requests running, waiting, or swapped. High wait queues indicate the shared model is overloaded - a critical signal that doesn't exist in traditional stateless APIs.
+
+   ![Metrics Dashboard](./images/metrics2.2.png)
+
+   **Request Characteristics - Understanding Context:**
+   - **Request Prompt Length**: Heatmap showing distribution of prompt sizes. How much conversation history are we maintaining? Longer contexts provide better answers but consume more memory and slow down inference.
+   - **Request Generation Length**: Heatmap showing distribution of response sizes
+
+   **Resource and Scheduler Metrics:**
+   - **KV Cache Utilization**: Memory usage for attention caching (high values may slow inference). This is unique to transformer models where the "K" (key) and "V" (value) matrices from the attention mechanism are cached to avoid recomputation.
+   - **Successfully Processed Requests**: Breakdown by finish reason (EOS token vs max length reached)
+
+   **Latency Metrics - The AI User Experience:**
+   - **E2E Request Latency**: End-to-end time from request to completion (p50, p90, p95, p99 percentiles). Traditional web apps might measure this alone, but for LLMs we need to break it down further.
+   - **Time To First Token (TTFT)**: How quickly the model starts responding. This affects perceived responsiveness
+   - **Time Per Output Token**: Inter-token latency during generation (affects streaming speed and determines how smoothly text appears)
+
+<!-- **Why These AI-Specific Metrics Matter:** Beyond basic infrastructure metrics (CPU, memory), these measurements reflect the unique characteristics of LLM workloads. They distinguish monitoring an AI system from monitoring a traditional web application - your Canopy backend might have great API response times, but if the underlying model has poor TTFT or low TPS, the user experience suffers. -->
+
+### Dashboard 2: Canopy-UI Metrics
+
+Your Canopy UI is the user facing interface - the web application where users ask questions and receive answers. This dashboard shows how well the frontend is performing.
+
+<!-- > For your Canopy application components ([UI](https://github.com/rhoai-genaiops/frontend/blob/main/chart/templates/deployment.yaml#L21) and [Backend](https://github.com/rhoai-genaiops/backend/blob/main/chart/templates/deployment.yaml#L17)), metrics collection requires an additional label. The Canopy Helm charts have already been configured with `monitoring.opendatahub.io/scrape: 'true'` in their deployment templates, which tells Prometheus to scrape metrics from these workloads. This label is essential for custom applications, without it, Red Hat OpenShift AI Observability stack won't collect their metrics even if they expose them. -->
+
+<!-- TODO: Add autoinstrumentation explanation also here. Canopy UI/Backend relies also in the auto-instrumentation to publish some metrics -->
+
+1. In Grafana, navigate to **Dashboards → Browse → `<USER_NAME>-toolings Canopy Dashboards`**
+
+2. Open the **Canopy UI Metrics Dashboard**:
+
+   > **Tip**: Expand the time range to 1-3 hours if metrics appear sparse. The time picker is located in the upper right corner of the dashboard.
+
+   ![Metrics Dashboard](./images/metrics1.2.png)
+
+3. **Generate Traffic to See Metrics**: If the dashboard is empty, open your Canopy UI in test environment and interact with it.
+
+   For example, copy paste a large text and click the **Summarize** button 3-5 times. This generates traffic through the entire stack (UI → Backend → LlamaStack) and populates all panels including "Backend Request Duration".
+
+   Wait 10-15 seconds for Prometheus to scrape the metrics, then refresh the Grafana dashboard.
+
+4. The dashboard displays:
+
+   ![Metrics Dashboard](./images/metrics3.png)
+
+   **High-Level Stats (Top Row):**
+   - **Total Requests (Last Hour)**: How many HTTP requests your UI has served
+   - **Average Response Time**: p50 latency for UI responses (should be < 500ms for good UX)
+   - **Error Rate (%)**: Percentage of failed requests (should be < 1%)
+   - **Active Requests**: Number of requests currently being processed
+
+   **Request Patterns:**
+   - **Request Rate (req/sec)**: Real-time view of traffic to your UI
+   - **Response Time Percentiles**: p50, p95, p99 latencies over time (watch for spikes)
+
+   **Health Indicators:**
+   - **HTTP Status Codes**: Distribution of 2xx, 4xx, 5xx responses
+   - **Backend Request Duration**: How long calls from UI to backend are taking (p95)
+
+The UI dashboard helps you understand the user experience. High latencies or error rates here mean users are having a poor experience, even if the backend and model are healthy.
+
+### Dashboard 3: Canopy-Backend Metrics
+
+Your Canopy Backend is the API layer that orchestrates calls between the UI and LlamaStackThis dashboard reveals backend performance and bottlenecks.
+
+1. In the same Grafana folder, open the **Canopy Backend Metrics Dashboard** to see:
+
+   **High-Level Stats (Top Row):**
+   - **Total API Requests (Last Hour)**: Volume of backend API calls
+   - **API Response Time (p95)**: 95th percentile latency for backend endpoints
+   - **Error Rate (%)**: Percentage of failed API calls
+   - **Active Requests**: Current backend request queue depth
+
+   ![Metrics Dashboard](./images/metrics3.1.png)
+
+   **Endpoint Performance:**
+   - **Request Rate by Endpoint**: Which API endpoints are getting the most traffic
+   - **Response Time by Endpoint (p95)**: Latency breakdown per endpoint (helps identify slow APIs)
+   - **Endpoint Performance Summary**: Table view with request rate, latency, and error rate per endpoint
+
+   **External Service Metrics:**
+   - **LLM Call Duration (Outbound to llamastack)**: How long calls to the shared vLLM model are taking (p50, p95, p99)
+   - **HTTP Status Distribution**: Success vs. error responses from the backend
+
+   ![Metrics Dashboard](./images/metrics3.2.png)
+
+The backend dashboard is crucial for debugging performance issues.
+
+### Dashboard 4: LlamaStack Token Metrics
+
+LlamaStack orchestrates LLM calls between Canopy Backend and vLLM, tracking token usage through OpenTelemetry. And why metrics here differ from vLLM? Because your LlamaStack tracks specifically your app's token usage, while vLLM shows total infrastructure load. Since the vLLM model in `ai501` is shared, these dashboards show different perspectives.
+
+1. Open the **LlamaStack Metrics Dashboard**:
+
+   > **Tip**: Expand the time range to 1-3 hours if metrics appear sparse.
+
+2. **Generate Traffic to See Metrics**: If the dashboard is empty, generate some inference requests from your code-server terminal:
+
+   ```bash
+   for i in {1..10}; do echo "Request $i:"; curl -s -X POST "http://llama-stack-service.<USER_NAME>-canopy.svc.cluster.local:8321/v1/chat/completions" -H "Content-Type: application/json" -d '{"model":"llama32","messages":[{"role":"user","content":"Hello, how are you?"}],"stream":false}' | jq -r '.usage.total_tokens // "error"'; sleep 2; done
+   ```
+
+   This sends 10 non-streaming requests to your LlamaStack instance. The metrics are batched every 60 seconds, so wait a minute then refresh the dashboard to see the token counts.
+
+   ![Metrics Dashboard](./images/metrics4.png)
+
+   **Dashboard Panels:**
+   - **Token Usage Overview**: Total, prompt, and completion tokens (last hour) plus real-time rate (tokens/sec)
+   - **Token Processing Rate**: Time-series graph showing prompt, completion, and total token throughput
+   - **Cumulative Token Usage**: Growing total since deployment
+   - **Model Summary Table**: Per-model/provider token breakdown
+
+   > **⚠️ Limitations**: LlamaStack telemetry only tracks non-streaming inference requests ([#3981](https://github.com/llamastack/llama-stack/issues/3981)) and doesn't instrument other APIs like agents or safety checks ([#2596](https://github.com/llamastack/llama-stack/issues/2596)). Canopy's streaming traffic won't appear here.
+
+<!-- ## Understanding the Metrics Flow
+
+Your AI assistant spans four layers, each with its own metrics:
+
+**1. Canopy-UI (`<USER_NAME>-canopy` namespace)** - The student-facing frontend
+- Metrics show: request rate, response time, HTTP status codes
+- **What it tells you**: Are students having a good experience?
+
+**2. Canopy-Backend (`<USER_NAME>-canopy` namespace)** - The backend
+- Metrics show: endpoint performance, outbound call duration, error rates
+- **What it tells you**: Where are bottlenecks in your application logic?
+
+**3. LlamaStack (`<USER_NAME>-canopy` namespace)** - The AI orchestration layer
+- Metrics show: token usage (prompt/completion), processing rate, model-specific throughput
+- **What it tells you**: How efficiently are you using LLM tokens? What's the prompt-to-completion ratio?
+
+**4. Shared vLLM Model (ai501 namespace)** - The inference engine
+- Metrics show: token throughput, latency, queue depth, cache usage
+- **What it tells you**: Is the shared model healthy and responsive? -->
