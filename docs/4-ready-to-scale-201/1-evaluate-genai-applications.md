@@ -49,7 +49,7 @@ For example, one scorer we will use is to make sure that the summarized text is 
 
 Let's see this in action!
 
-1. Go to Experiments (MLflow) -> <USER_NAME>-canopy -> summarization -> Traces
+1. Go to Experiments (MLflow) -> **<USER_NAME>-canopy** -> `summarization` -> Traces
 
     ![traces](./images/traces.png)
 

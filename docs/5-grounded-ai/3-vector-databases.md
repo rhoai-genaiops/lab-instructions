@@ -30,4 +30,4 @@ Vector databases are optimized to store and search across millions of vectors ef
 
 4. Go to your workbench and run through the notebook `experiments/5-rag/2-vector-databases.ipynb`
 
-After you are done with the notebook you can continue to learn about [Docling](5-grounded-ai-new/4-docling.md), which will teach you ways to process more complex document and formats.
+After you are done with the notebook you can continue to learn about [Docling](5-grounded-ai/4-docling.md), which will teach you ways to process more complex document and formats.
