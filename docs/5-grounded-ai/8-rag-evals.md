@@ -8,9 +8,12 @@ And I agree, so that's the end of this section!
 
 ...
 
-However, since we already have an evaluation framework, it would be a shame not to use it, so let's add some evaluations to make sure our RAG performs as expected after all.
+However, since we already have an evaluation framework, it would be a shame not to use it, so let's add some evaluations to make sure our RAG performs as expected after all.  
 
-To do that, we simply need to add a new eval folder with some tests in it.
+For RAG we also have the retreived text chunks, so we can build tests for those too. Here we specifically test if the retrieved chunks are relevant to the user question, and if the LLM use them to ground the answer.  
+MLflow have built-in tests for this that we will use, you can read more about them here: https://mlflow.org/docs/latest/genai/eval-monitor/scorers/llm-judge/rag/
+
+To add our new RAG evaluations, we simply need to add a new eval folder with some tests in it.
 
 1. Go to your workbench and navigate to `evals` folder.
 

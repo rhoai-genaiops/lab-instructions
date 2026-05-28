@@ -1,13 +1,12 @@
 # Evaluate Agents
 
-Your agent is now live, helping students and scheduling meetings with professors. But here's the thing - how do you know it's actually working correctly?
-
-Just like with testing in the earlier chapters, the same question gets answered differently every time. And that's fine... usually, but makes things a bit tricky.
+Your agent is now live, helping students and scheduling meetings with professors. But here's the thing - how do you know it's actually working correctly?  
+Let's do like in the previous chapters and add some evalutions for our agent!
 
 ## Agent traces
 
 Just like with summarization and RAG we get traces for our agents as well, which give good insight into which tools were used and in what order.  
-Let's take a look!
+Let's take a look:
 
 1. Go to OpenShift AI -> Develop & train -> Experiments (MLflow) -> <USER_NAME>-test Project and click on your student-assistant experiment
 
@@ -24,7 +23,7 @@ Let's take a look!
 When evaluating agents, we will focus on three areas:
 
 1. **Unit tests for individual tools** - Test each tool in isolation. Does the calendar API actually create events? Does the search return relevant results?
-2. **Text-to-JSON validation** - Can the LLM format tool calls correctly, and does it choose the right tools? (Spoiler: malformed JSON is where most agents break)
+2. **Text-to-JSON validation** - Can the LLM format tool calls correctly, and does it choose the right tools? (Spoiler: malformed JSON is where many agents break)
 3. **End-to-end evaluation** - Does the complete workflow help users?
 
 We've already set up an eval framework earlier, so let's put it to work testing our agent!
@@ -172,8 +171,8 @@ Respond with only "yes" or "no".
 ```
 
 4. Notice the `expected_tools` field in the tests - this tells the evaluator which tools the agent should call. This is used by the two new scorers `tool_call_correctness` and `tool_call_efficiency`. The eval pipeline will now check:
-- Did the agent call `search_knowledge_base` for the canopy question?
-- Did it call `find_professors_by_expertise` for the professor question?
+    - Did the agent call `search_knowledge_base` for the canopy question?
+    - Did it call `find_professors_by_expertise` for the professor question?
 
 6. Commit and push your changes:
 

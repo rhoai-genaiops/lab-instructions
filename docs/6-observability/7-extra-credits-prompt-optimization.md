@@ -31,7 +31,7 @@ Thumbs-down traces from Canopy are the ideal input. If you don't have enough yet
 Open your workbench and navigate to:
 
 ```
-experiments/6-prompt-optimization/prompt_optimization.ipynb
+experiments/6-observability/1-prompt-optimization.ipynb
 ```
 
 The notebook walks through seven steps:
