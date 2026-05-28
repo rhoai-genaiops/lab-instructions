@@ -126,7 +126,8 @@ usecase: student-assistant
 endpoint: /student-assistant
 scorers:
   - answer_quality
-  - tool_choice
+  - tool_call_correctness
+  - tool_call_efficiency
 judge_prompt: judge_prompt.txt
 tests:
   - inputs:
@@ -170,7 +171,7 @@ Answer "no" if it gives incorrect information, contradicts the expected answer, 
 Respond with only "yes" or "no".
 ```
 
-4. Notice the `expected_tools` field in the tests - this tells the evaluator which tools the agent should call. The eval pipeline will check:
+4. Notice the `expected_tools` field in the tests - this tells the evaluator which tools the agent should call. This is used by the two new scorers `tool_call_correctness` and `tool_call_efficiency`. The eval pipeline will now check:
 - Did the agent call `search_knowledge_base` for the canopy question?
 - Did it call `find_professors_by_expertise` for the professor question?
 
