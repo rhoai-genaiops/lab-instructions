@@ -55,12 +55,12 @@ Let's create some logs intentionally and then find them - simulating how you'd d
 2. Inside the container, generate custom log messages:
 
    ```bash
-   echo "🦙🦙🦙🦙" >> /tmp/custom.log
+   echo "🪄🪄🪄🪄" >> /tmp/custom.log
    tail -f /tmp/custom.log > /proc/1/fd/1 &
-   echo "🦙🦙🦙🦙" >> /tmp/custom.log
-   echo "🦙🦙🦙🦙" >> /tmp/custom.log
-   echo "🦙🦙🦙🦙" >> /tmp/custom.log
-   echo "🦙🦙🦙🦙" >> /tmp/custom.log
+   echo "🪄🪄🪄🪄" >> /tmp/custom.log
+   echo "🪄🪄🪄🪄" >> /tmp/custom.log
+   echo "🪄🪄🪄🪄" >> /tmp/custom.log
+   echo "🪄🪄🪄🪄" >> /tmp/custom.log
    exit
    ```
 
@@ -69,7 +69,7 @@ Let's create some logs intentionally and then find them - simulating how you'd d
 3. In the `Aggregated Logs` Tab, check the last logs or query specifically for your custom messages (in the Show Query button):
 
    ```logql
-   { log_type="application", kubernetes_pod_name=~"canopy-ui.*", kubernetes_namespace_name="<USER_NAME>-canopy" } |= `🦙🦙🦙🦙` | json
+   { log_type="application", kubernetes_pod_name=~"canopy-ui.*", kubernetes_namespace_name="<USER_NAME>-canopy" } |= `🪄🪄🪄🪄` | json
    ```
 
    ![Custom Log Messages](./images/logging3.png)

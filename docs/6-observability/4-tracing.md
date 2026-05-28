@@ -24,81 +24,34 @@ In this trace visualization, you can see the waterfall view showing:
 - Where the most time is spent (the longest bars)
 - Parent-child relationships (the tree structure)
 
-## Auto-Injecting Tracing into Canopy
 
-One of the powerful features of OpenShift's observability stack is the ability to automatically inject tracing into your applications without changing code.
+## Auto Tracing with MLflow
 
-### How Auto-Instrumentation Works
+MLflow has something called autologging which automatically captures any relevant requests whenever enabled.  
+We will use it here to capture all our OpenAI calls, which is what we use to communicate with the model from the backend.  
+You have already seen the traces in MLFlow, but let's also inspect the timeline data it captures.  
+For now it will be fairly simple tracing, but you will se it more complex tracing as soon as we get to agents 🤖
 
-The OpenTelemetry Operator can automatically [inject instrumentation](https://docs.redhat.com/en/documentation/red_hat_build_of_opentelemetry/3.9/html/configuring_the_instrumentation/otel-configuration-of-instrumentation#otel-autoinstrumentation_otel-configuration-of-instrumentation) into your pods by:
-1. Detecting the programming language (Python, Node.js, Java, etc.)
-2. Injecting the appropriate OTel SDK as a sidecar or init container
-3. Configuring environment variables to enable auto-instrumentation
-4. Sending traces to the OpenTelemetry Collector, which forwards them to Tempo
+1. Go to OpenShift AI -> Develop & train -> Experiments (MLflow) -> <USER_NAME>-test project
 
-For Canopy UI and Canopy Backend, this means you get distributed tracing with minimal configuration.
+2. Choose either the summarization or information-search experiment. Information Search will have a bit more tracing but both are fine
 
-### Enabling Auto-Instrumentation
+3. Go into Traces and choose the latest trace you sent and go to `Details & Timelines`
 
-The observability stack deployed with OpenShift AI includes the OpenTelemetry Operator. To enable tracing for Canopy's components, you would annotate the deployments. Because we're using python based apps (both for frontend and backend), we need to set the `instrumentation.opentelemetry.io/inject-python: "true"` label. We already did it by default in the [Canopy UI](https://github.com/rhoai-genaiops/frontend/blob/main/chart/templates/deployment.yaml#L18) and the [Canopy Backend](https://github.com/rhoai-genaiops/backend/blob/main/chart/templates/deployment.yaml#L20).
+   ![trace-timeline.png](./images/trace-timeline.png)
 
-## How Traces Flow Across Canopy AI App
+4. In here you can see the full breakdown of the trace, including all spans and relevant metadata.  
+   Click around a bit and see what's described in each span. You will even find information about which model was used if you look under `Completions`
 
-When a student asks a question, the request flows through multiple services: **Canopy-UI → Canopy-Backend → LlamaStack → vLLM**. 
+   ![model-name-completions.png](./images/model-name-completions.png)
 
-![Example Trace Visualization](./images/tracing0.1.png)
+5. You can also press the `Timeline` buttton to get a full breakdown of how long each span took
 
-Each component is instrumented with OpenTelemetry to create **spans** - records of work performed with timing data.
+   ![timeline-breakdown.png](./images/timeline-breakdown.png)
 
-**Trace Propagation:**
-- **Canopy-UI**: Creates the root span and propagates trace context via HTTP headers
-- **Canopy-Backend** : Receives the trace context, creates child spans for RAG queries and API calls
-- **LlamaStack**: Continues the trace with spans for inference operations, token counting, and model routing
-- **vLLM**: Generates spans for model inference and token generation
 
-These spans connect into a **distributed trace** - a complete tree showing the request's journey across all services. OpenTelemetry automatically handles trace context propagation, ensuring spans link correctly even as the request crosses service boundaries. The traces are exported to **Red Hat build of Tempo** for storage and querying.
-
-## Visualizing Traces in Grafana
-
-Now let's see distributed tracing in action by exploring your Canopy AI request traces.
-
-1. **Access the Traces Dashboard**: In your Grafana instance, navigate to the `<USER_NAME>-toolings Canopy Dashboards` folder and open **Canopy Distributed Traces**.
-
-   ![Trace List View](./images/tracing1.png)
-
-   The dashboard displays all captured traces for your Canopy AI application. Each row represents a complete request journey from user question to LLM response, showing:
-   - **Trace ID**: Unique identifier linking all spans in this request
-   - **Duration**: Total time from start to finish
-   - **Spans**: Number of operations captured in this trace
-   - **Service**: Which services participated (canopy-ui, canopy-backend, llamastack, vllm)
-
-2. **Explore a Trace**: Click any trace to see its detailed waterfall view, visualizing the complete request flow from Canopy-UI through to the LLM.
-
-   ![Trace Waterfall View](./images/tracing2.png)
-
-   **What the Trace Shows:**
-
-   The waterfall view displays the complete request hierarchy with precise timing. Each row represents a span, and indentation shows parent-child relationships:
-
-   - **canopy-ui**: Initial requests for host config and health checks (microseconds)
-   - **canopy-backend GET /feature-flags**: Frontend fetches feature toggles (890μs)
-   - **canopy-backend POST /summarize**: Main AI request (1.44s total)
-   - **llamastack-user4 /v1/chat/completions**: LLM inference call (1.35s)
-   - **InferenceRouter.openai_chat_completion**: LlamaStack internal routing (31ms)
-     - Model routing table lookups (1-69μs each)
-     - **stream_tokens_and_compute_metrics**: Actual token generation (1.32s)
-
-   **Key Insights:**
-   - **Performance Bottleneck**: The LlamaStack inference (1.35s) dominates the 1.44s total time
-   - **Service Boundaries**: Clear flow through UI → Backend → LlamaStack layers
-   - **Optimization Opportunities**: Model selection is fast (<2ms), but token streaming takes 1.32s
-   - **Debugging Power**: Instead of just seeing "request took 1.44s", you know exactly where time is spent
-
-3. **Inspect Span Details**: Click any span to see its attributes and metadata. The `InferenceRouter.openai_chat_completion` span is particularly useful as it shows the actual prompt sent to the LLM, the model used, and token counts.
-
-   ![Span Detail View](./images/tracing3.png)
-
-   Each span includes rich metadata like HTTP headers, model parameters, input/output samples, and error details - essential for debugging complex AI workflows.
-
+Note that this trace only captures spans that MLflow directly sees, so we don't have OGX or the frontend in here for example.  
+To add more information about parts of the stack outside MLflow we can `instrument` those pieces, either automatically or manually.  
+Since MLflow gives us all the information relevant for us right now though, we will not be doing any instrumentation here.
 
 You now have the three pillars of observability in place: metrics, logs, and traces. But there's one more signal that matters for AI systems -- **user feedback**. How do you know if your customers are happy with the AI's responses?

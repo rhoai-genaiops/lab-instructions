@@ -9,24 +9,22 @@ This module introduces the critical practice of implementing safety guardrails f
 At RDU, we're committed to building Canopy as a trustworthy educational tool. Guardrails are what transform a powerful language model into a responsible assistant that students and educators can rely on without concerns about academic integrity, bias, or harmful content.
 
 # 🖼️ Big Picture
-![big-picture-guardrails.png](images/big-picture-guardrails.png)
+![big-picture-guardrails.png](images/big-picture-guardrails.jpg)
 
 # 🔮 Learning Outcomes
 
 * Understand what guardrails are and why they're essential for production AI applications
 * Learn the limitations of prompt-level guardrails and why they need external enforcement
-* Deploy and configure Trusty AI Guardrails Orchestrator for multi-layered safety
-* Integrate detection systems including regex filters, HAP (Hate, Abuse, Profanity), prompt injection detection, and language detection
-* Combine system prompts with detector-based guardrails for robust safety policies
+* Deploy and configure NeMo Guardrails for multi-layered safety using a Helm chart
+* Experience how different detectors catch different types of problematic content
 * Test and harden your AI application against creative attempts to bypass safety measures
 
 # 🔨 Tools used in this module
 
-* **Trusty AI Guardrails Orchestrator**: External policy layer that coordinates multiple safety detectors before content reaches the LLM or user
-* **Llama Stack Safety APIs**: Integration layer for guardrails providers and safety shields
-* **Regex Detectors**: Pattern-based filters for blocking or flagging specific content patterns
-* **HAP Detector**: Classifier for detecting hate speech, abuse, and profanity
-* **Prompt Injection Detector**: Security layer to identify attempts to manipulate the AI's behavior
-* **Language Detector**: Multilingual safety to ensure compliance across different languages
-* **Llama Stack Playground**: Interactive environment for testing security shields and system prompts
-* **OpenShift & Helm Charts**: To deploy guardrails infrastructure in development environments
+* **NeMo Guardrails**: External policy layer that applies Colang-defined safety rails
+* **Regex Rules**: Pattern-based filters for blocking or flagging specific content patterns
+* **HAP Detector**: Classifier for detecting hate speech, abuse, and profanity (Granite Guardian)
+* **Prompt Injection Detector**: Security layer to identify attempts to manipulate the AI's behavior (DeBERTa)
+* **Language Detector**: Ensures responses stay in English (Lingua)
+* **Spikee**: Open Source automated prompt injection testing toolkit to benchmark your guardrails
+* **OpenShift & Helm Charts**: To deploy NeMo Guardrails infrastructure in development and production environments

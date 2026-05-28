@@ -13,108 +13,93 @@ There are typically two key parts to prompting:
 
 Together, they guide the model’s behavior and shape its response.
 
-> ℹ️ **Extra Info:** The System Prompt and User Prompt are not sent in seperately to the LLM, they are combined into a single prompt.  
-Typically like this:  
-\<System> *some system prompt*   
-\<User> *some user prompt*  
-and the model have just learned to treat the two parts differently.
+> ℹ️ **Reminder:** The System Prompt and User Prompt are not sent in separately to the LLM, they are combined into a single prompt.  
 
 ## 🎯 Why Prompt Engineering Matters for RDU’s Canopy
 
 At Redwood Digital University, we’re building **Canopy**, a platform designed to adapt to diverse student needs and teaching styles. That means that we not only need a good LLM, but also need to refine our prompts.
 
-With effective prompts, we can:
-
-* Make content more accessible for different learning levels.
-* Generate study guides, quiz questions, summaries, or personalized feedback.
-* Help educators save time while maintaining quality and consistency.
-
-But before we can trust an AI to assist learners, we need to explore how it behaves under different prompting conditions.
+Let's explore how our LLM behaves under different prompting conditions.
 
 
-## 🧪 Hands-On: The Prompt Playground
+## 🧪 Hands-On: Gen AI Playground
 
-We’ve created a **FastAPI Javascript app** where you can experiment with different prompting strategies.  
-Your goal is to find the **best system prompt** and configuration to **summarize** a given text.
+Red Hat OpenShift AI provides the ability to create a playground where you can experiment with different prompting strategies, alongside other experimentation capabilities. We are going to focus on `Prompt` part of it at the moment.
 
-Here’s what you can configure:
+Let's create a Playground!
 
-| Setting          | What it Does                                | Example                       |
-| ---------------- | ------------------------------------------- | ----------------------------- |
-| 🧾 System Prompt | Sets the AI’s role or behavior              | “You are a helpful tutor."     |
-| 💬 User Prompt   | The task you give                           | “This text is about...”        |
-| 🔥 Temperature   | How creative/varied the output will be (0 = serious and deterministic, 1 = creative and random) | “0.2 = strict, 0.8 = creative”  |
-| 🔢 Max Tokens    | Limits response length                      | “50 = short, 200 = detailed”   |
+1. Login to [OpenShift AI](https://data-science-gateway.<CLUSTER_DOMAIN>/). You’ll see some `Projects`. The one that is called `<USER_NAME>-canopy` is your experimentation environment! This is where we validate ideas before going to test and production stages 💪
 
+    User: `<USER_NAME>`
 
-And here is the text we ask you to summarize (in another word; the text you send into the User Prompt):
+    Password: `<PASSWORD>`
 
-```
-Tea preparation involves the controlled extraction of bioactive compounds from processed Camellia sinensis leaves. Begin by heating water to near 100°C to optimize solubility. Introduce a tea bag to a ceramic vessel, then infuse with hot water to initiate steeping—typically 3–5 minutes to allow for the diffusion of polyphenols and caffeine. Upon removal of the bag, optional additives like sucrose or lipid-based emulsions may be introduced to alter flavor profiles. The infusion is then ready for consumption.
-```
+   ![openshift-ai.png](./images/openshift-ai.png)
 
-![images/explain-like-8.jpg](images/explain-like-8.jpg)
+   Welcome to OpenShift AI! 👋🤖
 
-Use the Prompt Playground to:
+2. From the left menu, select `Gen AI studio` > `Playground`. Make sure you select `<USER_NAME>-canopy` namespace from the dropdown menu. Click `Create playground`.
 
-* Compare how different **system prompts** change the behavior of the same model.
-* Adjust **temperature** and **max tokens** to explore how output varies.
-* Decide on a system prompt template that will work well for **Canopy’s learning assistant** in future modules.
+	![genai-playground.png](./images/genai-playground.png)
 
-📌 **Tip**: Try changing the tone, specificity, or format of your system prompt to see how much it shapes the output. Don’t be afraid to get creative!
+3. Select the prompted model and click `Create`.
 
-The following info already entered to the playground:
+	![genai-playground-2.png](./images/genai-playground-2.png)
 
-- Model Name: 
-```
-llama32
-```
-- Model URL: 
-```
-https://llama32-ai501.<CLUSTER_DOMAIN>/
-```
+4. When the playground is ready, send a message to verify that is working 😊
 
-..now, it is up to what you feel like trying 🧪  
+	![genai-playground-3.png](./images/genai-playground-3.png)
 
-#### What is the best system prompt and settings you can find to summarize the above text?
+5. Your goal is to find the best system prompt and configuration to **summarize** a given text. 
 
-<details>
-<summary> 📜 Here are a few example System Prompts you can try.</summary>  
-<br>
+	Here’s what you can configure in the playground:
 
-```
-Write a short version of this.
-```
+	| Setting          | What it Does                                | Example                       |
+	| ---------------- | ------------------------------------------- | ----------------------------- |
+	| 🧾 System Prompt | Sets the AI’s role or behavior              | “You are a helpful tutor."     |
+	| 💬 User Prompt   | The task you give                           | “This text is about...”        |
+	| 🔥 Temperature   | How creative/varied the output will be (0 = serious and deterministic, 1 = creative and random) | “0.2 = strict, 0.8 = creative”  |
 
-```
-Summarize the text in a few sentences.
-```
+	You can see the Temperature setting on the `Model` tab, and System Prompt on the `Prompt` tab. And User Prompt is what you send to the model :)
 
-```
-Explain the given text as if I’m a 5-year-old.
-```
+	Start thinking about a good summarization prompt. And here is the text we ask you to summarize (in another word; the text you send into the User Prompt):
 
-```
-Explain the given text using only emojis.
-```
+	```
+	Tea preparation involves the controlled extraction of bioactive compounds from processed Camellia sinensis leaves. Begin by heating water to near 100°C to optimize solubility. Introduce a tea bag to a ceramic vessel, then infuse with hot water to initiate steeping—typically 3–5 minutes to allow for the diffusion of polyphenols and caffeine. Upon removal of the bag, optional additives like sucrose or lipid-based emulsions may be introduced to alter flavor profiles. The infusion is then ready for consumption.
+	```
 
-</details>
+	![images/explain-like-8.jpg](images/explain-like-8.jpg)
 
-Can you come up with something that explains the text even better without loosing important info?
+	Use the Gen AI Playground to:
 
-💡 If so, paste it into the Optional System Prompt Box on the top to keep hold of it for using across future lab exercise(s)
-```
-<PROMPT>
-```
+	* Compare how different **system prompts** change the behavior of the same model.
+	* Adjust **temperature** to explore how output varies.
+	* Decide on a system prompt template that will work well for Canopy’s Summarization feature.
 
-<iframe
-	src="https://ai-orientation-app-ai501.<CLUSTER_DOMAIN>/playground"
-	frameborder="0"
-	width="1600"
-	height="800"
-	style="border: 1px solid transparent; border-radius: 1px;"
-	loading="lazy">
-></iframe>
+	📌 **Tip**: Try changing the tone, specificity, or format of your system prompt to see how much it shapes the output. Don’t be afraid to get creative!
 
 
-Want more information about `Temperature` or `Max Tokens`? You have access to a Large Language Model that is quite knowledgeable, right? Feel free to ask 🙃
+6. What is the best system prompt and settings you can find to summarize the above text?
+
+	Here are a few example System Prompts you can try.
+
+	```
+	Write a short version of this.
+	```
+
+	```
+	Summarize the text in a few sentences.
+	```
+
+	```
+	Explain the given text as if I’m a 5-year-old.
+	```
+
+	```
+	Explain the given text using only emojis.
+	```
+
+	Can you come up with something that explains the text even better without losing important info?
+
+
+_Want more information about `Temperature`? You have access to a Large Language Model that is quite knowledgeable, right? Feel free to ask 🙃_

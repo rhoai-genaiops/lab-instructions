@@ -107,7 +107,6 @@ Like we've done multiple times before, let's update Canopy backend configuration
       enabled: true
       max_tokens: 2048 
       model: vllm-Llama-3.2-3B-Instruct-FP8/Llama-3.2-3B-Instruct-FP8 # 👈 update this ❗️❗️❗️
-      prompt: "<your prompt>"
     ```
 
 3. Click **Upgrade** to apply the changes.

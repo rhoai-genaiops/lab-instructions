@@ -16,6 +16,11 @@
       white-space: pre-wrap !important;     /* preserve line‑breaks but allow wrapping */
       overflow-wrap: break-word !important; /* break long words if needed */
     }
+    .markdown-section img {
+      border: 3px solid #ccc;
+      border-radius: 4px;
+      padding: 4px;
+    }
   </style>
 </head>
 <body>
@@ -40,29 +45,23 @@
         <input type="text" id="cdomain" name="clusterdomain" placeholder="Your cluster domain..">
       </div>
 
-
       <div class="user-inputs" style="display: none;">
         <label for="gitserver">Git Server (optional)</label><br/>
         <input type="text" id="gitserver" name="gitserver" placeholder="Your git server..">
       </div>
-      
-      <div class="user-inputs">
-        <label for="prompt">System Prompt (optional)</label><br/>
-        <input type="text" id="prompt" name="prompt" placeholder="You're a smart chatbot who only replies in emojis.">
-      </div>
 
-      <div class="" style="margin-left: 30px;">
-        <button class="storage-btns" onclick="setNamesInStorage()">Save</button>
-        <button class="storage-btns" onclick="clearStorage()">Clear</button>
+      <div style="display: flex; align-items: center; margin-left: 1px;">
+        <div style="display: flex; flex-direction: column;">
+          <button class="storage-btns" onclick="setNamesInStorage()">Save</button>
+          <button class="storage-btns" onclick="clearStorage()">Clear</button>
+        </div>
 
         <div class="dropdown">
-          <!-- class="dropbtn" -->
-          <button class="storage-btns"  style="background-color: #cc0000; color: white; border: 2px #FAB6B6;">Quick Links</button>
+          <button class="storage-btns" style="background-color: #cc0000; color: white; border: 2px #FAB6B6;">Quick Links</button>
           <div class="dropdown-content" id="dynamic-links">
             <!-- Links will be populated dynamically with JavaScript -->
           </div>
         </div>
-
       </div>
   </div>
 
@@ -73,7 +72,6 @@
     document.getElementById("pass").value = localStorage.getItem('PASSWORD') ? localStorage.getItem('PASSWORD') : '';
     document.getElementById("cdomain").value = localStorage.getItem('CLUSTER_DOMAIN') ? localStorage.getItem('CLUSTER_DOMAIN') : '';
     document.getElementById("gitserver").value = localStorage.getItem('GIT_SERVER') ? localStorage.getItem('GIT_SERVER') : '';
-    document.getElementById("prompt").value = localStorage.getItem('PROMPT') ? localStorage.getItem('PROMPT') : '';
 
     // Populate dropdown links with dynamic values
     function populateDropdownLinks() {
@@ -93,8 +91,7 @@
         { name: '☕️ Git Server', url: `https://${gitServer}` },
         { name: '📺 OpenShift Console', url: `https://console-openshift-console.${clusterDomain}` },
         { name: '🧠 OpenShift AI Dashboard', url: `https://data-science-gateway.${clusterDomain}` },
-        { name: '🐙 Argo CD', url: `https://argocd-server-${username}-toolings.${clusterDomain}` },
-        { name: '🦙 Prompt Tracker', url: `https://prompt-tracker-ai501.${clusterDomain}/${username}/${clusterDomain}` }
+        { name: '🐙 Argo CD', url: `https://argocd-server-${username}-toolings.${clusterDomain}` }
       ];
       
       links.forEach(link => {
@@ -112,7 +109,6 @@
     function setNamesInStorage () {
       let uname = document.getElementById('uname').value.toLowerCase();
       let pass = document.getElementById('pass').value;
-      let prompt = document.getElementById('prompt').value;
       let cdomain = (document.getElementById('cdomain').value.toLowerCase().indexOf('https://') > -1) 
                     ? document.getElementById('cdomain').value.toLowerCase().substring(8).replace(/[\/,&,?]/g, "")  
                     : document.getElementById('cdomain').value.toLowerCase().replace(/[\/,&,?]/g, "");
@@ -138,7 +134,6 @@
       localStorage.setItem('USER_NAME', uname);
       localStorage.setItem('PASSWORD', pass);
       localStorage.setItem('CLUSTER_DOMAIN', cdomain);
-      localStorage.setItem('PROMPT', prompt);
       // gitserver is not nullable
       if (gitserver !== '') {
         localStorage.setItem('GIT_SERVER', gitserver);
@@ -159,13 +154,11 @@
     function clearStorage () {
       console.info('INFO - clearing user and cluster');
       localStorage.removeItem('USER_NAME');
-      localStorage.removeItem('PROMPT');
       localStorage.removeItem('PASSWORD');
       localStorage.removeItem('CLUSTER_DOMAIN');
       localStorage.removeItem('GIT_SERVER');
       document.getElementById('uname').value = '';
       document.getElementById('pass').value = '';
-      document.getElementById('prompt').value = '';
       document.getElementById('cdomain').value = '';
       document.getElementById('gitserver').value = '';
       location.reload();

@@ -9,12 +9,12 @@ This module bridges the gap between basic AI interactions and intelligent system
 At RDU, we're building Canopy to help educators and students interact with vast amounts of academic content. RAG is the technology that makes this possible, turning your documents into searchable, queryable knowledge that enhances every AI interaction.
 
 # 🖼️ Big Picture
-![big-picture-rag](images/big-picture-rag.png)
+![big-picture-rag](images/big-picture-rag.jpg)
 
 # 🔮 Learning Outcomes
 
 * Understand RAG and how it gives AI access to your course materials
-* Deploy vector databases and build RAG systems with LlamaStack
+* Deploy vector databases and build RAG systems with Open GenAI Stack (OGX)
 * Process complex PDFs and documents using Docling
 * Create intelligent educational assistants that cite their sources
 * Deploy production-ready knowledge systems using GitOps
@@ -23,7 +23,8 @@ At RDU, we're building Canopy to help educators and students interact with vast 
 
 # 🔨 Tools used in this module
 
-* **LlamaStack RAG APIs**: Three-layer architecture for building retrieval-augmented applications
+* **[Open GenAI Stack, formerly known as Llama Stack](https://ogx-ai.github.io/)** - An open-source framework for building generative AI applications
+* **OGX RAG APIs**: Three-layer architecture for building retrieval-augmented applications
 * **Milvus Vector Database**: High-performance vector database for semantic search and retrieval
 * **Docling**: Advanced document processing pipeline for PDF analysis and content extraction
 * **RAG Tools**: Document ingestion, chunking, and querying capabilities

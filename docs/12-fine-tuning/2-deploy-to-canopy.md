@@ -82,7 +82,7 @@ Now that we have a new model deployed, let's add it to our MaaS so anyone who ne
 
 Now that we have the new model in MaaS, let's add it to our test Llama Stack so we can test it in Canopy! 🙌
 
-1. Go into your workbench and open `genaiops/test/llama-stack/config.yaml`
+1. Go into your workbench and open `genaiops/test/ogx/config.yaml`
 
 2. Add a new model in the yaml to reflect the socratic-model:
 

@@ -2,7 +2,7 @@
 
 ## From tools to agents
 
-You've seen how LLMs can use tools - they understand requests, format tool calls, and interpret results. But what if the LLM needs to use *multiple* tools afte each other? Or *reason* about which tool to use?  
+You've seen how LLMs can use tools - they understand requests, format tool calls, and interpret results. But what if the LLM needs to use *multiple* tools after each other? Or *reason* about which tool to use?  
 
 This is where **agentic workflows** come in.
 

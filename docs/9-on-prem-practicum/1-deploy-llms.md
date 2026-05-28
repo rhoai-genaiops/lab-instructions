@@ -58,7 +58,7 @@ In OpenShift AI, we use **KServe** with **vLLM** as the serving runtime to deplo
 
 ### Deploy Your First On-Prem Model
 
-1. Navigate to **OpenShift AI** → **AI Hub** → **Catalog** and choose `Community and custom models`. Find `TinyLlama` there.
+1. Navigate to **OpenShift AI** → **AI hub** → **Models** and choose `Other models`. Find `TinyLlama` there.
 
     ![model-catalog.png](./images/model-catalog.png)
 
@@ -70,11 +70,19 @@ In OpenShift AI, we use **KServe** with **vLLM** as the serving runtime to deplo
 
     **Model deployment name:** `tinyllama`
 
+    Here, click `Edit resource name`
+    
+    ![tinyllama-name.png](images/tinyllama-name.png)
+    
+    ..and replace `tinyllamatinyllama-11b-chat-v1` with just `tinyllama`. 
+
+    ![tinyllama-name2.png](images/tinyllama-name2.png)
+
     **Serving runtime:** `CUSTOM - vLLM Serving Runtime for CPU`
 
     ![tiny-deploy.png](./images/tiny-deploy.png)
 
-    Dont hit `Next` yet!
+    Don't hit `Next` yet!
 
 4. Expand `Customize resource requests and limits` to give a bit more CPU to TinyLlama:
 

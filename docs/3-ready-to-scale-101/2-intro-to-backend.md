@@ -1,0 +1,79 @@
+# Canopy Backend
+
+We'll separate out the LLM business logic from the frontend into its own backend so that we can iterate on them independently.
+
+1. We'll deploy the backend to our development environment the same way we deployed the other components. Go back to OpenShift Console > `Helm` > `Releases` in `<USER_NAME>-canopy` project.
+   
+   ![canopy-be-helm-releases.png](./images/canopy-be-helm-releases.png)
+
+2.  Under `Chart Repositories` select  `Canopy Helm Charts` and click `Canopy Backend` > `Create`.
+
+    ![canopy-be-helm.png](./images/canopy-be-helm.png)
+
+3. Open up the `YAML view`. There are a lot of default variables there. For now don't worry about them and just override the values with the ones provided below.
+
+    As we discussed, backend will be the one talking to the model, to the registry, and more. Therefore we need to make sure we provide the correct connection details.
+
+    We also need to provide your chosen System Prompt. Just like we did in the Notebooks, we need to include the system prompt while calling the model.
+
+    Delete the content of the box, and just copy the below YAML snippet 🙏
+
+    ```yaml
+    summarization:
+      enabled: true
+      model: llama32
+      endpoint: 'http://llama-32-predictor.ai501.svc.cluster.local:8080/v1'
+      mlflow_prompt_version: latest
+      mlflow_prompt: summarization # 👈 your prompt registry entry 
+    ```
+
+    ![canopy-be-values.png](./images/canopy-be-values.png)
+ 
+    ..leave the rest default and hit `Create`.
+
+4. Verify that it is running on the OpenShift Console.
+   
+   ![canopy-be-ocp.png](./images/canopy-be-ocp.png)
+
+
+## Update Canopy Frontend
+
+1. Now it is time to make Canopy UI talk with backend, instead of directly sending requests to the LLM. In order to do that, we need to update some values in our helm chart. In the `Workloads` >  `Topology` view, find the frontend called `canopy-ui` and click on the three dots underneath > `Upgrade`
+
+    ![update-canopy-ui.png](./images/update-canopy-ui.png)
+
+2. In the values, open up the `Form view`, find the `BACKEND_ENDPOINT` key and add the below value.
+   
+    ```bash
+    http://canopy-backend:8000
+    ```
+
+    ![update-canopy-ui-2.png](./images/update-canopy-ui-2.png)
+
+3. Then, go a little bit down, expand the `image` value and update the tag to point to a newer version:
+   
+   - tag: **0.11** (replace `simple-0.5` with `0.11`.)
+  
+  ..and now hit `Upgrade`!
+
+    ![update-canopy-ui-3.png](./images/update-canopy-ui-3.png)
+
+1. Verify that Canopy UI still works as expected by clicking the little arrow and accessing the UI:
+   
+   ![update-canopy-ui-4.png](./images/update-canopy-ui-4.png)
+
+2. Ask it to summarize a text again!
+
+    ```
+    Tea preparation involves the controlled extraction of bioactive compounds from processed Camellia sinensis leaves. Begin by heating water to near 100°C to optimize solubility. Introduce a tea bag to a ceramic vessel, then infuse with hot water to initiate steeping—typically 3–5 minutes to allow for the diffusion of polyphenols and caffeine. Upon removal of the bag, optional additives like sucrose or lipid-based emulsions may be introduced to alter flavor profiles. The infusion is then ready for consumption.
+    ```
+   
+   ![canopy-ui-after-backend.png](./images/canopy-ui-after-backend.png)
+
+Now that we're happy with the first iteration of our Canopy student assistant, it's time to put it in the hands of real users. To do that, we need to deploy everything we've built so far into a test, and eventually a production environment. But this time, we'll do it in a more robust, consistent, and repeatable way. That's why we're stepping into the world of: GitOps 🐙.
+
+By releasing early, we get feedback sooner, allowing us to make course corrections before investing too much. 
+
+And by investing in automation and GitOps, we can release often! 
+
+  ![keep-calm.png](./images/keep-calm.png ':size=300 :class=center')
