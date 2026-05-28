@@ -43,6 +43,7 @@
   * [🦔 Automate Guardrails Checks](7-honor-code/4-automate-checks.md)
   * [💂‍♂️ Canopy with Guardrails](7-honor-code/5-canopy-with-guardrails.md)
 * [Autonomous Systems 101](8-agents/README.md)
+  * [🚂 Intro to Agents](8-agents/0-intro-to-agents.md)
   * [🔨 What are Tools?](8-agents/1-what-are-tools.md)
   * [🤖 Agentic Workflows](8-agents/2-agentic-workflows.md)
   * [🦙 Agentic Llamas](8-agents/3-agentic-llamas.md)
