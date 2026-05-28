@@ -30,7 +30,7 @@ Canopy Backend → Llama Stack → NeMo Guardrails → LLM
       model: vllm-llama32/llama32  # 👈 UPDATE THIS ‼️‼️‼️‼️
       endpoint: 'http://llama-stack-service:8321/v1' # 👈 UPDATE THIS ‼️‼️‼️‼️
       mlflow_prompt: summarization
-    mlflow_prompt_version: latest
+      mlflow_prompt_version: latest
   ```
 
 4. Check the Topology view to make sure everything is healthy ❤️

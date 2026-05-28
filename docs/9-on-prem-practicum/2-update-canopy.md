@@ -38,14 +38,7 @@ Now that we have a model running locally, it's time to connect it to our applica
       max_tokens: 512 # 👈 ADD this ❗️❗️❗️
     ```
 
-7. And let's disable `guardrails` to make things slightly faster for the tinyllama's sake:)
-
-    ```yaml
-    shields:
-      enabled: false # 👈 UPDATE this ❗️❗️❗️
-    ```
-
-8. Click **Upgrade** to apply the changes.
+7. Click **Upgrade** to apply the changes.
 
 ### 🌳 Test Canopy with the New Model
 

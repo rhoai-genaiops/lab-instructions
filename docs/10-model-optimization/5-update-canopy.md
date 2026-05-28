@@ -66,8 +66,6 @@ Once Llama Stack and backend are running, let's verify it can communicate with t
       enabled: true
       milvus:
         service: "milvus-test"
-    guardrails:  # 👈 Update this too❗︎ ❗︎ ❗︎ ❗︎ ❗︎
-      enabled: false # 👈 Update this too❗︎ ❗︎ ❗︎ ❗︎ ❗︎  
     ```
 
 2. Now let's update the `backend`. Open up `genaiops-gitops/canopy/test/backend/config.yaml` and change every `llama32` to `llama32-fp8`.
@@ -89,7 +87,7 @@ Once Llama Stack and backend are running, let's verify it can communicate with t
       vector_db_id: latest
       mcp_calendar_url: "http://canopy-mcp-calendar-mcp-server:8080/sse"
     shields:   
-      enabled: false # 👈 Update this  ❗︎❗︎
+      enabled: true 
       endpoint: http://canopy-guardrails/v1
       model: llama32
       config: canopy-guardrails
