@@ -4,7 +4,7 @@ So far we created good regex rules and added some guardrails to prevent misuse o
 
 ## Test Your System for Prompt Injection with Spikee
 
-Spikee, as their [website](https://spikee.ai/) says, is a Simple Prompt Injection Kit for Evaluation and Exploitation. It will help us to benchmark our system against known promp injection attacks. 
+Spikee, as their [website](https://spikee.ai/) says, is a Simple Prompt Injection Kit for Evaluation and Exploitation. It will help us to benchmark our system against known prompt injection attacks. 
 
 1. Let's go back to your workbench and run the below commands in your terminal:
 
@@ -21,7 +21,7 @@ Spikee, as their [website](https://spikee.ai/) says, is a Simple Prompt Injectio
     mv vllm_local.py targets/
     ```
 
-3. Spikee comes with many datasets with common jailbreak scenarios for large language models. Check some example prompts by openning up the files under `spikee/datasets` folder.
+3. Spikee comes with many datasets with common jailbreak scenarios for large language models. Check some example prompts by opening up the files under `spikee/datasets` folder.
 
     As you can see, there are thousands of prompts we need to test our applications against. But of course it will take time. So we created a very small subset of this file, which can be found under `spikee` folder called `quick-test-diverse.jsonl`. Check the prompts there as well.
 
@@ -32,7 +32,7 @@ Spikee, as their [website](https://spikee.ai/) says, is a Simple Prompt Injectio
     mv quick-test-diverse.jsonl datasets/
     ```
 
-4. We are not ready to run some tests! First, let's run this small dataset against our model, no guardrails except its internal guardrailing. And see how the model behaves.
+4. We are now ready to run some tests! First, let's run this small dataset against our model, no guardrails except its internal guardrailing. And see how the model behaves.
 
     ```bash
     spikee test --dataset datasets/quick-test-diverse.jsonl --target vllm_local  --attack best_of_n --attack-iterations 1
@@ -155,7 +155,7 @@ Spikee, as their [website](https://spikee.ai/) says, is a Simple Prompt Injectio
     </code></pre> 
     </div>
 
-    When you run such test, you can check the details in the report and see what kind of attacks got successfull and plan what you need to improve; maybe a better prompt injection model or retrain the existing one, maybe some simple additions to regex..
+    When you run such test, you can check the details in the report and see what kind of attacks got successful and plan what you need to improve; maybe a better prompt injection model or retrain the existing one, maybe some simple additions to regex..
 
 
 Time to take the guardrails to higher environments 🌳🛡️

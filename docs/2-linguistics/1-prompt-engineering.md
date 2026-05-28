@@ -13,7 +13,7 @@ There are typically two key parts to prompting:
 
 Together, they guide the model’s behavior and shape its response.
 
-> ℹ️ **Reminder:** The System Prompt and User Prompt are not sent in seperately to the LLM, they are combined into a single prompt.  
+> ℹ️ **Reminder:** The System Prompt and User Prompt are not sent in separately to the LLM, they are combined into a single prompt.  
 
 ## 🎯 Why Prompt Engineering Matters for RDU’s Canopy
 
@@ -24,7 +24,7 @@ Let's explore how our LLM behaves under different prompting conditions.
 
 ## 🧪 Hands-On: Gen AI Playground
 
-Red Hat OpenShift AI provides the ability to create a playground where you can experiment with different prompting strategies, alongside with other experimentation capabilities. We are going to focus on `Prompt` part of it at the moment.
+Red Hat OpenShift AI provides the ability to create a playground where you can experiment with different prompting strategies, alongside other experimentation capabilities. We are going to focus on `Prompt` part of it at the moment.
 
 Let's create a Playground!
 
@@ -99,7 +99,7 @@ Let's create a Playground!
 	Explain the given text using only emojis.
 	```
 
-	Can you come up with something that explains the text even better without loosing important info?
+	Can you come up with something that explains the text even better without losing important info?
 
 
 _Want more information about `Temperature`? You have access to a Large Language Model that is quite knowledgeable, right? Feel free to ask 🙃_

@@ -167,6 +167,6 @@ Let's deploy some OGX (Llama Stack) for Canopy!
 
 There is one more Notebook we'd like to go through and it is to get you hands on with OGX before we update our backend to use it.
 
-Head over to you workbench and follow `experiments/5-rag/4-using-ogx.ipynb` notebook.
+Head over to your workbench and follow `experiments/5-rag/4-using-ogx.ipynb` notebook.
 
 When you are done, let's enable some automation for RDU students 🌳📚

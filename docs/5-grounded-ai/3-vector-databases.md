@@ -1,6 +1,6 @@
 # Vector Databases - Milvus
 
-Now that we know what embeddings are, we need to be able to store and search them somewhere, preferrably that's not just local.  
+Now that we know what embeddings are, we need to be able to store and search them somewhere, preferably that's not just local.  
 For this, we will use Milvus, a high-performant opensource **Vector Database** (as we saw in the previous chapter, embeddings are vectors so they fit perfectly with a vector database).  
 Vector databases are optimized to store and search across millions of vectors efficiently.
 
@@ -26,7 +26,7 @@ Vector databases are optimized to store and search across millions of vectors ef
 
     ![attu](./images/attu.png)
 
-    I promise, it will soon look more intersting!
+    I promise, it will soon look more interesting!
 
 4. Go to your workbench and run through the notebook `experiments/5-rag/2-vector-databases.ipynb`
 

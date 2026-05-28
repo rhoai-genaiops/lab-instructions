@@ -15,7 +15,7 @@ Context: {context}
 Question: {question}
 ```
 
-Notice how we send in both the question (which we previously sent in by itself with just the system prompt) and the context. `{something}` designate variables here that can be populated by the question and context texts (or anything else you wish).  
+Notice how we send in both the question (which we previously sent in by itself with just the system prompt) and the context. `{something}` designates variables here that can be populated by the question and context texts (or anything else you wish).  
 
 However, we can't send the entire knowledge of the universe of text in as context. In fact, the less context we send in, the faster the reply will be. So we need some way to send in as little but meaningful context as possible.  
 

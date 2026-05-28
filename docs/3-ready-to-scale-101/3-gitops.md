@@ -17,7 +17,7 @@ Let's setup the foundation of our GitOps system and deploy all the components we
 
 ## Log in to the cluster:
 
-In order to interact with OpenShift via the command line ou will need to log into the cluster. Using the terminal window in Visual Studio Code: 
+In order to interact with OpenShift via the command line you will need to log into the cluster. Using the terminal window in Visual Studio Code: 
 
   ```bash
     export CLUSTER_DOMAIN=<CLUSTER_DOMAIN>
@@ -76,7 +76,7 @@ In order to interact with OpenShift via the command line ou will need to log int
     echo https://$(oc get route/token-visualizer -n <USER_NAME>-toolings --template='{{.spec.host}}')
     ```
   
-  Enter the URL of the LLM we are using, hit Enter and visualize how many token we've been sending and generating since start of the enablement :)
+  Enter the URL of the LLM we are using, hit Enter and visualize how many tokens we've been sending and generating since start of the enablement :)
 
   ```bash
   https://llama32-ai501.<CLUSTER_DOMAIN>
@@ -142,7 +142,7 @@ Gitea is a lightweight, self-hosted Git server that allows teams to manage repos
     ```
 6. Now check the Argo CD's Application view on UI to see if ApplicationSet was able to see the subfolders under `toolings` and deploy the applications for us!
 
-7. As Argo CD sync's the resources we can see them in the cluster as well. In the workbench run the following:
+7. As Argo CD syncs the resources we can see them in the cluster as well. In the workbench run the following:
 
     ```bash
     oc get projects | grep <USER_NAME>

@@ -130,7 +130,7 @@ We will be triggering it from a Tekton Pipeline, where we both will have a step 
 
     And you can also check the GuideLLM results stored in the S3 bucket as an artifact under the `test-results` bucket. 
 
-    Go to MinIO UI and login with your credenials: [https://minio-ui-<USER_NAME>-toolings.<CLUSTER_DOMAIN>/browser](https://minio-ui-<USER_NAME>-toolings.<CLUSTER_DOMAIN>/browser)
+    Go to MinIO UI and login with your credentials: [https://minio-ui-<USER_NAME>-toolings.<CLUSTER_DOMAIN>/browser](https://minio-ui-<USER_NAME>-toolings.<CLUSTER_DOMAIN>/browser)
 
     ![guidellm-results.png](./images/guidellm-results.png)
 

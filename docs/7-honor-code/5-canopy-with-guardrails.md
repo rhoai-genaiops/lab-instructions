@@ -4,7 +4,7 @@ We did a few tests and are satisfied with the results. But before we bring all t
 
 ## Deploy NeMo Guardrails via GitOps
 
-1. Let's bring NeMo to test and prod evironments by creating the necessary folders. We want separate instances, cause when we update our guardrails to evaluate things, we wouldn't want effect production.
+1. Let's bring NeMo to test and prod evironments by creating the necessary folders. We want separate instances, cause when we update our guardrails to evaluate things, we wouldn't want to affect production.
 
     ```bash
     mkdir -p /opt/app-root/src/genaiops-gitops/canopy/test/nemo-guardrails-orchestrator

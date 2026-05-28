@@ -87,7 +87,7 @@ We know that you just put your best system prompt to the registry but let's see 
 
     _It takes a minute or two for Canopy to invalidate cache and pull the new system prompt. If you don't want to wait, just restart the pod💀_
 
-    Notice that you didn't have to change anything in the code or redeploy because your new prompt became the `latest` prompt automatically. Of course we won't be YOLO and use `latest` prompt for the production without any testing and evaluations. But before talking about these, we need to have a better understanding of what is happening in the background, and also create test and prod environments in a more robust, reproducable way!
+    Notice that you didn't have to change anything in the code or redeploy because your new prompt became the `latest` prompt automatically. Of course we won't be YOLO and use `latest` prompt for production without any testing and evaluations. But before talking about these, we need to have a better understanding of what is happening in the background, and also create test and prod environments in a more robust, reproducable way!
 
     ![summarization-prompt-4.png](./images/summarization-prompt-4.png)
 

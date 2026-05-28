@@ -1,6 +1,6 @@
 ## Automate the Flow with Tekton
 
-1. Let's automate this whole flow when there is a new document uplaoded to MinIO! For that we need to deploy a Tekton pipeline to handle triggering the KFP (Kubeflow Pipelines) as well as some surrounding ops tasks (very similar to what we did in Ready to Scale 201).
+1. Let's automate this whole flow when there is a new document uploaded to MinIO! For that we need to deploy a Tekton pipeline to handle triggering the KFP (Kubeflow Pipelines) as well as some surrounding ops tasks (very similar to what we did in Ready to Scale 201).
     In the end, the whole flow will look like this:
 
     ![doc-ingestion-tekton-flow.png](./images/doc-ingestion-tekton-flow.png)
@@ -46,7 +46,7 @@ Go to MinIO ([https://minio-ui-<USER_NAME>-toolings.<CLUSTER_DOMAIN>](https://mi
 
     ![minio-webhook-2.png](./images/minio-webhook-2.png)
 
-6. Strangely on top, MinIO will ask you to restart it to make the configuration takes effec. Click `Restart` and just refresh the page 🤷
+6. Strangely on top, MinIO will ask you to restart it to make the configuration takes effect. Click `Restart` and just refresh the page 🤷
 
     ![minio-webhook-3.png](./images/minio-webhook-3.png)
 
