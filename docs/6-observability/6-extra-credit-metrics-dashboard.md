@@ -105,6 +105,9 @@ Your Canopy Backend is the API layer that orchestrates calls between the UI and 
 
 The backend dashboard is crucial for debugging performance issues.
 
+
+⚠️⚠️  This dashboard is under construction. We'll be back shortly. ⚠️ ⚠️ 
+
 ### Dashboard 4: LlamaStack Token Metrics
 
 LlamaStack orchestrates LLM calls between Canopy Backend and vLLM, tracking token usage through OpenTelemetry. And why metrics here differ from vLLM? Because your LlamaStack tracks specifically your app's token usage, while vLLM shows total infrastructure load. Since the vLLM model in `ai501` is shared, these dashboards show different perspectives.
