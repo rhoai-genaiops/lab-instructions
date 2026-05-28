@@ -80,9 +80,9 @@ We will focus on **text generation** — specifically **Large Language Models (L
   <input type="radio" name="quiz-llm-type" id="llm-type-wrong3" class="quiz-radio-llm-type">
   <label for="llm-type-wrong3" class="quiz-option-llm-type" data-correct="false">🎬 Video</label>
 
-  <div class="feedback-llm-type" data-feedback="correct">✅ Correct! The "L" in LLM stands for Language — they take text in and produce text out. If there is anything to internalize from these 5 days, this is it!</div>
+  <div class="feedback-llm-type" data-feedback="correct">✅ Correct! The second "L" in LLM stands for Language — they take text in and produce text out. If there is anything to internalize from these 5 days, this is it!</div>
   <div class="feedback-llm-type" data-feedback="wrong1">❌ Image generation models exist, but LLMs specifically work with text. The "Language" in Large Language Model is the clue!</div>
-  <div class="feedback-llm-type" data-feedback="wrong2">❌ Audio models exist (like Whisper), but LLMs are all about text. The "L" stands for Language!</div>
+  <div class="feedback-llm-type" data-feedback="wrong2">❌ Audio models exist (like Whisper), but LLMs are all about text. The second "L" stands for Language!</div>
   <div class="feedback-llm-type" data-feedback="wrong3">❌ Video generation is a thing, but LLMs specifically generate text. Think: Large *Language* Model.</div>
 </div>
 </div>

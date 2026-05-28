@@ -112,7 +112,7 @@ We will be triggering it from a Tekton Pipeline, where we both will have a step 
 
 10. And lastly we need to do the same for **prompts** 💥💥💥 
 
-    Go to your code-server workbench, and open up the `experiments/4-ready-to-scale-201/3-mlflow-webhook.ipynb` and run the first cells. It will create a webhook on MLflow side, when you add a new prompt, it will trigger the Tekton pipeline.
+    Go to your code-server workbench, and open up the `experiments/4-ready-to-scale-201/3-mlflow-webhook.ipynb` and run the first 3 code cells. It will create a webhook on MLflow side, when you add a new prompt, it will trigger the Tekton pipeline.
 
     ![mlflow-webhook-notebook.png](./images/mlflow-webhook-notebook.png)
 

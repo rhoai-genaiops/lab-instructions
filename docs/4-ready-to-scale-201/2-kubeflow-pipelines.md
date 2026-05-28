@@ -60,6 +60,7 @@ The evaluation pipeline is inside of a repository called `evals`, where both the
           messages:
               - role: "user"
                 content: "The Forest Canopy Structure course at Redwood Digital University covers the vertical layering of forest ecosystems, including the emergent, canopy, understory, and forest floor layers. Each layer supports distinct plant and animal communities adapted to the varying light, temperature, and humidity conditions found at different heights."
+          session_id: "test-session-004"
         expectations:
           expected_result: "The course covers forest ecosystem layers - emergent, canopy, understory, and forest floor - each with distinct communities adapted to their light, temperature, and humidity conditions."
 
