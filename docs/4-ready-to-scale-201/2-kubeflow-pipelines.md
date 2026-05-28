@@ -4,7 +4,7 @@ Now that we know how the evaluation works, let's automate it by using pipelines!
 
 ## The Kubeflow pipeline
 
-We will be using Kubeflow Pipelines as our pipeline framework of choise for running the evaluation.  
+We will be using Kubeflow Pipelines as our pipeline framework of choice for running the evaluation.  
 Kubeflow pipelines are handy for data science/AI engineering tasks as it is Python based and works nicely with OpenShift AI by displaying the pipeline run inside the OpenShift AI dashboard.
 
 
@@ -47,7 +47,7 @@ The evaluation pipeline is inside of a repository called `evals`, where both the
    git clone https://<USER_NAME>:<PASSWORD>@gitea-gitea.<CLUSTER_DOMAIN>/<USER_NAME>/evals.git
    ```
 
-2. Inside, you will find a few folders, one called `evals-pipeline` and one for each usecase that we are going to want to run evaluations on - `summariztion` is the only one relevant for us for now, the rest are slight spoilers for the upcoming modules 🤫  
+2. Inside, you will find a few folders, one called `evals-pipeline` and one for each usecase that we are going to want to run evaluations on - `summarization` is the only one relevant for us for now, the rest are slight spoilers for the upcoming modules 🤫  
 
     Open up `evals/summarization/summary_tests.yaml` to see what tests we will run. Make sure to add some of your own examples as well ✍️
 

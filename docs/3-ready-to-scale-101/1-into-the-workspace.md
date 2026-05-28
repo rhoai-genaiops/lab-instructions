@@ -5,7 +5,7 @@ Before we move forward, let's explore the main pieces that we are using in the C
    - **OpenAI-compatible client** — to send prompts to the model
    - **MLflow** — to manage prompts and trace interactions
 
-In this section, we’ll launch a Workbench on Red Hat OpenShift AI to spin up a Code Server environment. This gives us a browser-based IDE where we can run Python notebooks and start interacting with the the model and MLflow programmatically.
+In this section, we’ll launch a Workbench on Red Hat OpenShift AI to spin up a Code Server environment. This gives us a browser-based IDE where we can run Python notebooks and start interacting with the model and MLflow programmatically.
 
 You’ll use this environment to:
 
@@ -69,5 +69,5 @@ When it is in running state, open it by clicking its name and use your credentia
 
    And now, feel free to experiment! Read and run the cells in the notebook! When you are done, come back here:)
 
-You have now set up your wokspace for these exercises and demonstrated interacting with a model.
+You have now set up your workspace for these exercises and demonstrated interacting with a model.
 

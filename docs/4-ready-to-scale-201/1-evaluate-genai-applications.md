@@ -31,7 +31,7 @@ Alright, let's onto the evaluations!
 ## How to evaluate a GenAI application?
 
 There are a few components we can evaluate in our GenAI application:
-1. **The LLM** - this would be to evaluate how competent our model is, without any bells and whistels. Great to do before you decide what model to use or upgrade to a new model.
+1. **The LLM** - this would be to evaluate how competent our model is, without any bells and whistles. Great to do before you decide what model to use or upgrade to a new model.
 2. **The application backend** - our backend is what implements the LLM logic. This could be simple things such as adding a system prompt (like we have done) to more complex workflows like fetching data to send to the LLM. We want to test our backend anytime our prompts, the backend code itself, or any of the workflow components change.
 3. **The workflow components** - rather than just testing them through the backend as a blackbox, we also want to test these components individually to make sure that each component does as it should.
 
@@ -108,6 +108,6 @@ This involves things such as:
 - How fast it produces tokens (Time Per Output Token)
 - How many requests the system can handle at the same time without slowing down (Throughput)
 
-This is important to test both for your model based on the hardware you use, but also on the backend system as a whole, as when we keep adding more complex functionality it will slow down how fast the model can responde, sometimes causing it to be an unviable option for our usecase.
+This is important to test both for your model based on the hardware you use, but also on the backend system as a whole, as when we keep adding more complex functionality it will slow down how fast the model can respond, sometimes causing it to be an unviable option for our usecase.
 
 To try it out, head over to your workbench again and go through the notebook `experiments/4-ready-to-scale-201/2-guidellm-test.ipynb`

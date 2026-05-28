@@ -6,7 +6,7 @@ There must be a better way to track these experiments you've been conducting in 
 
 This is where we introduce **prompt versioning** and a **prompt registry** concepts!
 
-## 🎯 Why Prompt Versioning Matter
+## 🎯 Why Prompt Versioning Matters
 
 Think of good prompt like a well-written function or component. Once you get it right, you want to reuse it across different apps and users.
 
@@ -42,5 +42,5 @@ We are going to store our prompts on our Prompt Registry, add notes, tags, etc w
 
     ![summarization-prompt-2.png](./images/summarization-prompt-2.png)
 
-    Now it's time to put your system prompt to work! That means, deploying Canopy to your experimentation environment on OpenShift cluster and let it fetch the prompt from your Prompt Registry.
+    Now it's time to put your system prompt to work! That means, deploying Canopy to your experimentation environment on OpenShift cluster and letting it fetch the prompt from your Prompt Registry.
 

@@ -22,7 +22,7 @@ These are all examples of GenAI in action!
 
 Before a GenAI model can do anything impressive, it needs a strong foundation — and that’s exactly what **Foundation Models (FMs)** provide. These are massive models trained on a wide variety of data, making them versatile for countless tasks with minimal additional training.
 
-If GenAI is like playing a song, Foundation Models are like well made instruments that can be used for different genres. Once you have the instrument, you just need to know the right tune (or prompt) to play.
+If GenAI is like playing a song, Foundation Models are like well-made instruments that can be used for different genres. Once you have the instrument, you just need to know the right tune (or prompt) to play.
 
 ### Some notable Foundation Models:
 

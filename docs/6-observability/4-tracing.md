@@ -25,9 +25,9 @@ In this trace visualization, you can see the waterfall view showing:
 - Parent-child relationships (the tree structure)
 
 
-## Auto Tracing with MLFlow
+## Auto Tracing with MLflow
 
-MLFlow has something called autologging which automatically captures any relevant requests whenever enabled.  
+MLflow has something called autologging which automatically captures any relevant requests whenever enabled.  
 We will use it here to capture all our OpenAI calls, which is what we use to communicate with the model from the backend.  
 You have already seen the traces in MLFlow, but let's also inspect the timeline data it captures.  
 For now it will be fairly simple tracing, but you will se it more complex tracing as soon as we get to agents 🤖

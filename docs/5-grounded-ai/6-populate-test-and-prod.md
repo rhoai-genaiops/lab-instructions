@@ -105,7 +105,7 @@ Time to run yet another pipeline!
 
    ![import-pipeline](images/import-pipeline.png)
 
-4. Give the pipeline a good name, like `Document Ingestion`, and the upload the yaml file you just downloaded.
+4. Give the pipeline a good name, like `Document Ingestion`, and upload the yaml file you just downloaded.
 
    ![imported-pipeline.png](./images/imported-pipeline.png)
 
@@ -145,6 +145,6 @@ Time to run yet another pipeline!
 
 ### What You've Built
 
-🎉 **Congratulations!** You now have a production-ready document processing pipeline that we can use to ingest documents into our test and producion databases at scale.
+🎉 **Congratulations!** You now have a production-ready document processing pipeline that we can use to ingest documents into our test and production databases at scale.
 
 Continue to the next section to enable our RAG feature inside our application! 🚀 

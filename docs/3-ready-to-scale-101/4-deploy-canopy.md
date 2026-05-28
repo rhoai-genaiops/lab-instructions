@@ -2,7 +2,7 @@
 
 We deployed our `canopy` in experiment environment manually, but for the higher environments we need to store the definitions in Git and deploy our applications via Argo CD to get all the benefits that GitOps brings. 
 
-But there are two things we need to do first. One is having a seperate space for production-ready prompts (the system prompts we want to "promote" to production). And secondly, we need to set up our GitOps repository to handle the GenAI application logic for test and production environments.
+But there are two things we need to do first. One is having a separate space for production-ready prompts (the system prompts we want to "promote" to production). And secondly, we need to set up our GitOps repository to handle the GenAI application logic for test and production environments.
 
 Let's start with the prompts.
 
@@ -50,7 +50,7 @@ Let's start with the prompts.
       name: "canopy-ui"
       tag: "0.10"
     ```
-3. For `backend`, paste the below yaml to test and prod `config.yaml` files. Mind that they are pointing to different alieses, although for now they are the same. As we iterate over prompts, we'll see this is going to change.
+3. For `backend`, paste the below yaml to test and prod `config.yaml` files. Mind that they are pointing to different aliases, although for now they are the same. As we iterate over prompts, we'll see this is going to change.
 
     TEST (`genaiops-gitops/canopy/test/backend/config.yaml`):
 

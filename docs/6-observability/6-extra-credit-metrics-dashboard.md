@@ -80,7 +80,7 @@ The UI dashboard helps you understand the user experience. High latencies or err
 
 ### Dashboard 3: Canopy-Backend Metrics
 
-Your Canopy Backend is the API layer that orchestrates calls between the UI and LlamaStackThis dashboard reveals backend performance and bottlenecks.
+Your Canopy Backend is the API layer that orchestrates calls between the UI and LlamaStack. This dashboard reveals backend performance and bottlenecks.
 
 1. In the same Grafana folder, open the **Canopy Backend Metrics Dashboard** to see:
 

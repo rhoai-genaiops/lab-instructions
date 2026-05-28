@@ -56,7 +56,7 @@ Let’s test your understanding with a quick quiz!
   <p style="color:#495057; font-weight:500;">
     Which takes 96 tokens in total.<br>
     Then you start feeding it the code, line by line, where each line takes about 12 tokens per line.<br>
-    Now, you also happen know that the model only can handle 4096 tokens at the same time.<br>
+    Now, you also happen to know that the model only can handle 4096 tokens at the same time.<br>
   </p>
   <p style="color:#495057; font-weight:500;">
     👉 <strong>How many <em>full</em> lines of code can you send the LLM at a time?</strong>
@@ -169,8 +169,8 @@ Imagine a prompt sent to an LLM reads exactly like this:
   <label for="next-easy-wrong2" class="quiz-option-next-easy" data-correct="false">🐭 mice</label>
 
   <div class="feedback-next-easy" data-feedback="correct">✅ Exactly!</div>
-  <div class="feedback-next-easy" data-feedback="wrong1">❌ "Frogs" doesn't sound quite right, although technically I guess frogs are more likley to rain than the other options...</div>
-  <div class="feedback-next-easy" data-feedback="wrong2">❌ Raining cats and mice, hmm, there is probably a Tom and Jerry episode about that but it's not quite the ideom we are going for.</div>
+  <div class="feedback-next-easy" data-feedback="wrong1">❌ "Frogs" doesn't sound quite right, although technically I guess frogs are more likely to rain than the other options...</div>
+  <div class="feedback-next-easy" data-feedback="wrong2">❌ Raining cats and mice, hmm, there is probably a Tom and Jerry episode about that but it's not quite the idiom we are going for.</div>
 </div>
 </div>
 
@@ -255,7 +255,7 @@ Imagine a prompt sent to an LLM reads exactly like this:
 
 ## 🧠 Context Length and Window :id=context-length-and-window
 
-  LLMs can't have infinite long inputs. When you send a message, the model needs room to:
+  LLMs can't have infinitely long inputs. When you send a message, the model needs room to:
 
   - Read your prompt
   - Think through it
@@ -404,7 +404,7 @@ Even if you tell the model something new today, it won’t “remember” it tom
 
 So how does systems “remember” facts between conversations?
 
-Let's see if you can figure it out through this quizz:
+Let's see if you can figure it out through this quiz:
 
 <!-- 🔮 Frozen-model memory dilemma (harder) -->
 <div style="background:linear-gradient(135deg,#e8f2ff 0%,#f5e6ff 100%);padding:20px;border-radius:10px;margin:20px 0;border:1px solid #d1e7dd;">
