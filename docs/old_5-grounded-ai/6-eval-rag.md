@@ -70,8 +70,4 @@ tests:
 
 5. Our eval pipeline should trigger off of this git push, just like in the `Ready to Scale 201` section, you can go to OpenShift Pipelines to see how it's progressing.
 
-You can find the results in MinIO `test-results` bucket (https://minio-ui-<USER_NAME>-toolings.<CLUSTER_DOMAIN>/browser/test-results). Since no backend prompt was changed, we don't have any link from the Prompt Tracker for these evaluations.  
-
-Look through the folders until you find the one with `information-search_results.html` in it.
-
-After you have looked at the results, let us continue to automate the whole flow! 
+After you have looked at the results in MLflow for evals and MinIO for GuideLLM, let us continue to automate the whole flow! 

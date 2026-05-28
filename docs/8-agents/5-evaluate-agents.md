@@ -8,7 +8,7 @@ Let's do like in the previous chapters and add some evalutions for our agent!
 Just like with summarization and RAG we get traces for our agents as well, which give good insight into which tools were used and in what order.  
 Let's take a look:
 
-1. Go to OpenShift AI -> Develop & train -> Experiments (MLflow) -> <USER_NAME>-test Project and click on your student-assistant experiment
+1. Go to OpenShift AI -> Develop & train -> Experiments (MLflow) -> **<USER_NAME>-test** Project and click on your student-assistant experiment
 
 2. Click on any trace and look at the Summary and Details & Timeline
 
@@ -186,4 +186,4 @@ Respond with only "yes" or "no".
 7. The eval pipeline should trigger automatically. Go to **OpenShift Pipelines** to watch it run!
 
 
-After it has completed you can see the evaluation results in minio or through the prompt tracker 🎉
+After it has completed you can see the evaluation results MLflow 🎉
