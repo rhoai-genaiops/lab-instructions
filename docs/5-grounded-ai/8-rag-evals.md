@@ -114,7 +114,7 @@ tests:
   ![information-search-traces.png](./images/information-search-traces.png)
   ![information-search-traces-2.png](./images/information-search-traces-2.png)
 
-8. And again, you can see the evaluation results under `Experiments (MLflow)` > under **<USER_NAME>-toolings** project.
+8. And after the pipeline is done, you can again see the evaluation results under `Experiments (MLflow)` > under **<USER_NAME>-toolings** project.
 
   ![rag-mlflow-eval.png](./images/rag-mlflow-eval.png)
 
