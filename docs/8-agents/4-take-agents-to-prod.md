@@ -123,7 +123,7 @@ There are a few things we want to do, such as evaluating and observing the agent
   ```bash
     cd /opt/app-root/src/genaiops-gitops/canopy/
     git pull
-    git add test/calendar-mcp
+    git add .
     git commit -m "📆 Agent feature and Calendar MCP added 📆"
     git push
   ```
