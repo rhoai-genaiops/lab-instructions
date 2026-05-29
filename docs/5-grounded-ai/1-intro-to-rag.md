@@ -28,6 +28,8 @@ Browse the programs in the "Academic Excellence" section, and download the sylla
 
     ![upload-doc](./images/upload-doc.png)
 
+    Note: if it's stuck at 50% then just give it a few minutes and refresh the page. It should show up as an Uploaded file when you go to the Knowledge tab after the refresh.
+
 4. Wait for the upload to finish and then try asking the same thing again. Do you get a better answer this time? You should see the response is ✨ grounded ✨ on the PDF you provided :)
 
 Now that we have seen RAG in practice, let's try to implement it into Canopy. For that, continue to RAG basics to understand how `embeddings` work.
