@@ -66,7 +66,7 @@ Go to MinIO ([https://minio-ui-<USER_NAME>-toolings.<CLUSTER_DOMAIN>](https://mi
 
     ![rag-kfp-pipelinerun.png](./images/rag-kfp-pipelinerun.png)
 
-11. After the pipeline finish, you'll see a automated push happened in `genaiops-gitops` repository. 
+11. After the pipeline finish, you'll see a automated push happened in `genaiops-gitops` repository (which in turn will start our eval pipeline). 
 
     ![gitea-auto-commit.png](./images/gitea-auto-commit.png)
 
