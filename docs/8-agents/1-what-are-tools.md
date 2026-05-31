@@ -2,15 +2,12 @@
 
 ## Tool basics
 
-LLMs are pretty smart, but they have some awkward limitations. Ask an LLM "What's 847 × 923?" and watch it confidently give you the wrong answer. Or ask it to look up real-time information, interact with databases, or call external APIs - it simply can't.
+You've just seen it live in the playground: the model paused, called the weather tool, and returned real data instead of guessing. But how does that actually work under the hood?
 
-We've already seen how RAG helps with knowledge limitations by giving LLMs access to documents. Now let's generalize this concept: **tools**.
+A **tool** is any service wrapped with a simple JSON interface so an LLM can interact with it — calculators, databases, ERP systems, weather APIs, you name it. The LLM acts as a **coordinator**: it decides which tool to call and how to interpret the result. The actual execution is handled by the surrounding application, runtime, or backend system, not by the model itself.
 
-A **tool** is any service we want the LLM to interact with - calculators, databases, ERP systems, weather APIs, you name it. We wrap these services with a simple communication layer (JSON in/out) that makes it easier for LLMs to format requests.
+Let's dig into the mechanics:  
 
-The LLM becomes a **coordinator** that uses tools and knows how to interpret their results.
-
-This is all very high level, so let's look at some examples!  
 Go to your workbench and run through the notebook: **`experiments/8-agents/1-intro-to-tools.ipynb`**
 
 ## MCP servers
@@ -30,7 +27,7 @@ Before we can use an MCP server, we need to deploy one, let's start with that!
 
     ![helm-calender.png](./images/helm-calender.png)
 
-3. You don't need to change anything here so just click Create right away.
+3. You don't need to change anything here so just click `Create` right away.
 
     ![helm-calender-2.png](./images/helm-calender-2.png)
 

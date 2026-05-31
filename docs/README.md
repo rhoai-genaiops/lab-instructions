@@ -11,7 +11,6 @@ The box at the top of the page allows you to load the docs with your team's vari
 1. **Username** — e.g. `user1`. This value will be prefixed to things such as the namespaces we use.
 2. **Password** — your lab password.
 3. **Cluster Domain** — the `apps.*` portion of your OpenShift domain (see below).
-4. **System Prompt** - we will update this box as we go along with the exercises, you can keep empty for now.
 
 The values are persisted in your browser's local storage. Click **Clear** to reset all saved values.
 
@@ -32,7 +31,7 @@ The values are persisted in your browser's local storage. Click **Clear** to res
     ```
 
 ## 🦆 Conventions
-When running through the exercises, we've tried to call out where things need replacing, especially in Notebooks. If you saved your details above, most `<PLACEHOLDER>` values will be filled in automatically. If any remain, replace them manually with your actual values. For example, if your username is `user1` and you see `<USER_NAME>`, replace it with `user1` like so:
+When running through the exercises, we've tried to call out where things need replacing, especially in Notebooks. If you saved your details above, most `<PLACEHOLDER>` values will be filled in automatically. If any remain, replace them manually with your actual values. For example, if your username is `user1` and you see `<\USER_NAME>`, replace it with `user1` like so:
     <div class="highlight" style="background: #f7f7f7">
     <pre><code class="language-bash">
     name: &lt;USER_NAME&gt;
@@ -48,4 +47,4 @@ There are lots of code blocks for you to copy and paste. They have a little ✂�
 
 **Important:** Not all code blocks are meant to be copied. Blocks without the ✂️ icon are **expected output**. Use them to validate your results or YAML against the given block.
 
-Alright, let's get started! Head over to the first exercise and begin your GenAIOps journey! 🏃💨
+Alright, let's get started! Head over to the first chapter and begin your GenAIOps journey! 🏃💨

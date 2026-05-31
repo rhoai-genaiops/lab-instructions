@@ -16,5 +16,5 @@ In this section, we'll cover the fundamentals of Generative AI and Large Languag
 
 # 🔨 Tools used in this module
 
-* LLM - Llama 3.2, a large language model from Meta, designed to understand and generate human-like text.
-* Chat Interface — available at `https://ai-orientation-app-ai501.<CLUSTER_DOMAIN>`
+* LLM - Llama 3.2, a large language model, designed to understand and generate human-like text.
+* Exercise app — available at `https://exercise-app-ai501.<CLUSTER_DOMAIN>`

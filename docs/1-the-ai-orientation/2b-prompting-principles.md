@@ -153,7 +153,7 @@ How can we guide the model's behaviour? In comes the... **System Prompt**!
 
 Let's see which one wins when they conflict:
 
-1. Set the System Prompt to: `"You only speak in lies."`
+1. Open up the settings and set the System Prompt to: `"You only speak in lies."`
 2. Then ask: `"You are a helpful tutor. What is 5+5?"`
 
 <iframe
