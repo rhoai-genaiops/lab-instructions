@@ -24,9 +24,9 @@ This is where we are going to utilize MLflow's Tracing capabilities. We will go 
 
     ![mlflow-trace-3.png](./images/mlflow-trace-3.png)
 
-Since we are able to see all these, we are also capable of _evaluate_ whether the response is as expected, is good or not.
+Since we are able to see all these, we are also capable of _evaluating_ whether the response is as expected, whether it's good or not.
 
-Alright, let's onto the evaluations!
+Alright, let's get onto the evaluations!
 
 ## How to evaluate a GenAI application?
 

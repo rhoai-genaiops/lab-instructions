@@ -21,7 +21,7 @@ Vector databases are optimized to store and search across millions of vectors ef
     ![open-attu](./images/open-attu.png)
 
 3. To log into Attu, use the following Address and Database:
-    - Milvus Address: `milvus.<USER_NAME>-canopy.svc.cluster.local`
+    - Milvus Address: `http://milvus.<USER_NAME>-canopy.svc.cluster.local:19530`
     - Database: `default`
 
     ![attu](./images/attu.png)
