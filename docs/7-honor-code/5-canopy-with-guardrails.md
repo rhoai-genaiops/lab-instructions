@@ -91,7 +91,7 @@ Every time you send a request, this is the flow happening behind the scenes:
 ```
 1. User Prompt → Canopy Backend
         ↓
-2. Backend → Llama Stack (Responses API with guardrails: ["nemo-guardrail"])
+2. Backend → Llama Stack (with guardrails: ["nemo-guardrail"])
         ↓
 3. Llama Stack → NeMo Guardrails (input rails: regex, language, HAP, prompt injection, LLM judge)
         ↓

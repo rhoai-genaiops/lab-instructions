@@ -20,9 +20,9 @@ In our case, we are going to store the prompts in MLflow Prompt Registry!
 
 ## Prompt Registry
 
-We are going to store our prompts on our Prompt Registry, add notes, tags, etc when necessary and fetch these prompts from our backend during the runtime. 
+We are going to store our prompts on our Prompt Registry, add notes, tags, etc when necessary and fetch these prompts from our application during the runtime. 
 
-1. Let's go to `Gen AI studio` > `Prompts` from the left menu. Select `<USER_NAME>-canopy` project from top and store your favourite Summarization prompt under the experiment environment. We'll get to talk about production later 🤫🤫🤫
+1. Let's go to `Gen AI studio` > `Prompts` from the left menu. Select **<USER_NAME>-canopy** project from top and store your favourite Summarization prompt under the experiment environment. We'll get to talk about production later 🤫🤫🤫
 
     _Note: We will be able to store prompts directly from the Playground very soon._
 

@@ -44,8 +44,13 @@ Before we start, we need to enable MCP support in your Llama Stack instance:
 
 This enables our MCP Calendar tool that LangGraph will use.
 
+## Why Llama Stack?
+
+Llama Stack does three things here that make the difference: it serves the model, manages the RAG vector store, and ✨crucially✨ exposes a **Responses API** that goes beyond standard Chat Completions. With standard Chat Completions, you'd have to write a Python wrapper function for every tool an MCP server exposes (the same manual approach you used when building the ReAct agent from scratch). The Responses API skips all of that: you pass it an MCP server binding, and it discovers the available tools and handles execution automatically. Llama Stack knows about the calendar server because the Helm upgrade you just did registered it as a `tool_group` at startup.
+
+LangGraph does have its own MCP support and could connect directly to the model without Llama Stack. The reason we use it here is that it's already the platform underneath everything: the model, the vector store, the MCP connections. So infrastructure concerns stay in one place rather than scattered across your application code. Swapping a model or MCP server becomes a config change, not a code change.
+
 ## Let's Build It!
 
-Ready to see how much easier this gets? You'll build the same agentic capabilities with **~70% less code**.  
-No manual parsing. No iteration loops. Just clean, declarative agent definitions.  
+Ready to see how much easier this gets? You'll build the same agentic capabilities with **~70% less code**. Just clean, declarative agent definitions.  
 Go to your workbench and open **`experiments/8-agents/4-agentic-llamas.ipynb`**

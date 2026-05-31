@@ -44,9 +44,11 @@ The notebook walks through five steps:
 | 4. Baseline Evaluation | Score the current prompt against the combined dataset to establish a before score |
 | 5. Optimize | GEPA rewrites the prompt to fix the failing cases and registers it as a new version |
 
-## What You Get
+Now go through the notebook and come back here to 
 
-By the end of the notebook you'll have:
+## What You Got
+
+By the end of the notebook you have:
 
 - A versioned prompt history in MLflow showing exactly what changed and why
 - Quantified before/after scores — not just a feeling that it's better
@@ -58,32 +60,32 @@ The loop that started with a user clicking 👎 ends with a measurably better AI
 ![mlflow-gepa.png](./images/mlflow-gepa.png)
 
 Since we create a new test prompt, we will also start a new eval pipeline (automation magic ✨).  
-You can go to OpenShift Pipelines, OpenShift AI Pipeline Runs, and MLflow in <USER_NAME>-toolings namespace just like before to keep track of this evaluation run.  
+You can go to OpenShift Pipelines, OpenShift AI Pipeline Runs, and MLflow in **<USER_NAME>-toolings** namespace just like before to keep track of this evaluation run.  
 After it finishes, you can also compare the baseline evaluation run we did in the notebook against the one that ran with the pipeline. Or against a previous pipeline run (it's the eval runs called `summary_tests_...`):  
 
 ![compare-eval-runs.png](./images/compare-eval-runs.png)
 
-If you are interested in the GEPA run you can also get plenty more details from MLflow.  
+If you are interested in the GEPA run, you can also get plenty more details from MLflow.  
 Simply:
 
-1. Go to to OpenShift AI -> Experiments (MLflow) -> <USER_NAME>-toolings Project -> Summarization and click on the Model Training tab at the top
+1. Go to to OpenShift AI -> Experiments (MLflow) -> select **<USER_NAME>-toolings** Project -> Summarization and click on the `Model Training` tab at the top
 
     ![model-training-tab.png](./images/model-training-tab.png)
 
-2. Select the latest Run with the tag `Training` (this is the GEPA run)
+2. Select the latest Run with the tag `Training` (this is the GEPA run).
 
     ![training-run.png](./images/training-run.png)
 
-3. Explore the run, Model metrics gives some nice visualizations
+3. Explore the run, `Model metrics` gives some nice visualizations.
 
     ![model-metrics.png](./images/model-metrics.png)
 
 
 
-A few notes, we took some shortcuts here for simplicity:  
+Just a few note, we took some shortcuts here for simplicity:  
 
 - We don't go through the backend but rather directly to the model.  
-- We also don't load the summary_test.yaml from git but rather just refer to the local folder.  
+- We also don't load the `summary_test.yaml` from git but rather just refer to the local folder.  
 - We use the same dataset to "train" the prompt that we use to "validate" the prompt. This is not a good practice and we should ideally have had a separate dataset for training and for validating/evaluating.
 
 All of these are easy fixes (it's what we already do in the evaluation pipeline) but are kept simple here.

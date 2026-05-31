@@ -105,6 +105,7 @@ Your Canopy Backend is the API layer that orchestrates calls between the UI and 
 
 The backend dashboard is crucial for debugging performance issues.
 
+---
 
 ⚠️⚠️  This dashboard is under construction. We'll be back shortly. ⚠️ ⚠️ 
 
