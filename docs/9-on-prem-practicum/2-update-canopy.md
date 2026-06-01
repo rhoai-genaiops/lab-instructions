@@ -56,7 +56,7 @@ Once Llama Stack and backend are back up, let's verify it can communicate with t
    - **Response quality**: Are answers still helpful and accurate?
    - **Response time**: How does latency compare?
 
-    You can compare the Canopy in your experimentation area with the Canopy in your test environment. Since we haven't touched our GitOps configuration, `test` and `prod` are still using te cloud model. You can access the test Canopy by clicking [here](https://canopy-ui-<USER_NAME>-test.<CLUSTER_DOMAIN>) or copying the below URL to your favourite browser:
+    You can compare the Canopy in your experimentation area with the Canopy in your test environment. Since we haven't touched our GitOps configuration, `test` and `prod` are still using the cloud model. You can access the test Canopy by clicking [here](https://canopy-ui-<USER_NAME>-test.<CLUSTER_DOMAIN>) or copying the below URL to your favourite browser:
 
     ```bash
     https://canopy-ui-<USER_NAME>-test.<CLUSTER_DOMAIN>
@@ -75,6 +75,6 @@ Running models on CPU introduces different performance characteristics:
 
 For development and testing, CPU inference is perfectly acceptable. For production workloads with higher traffic, you'll want to revisit GPU allocation or consider model optimization techniques 😉
 
-You found a way to keep the student data completely within your infrastructure.But are your fellow students and professors going be happy with this?
+You found a way to keep the student data completely within your infrastructure. But are your fellow students and professors going be happy with this?
 
 Let's look into model optimization and compression before we settle with TinyLlama actually 🦙🌿
