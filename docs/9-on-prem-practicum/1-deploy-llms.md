@@ -37,7 +37,7 @@ Not every model needs a high-end GPU, but some certainly do. Here's a general si
 | **< 3B parameters** | ~8–12GB VRAM (or CPU-only) | TinyLlama 1.1B, Granite 2B |
 | **3B–7B parameters** | ~16–24GB VRAM | Llama 3.2 3B, Mistral 7B |
 | **7B–13B parameters** | ≥24GB GPU memory | Llama 3.1 8B, CodeLlama 13B |
-| **> 30B parameters** | Multi-GPU setups (A100s) | Llama 3.1 70B, Mixtral 8x7B |
+| **> 30B parameters** | Multi-GPU setups | Llama 3.1 70B, Mixtral 8x7B |
 
 **Don't have a GPU?** You have options:
 
