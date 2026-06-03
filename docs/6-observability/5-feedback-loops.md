@@ -43,7 +43,7 @@ Let's directly do this in `test` environment for simplicity.
 
       ```yaml
       ---
-      repo_url: https://gitea-gitea.apps.cluster-v7kr7.v7kr7.sandbox763.opentlc.com/user2/backend
+      repo_url: https://gitea-gitea.<CLUSTER_DOMAIN>/<USER_NAME>/backend
       chart_path: chart
       summarization:
         enabled: true
