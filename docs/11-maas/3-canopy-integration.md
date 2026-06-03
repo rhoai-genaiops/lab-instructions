@@ -100,13 +100,15 @@ Like we've done multiple times before, let's update Canopy backend configuration
 1. Find `canopy-backend` under **OpenShift Console** → **Helm** → **Releases** 
 
 
-2.  We need to change every `llama32-fp8` into MaaS provided version of that model :) For example, for  `summarize`:
+2.  We need to update the `summarization` section with the LiteMaaS endpoint, model name, and API key:
 
     ```yaml
-    summarize:
+    summarization:
       enabled: true
-      max_tokens: 2048 
-      model: vllm-Llama-3.2-3B-Instruct-FP8/Llama-3.2-3B-Instruct-FP8 # 👈 update this ❗️❗️❗️
+      max_tokens: 2048
+      endpoint: https://litemaas-litellm-<USER_NAME>-maas.<CLUSTER_DOMAIN>/v1  # 👈 LiteMaaS endpoint
+      model: Llama-3.2-3B-Instruct-FP8  # 👈 MaaS model name
+      api_key: sk-your-key-here  # 👈 your LiteMaaS API key from Step 1
     ```
 
 3. Click **Upgrade** to apply the changes.
