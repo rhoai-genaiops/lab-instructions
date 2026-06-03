@@ -143,7 +143,7 @@ tests:
         - find_professors_by_expertise
 ```
 
-And also add a `judge-prompt.txt` in the same folder:
+And also add a `judge_prompt.txt` in the same folder:
 ```bash
 You are an expert evaluator judging the quality of a generated answer to a question.
 
