@@ -29,7 +29,7 @@ Now that we have a model running locally, it's time to connect it to our applica
 6.  Let's first evaluate the summarization use case with the new model. Add these under `summarize`.
 
     ```yaml
-    summarize:
+    summarization:
       enabled: true
       mlflow_prompt_version: latest
       mlflow_prompt: summarization
