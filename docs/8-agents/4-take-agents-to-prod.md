@@ -61,8 +61,10 @@ There are a few things we want to do, such as evaluating and observing the agent
       mlflow_prompt_b_version: latest 
     shields:
       enabled: true
-      shield_id: nemo-guardrail 
-    student-assistant:         # 👈 add this block ❗︎❗︎❗︎ ❗︎❗︎❗︎ ❗︎❗︎❗︎
+      endpoint: http://canopy-guardrails/v1
+      model: llama32
+      config: canopy-guardrails
+    student-assistant:         # 👈 just add this block ❗︎❗︎❗︎ ❗︎❗︎❗︎ ❗︎❗︎❗︎
       enabled: true
       model: vllm-llama32/llama32
       temperature: 0.1
