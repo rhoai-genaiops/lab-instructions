@@ -39,7 +39,7 @@ There are a few things we want to do, such as evaluating and observing the agent
 
     ```yaml
     ---
-    repo_url: https://gitea-gitea.apps.cluster-v7kr7.v7kr7.sandbox763.opentlc.com/user2/backend
+    repo_url: https://gitea-gitea.<CLUSTER_DOMAIN>/<USER_NAME>/backend
     chart_path: chart
     summarization:
       enabled: true
