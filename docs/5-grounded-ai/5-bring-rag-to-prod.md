@@ -47,7 +47,6 @@ So far we experienced RAG pieces on our workbench or playground. We need to set 
     NAME                                      READY   STATUS    RESTARTS   AGE
     canopy-backend-6785f999cf-946fx           1/1     Running   0          15m
     canopy-ui-568d7cd989-zsqbx                1/1     Running   0          4h9m
-    llama-stack-5f7778c6c-wh8hw               1/1     Running   0          22m
     milvus-test-attu-5dd559c7dd-xtgzc         1/1     Running   0          2m14s
     milvus-test-standalone-67585987cd-k72b7   1/1     Running   0          2m14s
     </code></pre>
