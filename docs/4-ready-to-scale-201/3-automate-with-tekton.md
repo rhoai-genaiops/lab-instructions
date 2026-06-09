@@ -215,6 +215,13 @@ For example, to add traces from your production environment to the eval dataset:
 3. Click **Show assessments** > **Add expectations** (e.g., `length` = `200`).
 4. Click **Add to dataset** and select the existing `eval` dataset, then **Export**.
 
+
+### Where are my prompts? Where are my traces?
+
+Follow the numbered steps to see how a prompt change triggers an eval run, where the traces are collected, and where results land for human review.
+
+![where-are-my-prompts.jpg](./images/where-are-my-prompts.jpg)
+
 ----
 
 And with that, we have an end-to-end automated process for changes that is traceable, observable, and ready to grow into more complex use cases. Let’s gooooo! 🚀
