@@ -12,27 +12,29 @@ Kubeflow pipelines are handy for data science/AI engineering tasks as it is Pyth
 
 As always we'll start in the experimentation environment and develop this automation there. But before we can use Kubeflow Pipelines, we need to install a Data Science Pipeline Server and MinIO as lightweight storage option to store pipeline artifacts in our Canopy environment. Yet again, we will use Helm charts for them.
 
-1. Go to the OpenShift Console > `Helm` > `Releases` > `Create Helm Release`.
+1. Select the project `<USER_NAME>-canopy`.
+
+2. Go to the OpenShift Console > `Helm` > `Releases` > `Create Helm Release`.
 
     ![dspa-helm-1.png](./images/dspa-helm-1.png)
 
-2. Select `GenAIOps Helm Charts` from the repository lists and select `Minio`. 
+3. Select `GenAIOps Helm Charts` from the repository lists and select `Minio`. 
 
     ![minio-helm.png](./images/minio-helm.png)
 
-3. After you click `Create`, keep the values the same and click `Create` again.
+4. After you click `Create`, keep the values the same and click `Create` again.
 
     ![minio-helm-2.png](./images/minio-helm-2.png)
 
-4. Now do the same for the helmchart `Dspa`
+5. Now do the same for the helmchart `Dspa`
 
     ![dspa-helm-2.png](./images/dspa-helm-2.png)
 
-5. Just hit `Create` and wait for the pipeline server to be ready!
+6. Just hit `Create` and wait for the pipeline server to be ready!
 
     ![dspa-helm-3.png](./images/dspa-helm-3.png)
 
-6. Everything is blue, you are good to continue!
+7. Everything is blue, you are good to continue!
     ![dspa-minio.png](./images/dspa-minio.png)
 
 ### Set up evaluation pipeline
