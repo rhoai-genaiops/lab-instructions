@@ -70,16 +70,12 @@ The evaluation pipeline is inside of a repository called `evals`, where both the
 
     _**A word of warning from someone who has been burned before:** YAML is a religion that worships the space bar. If you are adding your own evals, please mind the gap. 🥲_
 
-3. The code for the Kubeflow pipeline that is running these evaluations is inside of `evals-pipeline/mlflow_pipeline.py`. Go ahead and open it up and take a look. Scroll down to near the bottom of the file (around line 470) and edit the `repo_url` argument as below:
+3. The code for the Kubeflow pipeline that is running these evaluations is inside of `evals-pipeline/mlflow_pipeline.py`. Go ahead and open it up and take a look. Scroll down to near the bottom of the file (around line 19) and edit the `repo_url` argument as below:
     ```python
-    arguments = {
-        "repo_url":             "https://<USER_NAME>:thisisthepassword@gitea-gitea.<CLUSTER_DOMAIN>/<USER_NAME>/evals.git",  # 🚨 replace with your own repo URL
-        "branch":               "main",
-        "backend_url":          "http://canopy-backend:8000",
-        "llm_endpoint":         "http://llama-32-predictor.ai501.svc.cluster.local:8080",
-        "mlflow_tracking_uri":  "https://mlflow.redhat-ods-applications.svc.cluster.local:8443",
-        "git_hash":             "test",
-    }
+    # 🚨 replace with your own user details and repo URL
+    USER_NAME="Your user name"
+    PASSWORD="Your password"
+    GIT_SERVER="Your Gitea repository base url"
     ```
     These arguments instruct your pipeline how to run, make sure to replace the repo_url with your own.
 
