@@ -222,6 +222,12 @@ Follow the numbered steps to see how a prompt change triggers an eval run, where
 
 ![where-are-my-prompts.jpg](./images/where-are-my-prompts.jpg)
 
+1. A prompt change in the prompt registry kicks off an eval pipeline run in `toolings` namespace.
+2. The pipeline collects eval datasets from three sources: Git, and the trace collections from both `test` and `prod` environments.
+3. The eval prompts are sent to the `test` backend, which calls the LLM — new traces are generated in the `test` environment as a result.
+4. Eval results are stored in the `toolings` namespace.
+5. A human reviews the results before any promotion happens.
+
 ----
 
 And with that, we have an end-to-end automated process for changes that is traceable, observable, and ready to grow into more complex use cases. Let’s gooooo! 🚀
