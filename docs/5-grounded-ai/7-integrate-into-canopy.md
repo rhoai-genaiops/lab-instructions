@@ -20,7 +20,7 @@ The Canopy backend already has a RAG setup behind a feature flag, we just need t
 
     ```yaml
     ---
-    repo_url: https://gitea-gitea.apps.cluster-v7kr7.v7kr7.sandbox763.opentlc.com/user1/backend
+    repo_url: https://gitea-gitea.<CLUSTER_DOMAIN>/<USER_NAME>/backend
     chart_path: chart
     summarization:
       enabled: true
