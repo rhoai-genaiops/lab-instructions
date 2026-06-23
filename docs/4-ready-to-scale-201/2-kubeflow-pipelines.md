@@ -70,7 +70,7 @@ The evaluation pipeline is inside of a repository called `evals`, where both the
 
     _**A word of warning from someone who has been burned before:** YAML is a religion that worships the space bar. If you are adding your own evals, please mind the gap. 🥲_
 
-3. The code for the Kubeflow pipeline that is running these evaluations is inside of `evals-pipeline/mlflow_pipeline.py`. Go ahead and open it up and take a look. Scroll down to the definition of the `__main__` function (there is only one) at the bottom of the file and edit the `repo_url` argument as below:
+3. The code for the Kubeflow pipeline that is running these evaluations is inside of `evals-pipeline/mlflow_pipeline.py`. Go ahead and open it up and take a look. Scroll down to the definition of the `__main__` function (there is only one, around line 525) at the bottom of the file and edit the `repo_url` argument as below:
 
     ```python
     arguments = {
