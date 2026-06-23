@@ -70,10 +70,11 @@ The evaluation pipeline is inside of a repository called `evals`, where both the
 
     _**A word of warning from someone who has been burned before:** YAML is a religion that worships the space bar. If you are adding your own evals, please mind the gap. 🥲_
 
-3. The code for the Kubeflow pipeline that is running these evaluations is inside of `evals-pipeline/mlflow_pipeline.py`. Go ahead and open it up and take a look. Scroll down to near the bottom of the file (around line 470) and edit the `repo_url` argument as below:
+3. The code for the Kubeflow pipeline that is running these evaluations is inside of `evals-pipeline/mlflow_pipeline.py`. Go ahead and open it up and take a look. Scroll down to the definition of the `__main__` function (there is only one, around line 525) at the bottom of the file and edit the `repo_url` argument as below:
+
     ```python
     arguments = {
-        "repo_url":             "https://<USER_NAME>:thisisthepassword@gitea-gitea.<CLUSTER_DOMAIN>/<USER_NAME>/evals.git",  # 🚨 replace with your own repo URL
+        "repo_url":             "https://<USER_NAME>:<PASSWORD>@gitea-gitea.<CLUSTER_DOMAIN>/<USER_NAME>/evals.git",  # 🚨 replace with your own repo URL
         "branch":               "main",
         "backend_url":          "http://canopy-backend:8000",
         "llm_endpoint":         "http://llama-32-predictor.ai501.svc.cluster.local:8080",
