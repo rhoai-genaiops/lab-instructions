@@ -9,7 +9,7 @@ Let's see this in action before diving into the code!
    
    You can see that it is available for you to use at OpenShift AI Dashboard > Gen AI studio > AI asset endpoints > `MCP Servers`
 
-2. Go to OpenShift AI Dashboard > Gen AI studio > Playground > and make sure you have <USER_NAME>-canopy selected as the project.
+2. Go to OpenShift AI Dashboard > Gen AI studio > Playground > and make sure you have `<USER_NAME>-canopy` selected as the project.
 
 
 2. Try asking the model something it normally couldn't answer accurately:
