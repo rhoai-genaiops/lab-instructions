@@ -16,6 +16,7 @@ Let's deploy the Tekton pipeline by creating a folder under `genaiops-gitops/too
 2. Update the `config.yaml` file:
 
     ```yaml
+    ---
     chart_path: charts/canopy-doc-ingestion-pipeline
     username: <USER_NAME>
     cluster_domain: <CLUSTER_DOMAIN>

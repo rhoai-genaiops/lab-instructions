@@ -55,6 +55,7 @@ Let's start with the prompts.
     TEST (`genaiops-gitops/canopy/test/backend/config.yaml`):
 
     ```yaml
+    ---
     repo_url: https://gitea-gitea.<CLUSTER_DOMAIN>/<USER_NAME>/backend
     chart_path: chart
     summarization:
@@ -68,6 +69,7 @@ Let's start with the prompts.
     PROD (`genaiops-gitops/canopy/prod/backend/config.yaml`):
 
     ```yaml
+    ---
     repo_url: https://gitea-gitea.<CLUSTER_DOMAIN>/<USER_NAME>/backend
     chart_path: chart
     summarization:

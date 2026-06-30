@@ -16,13 +16,16 @@ We did a few tests and are satisfied with the results. But before we bring all t
     In each newly created `config.yaml`, add:
 
     ```yaml
+    ---
     chart_path: charts/nemo-guardrails-orchestrator
+    ```
 
 ## Enable NeMo in Llama Stack
 
 1. Open up `genaiops-gitops/canopy/test/ogx`  and add the guardrails block:
 
     ```yaml
+    ---
     chart_path: charts/llama-stack-operator-instance
     models:
       - name: "llama32"

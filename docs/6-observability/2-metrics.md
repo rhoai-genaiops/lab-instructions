@@ -62,6 +62,7 @@ Let's deploy a Grafana instance in your toolings namespace to support the end-to
 2. Open up the `grafana/config.yaml` file and paste the below line to let Argo CD know which chart we want to deploy.
 
     ```yaml
+    ---
     chart_path: charts/grafana
     ```
 

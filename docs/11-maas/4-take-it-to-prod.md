@@ -95,6 +95,7 @@ In order to do that, we need to give what is the secret that it needs to seal:
     First, copy below:
 
     ```yaml
+    ---
     repo_url: https://github.com/redhat-cop/helm-charts.git
     chart_path: charts/helper-sealed-secrets
     ```
