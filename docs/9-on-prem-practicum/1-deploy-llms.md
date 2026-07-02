@@ -78,13 +78,7 @@ In OpenShift AI, we use **KServe** with **vLLM** as the serving runtime to deplo
 
     ![tinyllama-name2.png](images/tinyllama-name2.png)
 
-    **Serving runtime:** `CUSTOM - vLLM Serving Runtime for CPU`
-
-    ![tiny-deploy.png](./images/tiny-deploy.png)
-
-    Don't hit `Next` yet!
-
-4. Expand `Customize resource requests and limits` to give a bit more CPU to TinyLlama:
+4. In Hardware profiles: Expand `Customize resource requests and limits` to give a bit more CPU to TinyLlama:
 
     **CPU Request:** 3
 
@@ -98,20 +92,26 @@ In OpenShift AI, we use **KServe** with **vLLM** as the serving runtime to deplo
 
     Now click `Next`.
 
-5. Don't change anything on this page. Especially For **Model access** and **Token authentication**, leave them unchecked.
+5. **Deployment Resource:** `CUSTOM - vLLM Serving Runtime for CPU`
+
+    ![tiny-deploy.png](./images/tiny-deploy.png)
+
+    Don't hit `Next` yet!
+
+6. Don't change anything on this page. Especially For **Model access** and **Token authentication**, leave them unchecked.
 
     - **Uncheck** `Make deployed models available through an external route` Because we don't want our model to be accesible outside of the cluster.
     - **Uncheck** `Require token authentication` Because we'll get back to this a bt later :)
 
   Click `Next` to review the deployment.
 
-6. The review should look like this:
+7. The review should look like this:
 
   ![tiny-review.png](./images/tiny-review.png)
 
   Then click `Deploy model`!
 
-1. Watch the deployment progress. Wait until the status becomes `Started`, indicating the model is ready to serve requests.
+- Watch the deployment progress. Wait until the status becomes `Started`, indicating the model is ready to serve requests.
 
     ![tiny-deployed.png](./images/tiny-deployed.png)
 
