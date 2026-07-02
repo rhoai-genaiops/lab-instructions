@@ -14,9 +14,13 @@ The Canopy backend already has a RAG setup behind a feature flag, we just need t
     ```
     ![information-search-prompt-2.png](./images/information-search-prompt-2.png)
 
-2. Then please go to your workbench and open the file `genaiops-gitops/canopy/test/backend/config.yaml`
+    We will be using the latest prompt for test, so we are always up-to-date, and then we will have an alias (tag) for the prompts which are in prod. We call this alias prod. Go ahead and add that alias to your new prompt.
+
+2. Then please go to your workbench and open both files `genaiops-gitops/canopy/test/backend/config.yaml` and `genaiops-gitops/canopy/prod/backend/config.yaml`
 
 3. Edit the file to contain the `information-search` feature flag. Feel free to change the prompt, this is a system prompt just like before.
+
+TEST(`genaiops-gitops/canopy/test/backend/config.yaml`)
 
     ```yaml
     ---
@@ -35,6 +39,27 @@ The Canopy backend already has a RAG setup behind a feature flag, we just need t
       vector_db_id: latest
       mlflow_prompt: information-search
       mlflow_prompt_version: latest
+    ```
+
+PROD(`genaiops-gitops/canopy/test/backend/config.yaml`)
+
+    ```yaml
+    ---
+    repo_url: https://gitea-gitea.<CLUSTER_DOMAIN>/<USER_NAME>/backend
+    chart_path: chart
+    summarization:
+      enabled: true
+      model: llama32
+      endpoint: "http://llama-32-predictor.ai501.svc.cluster.local:8080/v1"
+      mlflow_prompt: summarization
+      mlflow_prompt_version: prod
+    information-search:          # 👈 add this block 📚❗︎❗︎❗︎❗︎❗︎
+      enabled: true
+      endpoint: "http://llama-stack-service:8321/v1"
+      model: vllm-llama32/llama32
+      vector_db_id: latest
+      mlflow_prompt: information-search
+      mlflow_prompt_version: prod
     ```
 
 4. Push the change to git:
