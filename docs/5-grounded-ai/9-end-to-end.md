@@ -70,23 +70,43 @@ Go to MinIO ([https://minio-ui-<USER_NAME>-toolings.<CLUSTER_DOMAIN>](https://mi
 
     ![gitea-auto-commit.png](./images/gitea-auto-commit.png)
 
-12. Now we need to think about the evals! What if your evals doesn't cover anything related to the last PDF you uploaded? Feel free to update your evals by for example adding more prompt & expected result pairs (Prompt Engineering Yay!). When you update the dataset, the evals pipeline will be triggered automagically! 
+## Automated Promotion with Evaluation Results
 
-<!-- 
-    And what happens when we see an update in `backend`?
-    You guessed it, we trigger the evals pipeline! 
+Remember the evaluation pipeline we deployed back in [Ready to Scale 201](../4-ready-to-scale-201/3-automate-with-tekton.md)? Now with the full RAG flow in place, it does something extra: after all evaluations pass, it **automatically creates a Pull Request** to promote the new `vector_db_id` to production — with all evaluation results embedded directly in the PR body.
 
-    ![trigger-evals.png](./images/trigger-evals.png)
+The evaluation pipeline:
 
-    After the eval pipeline finishes, you can find a PR in `backend` repository to update vector DB ID in production. 
+- Runs **KFP evaluations** (groundedness, relevance, precision) against the new vector DB using MLflow
+- Runs **GuideLLM benchmarks** (throughput, latency, TTFT) against the backend endpoints
+- Creates a **PR to `genaiops-gitops`** with the results so you can make an informed decision
 
-    In the description, you'll see a link to evaluation results. You need to check the results and decide whether to accept this change or go back and do some more test, more data ingestions etc. 
-      
-    You are the human in the loop here :)
+12. After the evaluation pipeline finishes (triggered by the doc-ingestion completing), go to `Gitea` > `genaiops-gitops` > `Pull Requests`. You'll see an automated PR has been created with the evaluation results:
 
-    ![canopy-be-rag-pr.png](./images/canopy-be-rag-pr.png)
+    ![eval-pr-created.png](./images/eval-pr-created.png)
 
-    And what if your evals doesn't cover anything related to the last PDF you uploaded?  
-    Feel free to update your evals by for example adding more prompt & expected result pairs (Prompt Engineering Yay!). 
+13. Open the PR and inspect the body. It contains:
 
-    ![prompt-tracker-eval-results.png](./images/prompt-tracker-eval-results.png) -->
+    **KFP Evaluation Metrics** — a table with the latest MLflow metrics (groundedness, relevance, precision) for each experiment, plus direct links to the MLflow run in OpenShift AI.
+
+    **GuideLLM Benchmarks** — a table with throughput (req/s), output tokens/s, TTFT, and latency for each endpoint.
+
+
+14. Click on the MLflow links in the PR to navigate directly to the experiment run in the OpenShift AI dashboard.
+
+15. You can also check the GuideLLM detailed HTML reports in MinIO. Go to MinIO > Object Browser > `test-results` and navigate to the folder matching the commit hash.
+
+16. **You are the human in the loop!** Review the evaluation results in the PR:
+    - Are the groundedness and relevance scores acceptable?
+    - Is the latency within your SLA requirements?
+    - Does the new document improve or degrade the overall quality?
+
+    If everything looks good, **merge the PR** to promote the new `vector_db_id` to production. If not, go back and iterate — add more test cases, improve your prompts, or ingest better documents.
+
+17. After merging, ArgoCD will automatically deploy the new `vector_db_id` to the production backend. The full GitOps cycle is complete!
+
+    ```
+    New Document → Doc Ingestion → Vector DB Updated → Evaluations Run
+        → PR Created with Metrics → Human Reviews → Merge → Production Deployed
+    ```
+
+18. What if your evals don't cover anything related to the last PDF you uploaded? Feel free to update your evals by adding more prompt & expected result pairs (Prompt Engineering Yay!). When you update the dataset, the evals pipeline will be triggered automagically and a new PR will be created with the updated results!
