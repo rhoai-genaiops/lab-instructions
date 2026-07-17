@@ -27,8 +27,6 @@ We did a few tests and are satisfied with the results. But before we bring all t
     models:
       - name: "llama32"
         url: "http://llama-32-predictor.ai501.svc.cluster.local:8080/v1"
-    eval:
-      enabled: true
     rag:
       enabled: true
       milvus:

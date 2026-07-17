@@ -99,8 +99,6 @@ Now that we have the new model in MaaS, let's add it to our test Llama Stack so 
     - name: "socratic-model"    # 👈 Add this ❗︎❗︎
       url: "https://litemaas-litellm-<USER_NAME>-maas.<CLUSTER_DOMAIN>/v1"   # 👈 Add this ❗︎❗︎
       token: "<YOUR-COPIED-API-KEY>"    # 👈 Add this ❗︎❗︎
-  eval:
-    enabled: true
   rag:                  
     enabled: true
   mcp:                
