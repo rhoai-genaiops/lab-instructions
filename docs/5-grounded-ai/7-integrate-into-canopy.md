@@ -41,7 +41,7 @@ TEST(`genaiops-gitops/canopy/test/backend/config.yaml`)
       mlflow_prompt_version: latest
     ```
 
-PROD(`genaiops-gitops/canopy/test/backend/config.yaml`)
+PROD(`genaiops-gitops/canopy/prod/backend/config.yaml`)
 
     ```yaml
     ---
