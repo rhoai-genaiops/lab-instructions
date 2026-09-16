@@ -129,7 +129,7 @@ Just make sure that LlamaStack starts properly after this (check Topology view i
 
 Let's get this Socratic tutor fully set up in Canopy!
 
-1. Go to `backend/chart/values-test.yaml` and add the new feature flag
+1. Go to `genaiops-gitops/canopy/test/backend/config.yaml` and add the new feature flag
 
   ```yaml
   LLAMA_STACK_URL: "http://llama-stack-service:8321"
@@ -166,9 +166,9 @@ Let's get this Socratic tutor fully set up in Canopy!
 2. Commit to git:
 
   ```bash
-  cd /opt/app-root/src/backend
+  cd /opt/app-root/src/genaiops-gitops
   git pull
-  git add .
+  git add canopy/test/backend/config.yaml
   git commit -m "🤔 Add the Socratic Tutor feature 🤔"
   git push
   ```
