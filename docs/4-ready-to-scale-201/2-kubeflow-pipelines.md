@@ -79,7 +79,7 @@ The evaluation pipeline is inside of a repository called `evals`, where both the
     PASSWORD="Your password"
     GIT_SERVER="Your Gitea host"  # Without the https://
     ```
-    These arguments instruct your pipeline how to run, make sure to replace them with your own.
+    ⚠️ These variables are used at the bottom of the file to build the `repo_url` argument, which is required for your pipeline to clone the `evals` repository and run the tests that you just saw. Make sure to replace those values with your own!
 
 
 5. Let's push the change:
