@@ -3,18 +3,18 @@
 ## 📚 Contents
 - [🎓 GenAI 101: Model Mannerisms](#-genai-101-model-mannerisms)
   - [📚 Contents](#-contents)
-  - [🧠 There is a lot of different AI out there :id=there-is-a-lot-of-different-ai-out-there](#-there-is-a-lot-of-different-ai-out-there-idthere-is-a-lot-of-different-ai-out-there)
-  - [🤖 Generative AI Models :id=generative-ai-models](#-generative-ai-models-idgenerative-ai-models)
-  - [📜 4 Truths about GenAI Models :id=4-truths-about-genai-models](#-4-truths-about-genai-models-id4-truths-about-genai-models)
-  - [🔍 Truth 1: They only speak when spoken to :id=truth-1-they-only-speak-when-spoken-to](#-truth-1-they-only-speak-when-spoken-to-idtruth-1-they-only-speak-when-spoken-to)
-    - [🔍 Hands-on: Let's play!](#-hands-on-lets-play)
-  - [🎲 Truth 2: They are non-deterministic :id=truth-2-they-are-non-deterministic](#-truth-2-they-are-non-deterministic-idtruth-2-they-are-non-deterministic)
-    - [🔍 Hands-on: Test it yourself](#-hands-on-test-it-yourself)
-  - [🤥 Truth 3: They don't speak the truth, they speak the probable :id=truth-3-they-dont-speak-the-truth-they-speak-the-probable](#-truth-3-they-dont-speak-the-truth-they-speak-the-probable-idtruth-3-they-dont-speak-the-truth-they-speak-the-probable)
-    - [🔍 Hands-on: Can the model lie?](#-hands-on-can-the-model-lie)
-  - [🧠 Truth 4: They have no memory :id=truth-4-they-have-no-memory](#-truth-4-they-have-no-memory-idtruth-4-they-have-no-memory)
-    - [🔍 Hands-on: Does the model remember you?](#-hands-on-does-the-model-remember-you)
-  - [✅ Recap :id=recap](#-recap-idrecap)
+  - [🧠 There is a lot of different AI out there](#there-is-a-lot-of-different-ai-out-there)
+  - [🤖 Generative AI Models](#generative-ai-models)
+  - [📜 4 Truths about GenAI Models](#truths-about-genai-models)
+  - [🔍 Truth 1: They only speak when spoken to](#truth-1-they-only-speak-when-spoken-to)
+    - [🔍 Hands-on: Let's play!](#hands-on-lets-play)
+  - [🎲 Truth 2: They are non-deterministic](#truth-2-they-are-non-deterministic)
+    - [🔍 Hands-on: Test it yourself](#hands-on-test-it-yourself)
+  - [🤥 Truth 3: They don't speak the truth, they speak the probable](#truth-3-they-dont-speak-the-truth-they-speak-the-probable)
+    - [🔍 Hands-on: Can the model lie?](#hands-on-can-the-model-lie)
+  - [🧠 Truth 4: They have no memory](#truth-4-they-have-no-memory)
+    - [🔍 Hands-on: Does the model remember you?](#hands-on-does-the-model-remember-you)
+  - [✅ Recap](#recap)
 
 ## 🧠 There is a lot of different AI out there :id=there-is-a-lot-of-different-ai-out-there
 
@@ -103,7 +103,7 @@ All of these extend the model's capabilities. But let's start with focusing on *
 ![Let's focus on just the model](images/model-focus.png)
 
 
-## 📜 4 Truths about GenAI Models :id=4-truths-about-genai-models
+## 📜 4 Truths about GenAI Models :id=truths-about-genai-models
 
 There are **4 fundamental truths** about how GenAI models behave. Let's explore each one through hands-on exercises:
 
@@ -123,7 +123,7 @@ Unless prompted (i.e. an input is sent), the model won't output anything. Imagin
 
 ![Coffee machine analogy](https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExcm51bjBqazB4emVtdnNuN2Vxc3ZiNjU1dTBqYjRta3ppMWY3MjlhayZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/YA6FYcwm2QUHpDtvF2/giphy.gif)
 
-### 🔍 Hands-on: Let's play!
+### 🔍 Hands-on: Let's play! :id=hands-on-lets-play
 
 Go ahead and use the chat interface below. Ask the model anything — try something simple like:
 
@@ -147,7 +147,7 @@ Notice how the model only responds **after** you send it something. It never ini
 
 Do you always get the same answer back from an LLM?
 
-### 🔍 Hands-on: Test it yourself
+### 🔍 Hands-on: Test it yourself :id=hands-on-test-it-yourself
 
 Ask the model the **exact same question twice**:
 
@@ -203,7 +203,7 @@ Compare the two responses. Did you get the same answer?
 
 LLMs don't actually "know" anything! They produce the **most probable** next words based on patterns they've seen during training.
 
-### 🔍 Hands-on: Can the model lie?
+### 🔍 Hands-on: Can the model lie? :id=hands-on-can-the-model-lie
 
 Try asking the model:
 
@@ -231,7 +231,7 @@ Did the model give you an answer? Pi is an **irrational number** — it has no "
 
 Can LLMs learn from what you write to them?
 
-### 🔍 Hands-on: Does the model remember you?
+### 🔍 Hands-on: Does the model remember you? :id=hands-on-does-the-model-remember-you
 
 Try this in two steps:
 
