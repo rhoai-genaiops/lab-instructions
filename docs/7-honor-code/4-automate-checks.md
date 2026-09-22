@@ -13,7 +13,7 @@ Spikee, as their [website](https://spikee.ai/) says, is a Simple Prompt Injectio
     spikee init
     ```
 
-2. For spikee to work with our vLLM endpoint and Llama Stack endpoint, we need to define two targets. Copy the existing python files that are pointing to our model and Llama Stack server under `targets/` folder by running the below commands:
+2. For spikee to work with our vLLM endpoint and Llama Stack endpoint, we need to define two targets. Move the existing python files that are pointing to our model and Llama Stack server under `targets/` folder by running the below commands:
 
     ```bash
     cd /opt/app-root/src/experiments/7-guardrails/spikee
