@@ -3,14 +3,14 @@
  * Screenshot Renewal Script for Lab Instructions
  *
  * Usage:
- *   node scripts/renew-screenshots.js <cluster-domain> <username> <password> [chapter]
+ *   RENEW_USERNAME=user1 RENEW_PASSWORD=mypassword node scripts/renew-screenshots.js <cluster-domain> [chapter]
  *
  * Examples:
  *   # Renew all chapters
- *   node scripts/renew-screenshots.js apps.cluster-xyz.opentlc.com user1 mypassword
+ *   RENEW_USERNAME=user1 RENEW_PASSWORD=mypassword node scripts/renew-screenshots.js apps.cluster-xyz.opentlc.com
  *
  *   # Renew specific chapter
- *   node scripts/renew-screenshots.js apps.cluster-xyz.opentlc.com user1 mypassword 2-linguistics
+ *   RENEW_USERNAME=user1 RENEW_PASSWORD=mypassword node scripts/renew-screenshots.js apps.cluster-xyz.opentlc.com 2-linguistics
  */
 
 const { chromium } = require('playwright');
@@ -19,23 +19,27 @@ const fs = require('fs');
 
 // Parse command line arguments
 const CLUSTER_DOMAIN = process.argv[2];
-const USERNAME = process.argv[3];
-const PASSWORD = process.argv[4];
-const SPECIFIC_CHAPTER = process.argv[5];
+// Credentials are read from environment variables (not argv) so they are not
+// exposed in plaintext via `ps aux` or /proc/[pid]/cmdline.
+const USERNAME = process.env.RENEW_USERNAME;
+const PASSWORD = process.env.RENEW_PASSWORD;
+const SPECIFIC_CHAPTER = process.argv[3];
 
 if (!CLUSTER_DOMAIN || !USERNAME || !PASSWORD) {
   console.error(`
-Usage: node scripts/renew-screenshots.js <cluster-domain> <username> <password> [chapter]
+Usage: RENEW_USERNAME=<username> RENEW_PASSWORD=<password> node scripts/renew-screenshots.js <cluster-domain> [chapter]
 
 Arguments:
   cluster-domain  The OpenShift cluster domain (e.g., apps.cluster-xyz.opentlc.com)
-  username        The username for login (e.g., user1)
-  password        The password for login
   chapter         Optional: specific chapter to renew (e.g., 2-linguistics)
 
+Environment variables:
+  RENEW_USERNAME  The username for login (e.g., user1)
+  RENEW_PASSWORD  The password for login
+
 Examples:
-  node scripts/renew-screenshots.js apps.cluster-xyz.opentlc.com user1 mypassword
-  node scripts/renew-screenshots.js apps.cluster-xyz.opentlc.com user1 mypassword 2-linguistics
+  RENEW_USERNAME=user1 RENEW_PASSWORD=mypassword node scripts/renew-screenshots.js apps.cluster-xyz.opentlc.com
+  RENEW_USERNAME=user1 RENEW_PASSWORD=mypassword node scripts/renew-screenshots.js apps.cluster-xyz.opentlc.com 2-linguistics
 `);
   process.exit(1);
 }
