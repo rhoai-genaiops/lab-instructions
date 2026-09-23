@@ -110,13 +110,6 @@ Let's deploy a Grafana instance in your toolings namespace to support the end-to
 
    You can explore the other dashboards in a similar fashion by selecting the `UWM Prometheus` datasource. Note that some of the dashboards maybe empty because you have not invoked the corresponding services.
 
-   > ⚠️ **Note:** If you don't see the dashboards, or if you cannot find the `UWM Prometheus` data source, delete the `GrafanaDatasource` and `GrafanaDashboard` objects and let ArgoCD recreate them, or sync the grafana application manually:
-   >
-   > ```bash
-   > oc delete grafanadashboards.grafana.integreatly.org -n userX-toolings --all
-   > oc delete grafanadatasources.grafana.integreatly.org -n userX-toolings --all
-   > ```
-
 If you want to further explore the dashboards in depth, please check the [Extra Credits](6-observability/6-extra-credit-metrics-dashboard) section 🤓
 
 
