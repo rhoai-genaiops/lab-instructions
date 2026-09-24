@@ -12,7 +12,7 @@ Let's see this in action before diving into the code!
 2. Go to OpenShift AI Dashboard > Gen AI studio > Playground > and make sure you have `<USER_NAME>-canopy` selected as the project.
 
 
-2. Try asking the model something it normally couldn't answer accurately:
+3. Try asking the model something it normally couldn't answer accurately:
 
     ```
     What is the weather like in Raleigh right now?
@@ -20,11 +20,11 @@ Let's see this in action before diving into the code!
 
     Without any tools, the model would either refuse or make something up.
 
-3. Now at the `MCP` section, enable `Weather MCP Server` by checking the box.
+4. Now at the `MCP` section, enable `Weather MCP Server` by checking the box.
 
     ![playground-weather-mcp.png](./images/playground-weather-mcp.png)
 
-4. You should see the model **pause and think**. At that moment a call to the weather tool is happening, then you'll get a respond with actual current data — not a hallucination.
+5. You should see the model **pause and think**. At that moment a call to the weather tool is happening, then you'll get a respond with actual current data — not a hallucination.
 
     Try a few more cities if you like. Notice how the model decides *when* to use the tool and *how* to phrase the response.
 

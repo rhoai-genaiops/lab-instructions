@@ -22,7 +22,7 @@ We did a few tests and are satisfied with the results. But before we bring all t
 
 ## Enable NeMo in Llama Stack
 
-1. Open up `genaiops-gitops/canopy/test/ogx`  and add the guardrails block:
+2. Open up `genaiops-gitops/canopy/test/ogx`  and add the guardrails block:
 
     ```yaml
     ---
@@ -40,7 +40,7 @@ We did a few tests and are satisfied with the results. But before we bring all t
 
 ## Enable Shields in the Backend
 
-1. Open `genaiops-gitops/canopy/test/backend/config.yaml` and add:
+3. Open `genaiops-gitops/canopy/test/backend/config.yaml` and add:
 
     ```yaml
     shields:   # 👈 Add this block ❗︎
