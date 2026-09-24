@@ -16,9 +16,9 @@ The Canopy backend already has a RAG setup behind a feature flag, we just need t
 
     We will be using the latest prompt for test, so we are always up-to-date, and then we will have an alias (tag) for the prompts which are in prod. We call this alias prod. Go ahead and add that alias to your new prompt.
 
-2. Then please go to your workbench and open both files `genaiops-gitops/canopy/test/backend/config.yaml` and `genaiops-gitops/canopy/prod/backend/config.yaml`
+3. Then please go to your workbench and open both files `genaiops-gitops/canopy/test/backend/config.yaml` and `genaiops-gitops/canopy/prod/backend/config.yaml`
 
-3. Edit the file to contain the `information-search` feature flag. Feel free to change the prompt, this is a system prompt just like before.
+4. Edit the file to contain the `information-search` feature flag. Feel free to change the prompt, this is a system prompt just like before.
 
 TEST(`genaiops-gitops/canopy/test/backend/config.yaml`)
 
@@ -62,7 +62,7 @@ PROD(`genaiops-gitops/canopy/prod/backend/config.yaml`)
       mlflow_prompt_version: prod
     ```
 
-4. Push the change to git:
+5. Push the change to git:
 
     ```bash
     cd /opt/app-root/src/genaiops-gitops
@@ -72,7 +72,7 @@ PROD(`genaiops-gitops/canopy/prod/backend/config.yaml`)
     git push
     ```
 
-5. Open the Canopy UI (https://canopy-ui-<USER_NAME>-test.<CLUSTER_DOMAIN> if you have closed it since last time), select the *Information Search* feature in the left menu and ask something like `what is the total credits in Biotechnology program in Redwood Digital University?`
+6. Open the Canopy UI (https://canopy-ui-<USER_NAME>-test.<CLUSTER_DOMAIN> if you have closed it since last time), select the *Information Search* feature in the left menu and ask something like `what is the total credits in Biotechnology program in Redwood Digital University?`
 
 Replace "Biotechnology" in the prompt with the program syllabus you've uploaded to Minio. For example, if you uploaded the "Computer Science" syllabus only, update the prompt to say "Computer Science" instead of "Biotechnology."
 

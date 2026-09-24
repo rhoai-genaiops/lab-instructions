@@ -82,7 +82,7 @@ The evaluation pipeline is inside of a repository called `evals`, where both the
     ⚠️ These variables are used at the bottom of the file to build the `repo_url` argument, which is required for your pipeline to clone the `evals` repository and run the tests that you just saw. Make sure to replace those values with your own!
 
 
-5. Let's push the change:
+4. Let's push the change:
 
     ```bash
     cd /opt/app-root/src/evals
@@ -91,7 +91,7 @@ The evaluation pipeline is inside of a repository called `evals`, where both the
     git push origin main
     ```
 
-6. Now we can run the pipeline! 🙌  
+5. Now we can run the pipeline! 🙌  
 
     Just execute this in your terminal:
 
@@ -107,7 +107,7 @@ The evaluation pipeline is inside of a repository called `evals`, where both the
 
     ![running-kfp-pipeline](images/running-kfp-pipeline.png)
 
-7.  After it has finished running, you can see the results in Experiments (MLFlow) in the workspace `<USER_NAME>-canopy`, experiment `summarization` and under `Evaluation runs` in the left menu.
+6.  After it has finished running, you can see the results in Experiments (MLFlow) in the workspace `<USER_NAME>-canopy`, experiment `summarization` and under `Evaluation runs` in the left menu.
 
 ![summary_eval](./images/summary_eval.png)
 
