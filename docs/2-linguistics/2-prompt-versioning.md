@@ -34,7 +34,7 @@ We are going to store our prompts on our Prompt Registry, add notes, tags, etc w
     summarization
     ```
 
-    And paste your new favourite System Prompt for the task 🫶 Alternatively you can add a nice commit message there too, and hit `Create`. 
+    And paste your new favourite System Prompt for the task 🫶 While you're at it, you can add a nice commit message there too, and hit `Create`. 
 
     ![summarization-prompt-1.png](./images/summarization-prompt-1.png)
 
