@@ -104,8 +104,13 @@ Let's deploy a Grafana instance in your toolings namespace to support the end-to
 
    _If you don't see all the dashboards, that means they haven't synced yet. Just refresh the page a couple of times :)_
 
+7. Click the **Canopy Backend Metrics Dasboard**, and then select `UWM Prometheus` as the data source to view the dashboard for the backend service metrics.
 
-If you want to explore the dashboards more in depth, please check the [Extra Credits](6-observability/6-extra-credit-metrics-dashboard) section 🤓
+   ![Select Datasource](./images/dashboard-ds.png)
+
+   You can explore the other dashboards in a similar fashion by selecting the `UWM Prometheus` datasource. Note that some of the dashboards maybe empty because you have not invoked the corresponding services.
+
+If you want to further explore the dashboards in depth, please check the [Extra Credits](6-observability/6-extra-credit-metrics-dashboard) section 🤓
 
 
 ## 🎯 Next Steps: Understanding Behavior with Logs
