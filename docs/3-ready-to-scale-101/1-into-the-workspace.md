@@ -45,7 +45,7 @@ By the end of this section, you'll have a better grasp of how to integrate a mod
 
     And finally, hit `Create workbench`.
 
-When it is in running state, open it by clicking its name and use your credentials to access it.
+When its Status is Ready, open it by clicking its name and use your credentials to access it.
 
    ![open-workbench.png](./images/open-workbench.png)
 
