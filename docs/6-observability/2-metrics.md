@@ -105,7 +105,7 @@ Let's deploy a Grafana instance in your toolings namespace to support the end-to
    _If you don't see all the dashboards, that means they haven't synced yet. Just refresh the page a couple of times :)_
 
 
-If you want to explore the dashboards more in depth, please check the [Extra Credits](6-observability/6-extra-credit-metrics-dashboard) section 🤓
+If you want to explore the dashboards more in depth, please check the [Extra Credits](6-extra-credit-metrics-dashboard.md) section 🤓
 
 
 ## 🎯 Next Steps: Understanding Behavior with Logs

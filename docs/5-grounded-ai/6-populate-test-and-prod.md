@@ -75,7 +75,7 @@ Time to run yet another pipeline!
    arguments = {
         "minio_secret_name": "documents", 
         "minio_bucket_name": "documents",  
-        "embedding_model": "sentence-transformers/nomic-ai/nomic-embed-text-v1.5",
+        "embedding_model": "nomic-ai/nomic-embed-text-v1.5",
         "embedding_dimension": 768,
         "chunk_size_tokens": 512,
         "vector_provider": "milvus",

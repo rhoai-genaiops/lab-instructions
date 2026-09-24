@@ -158,7 +158,7 @@ Well, test first.
     git push
     ```
 
-4. Now let's update the `backend`. Open up `backend/chart/values-test.yaml` and update change every `llama32-fp8` to `Llama-3.2-3B-Instruct-FP8` from MaaS (same model, just exposed through the MaaS gateway).
+4. Now let's update the `backend`. Open up `genaiops-gitops/canopy/test/backend/config.yaml` and update change every `llama32-fp8` to `Llama-3.2-3B-Instruct-FP8` from MaaS (same model, just exposed through the MaaS gateway).
 
     ```yaml
 
@@ -189,9 +189,9 @@ Well, test first.
 4. Now let's push the changes:
 
     ```bash
-    cd /opt/app-root/src/backend
+    cd /opt/app-root/src/genaiops-gitops
     git pull
-    git add chart/values-test.yaml
+    git add canopy/test/backend/config.yaml
     git commit -m "🎄 Add FP8 from MaaS 🎄"
     git push
     ```
