@@ -12,7 +12,7 @@ Let's start with the prompts.
 
 1. Click `Create prompt` and call it the same name we used before; `summarization`. And paste the System Prompt you want to take into test environment.
 
-  Alternatively you can add a nice commit message there too, and hit `Create`. 
+  You can optionally add a nice commit message there too, and hit `Create`. 
 
   ![prompt-toolings-2.png](./images/prompt-toolings-2.png)
 
