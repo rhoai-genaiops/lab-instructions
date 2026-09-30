@@ -22,7 +22,6 @@ The Canopy backend already has a RAG setup behind a feature flag, we just need t
 
 TEST(`genaiops-gitops/canopy/test/backend/config.yaml`)
 
-    ```yaml
     ---
     repo_url: https://gitea-gitea.<CLUSTER_DOMAIN>/<USER_NAME>/backend
     chart_path: chart
@@ -39,11 +38,10 @@ TEST(`genaiops-gitops/canopy/test/backend/config.yaml`)
       vector_db_id: latest
       mlflow_prompt: information-search
       mlflow_prompt_version: latest
-    ```
+    
 
 PROD(`genaiops-gitops/canopy/prod/backend/config.yaml`)
 
-    ```yaml
     ---
     repo_url: https://gitea-gitea.<CLUSTER_DOMAIN>/<USER_NAME>/backend
     chart_path: chart
@@ -60,7 +58,7 @@ PROD(`genaiops-gitops/canopy/prod/backend/config.yaml`)
       vector_db_id: latest
       mlflow_prompt: information-search
       mlflow_prompt_version: prod
-    ```
+    
 
 5. Push the change to git:
 
