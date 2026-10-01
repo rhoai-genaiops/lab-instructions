@@ -112,9 +112,9 @@ Like we've done multiple times before, let's update Canopy backend configuration
       model: vllm-Llama-3.2-3B-Instruct-FP8/Llama-3.2-3B-Instruct-FP8 # 👈 Update this  ❗︎❗️❗️❗️
     ```
 
-1. Click **Upgrade** to apply the changes.
+3. Click **Upgrade** to apply the changes.
 
-2. When everything is blue in Topology view, go to Canopy UI and verify everything works before we repeat this for `test` and `prod` environment, but through GitOps. 
+4. When everything is blue in Topology view, go to Canopy UI and verify everything works before we repeat this for `test` and `prod` environment, but through GitOps. 
 
   Here is your Canopy UI link: 
 
