@@ -135,63 +135,63 @@ Well, test first.
         url: "http://llama-32-predictor.ai501.svc.cluster.local:8080/v1"
       - name: "llama32-fp8"   
         url: "http://llama-32-fp8-predictor.ai501.svc.cluster.local:8080/v1" 
-      - name: "Llama-3.2-3B-Instruct-FP8"     # 👈 Add this ❗︎❗︎
-        url: "https://litemaas-litellm-<USER_NAME>-maas.<CLUSTER_DOMAIN>/v1" # 👈 Add this ❗︎❗︎
+      - name: "Llama-3.2-3B-Instruct-FP8"     # 👈 ADD THIS ❗︎❗︎
+        url: "https://litemaas-litellm-<USER_NAME>-maas.<CLUSTER_DOMAIN>/v1" # 👈 ADD THIS ❗︎❗︎❗︎❗︎
     rag:                  
       enabled: true
     mcp:                
       enabled: true 
-    sealed_secrets:  # 👈 Add this ❗︎❗︎
-      enabled: true    # 👈 Add this ❗︎❗︎
-      secretName: llama-fp8-maas-token  # 👈 Add this ❗︎❗︎    
+    sealed_secrets:  # 👈 ADD THIS ❗︎❗︎❗︎❗︎
+      enabled: true    # 👈 ADD THIS ❗︎❗︎❗︎❗︎
+      secretName: llama-fp8-maas-token  # 👈 ADD THIS ❗︎❗︎❗︎❗︎
     ```
 
   Yes, you are very right to think _why we are pushing an API key to Git? I don't think this is right!_, and we totally agree with you. We'll come to secret management conversation, promise!
 
-3. Push the changes:
 
-    ```bash
-    cd /opt/app-root/src/genaiops-gitops
-    git pull
-    git add .
-    git commit -m "🎄 Add FP8 from MaaS 🎄"
-    git push
-    ```
-
-4. Now let's update the `backend`. Open up `backend/chart/values-test.yaml` and update change every `llama32-fp8` to `Llama-3.2-3B-Instruct-FP8` from MaaS (same model, just exposed through the MaaS gateway).
+3. Now let's update the `backend`. Open up `genaiops-gitops/canopy/test/backend/config.yaml` and change every `llama32-fp8` to `Llama-3.2-3B-Instruct-FP8` from MaaS (same model, just exposed through the MaaS gateway).
 
     ```yaml
-
-    LLAMA_STACK_URL: "http://llama-stack-service:8321"
+    repo_url: https://gitea-gitea.<CLUSTER_DOMAIN>/<USER_NAME>/backend
+    chart_path: chart
     summarization:
       enabled: true
-      model: vllm-Llama-3.2-3B-Instruct-FP8/Llama-3.2-3B-Instruct-FP8 # 👈 Update this ❗︎❗︎
-      temperature: 0.9
-      max_tokens: 4096
-      prompt: |
-        You are a helpful assistant. Summarize the given text please.
+      model: vllm-Llama-3.2-3B-Instruct-FP8/Llama-3.2-3B-Instruct-FP8 # 👈 Update this  ❗︎❗︎
+      endpoint: "http://llama-stack-service:8321/v1"
+      mlflow_prompt: summarization
+      mlflow_prompt_version: latest
     information-search:
       enabled: true
-      vector_db_id: latest
-      model: vllm-Llama-3.2-3B-Instruct-FP8/Llama-3.2-3B-Instruct-FP8 # 👈 Update this ❗︎❗︎
-      prompt: |
-        You are a helpful assistant specializing in document intelligence and academic content analysis.
-    student-assistant:         
+      endpoint: "http://llama-stack-service:8321/v1"
+      model: vllm-Llama-3.2-3B-Instruct-FP8/Llama-3.2-3B-Instruct-FP8 # 👈 Update this  ❗︎❗︎
+      vector_db_id: genaiops_2026_09_30_10_24
+      mlflow_prompt: information-search
+      mlflow_prompt_version: latest
+    feedback:
+      enabled: false
+    ab_testing:
+      enabled: false
+    shields: 
       enabled: true
-      model: vllm-Llama-3.2-3B-Instruct-FP8/Llama-3.2-3B-Instruct-FP8 # 👈 Update this ❗︎❗︎
+      endpoint: http://canopy-guardrails/v1
+      model: llama32
+      config: canopy-guardrails
+    student-assistant: 
+      enabled: true
+      model: vllm-Llama-3.2-3B-Instruct-FP8/Llama-3.2-3B-Instruct-FP8 # 👈 Update this  ❗︎❗︎
       temperature: 0.1
       vector_db_id: latest
       mcp_calendar_url: "http://canopy-mcp-calendar-mcp-server:8080/sse"
-      prompt: |
-        You are ...
+      mlflow_prompt: student-assistant
+      mlflow_prompt_version: latest        
     ```
 
 4. Now let's push the changes:
 
     ```bash
-    cd /opt/app-root/src/backend
+    cd /opt/app-root/src/genaiops-gitops
     git pull
-    git add chart/values-test.yaml
+    git add .
     git commit -m "🎄 Add FP8 from MaaS 🎄"
     git push
     ```

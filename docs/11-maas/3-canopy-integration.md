@@ -105,13 +105,16 @@ Like we've done multiple times before, let's update Canopy backend configuration
     ```yaml
     summarization:
       enabled: true
-      max_tokens: 2048 
-      model: vllm-Llama-3.2-3B-Instruct-FP8/Llama-3.2-3B-Instruct-FP8 # 👈 update this ❗️❗️❗️
+      endpoint: 'http://llama-stack-service:8321/v1'
+      max_tokens: 2048
+      mlflow_prompt: summarization
+      mlflow_prompt_version: latest
+      model: vllm-Llama-3.2-3B-Instruct-FP8/Llama-3.2-3B-Instruct-FP8 # 👈 Update this  ❗︎❗️❗️❗️
     ```
 
-3. Click **Upgrade** to apply the changes.
+1. Click **Upgrade** to apply the changes.
 
-4. When everything is blue in Topology view, go to Canopy UI and verify everything works before we repeat this for `test` and `prod` environment, but through GitOps. 
+2. When everything is blue in Topology view, go to Canopy UI and verify everything works before we repeat this for `test` and `prod` environment, but through GitOps. 
 
   Here is your Canopy UI link: 
 

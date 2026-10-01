@@ -8,7 +8,7 @@ For a more rigerous process you
 
 In the previous notebook you just pushed your model to the Model Registry, let's go and take a look at how it looks like!
 
-1. Go to OpenShift AI Dashboard -> AI hub -> Registry
+1. Go to OpenShift AI Dashboard -> AI hub -> Models -> Registry
 
   ![model-registry](images/model-registry.png)
 
@@ -44,11 +44,19 @@ Leave the rest as is and press Next.
 
   ![model-deployment.png](images/model-deployment.png)
 
-6. In the `Advanced settings` page, leave all as is and just press Next, then press `Deploy model` in the Review page after making sure all the details look correct.
+6. In the `Advanced settings` page, let's add one custom parameter. 
+
+  ```
+    --served-model-name=socratic-model
+  ```
+
+  ![custom-args.png](./images/custom-args.png)
+
+  Then press `Next`, and then press `Deploy model` in the Review page after making sure all the details look correct.
 
   ![advanced-and-review.png](images/advanced-and-review.png)
 
-7. To see your model being deployed, go to `AI hub` -> `Deployments` and wait for the model to be deployed.  
+7. Wait for the model to be deployed.  
 
   If it doesn't update automatically, try refreshing the page.
   
@@ -94,8 +102,8 @@ Now that we have the new model in MaaS, let's add it to our test Llama Stack so 
       url: "http://llama-32-predictor.ai501.svc.cluster.local:8080/v1"
     - name: "llama32-fp8"   
       url: "http://llama-32-fp8-predictor.ai501.svc.cluster.local:8080/v1" 
-    - name: "Llama-3.2-3B-Instruct-FP8"
-      url: "https://litemaas-litellm-<USER_NAME>-maas.<CLUSTER_DOMAIN>/v1"
+    - name: "Llama-3.2-3B-Instruct-FP8"    
+      url: "https://litemaas-litellm-<USER_NAME>-maas.<CLUSTER_DOMAIN>/v1"❗
     - name: "socratic-model"    # 👈 Add this ❗︎❗︎
       url: "https://litemaas-litellm-<USER_NAME>-maas.<CLUSTER_DOMAIN>/v1"   # 👈 Add this ❗︎❗︎
       token: "<YOUR-COPIED-API-KEY>"    # 👈 Add this ❗︎❗︎
@@ -103,12 +111,12 @@ Now that we have the new model in MaaS, let's add it to our test Llama Stack so 
     enabled: true
   mcp:                
     enabled: true 
-  sealed_secrets:
-    enabled: true
+  sealed_secrets: 
+    enabled: true   
     secretName: llama-fp8-maas-token 
 ```
 
-  (Yes I know we are pushing a key to git, which is not secure... Feel free to go through seeled secret with this one as well, but in favor of time we'll take the easy path this once 🙈)
+  (Yes I know we are pushing a key to git, which is not secure... Feel free to go through seeled secret with this one as well, but in favor of time we'll take the easy path for this once 🙈)
 
   3. Commit this to git:
 ```bash
@@ -129,51 +137,71 @@ Just make sure that LlamaStack starts properly after this (check Topology view i
 
 Let's get this Socratic tutor fully set up in Canopy!
 
-1. Go to `backend/chart/values-test.yaml` and add the new feature flag
+1. Firstly, let's create the system prompt for our Socratic Tutor. Go to OpenShift AI Dashboard > Gen AI Studio > Prompts under **`<USER_NAME>-toolings`** project.
 
-  ```yaml
-  LLAMA_STACK_URL: "http://llama-stack-service:8321"
+2. Create a new prompt called `socratic-tutor` and use below prompt:
+
+    ```bash
+    You are a Socratic tutor. Your role is to guide students to discover answers themselves through thoughtful questions rather than providing direct answers. Ask clarifying questions, prompt critical thinking, and help students explore different angles of their question.
+    ```
+  ![socratic-tutor-prompt.png](./images/socratic-tutor-prompt.png)
+
+3. Then go to `genaiops-gitops/canopy/test/backend/config.yaml` and add the new feature flag:
+
+```yaml
+  repo_url: https://gitea-gitea.<CLUSTER_DOMAIN>/<USER_NAME>/backend
+  chart_path: chart
   summarization:
     enabled: true
     model: vllm-Llama-3.2-3B-Instruct-FP8/Llama-3.2-3B-Instruct-FP8
-    temperature: 0.9
-    max_tokens: 4096
-    prompt: |
-      You are a helpful assistant. Summarize the given text please.
+    endpoint: "http://llama-stack-service:8321/v1"
+    mlflow_prompt: summarization
+    mlflow_prompt_version: latest
   information-search:
     enabled: true
-    vector_db_id: latest
+    endpoint: "http://llama-stack-service:8321/v1"
     model: vllm-Llama-3.2-3B-Instruct-FP8/Llama-3.2-3B-Instruct-FP8
-    prompt: |
-      You are a helpful assistant specializing in document intelligence and academic content analysis.
-  student-assistant:         
+    vector_db_id: genaiops_2026_09_30_10_24
+    mlflow_prompt: information-search
+    mlflow_prompt_version: latest
+  feedback:
+    enabled: false
+  ab_testing:
+    enabled: false
+  shields: 
     enabled: true
-    model: vllm-Llama-3.2-3B-Instruct-FP8/Llama-3.2-3B-Instruct-FP8
+    endpoint: http://canopy-guardrails/v1
+    model: llama32
+    config: canopy-guardrails
+  student-assistant: 
+    enabled: true
+    model: vllm-Llama-3.2-3B-Instruct-FP8/Llama-3.2-3B-Instruct-FP8 
     temperature: 0.1
     vector_db_id: latest
     mcp_calendar_url: "http://canopy-mcp-calendar-mcp-server:8080/sse"
-    prompt: |
-      You are ...
+    mlflow_prompt: student-assistant
+    mlflow_prompt_version: latest     
   socratic-tutor:    # 👈 Add this ❗︎❗︎
     enabled: true    # 👈 Add this ❗︎❗︎
     model: vllm-socratic-model/socratic-model    # 👈 Add this ❗︎❗︎
-    prompt: |    # 👈 Add this ❗︎❗︎
-      You are a Socratic tutor. Your role is to guide students to discover answers themselves through thoughtful questions rather than providing direct answers. Ask clarifying questions, prompt critical thinking, and help students explore different angles of their question.
+    endpoint: "http://llama-stack-service:8321/v1"   # 👈 Add this ❗︎❗︎
+    mlflow_prompt: socratic-tutor   # 👈 Add this ❗︎❗︎
+    mlflow_prompt_version: latest   # 👈 Add this ❗︎❗︎
     temperature: 0.9    # 👈 Add this ❗︎❗︎
     max_tokens: 1500    # 👈 Add this ❗︎❗︎
-  ```
+```
 
-2. Commit to git:
+4. Commit to git:
 
   ```bash
-  cd /opt/app-root/src/backend
+  cd /opt/app-root/src/genaiops-gitops
   git pull
   git add .
   git commit -m "🤔 Add the Socratic Tutor feature 🤔"
   git push
   ```
 
-3. Open up Canopy, select Socratic Tutor in the left menu and try asking some questions, for example `What is 1+1?`.  
+5. Open up Canopy, select Socratic Tutor in the left menu and try asking some questions, for example `What is 1+1?`.  
 
 _(Note that the tutor might be a bit slow, this is because it's running on CPU 🙈)_
 
