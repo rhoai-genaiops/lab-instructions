@@ -71,26 +71,38 @@ Once Llama Stack and backend are running, let's verify it can communicate with t
 2. Now let's update the `backend`. Open up `genaiops-gitops/canopy/test/backend/config.yaml` and change every `llama32` to `llama32-fp8`.
 
     ```yaml
-
-    LLAMA_STACK_URL: "http://llama-stack-service:8321"
+    repo_url: https://gitea-gitea.<CLUSTER_DOMAIN>/<USER_NAME>/backend
+    chart_path: chart
     summarization:
       enabled: true
       model: vllm-llama32-fp8/llama32-fp8 # 👈 Update this  ❗︎❗︎
+      endpoint: "http://llama-stack-service:8321/v1"
+      mlflow_prompt: summarization
+      mlflow_prompt_version: latest
     information-search:
       enabled: true
-      vector_db_id: latest
+      endpoint: "http://llama-stack-service:8321/v1"
       model: vllm-llama32-fp8/llama32-fp8 # 👈 Update this  ❗︎❗︎
-    student-assistant:         
+      vector_db_id: genaiops_2026_09_30_10_24
+      mlflow_prompt: information-search
+      mlflow_prompt_version: latest
+    feedback:
+      enabled: false
+    ab_testing:
+      enabled: false
+    shields: 
+      enabled: true
+      endpoint: http://canopy-guardrails/v1
+      model: llama32
+      config: canopy-guardrails
+    student-assistant: 
       enabled: true
       model: vllm-llama32-fp8/llama32-fp8 # 👈 Update this  ❗︎❗︎
       temperature: 0.1
       vector_db_id: latest
       mcp_calendar_url: "http://canopy-mcp-calendar-mcp-server:8080/sse"
-    shields:   
-      enabled: true 
-      endpoint: http://canopy-guardrails/v1
-      model: llama32
-      config: canopy-guardrails
+      mlflow_prompt: student-assistant
+      mlflow_prompt_version: latest
     ```
 
 3. Push the changes:
