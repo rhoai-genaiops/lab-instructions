@@ -106,7 +106,7 @@ We will be triggering it from a Tekton Pipeline, where we both will have a step 
 
 9. We also need to trigger our evals whenever there is a change in the system. Let's say we change something in the settings, add a new feature, etc, we need to asses the system again. So let's add the webhook for `genaiops-gitops` repo too. That is where we keep the externalized backend config.
 
-    But don't worry, we won't be triggering the pipeline for _every push_ to GitOps repo. We have an interceptor config that triggers the pipeline **only** when there is change in `canopy/test/backend/config.yaml` file.
+    But don't worry, we won't be triggering the pipeline for _every push_ to GitOps repo. We have an [interceptor config](https://github.com/rhoai-genaiops/genaiops-helmcharts/blob/main/charts/canopy-evals-pipeline/templates/triggers/triggers.yaml#L83) that triggers the pipeline **only** when there is change in `canopy/test/backend/config.yaml` file.
 
     ![webhook-gitops.png](./images/webhook-gitops.png)
 
