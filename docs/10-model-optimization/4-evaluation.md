@@ -143,7 +143,7 @@ lm-evaluation-harness can hit your model's API endpoint directly:
 
 ```bash
 lm_eval --model local-completions \
-        --model_args base_url=https://llama32-fp8-ai501.<CLUSTER_DOMAIN> \
+        --model_args base_url=https://llama32-fp8-ai501.<CLUSTER_DOMAIN>/v1/completions,tokenizer=RedHatAI/Llama-3.2-3B-Instruct-FP8 \
         --tasks hellaswag,winogrande,arc_easy \
         --limit 100
 ```
