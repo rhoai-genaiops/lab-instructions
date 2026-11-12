@@ -48,9 +48,9 @@ In OpenShift, you have an experimentation environment which is called `<USER_NAM
 
 4. Hit `Create` , then expand `Canopy UI Helm Chart Values Schema` and fill out the values as below:
 
-    - **MLFLOW_PROMPT_NAME:** Do you remember the great prompt you just saved in the registry? We need to provide its name here. We used `summarization`, so make sure it's there. 
-
     - **MODEL_NAME:** `llama32`
+
+    - **MLFLOW_PROMPT_NAME:** Do you remember the great prompt you just saved in the registry? We need to provide its name here. We used `summarization`, so make sure it's there. 
   
     - **LLM_ENDPOINT:** `https://llama32-ai501.<CLUSTER_DOMAIN>`
   
