@@ -68,23 +68,26 @@ In order to interact with OpenShift via the command line you will need to log in
   ![argocd-token-visualizer-2.png](./images/argocd-token-visualizer-2.png)
 
 7. You can verify the little token-visualizer application is running and behaving as expected by navigating to its URL.  
-   Token visualizer lives in this URL: [https://token-visualizer-<USER_NAME>-toolings.<CLUSTER_DOMAIN>/](https://token-visualizer-<USER_NAME>-toolings.<CLUSTER_DOMAIN>/)
+   
+   The token visualizer lives at this URL: [https://token-visualizer-<USER_NAME>-toolings.<CLUSTER_DOMAIN>/](`https://token-visualizer-<USER_NAME>-toolings.<CLUSTER_DOMAIN>/`)
   
-  Alternatively, you can get the same URL by running the following command in the terminal:
-
-    ```bash
-    echo https://$(oc get route/token-visualizer -n <USER_NAME>-toolings --template='{{.spec.host}}')
-    ```
+      > 
+      > Alternatively, you can get the same URL by running the following command in the terminal:
+      >
+      >  ```bash
+      >  echo https://$(oc get route/token-visualizer -n <USER_NAME>-toolings --template='{{.spec.host}}')
+      >  ```
+      > 
   
-  Enter the URL of the LLM we are using, hit Enter and visualize how many tokens we've been sending and generating since start of the enablement :)
+      Copy the following URL of the LLM we are using, into the Server URL text box, hit Enter and visualize how many tokens we've been sending and generating since start of the enablement :)
 
-  ```bash
-  https://llama32-ai501.<CLUSTER_DOMAIN>
-  ```
+      ```bash
+      https://llama32-ai501.<CLUSTER_DOMAIN>
+      ```
 
   ![token-visualizer.png](./images/token-visualizer.png)
   
-🪄🪄 Magic! You now have a GitOps controller - Argo CD - and made it to manually deploy an application for you. Next up, we’ll make Argo CD deploy Canopy🌳 into `test` and `prod` environments 🪄🪄
+  🪄🪄 Magic! You now have a GitOps controller - Argo CD - and made it to manually deploy an application for you. Next up, we’ll make Argo CD deploy Canopy🌳 into `test` and `prod` environments 🪄🪄
 
 
 ## ApplicationSets
@@ -101,6 +104,10 @@ Gitea is a lightweight, self-hosted Git server that allows teams to manage repos
     https://gitea-gitea.<CLUSTER_DOMAIN>
     ```
 
+    username: <USER_NAME>
+
+    password: <PASSWORD>
+    
     You will see a `genaiops-gitops` repository already created for you. It is the git repository that we are going to use for **GIT**Ops purposes. It will serve as a mono-repo holding both our tooling configuration and the application deployment definitions. In the real world, you may want to separate these into different repos! Anyways, let's get started!
 
 2. Let's go back to the `code-server` workbench terminal and clone the repository.
